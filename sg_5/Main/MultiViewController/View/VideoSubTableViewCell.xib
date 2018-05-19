@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoSub" rowHeight="149" id="KGk-i7-Jjw" customClass="VideoSubTableViewCell" customModule="Sougua" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="148.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpU-3L-F1q">
+                        <rect key="frame" x="16" y="11" width="150" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="inn-q8-dq2">
+                        <rect key="frame" x="174" y="11" width="130" height="121"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="130" id="WtK-wg-ppG"/>
+                            <constraint firstAttribute="height" constant="121" id="gxa-tO-xW1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据来源" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xk-VR-f80">
+                        <rect key="frame" x="16" y="117" width="58" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="LH5-pc-xtY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88评论" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lf2-4p-GGn">
+                        <rect key="frame" x="91" y="115" width="47" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="M8t-5k-nvQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4Xk-VR-f80" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="DK8-Rl-E5f"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="4Xk-VR-f80" secondAttribute="bottom" constant="4" id="Q9Q-7u-CC9"/>
+                    <constraint firstItem="inn-q8-dq2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="XFo-lu-fd9"/>
+                    <constraint firstItem="inn-q8-dq2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="YpW-mS-1Vn"/>
+                    <constraint firstItem="ZpU-3L-F1q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bR1-Yz-OiX"/>
+                    <constraint firstItem="Lf2-4p-GGn" firstAttribute="leading" secondItem="4Xk-VR-f80" secondAttribute="trailing" constant="17" id="bgq-qF-029"/>
+                    <constraint firstItem="inn-q8-dq2" firstAttribute="leading" secondItem="ZpU-3L-F1q" secondAttribute="trailing" constant="8" id="nbH-Bt-mU2"/>
+                    <constraint firstItem="ZpU-3L-F1q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nsy-3w-PDa"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Lf2-4p-GGn" secondAttribute="bottom" constant="6" id="z1n-Sl-kJ1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="image1" destination="inn-q8-dq2" id="BMl-Yl-7gE"/>
+                <outlet property="newsFrom" destination="4Xk-VR-f80" id="HOk-lF-I1h"/>
+                <outlet property="reviewLab" destination="Lf2-4p-GGn" id="lPv-I7-TC7"/>
+                <outlet property="titleLabel" destination="ZpU-3L-F1q" id="0F2-8R-gbL"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="136.5"/>
+        </tableViewCell>
+    </objects>
+</document>

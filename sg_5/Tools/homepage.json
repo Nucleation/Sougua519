@@ -1,0 +1,75 @@
+{
+    "result": "success",
+    "data": [
+        {
+            "source": "智深数据",
+            "imageurl": "http:\/\/a.hiphotos.baidu.com\/image\/pic\/item\/359b033b5bb5c9ea7570dd9bd939b6003bf3b3c3.jpg",
+            "imageurls": [
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/30adcbef76094b3653b34491afcc7cd98d109dad.jpg",
+                "http:\/\/g.hiphotos.baidu.com\/image\/pic\/item\/bd315c6034a85edf2bde205b45540923dd54757c.jpg",
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/5882b2b7d0a20cf446f825a77a094b36acaf995a.jpg"
+            ],
+            "videourl": "http:\/\/flv2.bn.netease.com\/videolib3\/1604\/28\/fVobI0704\/SD\/fVobI0704-mobile.mp4",
+            "title": "这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题这是纯文本标题",
+            "newsurl": "https:\/\/www.baidu.com",
+            "type": "singletext",
+            "comment": 22
+        },
+        {
+            "source": "智深数据",
+            "imageurl": "http:\/\/a.hiphotos.baidu.com\/image\/pic\/item\/359b033b5bb5c9ea7570dd9bd939b6003bf3b3c3.jpg",
+            "imageurls": [
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/30adcbef76094b3653b34491afcc7cd98d109dad.jpg",
+                "http:\/\/g.hiphotos.baidu.com\/image\/pic\/item\/bd315c6034a85edf2bde205b45540923dd54757c.jpg",
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/5882b2b7d0a20cf446f825a77a094b36acaf995a.jpg"
+            ],
+            "videourl": "http:\/\/flv2.bn.netease.com\/videolib3\/1604\/28\/fVobI0704\/SD\/fVobI0704-mobile.mp4",
+            "title": "这是文本和图片这是文本这是文本这是文本这是文本这是文本这是文本这是文本这是文本这是文本这是文本",
+            "newsurl": "https:\/\/www.baidu.com",
+            "type": "image",
+            "comment": 22
+        },
+        {
+            "source": "智深数据",
+            "imageurl": "http:\/\/a.hiphotos.baidu.com\/image\/pic\/item\/359b033b5bb5c9ea7570dd9bd939b6003bf3b3c3.jpg",
+            "imageurls": [
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/30adcbef76094b3653b34491afcc7cd98d109dad.jpg",
+                "http:\/\/g.hiphotos.baidu.com\/image\/pic\/item\/bd315c6034a85edf2bde205b45540923dd54757c.jpg",
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/5882b2b7d0a20cf446f825a77a094b36acaf995a.jpg"
+            ],
+            "videourl": "http:\/\/flv2.bn.netease.com\/videolib3\/1604\/28\/fVobI0704\/SD\/fVobI0704-mobile.mp4",
+            "title": "这是大视频的",
+            "newsurl": "https:\/\/www.baidu.com",
+            "type": "video",
+            "comment": 22
+        },
+        {
+            "source": "智深数据",
+            "imageurl": "http:\/\/a.hiphotos.baidu.com\/image\/pic\/item\/359b033b5bb5c9ea7570dd9bd939b6003bf3b3c3.jpg",
+            "imageurls": [
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/30adcbef76094b3653b34491afcc7cd98d109dad.jpg",
+                "http:\/\/g.hiphotos.baidu.com\/image\/pic\/item\/bd315c6034a85edf2bde205b45540923dd54757c.jpg",
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/5882b2b7d0a20cf446f825a77a094b36acaf995a.jpg"
+            ],
+            "videourl": "http:\/\/flv2.bn.netease.com\/videolib3\/1604\/28\/fVobI0704\/SD\/fVobI0704-mobile.mp4",
+            "title": "这是小视频的",
+            "newsurl": "https:\/\/www.baidu.com",
+            "type": "videosub",
+            "comment": 22
+        },
+        {
+            "source": "智深数据",
+            "imageurl": "http:\/\/a.hiphotos.baidu.com\/image\/pic\/item\/359b033b5bb5c9ea7570dd9bd939b6003bf3b3c3.jpg",
+            "imageurls": [
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/30adcbef76094b3653b34491afcc7cd98d109dad.jpg",
+                "http:\/\/g.hiphotos.baidu.com\/image\/pic\/item\/bd315c6034a85edf2bde205b45540923dd54757c.jpg",
+                "http:\/\/h.hiphotos.baidu.com\/image\/pic\/item\/5882b2b7d0a20cf446f825a77a094b36acaf995a.jpg"
+            ],
+            "videourl": "http:\/\/flv2.bn.netease.com\/videolib3\/1604\/28\/fVobI0704\/SD\/fVobI0704-mobile.mp4",
+            "title": "这是文本和多图",
+            "newsurl": "https:\/\/www.baidu.com",
+            "type": "images",
+            "comment": 22
+        }
+    ]
+}
