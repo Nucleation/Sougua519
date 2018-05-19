@@ -32,6 +32,7 @@ class NoveHomeViewController: UIViewController {
             unowned let uSelf = self
             uSelf.oprateClick(sender: sender)
         }
+        self.view.addSubview(oprateView)
         let urlStr = noveGetCategorys
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval)]
