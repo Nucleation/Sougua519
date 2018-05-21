@@ -27,6 +27,7 @@ class MetooCollectionViewCell: UICollectionViewCell {
         self.imageView?.kf.setImage(with: URL(string:"\(model.downloadUrl)"))
         self.fromLab?.text = model.source
         self.desLab?.text = model.name
+        self.collcetBtn?.setTitle(model.countPraise, for: .normal)
     }
     func setUI(){
         imageView = UIImageView(image: UIImage(named: "333"))
@@ -41,14 +42,16 @@ class MetooCollectionViewCell: UICollectionViewCell {
         self.addSubview(desLab!)
         circleImage = UIImageView()
         circleImage?.backgroundColor = UIColor.randomColor
-        circleImage?.layer.cornerRadius = 15
+        circleImage?.layer.cornerRadius = 10
         self.addSubview(circleImage!)
         fromLab = UILabel()
         fromLab?.text = "智深数据"
         fromLab?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(fromLab!)
         collcetBtn = UIButton(type: .custom)
+        collcetBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
         collcetBtn?.setTitle("收藏", for: .normal)
+        collcetBtn?.setTitleColor(.black, for: .normal)
         self.addSubview(collcetBtn!)
         imageView?.snp.makeConstraints({ (make) in
             make.top.left.right.equalTo(self)
@@ -61,7 +64,7 @@ class MetooCollectionViewCell: UICollectionViewCell {
         circleImage?.snp.makeConstraints({ (make) in
             make.top.equalTo((desLab?.snp.bottom)!).offset(13)
             make.left.equalTo(self)
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(20)
         })
         fromLab?.snp.makeConstraints({ (make) in
             make.centerY.height.equalTo(circleImage!)
@@ -69,7 +72,8 @@ class MetooCollectionViewCell: UICollectionViewCell {
         })
         collcetBtn?.snp.makeConstraints({ (make) in
             make.right.equalTo(self)
-            make.centerY.height.equalTo(circleImage!)
+            make.height.equalTo(30)
+            make.centerY.equalTo(circleImage!)
             make.width.equalTo(100)
         })
         self.contentView.snp.makeConstraints { (make) in

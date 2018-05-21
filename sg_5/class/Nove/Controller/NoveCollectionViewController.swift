@@ -15,7 +15,7 @@ class NoveCollectionViewController: UIViewController {
     var category: String?
     var noveClassifyArray: Array = [NoveCategoryListModel]()
     var flowLayout: NovelFlowLayout?
-    var pageIndex: Int = 0
+    var pageIndex: Int = 1
     lazy var mainCollectionView: UICollectionView = {
         let flowLayout = NovelFlowLayout()
         flowLayout.scrollDirection = UICollectionViewScrollDirection.vertical
@@ -59,7 +59,7 @@ class NoveCollectionViewController: UIViewController {
         }
     }
     func requestData() {
-        self.pageIndex = 0
+        self.pageIndex = 1
         let urlStr = getNovelListByPage
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"categoryName":self.category!,"page":self.pageIndex]

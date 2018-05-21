@@ -17,5 +17,6 @@ class PictureClassifyModel: HandyJSON {
     var type: String = ""
     var name: String = ""
     var createTime: String = ""
+    var countPraise: String = ""
     public required init() {}
 }

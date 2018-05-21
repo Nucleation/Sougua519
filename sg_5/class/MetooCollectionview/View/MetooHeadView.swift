@@ -38,7 +38,7 @@ class MetooHeadView: UIView {
         self.addSubview(leftBtn)
         self.leftBtn = leftBtn
         let rightBtn = UIButton(type: .custom)
-        rightBtn.setImage(UIImage(named: "sousuo"), for: .normal)
+        rightBtn.setImage(UIImage(named: "souzuo"), for: .normal)
         rightBtn.backgroundColor = UIColor.white
         self.addSubview(rightBtn)
         self.rightBtn = rightBtn
