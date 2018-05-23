@@ -12,11 +12,11 @@ class SingleTestTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var newsFrom: UILabel!
     @IBOutlet weak var reviewLab: UILabel!
-    var aNews = HomePageNews(){
+    var aNews = HomePageNewsModel(){
         didSet {
             titleLabel.text = aNews.title
             newsFrom.text = aNews.source
-            reviewLab.text = "评论:\(aNews.comment)"
+            reviewLab.text = "评论:\(aNews.discussCount)"
         }
     }
     

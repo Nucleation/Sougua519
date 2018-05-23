@@ -184,61 +184,70 @@ extension MuRootViewController {
         }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let aNews = newsListArr[indexPath.row]
-            switch aNews.modelType {
-                case "0":
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "SingleImage") as! SingleImageTableViewCell
-                    cell.setHighlighted(false, animated: false)
-                    cell.aNews = aNews
-                    return cell
-                default :
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "Video") as! VideoTableViewCell
-                    cell.setHighlighted(false, animated: false)
-                    cell.aNews = aNews
-                    return cell
-                }
-//            case "singletext":
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTest") as! SingleTestTableViewCell
-//                cell.aNews = anews
-//                return cell
-//            case "images":
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "Image") as! ImageTableViewCell
-//                cell.aNews = anews
-//                return cell
-//            case "video":
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "Video") as! VideoTableViewCell
-//                cell.aNews = anews
-//                return cell
-//            case "videosub":
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "VideoSub") as! VideoSubTableViewCell
-//                cell.aNews = anews
-//                return cell
-//            default:
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SingleImage") as! SingleImageTableViewCell
-//                cell.aNews = anews
-//                return cell
-//            }
-            
+        let aNews = newsListArr[indexPath.row]
+        switch aNews.modelType {
+        case "1":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTest") as! SingleTestTableViewCell
+            cell.selectionStyle = .none
+            cell.aNews = aNews
+            return cell
+        case "2":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SingleImage") as! SingleImageTableViewCell
+            cell.selectionStyle = .none
+            cell.aNews = aNews
+            return cell
+        case "3":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Video") as! VideoTableViewCell
+            cell.selectionStyle = .none
+            cell.aNews = aNews
+            return cell
+        case "4":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VideoSub") as! VideoSubTableViewCell
+            cell.selectionStyle = .none
+            cell.aNews = aNews
+            return cell
+        default :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Video") as! VideoTableViewCell
+            cell.selectionStyle = .none
+            cell.aNews = aNews
+            return cell
+        }
+        //            case "singletext":
+        //                let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTest") as! SingleTestTableViewCell
+        //                cell.aNews = anews
+        //                return cell
+        //            case "images":
+        //                let cell = tableView.dequeueReusableCell(withIdentifier: "Image") as! ImageTableViewCell
+        //                cell.aNews = anews
+        //                return cell
+        //            case "video":
+        //                let cell = tableView.dequeueReusableCell(withIdentifier: "Video") as! VideoTableViewCell
+        //                cell.aNews = anews
+        //                return cell
+        //            case "videosub":
+        //                let cell = tableView.dequeueReusableCell(withIdentifier: "VideoSub") as! VideoSubTableViewCell
+        //                cell.aNews = anews
+        //                return cell
+        //            default:
+        //                let cell = tableView.dequeueReusableCell(withIdentifier: "SingleImage") as! SingleImageTableViewCell
+        //                cell.aNews = anews
+        //                return cell
+        //            }
+        
         }
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             let aNews = newsListArr[indexPath.row]
-            switch aNews.type {
-            case "0":
-                return 160
+            switch aNews.modelType {
+            case "1":
+                return 95
+            case "2":
+                return 150
+            case "3":
+                return 270
+            case "4":
+                return 150
             default:
                 return 270
-//            case "singletext":
-//                return 95
-//            case "image":
-//                return 200
-//            case "video":
-//                return 270
-//            case "videosub":
-//                return 150
-//            case "singleimage":
-//                return 160
-//            default:
-//                return 200
             }
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

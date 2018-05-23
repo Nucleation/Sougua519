@@ -7,19 +7,29 @@
 //
 
 import UIKit
-
-class HomePageWebViewController: UIViewController {
+import SVProgressHUD
+class HomePageWebViewController: UIViewController,UIWebViewDelegate {
     var webURL: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.white
         let webview: UIWebView = UIWebView(frame: self.view.frame)
         webview.loadRequest(URLRequest(url: URL(string: webURL)!))
         webview.backgroundColor = .clear
+        webview.delegate = self
         webview.isOpaque = false
         self.view.addSubview(webview)
         // Do any additional setup after loading the view.
     }
-
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        SVProgressHUD.show()
+    }
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        SVProgressHUD.dismiss()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        SVProgressHUD.dismiss()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

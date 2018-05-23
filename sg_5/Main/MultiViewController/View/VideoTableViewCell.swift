@@ -13,12 +13,20 @@ class VideoTableViewCell: UITableViewCell {
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var newsFrom: UILabel!
     @IBOutlet weak var reviewLab: UILabel!
+    @IBOutlet weak var videoTimeLab: UILabel!
+    @IBOutlet weak var videoPlayImage: UIImageView!
     var aNews = HomePageNewsModel(){
         didSet {
             titleLabel.text = aNews.title
             image1.kf.setImage(with: URL(string: aNews.imageUrl))
             newsFrom.text = aNews.source
             reviewLab.text = "评论:\(aNews.discussCount)"
+            if aNews.modelType == "5" {
+                videoTimeLab.text = aNews.figureTime
+            }else{
+                videoPlayImage.isHidden = true
+                videoTimeLab.text = ""
+            }
         }
     }
     override func awakeFromNib() {
