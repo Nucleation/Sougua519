@@ -75,6 +75,8 @@
 		1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */; };
 		1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */; };
 		1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724620B0162D00EAFEC0 /* LoginViewController.swift */; };
+		17857D5C20B53BF2005B028C /* HomePageNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */; };
+		17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5E20B548B6005B028C /* HomePageWebViewController.swift */; };
 		17D8CB3E20A44F6800914492 /* SougouSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB3D20A44F6800914492 /* SougouSearch.swift */; };
 		17D8CB4020A44F7800914492 /* SOsearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB3F20A44F7800914492 /* SOsearch.swift */; };
 		17D8CB4820A44FFB00914492 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB4320A44FFA00914492 /* TFHpple.m */; };
@@ -183,6 +185,8 @@
 		1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollViewController.swift; sourceTree = "<group>"; };
 		1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetooCollectionViewController.swift; sourceTree = "<group>"; };
 		1782724620B0162D00EAFEC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageNewsModel.swift; sourceTree = "<group>"; };
+		17857D5E20B548B6005B028C /* HomePageWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageWebViewController.swift; sourceTree = "<group>"; };
 		17D8CB3D20A44F6800914492 /* SougouSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SougouSearch.swift; sourceTree = "<group>"; };
 		17D8CB3F20A44F7800914492 /* SOsearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOsearch.swift; sourceTree = "<group>"; };
 		17D8CB4220A44FFA00914492 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
@@ -376,10 +380,8 @@
 			isa = PBXGroup;
 			children = (
 				174F768520A44E6700BB0B46 /* Model */,
+				17857D5D20B5487D005B028C /* Controller */,
 				174F766A20A44E6300BB0B46 /* View */,
-				174F763D20A44AB900BB0B46 /* MUMultiWindowController.swift */,
-				174F763E20A44AB900BB0B46 /* MuRootViewController.swift */,
-				174F763F20A44AB900BB0B46 /* MUmultiWindowFlowlayout.swift */,
 			);
 			path = MultiViewController;
 			sourceTree = "<group>";
@@ -439,18 +441,18 @@
 			isa = PBXGroup;
 			children = (
 				174F767420A44E6300BB0B46 /* CategoryButtonView.swift */,
-				174F766B20A44E6300BB0B46 /* SingleTestTableViewCell.swift */,
-				174F766C20A44E6300BB0B46 /* ImageTableViewCell.swift */,
-				174F766D20A44E6300BB0B46 /* VideoTableViewCell.swift */,
-				174F766E20A44E6300BB0B46 /* VideoSubTableViewCell.xib */,
-				174F766F20A44E6300BB0B46 /* SingleImageTableViewCell.swift */,
+				174F767520A44E6300BB0B46 /* HomeNavigationView.swift */,
 				174F767020A44E6300BB0B46 /* HomeNavigationView.xib */,
+				174F766B20A44E6300BB0B46 /* SingleTestTableViewCell.swift */,
+				174F767320A44E6300BB0B46 /* SingleTestTableViewCell.xib */,
+				174F766C20A44E6300BB0B46 /* ImageTableViewCell.swift */,
+				174F767620A44E6300BB0B46 /* ImageTableViewCell.xib */,
+				174F766D20A44E6300BB0B46 /* VideoTableViewCell.swift */,
+				174F767720A44E6300BB0B46 /* VideoTableViewCell.xib */,
+				174F766F20A44E6300BB0B46 /* SingleImageTableViewCell.swift */,
 				174F767120A44E6300BB0B46 /* SingleImageTableViewCell.xib */,
 				174F767220A44E6300BB0B46 /* VideoSubTableViewCell.swift */,
-				174F767320A44E6300BB0B46 /* SingleTestTableViewCell.xib */,
-				174F767520A44E6300BB0B46 /* HomeNavigationView.swift */,
-				174F767620A44E6300BB0B46 /* ImageTableViewCell.xib */,
-				174F767720A44E6300BB0B46 /* VideoTableViewCell.xib */,
+				174F766E20A44E6300BB0B46 /* VideoSubTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -459,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				174F768620A44E6700BB0B46 /* CategoryButtonModel.swift */,
+				17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +545,17 @@
 				177C617C20A9957600BDE571 /* PictureClassifyModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		17857D5D20B5487D005B028C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				174F763D20A44AB900BB0B46 /* MUMultiWindowController.swift */,
+				174F763E20A44AB900BB0B46 /* MuRootViewController.swift */,
+				174F763F20A44AB900BB0B46 /* MUmultiWindowFlowlayout.swift */,
+				17857D5E20B548B6005B028C /* HomePageWebViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		17D8CB4120A44FFA00914492 /* Hpple */ = {
@@ -812,6 +826,7 @@
 				174F766520A44C4900BB0B46 /* NetworkTool.swift in Sources */,
 				1762DE9120AD5D8400D179AE /* NoveCollectionViewCell.swift in Sources */,
 				174F765120A44AB900BB0B46 /* MUMultiWindowViewModel.swift in Sources */,
+				17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */,
 				17D8CB4020A44F7800914492 /* SOsearch.swift in Sources */,
 				17D8CB4820A44FFB00914492 /* TFHpple.m in Sources */,
 				174F767920A44E6300BB0B46 /* ImageTableViewCell.swift in Sources */,
@@ -820,6 +835,7 @@
 				1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */,
 				177D5AC620B3C84900B4A5E8 /* KeyChainTool.swift in Sources */,
 				172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */,
+				17857D5C20B53BF2005B028C /* HomePageNewsModel.swift in Sources */,
 				174F765420A44AB900BB0B46 /* MUMutiWindowCollectionViewCell.swift in Sources */,
 				174F767F20A44E6300BB0B46 /* VideoSubTableViewCell.swift in Sources */,
 				1762DE8F20AD565100D179AE /* NoveCollectionViewController.swift in Sources */,

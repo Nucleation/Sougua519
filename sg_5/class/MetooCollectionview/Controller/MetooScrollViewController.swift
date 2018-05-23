@@ -20,7 +20,6 @@ class MetooScrollViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          //[self setAutomaticallyAdjustsScrollViewInsets:NO];
-        
         let scrollerView = UIScrollView()
         scrollerView.contentInsetAdjustmentBehavior = .never
         scrollerView.isPagingEnabled = true
@@ -51,7 +50,6 @@ class MetooScrollViewController: UIViewController {
                 }
             }
             self.lastImageView = imageView
-
         }
         self.contentView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.scrollerView!).inset(UIEdgeInsets.zero)
@@ -59,7 +57,6 @@ class MetooScrollViewController: UIViewController {
             make.right.equalTo(self.lastImageView!.snp.right)
         })
         self.view.layoutIfNeeded()
-        
     }
 
     override func didReceiveMemoryWarning() {

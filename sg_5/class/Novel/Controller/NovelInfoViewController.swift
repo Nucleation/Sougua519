@@ -25,9 +25,11 @@ class NovelInfoViewController: UIViewController {
     var briefLab: UILabel?
     var lineView: UIView?
     var commentView: UIView?
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = true
-    }
+    var vView: UIView?
+    var bookCommentLab: UILabel?
+    var moreBtn: UIButton?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNav()
@@ -50,6 +52,7 @@ class NovelInfoViewController: UIViewController {
         self.view.addSubview(tableView)
         self.tableView = tableView
         let headView = UIView()
+        headView.backgroundColor = UIColor.lightGray
         self.headView = headView
         self.headView?.frame.size.height = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height)!
         tableView.tableHeaderView = self.headView
@@ -120,10 +123,24 @@ class NovelInfoViewController: UIViewController {
         bookView.addSubview(briefLab)
         self.briefLab = briefLab
         let commentView = UIView()
-        commentView.backgroundColor = UIColor.black
+        commentView.backgroundColor = UIColor.white
         headView.addSubview(commentView)
         self.commentView = commentView
-        
+        let vView = UIView()
+        vView.backgroundColor = UIColor.blue
+        self.commentView?.addSubview(vView)
+        self.vView = vView
+        let bookCommentLab = UILabel()
+        bookCommentLab.text = "热门评论"
+        bookCommentLab.font = UIFont.systemFont(ofSize: 14)
+        self.commentView?.addSubview(bookCommentLab)
+        self.bookCommentLab = bookCommentLab
+        let moreBtn = UIButton(type: .custom)
+        moreBtn.setTitle("更多", for: .normal)
+        moreBtn.setTitleColor(UIColor.black, for: .normal)
+        moreBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        self.commentView?.addSubview(moreBtn)
+        self.moreBtn = moreBtn
 //        self.tableView?.snp.makeConstraints({ (make) in
 //            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0))
 //        })
@@ -189,10 +206,23 @@ class NovelInfoViewController: UIViewController {
         self.commentView?.snp.makeConstraints({ (make) in
             make.left.right.equalTo(self.headView!)
             make.top.equalTo(self.bookView!.snp.bottom).offset(10)
-            make.height.equalTo(100)
+            make.height.equalTo(50)
             make.bottom.equalTo(self.headView!)
         })
-        
+        self.vView?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.commentView!).offset(20)
+            make.width.equalTo(3)
+            make.height.equalTo(15)
+            make.centerY.equalTo(self.commentView!)
+        })
+        self.bookCommentLab?.snp.makeConstraints({ (make) in
+            make.centerY.height.equalTo(self.commentView!)
+            make.left.equalTo(self.vView!).offset(10)
+        })
+        self.moreBtn?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self.commentView!).offset(-20)
+            make.centerY.height.equalTo(self.commentView!)
+        })
     }
     @objc func beginReadBtnClick() {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
@@ -267,8 +297,10 @@ extension NovelInfoViewController: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "novelCommentCell") as! NovelCommentTableViewCell
-        //cell.comment = self.commentArr[indexPath.row]
+        cell.comment = self.commentArr[indexPath.row]
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
 }

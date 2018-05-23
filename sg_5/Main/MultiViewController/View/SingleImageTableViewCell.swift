@@ -14,13 +14,12 @@ class SingleImageTableViewCell: UITableViewCell {
     @IBOutlet weak var reviewLab: UILabel!
     @IBOutlet weak var newsFrom: UILabel!
     
-    var aNews = HomePageNews(){
+    var aNews = HomePageNewsModel(){
         didSet {
             titleLabel.text = aNews.title
-            image1.kf.setImage(with: URL(string: aNews.imageurl))
+            image1.kf.setImage(with: URL(string: aNews.imageUrl))
             newsFrom.text = aNews.source
-            reviewLab.text = "评论:\(aNews.comment)"
-            
+            reviewLab.text = "评论:\(aNews.discussCount)"    
         }
     }
     

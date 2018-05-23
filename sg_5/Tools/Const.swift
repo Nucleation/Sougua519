@@ -37,5 +37,7 @@ let commentReport = "\(postUrl)/app/comment/api/entry/appCommentReport"
 let commentByType = "\(postUrl)/app/comment/api/getCommentByTypeId"
 //添加评论
 let addCommentUrl = "\(postUrl)/app/comment/api/entry/addComment"
+//首页新闻推荐
+let getNewsUrl = "\(postUrl)/app/novel/api/getRecommendListByPage"
 
 

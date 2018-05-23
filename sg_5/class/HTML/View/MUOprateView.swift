@@ -13,8 +13,6 @@ class MUOprateView: UIView {
     //设置dataArray
     var dataArray: Array<Any>?{
         didSet{
-            //dataArray = dataArray
-            //dataArray = ["1.png","2.png","3.png","4.png"]
             createSubView()
         }
     }
@@ -51,19 +49,20 @@ class MUOprateView: UIView {
             self.subviews[index].frame = CGRect(x: width * CGFloat(index), y: 0, width: width, height: self.frame.height)
         }
     }
+    //MARK: --控制tabbar按钮点击状态
     func subViewStatus(viewController:UIViewController){
-        let nav = viewController.navigationController as! MUNaigationViewController
-        let index = nav.currentVisibleIndex as NSInteger
-        for view in self.subviews {
-            if view is UIButton{
-                if index <= 1 && view.tag == 1{
-                    (viewController is HTMLViewController) && (viewController as! HTMLViewController).webView!.canGoBack ? ((view as! UIButton).isEnabled = true): ((view as! UIButton).isEnabled = false)
-                }
-            }else if index >= (nav.opendViewControllers.count) && view.tag == 2  {
-                (viewController is HTMLViewController) && (viewController as! HTMLViewController).webView!.canGoForward ? ((view as! UIButton).isEnabled = true): ((view as! UIButton).isEnabled = false)
-            }else{
-                (view as!UIButton).isEnabled = true
-            }
-        }
+//        let nav = viewController.navigationController as! MUNaigationViewController
+//        let index = nav.currentVisibleIndex as NSInteger
+//        for view in self.subviews {
+//            if view is UIButton{
+//                if index <= 1 && view.tag == 1{
+//                    (viewController is HTMLViewController) && (viewController as! HTMLViewController).webView!.canGoBack ? ((view as! UIButton).isEnabled = true): ((view as! UIButton).isEnabled = false)
+//                }
+//            }else if index >= (nav.opendViewControllers.count) && view.tag == 2  {
+//                (viewController is HTMLViewController) && (viewController as! HTMLViewController).webView!.canGoForward ? ((view as! UIButton).isEnabled = true): ((view as! UIButton).isEnabled = false)
+//            }else{
+//                (view as!UIButton).isEnabled = true
+//            }
+//        }
     }
 }

@@ -21,6 +21,29 @@ class LoginViewController: UIViewController {
     var codeTF:UITextField!
     var cLeftView: UIImageView!
     var getCodeBtn: UIButton!
+    var countdownTimer: Timer?
+    var remainingSeconds: Int = 0 {
+        willSet {
+            getCodeBtn.setTitle("\(newValue)秒后重新获取", for: .normal)
+            if newValue <= 0 {
+                getCodeBtn.setTitle("重新获取", for: .normal)
+                isCounting = false
+            }
+        }
+    }
+    var isCounting = false {
+        willSet {
+            if newValue {
+                countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime(timer:)), userInfo: nil, repeats: true)
+                remainingSeconds = 30
+            } else {
+                countdownTimer?.invalidate()
+                countdownTimer = nil
+            }
+            
+            getCodeBtn.isEnabled = !newValue
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
@@ -77,6 +100,7 @@ class LoginViewController: UIViewController {
         self.codeTF = codeTF
         let getCodeBtn = UIButton(type: .custom)
         getCodeBtn.setTitle("获取验证码", for: .normal)
+        getCodeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         getCodeBtn.setTitleColor(UIColor.white, for: .normal)
         getCodeBtn.backgroundColor = UIColor.clear
         getCodeBtn.addTarget(self, action: #selector(getCodeBtnClick), for: .touchUpInside)
@@ -177,6 +201,7 @@ class LoginViewController: UIViewController {
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (result) in
             print(result)  
         }
+         isCounting = true
     }
     @objc func forgotBtnClick(){
         switch self.forgotBtn.tag {
@@ -270,6 +295,10 @@ class LoginViewController: UIViewController {
         NetworkTool.requestData(.post, URLString: userRegister, parameters: parData) { (json) in
             print(json)
         }
+    }
+    @objc func updateTime(timer: Timer) {
+        // 计时开始时，逐秒减少remainingSeconds的值
+        remainingSeconds -= 1
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
