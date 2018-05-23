@@ -10,6 +10,7 @@ PODS:
   - FDFullscreenPopGesture (1.1)
   - HandyJSON (4.0.0-beta.1)
   - IBAnimatable (5.0.0)
+  - KeychainSwift (11.0.0)
   - Kingfisher (4.7.0)
   - lottie-ios (2.5.0)
   - MJRefresh (3.1.15.3)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - FDFullscreenPopGesture
   - HandyJSON (~> 4.0.0-beta.1)
   - IBAnimatable
+  - KeychainSwift (~> 11.0)
   - Kingfisher
   - lottie-ios
   - MJRefresh
@@ -41,6 +43,7 @@ SPEC CHECKSUMS:
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HandyJSON: 428bb18e2c34c2a77361accebf90cf64e4f74118
   IBAnimatable: aa2286a9cf8fb4ae2e1be85c5287ae56143b024f
+  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
@@ -50,6 +53,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 78b834f3838fc1e94af6112b2407aecb36921ebc
+PODFILE CHECKSUM: 8c61e7c73eda02eb13d38be6dd44d7ac985c6fc3
 
 COCOAPODS: 1.4.0

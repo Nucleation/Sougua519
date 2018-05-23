@@ -18,4 +18,5 @@ target 'sg_5' do
   # pod 'Texture'
   pod 'lottie-ios'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'KeychainSwift', '~> 11.0'
 end

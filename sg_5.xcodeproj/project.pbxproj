@@ -52,6 +52,8 @@
 		1762DE8F20AD565100D179AE /* NoveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE8E20AD565100D179AE /* NoveCollectionViewController.swift */; };
 		1762DE9120AD5D8400D179AE /* NoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE9020AD5D8400D179AE /* NoveCollectionViewCell.swift */; };
 		1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE9220AD891200D179AE /* NovelContentViewController.swift */; };
+		17765E1F20B2D6A0008FDC6E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */; };
+		17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */; };
 		177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A185D20ABCB5C0025EF58 /* MetooViewController.swift */; };
 		177A4F8420A539EF0004336E /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 177A4F6E20A539EF0004336E /* NSString+AES.m */; };
 		177A4F8520A539EF0004336E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A4F6F20A539EF0004336E /* SwiftyJSON.swift */; };
@@ -66,6 +68,10 @@
 		177C617D20A9957600BDE571 /* PictureClassifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177C617C20A9957600BDE571 /* PictureClassifyModel.swift */; };
 		177CC1E520AEA55E00202F14 /* NovelFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177CC1E420AEA55E00202F14 /* NovelFlowLayout.swift */; };
 		177CC1E720AEAAB500202F14 /* NovelInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177CC1E620AEAAB500202F14 /* NovelInfoViewController.swift */; };
+		177D5AC620B3C84900B4A5E8 /* KeyChainTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177D5AC520B3C84900B4A5E8 /* KeyChainTool.swift */; };
+		177D5AC820B4090600B4A5E8 /* NovelCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177D5AC720B4090600B4A5E8 /* NovelCommentModel.swift */; };
+		177D5ACD20B40FC500B4A5E8 /* NovelCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177D5ACB20B40FC500B4A5E8 /* NovelCommentTableViewCell.swift */; };
+		177D5ACE20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177D5ACC20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib */; };
 		1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */; };
 		1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */; };
 		1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724620B0162D00EAFEC0 /* LoginViewController.swift */; };
@@ -146,6 +152,9 @@
 		1762DE8E20AD565100D179AE /* NoveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveCollectionViewController.swift; sourceTree = "<group>"; };
 		1762DE9020AD5D8400D179AE /* NoveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveCollectionViewCell.swift; sourceTree = "<group>"; };
 		1762DE9220AD891200D179AE /* NovelContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelContentViewController.swift; sourceTree = "<group>"; };
+		17765E1D20B2D4AE008FDC6E /* sg_5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sg_5.entitlements; sourceTree = "<group>"; };
+		17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		177A185D20ABCB5C0025EF58 /* MetooViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooViewController.swift; sourceTree = "<group>"; };
 		177A4F6E20A539EF0004336E /* NSString+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AES.m"; sourceTree = "<group>"; };
 		177A4F6F20A539EF0004336E /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -167,6 +176,10 @@
 		177C617C20A9957600BDE571 /* PictureClassifyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureClassifyModel.swift; sourceTree = "<group>"; };
 		177CC1E420AEA55E00202F14 /* NovelFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelFlowLayout.swift; sourceTree = "<group>"; };
 		177CC1E620AEAAB500202F14 /* NovelInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelInfoViewController.swift; sourceTree = "<group>"; };
+		177D5AC520B3C84900B4A5E8 /* KeyChainTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainTool.swift; sourceTree = "<group>"; };
+		177D5AC720B4090600B4A5E8 /* NovelCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelCommentModel.swift; sourceTree = "<group>"; };
+		177D5ACB20B40FC500B4A5E8 /* NovelCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelCommentTableViewCell.swift; sourceTree = "<group>"; };
+		177D5ACC20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NovelCommentTableViewCell.xib; sourceTree = "<group>"; };
 		1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollViewController.swift; sourceTree = "<group>"; };
 		1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetooCollectionViewController.swift; sourceTree = "<group>"; };
 		1782724620B0162D00EAFEC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +202,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */,
+				17765E1F20B2D6A0008FDC6E /* UserNotifications.framework in Frameworks */,
 				17D8CB5320A4523D00914492 /* libxml2.tbd in Frameworks */,
 				0F28CFA495528E4F7CA144CB /* Pods_sg_5.framework in Frameworks */,
 			);
@@ -214,6 +229,8 @@
 		0F688CE577A2C4203CD15B31 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */,
+				17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */,
 				17D8CB5220A4523D00914492 /* libxml2.tbd */,
 				1EF282048723040960C2530E /* Pods_sg_5.framework */,
 			);
@@ -245,6 +262,7 @@
 		174F75F120A44A9E00BB0B46 /* sg_5 */ = {
 			isa = PBXGroup;
 			children = (
+				17765E1D20B2D4AE008FDC6E /* sg_5.entitlements */,
 				172CF23A20A45563005632F3 /* AppDelegate.swift */,
 				174F762020A44AB700BB0B46 /* MUConfig.swift */,
 				174F762420A44AB800BB0B46 /* MUltiWindow-Bridging-Header.h */,
@@ -306,7 +324,7 @@
 				174F763120A44AB900BB0B46 /* ViewModel */,
 				174F763320A44AB900BB0B46 /* HTML */,
 				174F764020A44AB900BB0B46 /* MetooCollectionview */,
-				1762DE8220AD15AC00D179AE /* Nove */,
+				1762DE8220AD15AC00D179AE /* Novel */,
 				174F764720A44AB900BB0B46 /* Login */,
 			);
 			path = class;
@@ -410,6 +428,7 @@
 				174F766020A44C4900BB0B46 /* NetworkTool.swift */,
 				174F766120A44C4900BB0B46 /* UIKit+Extension.swift */,
 				174F766220A44C4900BB0B46 /* Foundation+Extension.swift */,
+				177D5AC520B3C84900B4A5E8 /* KeyChainTool.swift */,
 				174F766320A44C4900BB0B46 /* Const.swift */,
 				174F766420A44C4900BB0B46 /* homepage.json */,
 			);
@@ -444,14 +463,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1762DE8220AD15AC00D179AE /* Nove */ = {
+		1762DE8220AD15AC00D179AE /* Novel */ = {
 			isa = PBXGroup;
 			children = (
 				1762DE8520AD160C00D179AE /* View */,
 				1762DE8420AD15F600D179AE /* Model */,
 				1762DE8320AD15D800D179AE /* Controller */,
 			);
-			path = Nove;
+			path = Novel;
 			sourceTree = "<group>";
 		};
 		1762DE8320AD15D800D179AE /* Controller */ = {
@@ -469,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				1762DE8820AD2BAA00D179AE /* NoveCategoryListModel.swift */,
+				177D5AC720B4090600B4A5E8 /* NovelCommentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -478,6 +498,8 @@
 			children = (
 				1762DE9020AD5D8400D179AE /* NoveCollectionViewCell.swift */,
 				177CC1E420AEA55E00202F14 /* NovelFlowLayout.swift */,
+				177D5ACB20B40FC500B4A5E8 /* NovelCommentTableViewCell.swift */,
+				177D5ACC20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -615,6 +637,14 @@
 				TargetAttributes = {
 					174F75EE20A44A9E00BB0B46 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					174F760220A44AA000BB0B46 = {
 						CreatedOnToolsVersion = 9.3;
@@ -655,6 +685,7 @@
 				174F768320A44E6300BB0B46 /* ImageTableViewCell.xib in Resources */,
 				174F768020A44E6300BB0B46 /* SingleTestTableViewCell.xib in Resources */,
 				177A4F8920A539EF0004336E /* Info-tvOS.plist in Resources */,
+				177D5ACE20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib in Resources */,
 				174F766920A44C4900BB0B46 /* homepage.json in Resources */,
 				177A4F8720A539EF0004336E /* Info-iOS.plist in Resources */,
 				174F767E20A44E6300BB0B46 /* SingleImageTableViewCell.xib in Resources */,
@@ -729,6 +760,7 @@
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/IBAnimatable/IBAnimatable.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
@@ -745,6 +777,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IBAnimatable.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
@@ -785,12 +818,15 @@
 				177CC1E520AEA55E00202F14 /* NovelFlowLayout.swift in Sources */,
 				174F768220A44E6300BB0B46 /* HomeNavigationView.swift in Sources */,
 				1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */,
+				177D5AC620B3C84900B4A5E8 /* KeyChainTool.swift in Sources */,
 				172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */,
 				174F765420A44AB900BB0B46 /* MUMutiWindowCollectionViewCell.swift in Sources */,
 				174F767F20A44E6300BB0B46 /* VideoSubTableViewCell.swift in Sources */,
 				1762DE8F20AD565100D179AE /* NoveCollectionViewController.swift in Sources */,
+				177D5ACD20B40FC500B4A5E8 /* NovelCommentTableViewCell.swift in Sources */,
 				174F766620A44C4900BB0B46 /* UIKit+Extension.swift in Sources */,
 				1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */,
+				177D5AC820B4090600B4A5E8 /* NovelCommentModel.swift in Sources */,
 				174F767C20A44E6300BB0B46 /* SingleImageTableViewCell.swift in Sources */,
 				174F764A20A44AB900BB0B46 /* JHFundation-Extension.swift in Sources */,
 				177A4F8B20A539EF0004336E /* AES加密.swift in Sources */,
@@ -982,6 +1018,7 @@
 			baseConfigurationReference = 3926C2AAF1114154A6286F3A /* Pods-sg_5.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = sg_5/sg_5.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NU49PVLB9F;
 				HEADER_SEARCH_PATHS = (
@@ -1006,6 +1043,7 @@
 			baseConfigurationReference = E2320D7EC544693F9FC25BCE /* Pods-sg_5.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = sg_5/sg_5.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NU49PVLB9F;
 				HEADER_SEARCH_PATHS = (

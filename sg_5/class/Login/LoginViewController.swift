@@ -166,8 +166,12 @@ class LoginViewController: UIViewController {
         }
     }
     @objc func getCodeBtnClick(){
+        guard self.userNameTF.text != "" else {
+            print("账号为空")
+            return
+        }
         let urlStr = ucenterGetSecurityCode
-        let timeInterval = Date().timeIntervalSince1970 * 1000
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, String> = ["mobile":self.userNameTF.text ?? "","timestamp":String(timeInterval)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (result) in
@@ -241,10 +245,31 @@ class LoginViewController: UIViewController {
         }
     }
     func login() {
+        guard self.userNameTF.text != "", self.passWordTF.text != "" else {
+            print("账号密码不能为空")
+            return
+        }
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: userLogin, parameters: parData) { (json) in
+            KeyChain().savekeyChain(dic: ["mobile":json["mobile"].stringValue,"id":json["id"].stringValue,"token":json["token"].stringValue])
+            print(KeyChain().getKeyChain())
+            self.navigationController?.popViewController(animated: false)
+        }
         
     }
     func register() {
-
+        guard self.userNameTF.text != "", self.passWordTF.text != "" ,self.passWordTF.text != "" else {
+            print("账号/密码/验证码不能为空")
+            return
+        }
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!,"securityCode":self.codeTF.text!]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: userRegister, parameters: parData) { (json) in
+            print(json)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

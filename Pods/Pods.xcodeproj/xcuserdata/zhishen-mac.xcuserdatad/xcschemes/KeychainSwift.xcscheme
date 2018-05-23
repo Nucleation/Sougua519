@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DDC0987782521320AA6951C2047B23F6"
-               BlueprintName = "SVProgressHUD"
+               BlueprintIdentifier = "38ACA430605AFB4229712A18BDDF5086"
+               BlueprintName = "KeychainSwift"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SVProgressHUD.framework">
+               BuildableName = "KeychainSwift.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

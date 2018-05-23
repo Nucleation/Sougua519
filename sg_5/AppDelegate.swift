@@ -7,16 +7,20 @@
 //
 
 import UIKit
-
+import UserNotifications
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+    
     var window: UIWindow?
     var firstWindow: MultiWindow?
+    var deviceToken: String?
     
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        //注册推送
+        UIApplication.shared.registerForRemoteNotifications()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.resignKey()
         window?.isHidden = true
@@ -26,6 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firstWindow?.rootViewController = MUNaigationViewController(rootViewController: MuRootViewController())
         firstWindow?.makeKeyAndVisible()
         return true
+    }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let device = NSData(data: deviceToken)
+        let deviceId = device.description.replacingOccurrences(of:"<", with:"").replacingOccurrences(of:">", with:"").replacingOccurrences(of:" ", with:"")
+        if AppDelegate().deviceToken == nil {
+            AppDelegate().deviceToken = deviceId
+            print(AppDelegate().deviceToken ?? "token为空")
+        }
     }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

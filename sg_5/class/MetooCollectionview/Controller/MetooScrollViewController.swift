@@ -19,20 +19,25 @@ class MetooScrollViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+         //[self setAutomaticallyAdjustsScrollViewInsets:NO];
+        
         let scrollerView = UIScrollView()
+        scrollerView.contentInsetAdjustmentBehavior = .never
         scrollerView.isPagingEnabled = true
         scrollerView.bounces = false
+        scrollerView.showsHorizontalScrollIndicator = false
+        scrollerView.alwaysBounceVertical = false
         self.view.addSubview(scrollerView)
         self.scrollerView = scrollerView
         let contentView = UIView()
         scrollerView.addSubview(contentView)
         self.contentView = contentView
         self.scrollerView?.snp.makeConstraints({ (make) in
-            make.edges.equalTo(self.view).inset(UIEdgeInsets.zero)
+            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         })   
         for i in 0 ..< pictureModelArr.count {
             let imageView: UIImageView = UIImageView()
-            //imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleToFill
             imageView.kf.setImage(with: URL(string:"\(pictureModelArr[i].downloadUrl)"))
             self.contentView?.addSubview(imageView)
             imageView.snp.makeConstraints { (make) in
@@ -53,6 +58,8 @@ class MetooScrollViewController: UIViewController {
             make.height.equalTo(self.scrollerView!)
             make.right.equalTo(self.lastImageView!.snp.right)
         })
+        self.view.layoutIfNeeded()
+        
     }
 
     override func didReceiveMemoryWarning() {

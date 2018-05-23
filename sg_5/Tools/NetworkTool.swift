@@ -138,12 +138,12 @@ extension NetworkToolProtocol{
         let path = Bundle.main.path(forResource: "homepage", ofType: "json")
         let url = URL(fileURLWithPath: path!)
         let data = try! Data(contentsOf: url)
-        let jsonStr = String(data: data, encoding: String.Encoding.utf8)
+        //let jsonStr = String(data: data, encoding: String.Encoding.utf8)
         let json = try! JSON(data: data)
         guard json["result"] == "success" else { return }
         if let datas = json["data"].arrayObject{
              var homepageNews  = [HomePageNews]()
-             homepageNews += datas.flatMap({HomePageNews.deserialize(from: $0 as? Dictionary)})
+            homepageNews += datas.compactMap({HomePageNews.deserialize(from: $0 as? Dictionary)})
             completionHandler(homepageNews)
         }
     }
@@ -155,20 +155,25 @@ extension NetworkToolProtocol{
                 print(response)
                 if let jsons = response.result.value{
                     let jsonDic = JSON(jsons)
-                    if jsonDic["code"].intValue == 1 {
-                        let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt
-                        let jsonData = jsonDataStr?.data(using: String.Encoding.utf8, allowLossyConversion: true)
-                        success(JSON(data: jsonData!))
+                    guard jsonDic["code"].intValue == 1 else {
                         SVProgressHUD.dismiss()
-                    }else{
-                       SVProgressHUD.dismiss()
-                     }
-                   }
+                        return
+                    }
+                    let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt
+                    let jsonData = jsonDataStr?.data(using: String.Encoding.utf8, allowLossyConversion: true)
+                    success(JSON(data: jsonData!))
+                    SVProgressHUD.dismiss()
             }else{
                 print(response)
                 SVProgressHUD.dismiss()
             }
-            }
         }
+      }
+    }
+//    static func getToken() -> String {
+//        let device = NSData(data: deviceToken)
+//        let deviceId = device.description.replacingOccurrences(of:"<", with:"").replacingOccurrences(of:">", with:"").replacingOccurrences(of:" ", with:"")
+//        return deviceId
+//    }
 }
 struct NetworkTool: NetworkToolProtocol {}

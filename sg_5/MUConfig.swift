@@ -14,7 +14,6 @@ import SwiftyJSON
 import Alamofire
 import SnapKit
 
-
 public let SCREEN_WIDTH: CGFloat = UIScreen.main.bounds.width
 public let SCREEN_HEIGHT: CGFloat = UIScreen.main.bounds.height
 class MUConfig: NSObject {
