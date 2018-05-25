@@ -7,15 +7,19 @@
 //
 
 import UIKit
-
-class MetooScrollViewController: UIViewController {
+import SVProgressHUD
+class MetooScrollViewController: UIViewController ,MetooFootDelegate{
+    var index: Int = 0
+    var headView: MetooScrollHeadView?
+    var footView: MetooScrollerFootView?
     var scrollerView: UIScrollView?
     var contentView: UIView?
-    
     var pictureModelArr: Array<PictureClassifyModel> = []
     var lastImageView: UIImageView?
+    var imageViewArr: Array = [UIImageView]()
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        self.scrollerView?.scrollRectToVisible(CGRect(x: CGFloat(self.index) * screenWidth, y: 0, width: screenWidth, height: screenHeight), animated: false)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,7 @@ class MetooScrollViewController: UIViewController {
         scrollerView.bounces = false
         scrollerView.showsHorizontalScrollIndicator = false
         scrollerView.alwaysBounceVertical = false
+        scrollerView.delegate = self
         self.view.addSubview(scrollerView)
         self.scrollerView = scrollerView
         let contentView = UIView()
@@ -38,6 +43,9 @@ class MetooScrollViewController: UIViewController {
             let imageView: UIImageView = UIImageView()
             imageView.contentMode = .scaleToFill
             imageView.kf.setImage(with: URL(string:"\(pictureModelArr[i].downloadUrl)"))
+            imageView.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(imageViewTaped(sender:)))
+            imageView.addGestureRecognizer(tap)
             self.contentView?.addSubview(imageView)
             imageView.snp.makeConstraints { (make) in
                 make.top.bottom.equalTo(self.contentView!)
@@ -50,6 +58,7 @@ class MetooScrollViewController: UIViewController {
                 }
             }
             self.lastImageView = imageView
+            self.imageViewArr.append(imageView)
         }
         self.contentView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.scrollerView!).inset(UIEdgeInsets.zero)
@@ -57,22 +66,47 @@ class MetooScrollViewController: UIViewController {
             make.right.equalTo(self.lastImageView!.snp.right)
         })
         self.view.layoutIfNeeded()
+        let headView = MetooScrollHeadView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 60))
+        headView.backBlock {
+            self.navigationController?.popViewController(animated: false)
+        }
+        self.view.addSubview(headView)
+        self.headView = headView
+        let footView = MetooScrollerFootView(frame: CGRect(x: 0, y: screenHeight - 60, width: screenWidth, height: 60))
+        footView.delegate = self
+        self.view.addSubview(footView)
+        self.footView = footView
     }
-
+    @objc func imageViewTaped(sender: UIImageView){
+        if self.headView?.isShow ?? true {
+            self.headView?.hideHeadView()
+        }else{
+            self.headView?.showHeadView()
+        }
+        if self.footView?.isShow ?? true {
+            self.footView?.hideFootView()
+        }else{
+            self.footView?.showFootView()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func downLoadImage() {
+        UIImageWriteToSavedPhotosAlbum(self.imageViewArr[self.index].image!, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
     }
-    */
-
+    @objc func image(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject) {
+        
+        if didFinishSavingWithError != nil {
+            SVProgressHUD.show(withStatus: "保存失败,请稍后再试!")
+            return
+        }
+        SVProgressHUD.show(withStatus: "已保存在相册")
+    }
+}
+extension MetooScrollViewController: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.index =  Int (scrollView.contentOffset.x / screenWidth)
+    }
 }

@@ -51,7 +51,7 @@ class NoveHomeViewController: UIViewController {
             self.pageTitleView!.backgroundColor = .clear
             self.view.addSubview(self.pageTitleView!)
             // 设置子控制器
-            _ = array.flatMap({ (title) -> () in
+            _ = array.compactMap({ (title) -> () in
                 let noveView = NoveCollectionViewController()
                 noveView.category = title as? String
                 self.addChildViewController(noveView)

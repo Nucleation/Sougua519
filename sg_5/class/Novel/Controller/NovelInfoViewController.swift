@@ -119,7 +119,7 @@ class NovelInfoViewController: UIViewController {
         let briefLab = UILabel()
         briefLab.textColor = .black
         briefLab.numberOfLines = 6
-        briefLab.text = self.novelInfo?.fictionBrief.trimmingCharacters(in: NSCharacterSet.newlines)
+        briefLab.text = self.novelInfo?.fictionBrief.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         bookView.addSubview(briefLab)
         self.briefLab = briefLab
         let commentView = UIView()

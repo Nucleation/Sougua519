@@ -52,7 +52,7 @@ class MetooCollectionViewController: UIViewController{
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (json) in
             print(json)
             if let datas = json["list"].arrayObject{
-                self.pictureClassifyArray += datas.flatMap({PictureClassifyModel.deserialize(from: $0 as? Dictionary)})
+                self.pictureClassifyArray += datas.compactMap({PictureClassifyModel.deserialize(from: $0 as? Dictionary)})
             }
             self.flowLayout?.itemCount = self.pictureClassifyArray.count
             self.mainCollectionView.mj_footer.endRefreshing()
@@ -69,7 +69,7 @@ class MetooCollectionViewController: UIViewController{
             print(json)
             self.pictureClassifyArray.removeAll()
             if let datas = json["list"].arrayObject{
-                self.pictureClassifyArray += datas.flatMap({PictureClassifyModel.deserialize(from: $0 as? Dictionary)})
+                self.pictureClassifyArray += datas.compactMap({PictureClassifyModel.deserialize(from: $0 as? Dictionary)})
             }
             self.flowLayout?.itemCount = self.pictureClassifyArray.count
             self.mainCollectionView.mj_header.endRefreshing()
@@ -102,6 +102,7 @@ extension MetooCollectionViewController:UICollectionViewDelegateFlowLayout,UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MetooScrollViewController()
         vc.pictureModelArr = self.pictureClassifyArray
+        vc.index = indexPath.row
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

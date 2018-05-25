@@ -8,7 +8,7 @@
 
 import UIKit
 import MJRefresh
-class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CategoryButtonViewDelegate{
+class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CategoryButtonViewDelegate,EmptyDataSetProtocol{
     //tableView
     var navigationBar = HomeNavigationView.loadViewFromNib()
     var searchBar: UISearchBar?
@@ -142,6 +142,9 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             if let datas = json["news"].arrayObject{
                 self.newsListArr += datas.compactMap({HomePageNewsModel.deserialize(from: $0 as? Dictionary)})
             }
+            else{
+                self.addEmptyView(iconName: "", tipTitle: "无数据")
+            }
             self.mainTableView?.reloadData()
             self.mainTableView?.contentOffset = CGPoint.zero
             
@@ -271,7 +274,7 @@ extension MuRootViewController {
     //MARK: --点击分类跳转
     func categoryBtnClick(sender: UIButton) {
         if sender.tag == 5 {
-            let vc = NoveHomeViewController()
+            let vc = NovelViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             let vc = MetooViewController()

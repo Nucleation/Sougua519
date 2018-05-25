@@ -7,6 +7,12 @@ PODS:
     - BMPlayer/Core
     - NVActivityIndicatorView (~> 4.0.0)
     - SnapKit (~> 4.0.0)
+  - EmptyPage (1.2.8):
+    - EmptyPage/Core (= 1.2.8)
+    - EmptyPage/Standard (= 1.2.8)
+  - EmptyPage/Core (1.2.8)
+  - EmptyPage/Standard (1.2.8):
+    - EmptyPage/Core
   - FDFullscreenPopGesture (1.1)
   - HandyJSON (4.0.0-beta.1)
   - IBAnimatable (5.0.0)
@@ -25,6 +31,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - BMPlayer
+  - EmptyPage
   - FDFullscreenPopGesture
   - HandyJSON (~> 4.0.0-beta.1)
   - IBAnimatable
@@ -40,6 +47,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   BMPlayer: 44eebf06eb01450dd14ea74b27d07c5222f0eed1
+  EmptyPage: 710b7969d507fa462e96e6070deef05a0dc7c012
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HandyJSON: 428bb18e2c34c2a77361accebf90cf64e4f74118
   IBAnimatable: aa2286a9cf8fb4ae2e1be85c5287ae56143b024f
@@ -53,6 +61,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 8c61e7c73eda02eb13d38be6dd44d7ac985c6fc3
+PODFILE CHECKSUM: b054e9212b8349bdd0ff50b93403234524958c27
 
 COCOAPODS: 1.4.0

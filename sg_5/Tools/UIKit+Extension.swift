@@ -210,7 +210,6 @@ extension Dictionary{
     }
 }
 extension UIImageView{
-
     func AddTapFullScreenScan(){
         self.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(showImage(sender:)))
@@ -250,5 +249,72 @@ extension UIImageView{
                 view.removeFromSuperview()
             }
         }
+    }
+}
+enum EmptyType {
+    case emptyData
+    case networkError
+}
+
+protocol EmptyDataSetProtocol { }
+
+extension EmptyDataSetProtocol where Self : UIViewController {
+    
+    func addEmptyView(type: EmptyType? = .emptyData, iconName: String, tipTitle: String, action: Selector? = nil) {
+        
+        let emptyView = UIView(frame: view.bounds)
+        emptyView.backgroundColor = UIColor.white
+        emptyView.tag = 1024
+        view.addSubview(emptyView)
+        
+        let icomViewW: CGFloat = 100
+        let imageView = UIImageView(image: UIImage(named: iconName))
+        imageView.frame.size = imageView.image?.size ?? CGSize(width: icomViewW, height: icomViewW)
+        imageView.contentMode = .center
+        imageView.center = CGPoint(x: emptyView.center.x, y: emptyView.center.y - 100)
+        emptyView.addSubview(imageView)
+        
+        let tipLabel = UILabel()
+        let margin: CGFloat = 20
+        tipLabel.numberOfLines = 0
+        tipLabel.font = UIFont.systemFont(ofSize: 14)
+        tipLabel.textColor = UIColor.lightGray
+        
+        if tipTitle.contains("\n") {
+            let style = NSMutableParagraphStyle()
+            style.lineSpacing = 5 // 设置行间距
+            style.alignment = .center // 文字居中
+            //let tipString = NSAttributedString(string: tipTitle, attributes: [NSParagraphStyleAttributeName: style])
+            let tipString = NSAttributedString(string: tipTitle, attributes: [NSAttributedStringKey.paragraphStyle: style])
+            tipLabel.attributedText = tipString
+        } else {
+            tipLabel.text = tipTitle
+        }
+        tipLabel.adjustsFontSizeToFitWidth = true
+        tipLabel.textAlignment = .center
+        tipLabel.sizeToFit()
+        tipLabel.frame = CGRect(x: margin, y: imageView.frame.maxY + margin, width: UIScreen.main.bounds.width - margin*2, height: tipLabel.bounds.height)
+        emptyView.addSubview(tipLabel)
+        
+        // 网络请求失败
+        if type == .networkError {
+            
+            let reloadButton = UIButton(type: .system)
+            reloadButton.frame.size = CGSize(width: 100, height: 36)
+            reloadButton.center = CGPoint(x: emptyView.center.x, y: tipLabel.frame.maxY + margin*2)
+            reloadButton.backgroundColor = UIColor(red: 255/255.0, green: 42/255.0, blue: 102/255.0, alpha: 1.0)
+            reloadButton.layer.cornerRadius = 18
+            reloadButton.layer.masksToBounds = true
+            reloadButton.setTitle("重新加载", for: .normal)
+            reloadButton.setTitleColor(UIColor.white, for: .normal)
+            reloadButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+            reloadButton.addTarget(self, action: action!, for: .touchUpInside)
+            emptyView.addSubview(reloadButton)
+        }
+        
+    }
+    
+    func hideEmptyView() {
+        view.subviews.filter({ $0.tag == 1024 }).first?.removeFromSuperview()
     }
 }
