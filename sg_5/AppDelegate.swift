@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     var window: UIWindow?
     var firstWindow: MultiWindow?
     var deviceToken: String?
+    var isLogin: Bool = false
     
     
 

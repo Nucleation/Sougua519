@@ -93,16 +93,28 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         super.didReceiveMemoryWarning()
         
     }
+    func likes(){
+        print("likes")
+    }
+    func report(){
+        print("report")
+    }
     func downLoadImage() {
         UIImageWriteToSavedPhotosAlbum(self.imageViewArr[self.index].image!, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
     }
     @objc func image(image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject) {
         
         if didFinishSavingWithError != nil {
-            SVProgressHUD.show(withStatus: "保存失败,请稍后再试!")
+            
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                SVProgressHUD.show(withStatus: "保存失败,请稍后再试!")
+            }
             return
         }
-        SVProgressHUD.show(withStatus: "已保存在相册")
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+            SVProgressHUD.show(withStatus: "正在保存!")
+        }
+       SVProgressHUD.dismiss()
     }
 }
 extension MetooScrollViewController: UIScrollViewDelegate{

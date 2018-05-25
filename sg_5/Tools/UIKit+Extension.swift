@@ -318,3 +318,4 @@ extension EmptyDataSetProtocol where Self : UIViewController {
         view.subviews.filter({ $0.tag == 1024 }).first?.removeFromSuperview()
     }
 }
+

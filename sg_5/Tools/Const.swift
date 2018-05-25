@@ -39,5 +39,12 @@ let commentByType = "\(postUrl)/app/comment/api/getCommentByTypeId"
 let addCommentUrl = "\(postUrl)/app/comment/api/entry/addComment"
 //首页新闻推荐
 let getNewsUrl = "\(postUrl)/app/novel/api/getRecommendListByPage"
-
+//判断用户是否添加过小说到书架
+let checkNovelShelfUrl = "\(postUrl)/app/novel/api/checkNovelShelf"
+//获取书架列表
+let getNovelShelfListUrl = "\(postUrl)/app/novel/api/entry/getShelfList"
+//根据id删除小说
+let deleteNovelShelfUrl = "\(postUrl)/app/novel/api/entry/deleteShelf"
+//增加小说
+let addNovelShelfUrl = "\(postUrl)/app/novel/api/entry/addShelf"
 

@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import SVProgressHUD
+
 protocol MetooFootDelegate {
     func downLoadImage()
+    func report()
+    func likes()
 }
 class MetooScrollerFootView: UIView {
     var delegate: MetooFootDelegate?
@@ -66,7 +70,15 @@ class MetooScrollerFootView: UIView {
         self.reportBtn = reportBtn
     }
     @objc func likesBtnClick(){
-        
+        if KeyChain().getKeyChain()["isLogin"] != "true" {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                SVProgressHUD.show(withStatus: "未登录")
+            }
+            return
+        }
+        if self.delegate != nil {
+            self.delegate?.likes()
+        }
     }
     @objc func downLoadBtnClick(){
         if self.delegate != nil {
@@ -74,7 +86,15 @@ class MetooScrollerFootView: UIView {
         }
     }
     @objc func reportBtnClick(){
-        
+        if KeyChain().getKeyChain()["isLogin"] != "true" {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                SVProgressHUD.show(withStatus: "未登录")
+            }
+            return
+        }
+        if self.delegate != nil {
+            self.delegate?.report()
+        }
     }
     func hideFootView(){
         UIView.animate(withDuration: 0.5) {
