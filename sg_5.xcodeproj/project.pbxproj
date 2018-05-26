@@ -52,6 +52,8 @@
 		1762DE8F20AD565100D179AE /* NoveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE8E20AD565100D179AE /* NoveCollectionViewController.swift */; };
 		1762DE9120AD5D8400D179AE /* NoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE9020AD5D8400D179AE /* NoveCollectionViewCell.swift */; };
 		1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE9220AD891200D179AE /* NovelContentViewController.swift */; };
+		176F998A20B92E6600FF6E46 /* NovelShelfListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */; };
+		176F998E20B940AF00FF6E46 /* BookShelfFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */; };
 		17765E1F20B2D6A0008FDC6E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */; };
 		17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */; };
 		177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A185D20ABCB5C0025EF58 /* MetooViewController.swift */; };
@@ -84,7 +86,6 @@
 		177DEBEC20B7E2C400E176F7 /* MetooScrollHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DEBEB20B7E2C400E176F7 /* MetooScrollHeadView.swift */; };
 		177DEBEE20B7F47700E176F7 /* MetooScrollerFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DEBED20B7F47600E176F7 /* MetooScrollerFootView.swift */; };
 		177DEBF020B80B2C00E176F7 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DEBEF20B80B2C00E176F7 /* ReportView.swift */; };
-		177DEBF220B81B6B00E176F7 /* NovelBookshelfModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DEBF120B81B6B00E176F7 /* NovelBookshelfModel.swift */; };
 		1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */; };
 		1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */; };
 		1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724620B0162D00EAFEC0 /* LoginViewController.swift */; };
@@ -167,6 +168,8 @@
 		1762DE8E20AD565100D179AE /* NoveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveCollectionViewController.swift; sourceTree = "<group>"; };
 		1762DE9020AD5D8400D179AE /* NoveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveCollectionViewCell.swift; sourceTree = "<group>"; };
 		1762DE9220AD891200D179AE /* NovelContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelContentViewController.swift; sourceTree = "<group>"; };
+		176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelShelfListModel.swift; sourceTree = "<group>"; };
+		176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfFlowLayout.swift; sourceTree = "<group>"; };
 		17765E1D20B2D4AE008FDC6E /* sg_5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sg_5.entitlements; sourceTree = "<group>"; };
 		17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -207,7 +210,6 @@
 		177DEBEB20B7E2C400E176F7 /* MetooScrollHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollHeadView.swift; sourceTree = "<group>"; };
 		177DEBED20B7F47600E176F7 /* MetooScrollerFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollerFootView.swift; sourceTree = "<group>"; };
 		177DEBEF20B80B2C00E176F7 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
-		177DEBF120B81B6B00E176F7 /* NovelBookshelfModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelBookshelfModel.swift; sourceTree = "<group>"; };
 		1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollViewController.swift; sourceTree = "<group>"; };
 		1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetooCollectionViewController.swift; sourceTree = "<group>"; };
 		1782724620B0162D00EAFEC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -525,7 +527,7 @@
 				1762DE8820AD2BAA00D179AE /* NoveCategoryListModel.swift */,
 				177D5AC720B4090600B4A5E8 /* NovelCommentModel.swift */,
 				177C35DC20B6CF4000B803EF /* NovelTitleModel.swift */,
-				177DEBF120B81B6B00E176F7 /* NovelBookshelfModel.swift */,
+				176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +544,7 @@
 				177C35DA20B6AB5B00B803EF /* NovelCategoryCollectionView.swift */,
 				177DEBE720B7ABAA00E176F7 /* NovelListTableViewCell.swift */,
 				177DEBE820B7ABAA00E176F7 /* NovelListTableViewCell.xib */,
+				176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				174F768220A44E6300BB0B46 /* HomeNavigationView.swift in Sources */,
 				1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */,
 				177D5AC620B3C84900B4A5E8 /* KeyChainTool.swift in Sources */,
+				176F998A20B92E6600FF6E46 /* NovelShelfListModel.swift in Sources */,
 				177C35D720B66F3600B803EF /* BookCityViewController.swift in Sources */,
 				172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */,
 				17857D5C20B53BF2005B028C /* HomePageNewsModel.swift in Sources */,
@@ -885,6 +889,7 @@
 				177DEBE920B7ABAA00E176F7 /* NovelListTableViewCell.swift in Sources */,
 				174F767F20A44E6300BB0B46 /* VideoSubTableViewCell.swift in Sources */,
 				1762DE8F20AD565100D179AE /* NoveCollectionViewController.swift in Sources */,
+				176F998E20B940AF00FF6E46 /* BookShelfFlowLayout.swift in Sources */,
 				177D5ACD20B40FC500B4A5E8 /* NovelCommentTableViewCell.swift in Sources */,
 				174F766620A44C4900BB0B46 /* UIKit+Extension.swift in Sources */,
 				1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */,
@@ -905,7 +910,6 @@
 				174F765320A44AB900BB0B46 /* MUOprateView.swift in Sources */,
 				177C35DB20B6AB5B00B803EF /* NovelCategoryCollectionView.swift in Sources */,
 				177A4F8A20A539EF0004336E /* Base64.m in Sources */,
-				177DEBF220B81B6B00E176F7 /* NovelBookshelfModel.swift in Sources */,
 				174F765720A44AB900BB0B46 /* MUMultiWindowController.swift in Sources */,
 				174F765B20A44AB900BB0B46 /* MetooCollectionViewCell.swift in Sources */,
 				177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */,

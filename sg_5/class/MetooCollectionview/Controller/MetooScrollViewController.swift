@@ -94,10 +94,17 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         
     }
     func likes(){
-        print("likes")
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id ,"contentType":ContentType.Picture.rawValue,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: commentLike, parameters: parData ) { (json) in
+            
+        }
     }
     func report(){
-        print("report")
+        let reportView = ReportView(frame: UIScreen.main.bounds)
+        reportView.contentId = self.pictureModelArr[self.index].id
+        UIApplication.shared.keyWindow?.addSubview(reportView)
     }
     func downLoadImage() {
         UIImageWriteToSavedPhotosAlbum(self.imageViewArr[self.index].image!, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
@@ -120,5 +127,8 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
 extension MetooScrollViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.index =  Int (scrollView.contentOffset.x / screenWidth)
+        self.footView?.likesBtn?.setTitle(self.pictureModelArr[self.index].id, for: .normal)
+        self.view.layoutIfNeeded()
     }
+    
 }

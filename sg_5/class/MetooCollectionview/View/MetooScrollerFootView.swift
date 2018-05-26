@@ -70,7 +70,7 @@ class MetooScrollerFootView: UIView {
         self.reportBtn = reportBtn
     }
     @objc func likesBtnClick(){
-        if KeyChain().getKeyChain()["isLogin"] != "true" {
+        if KeyChain().getKeyChain()["isLogin"] != "1" {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
                 SVProgressHUD.show(withStatus: "未登录")
             }
@@ -86,7 +86,7 @@ class MetooScrollerFootView: UIView {
         }
     }
     @objc func reportBtnClick(){
-        if KeyChain().getKeyChain()["isLogin"] != "true" {
+        if KeyChain().getKeyChain()["isLogin"] != "1" {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
                 SVProgressHUD.show(withStatus: "未登录")
             }

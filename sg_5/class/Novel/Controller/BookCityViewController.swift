@@ -116,7 +116,6 @@ class BookCityViewController: UIViewController{
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"categoryName":self.category,"page":self.pageIndex,"fictionIsEnd": self.subCategory]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData) { (json) in
-            print(json)
             self.dataArr.removeAll()
             if let datas = json["novelList"].arrayObject{
                 self.dataArr += datas.compactMap({NoveCategoryListModel.deserialize(from: $0 as? Dictionary)})

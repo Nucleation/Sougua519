@@ -50,7 +50,7 @@ class MetooCollectionViewController: UIViewController{
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"category":self.category!,"pageIndex":String( self.pageIndex),"pageSize":String(20)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (json) in
-            print(json)
+           
             if let datas = json["list"].arrayObject{
                 self.pictureClassifyArray += datas.compactMap({PictureClassifyModel.deserialize(from: $0 as? Dictionary)})
             }
@@ -66,7 +66,7 @@ class MetooCollectionViewController: UIViewController{
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"category":self.category!,"pageIndex":String(self.pageIndex),"pageSize":String(20)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (json) in
-            print(json)
+            
             self.pictureClassifyArray.removeAll()
             if let datas = json["list"].arrayObject{
                 self.pictureClassifyArray += datas.compactMap({PictureClassifyModel.deserialize(from: $0 as? Dictionary)})

@@ -279,7 +279,6 @@ class LoginViewController: UIViewController {
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: userLogin, parameters: parData) { (json) in
             KeyChain().savekeyChain(dic: ["mobile":json["mobile"].stringValue,"id":json["id"].stringValue,"token":json["token"].stringValue])
-            print(KeyChain().getKeyChain())
             self.navigationController?.popViewController(animated: false)
         }
         
@@ -293,7 +292,7 @@ class LoginViewController: UIViewController {
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!,"securityCode":self.codeTF.text!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: userRegister, parameters: parData) { (json) in
-            print(json)
+            
         }
     }
     @objc func updateTime(timer: Timer) {

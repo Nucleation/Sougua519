@@ -7,7 +7,10 @@
 //
 
 import UIKit
-
+enum ContentType: String {
+    case Novel = "7"
+    case Picture = "3"
+}
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 //总接口
@@ -32,7 +35,7 @@ let getNovelContent = "\(postUrl)/app/novel/api/getNovelContent"
 //点赞
 let commentLike = "\(postUrl)/app/comment/api/appCommentLike"
 //举报
-let commentReport = "\(postUrl)/app/comment/api/entry/appCommentReport"
+let commentReportUrl = "\(postUrl)/app/comment/api/entry/appCommentReport"
 //获取评论列表
 let commentByType = "\(postUrl)/app/comment/api/getCommentByTypeId"
 //添加评论

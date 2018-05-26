@@ -95,7 +95,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
                                 forCellReuseIdentifier:"SingleTest")
         self.view?.addSubview(mainTableView!)
         self.mainTableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
-            print("加载更多")
+            
             self.pageNO += 1
             self.getNewsList(pageNO: self.pageNO)
             self.mainTableView?.reloadData()
@@ -138,7 +138,6 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         var parData = dic.toParameterDic()
         parData["pageNo"] = pageNO
         NetworkTool.requestData(.post, URLString: getNewsUrl, parameters: parData) { (json) in
-            print(json)
             if let datas = json["news"].arrayObject{
                 self.newsListArr += datas.compactMap({HomePageNewsModel.deserialize(from: $0 as? Dictionary)})
             }

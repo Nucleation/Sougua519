@@ -152,11 +152,11 @@ extension NetworkToolProtocol{
         SVProgressHUD.show(withStatus: "加载中...")
         Alamofire.request(URLString, method: method, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
-                print(response)
                 if let jsons = response.result.value{
                     let jsonDic = JSON(jsons)
                     guard jsonDic["code"].intValue == 1 else {
                         SVProgressHUD.dismiss()
+                        success(jsonDic)
                         return
                     }
                     let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt
@@ -164,7 +164,6 @@ extension NetworkToolProtocol{
                     success(JSON(data: jsonData!))
                     SVProgressHUD.dismiss()
             }else{
-                print(response)
                 SVProgressHUD.dismiss()
             }
         }

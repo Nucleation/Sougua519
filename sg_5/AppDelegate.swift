@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         let deviceId = device.description.replacingOccurrences(of:"<", with:"").replacingOccurrences(of:">", with:"").replacingOccurrences(of:" ", with:"")
         if AppDelegate().deviceToken == nil {
             AppDelegate().deviceToken = deviceId
-            print(AppDelegate().deviceToken ?? "token为空")
+           
         }
     }
     func applicationWillResignActive(_ application: UIApplication) {

@@ -49,9 +49,9 @@ class NoveCollectionViewController: UIViewController {
         //["timestamp":String(timeInterval),"categoryName":self.category!,"page":String(self.pageIndex)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (json) in
-            print(json)
+           
             if let datas = json["novelList"].arrayObject{
-                self.noveClassifyArray += datas.flatMap({NoveCategoryListModel.deserialize(from: $0 as? Dictionary)})
+                self.noveClassifyArray += datas.compactMap({NoveCategoryListModel.deserialize(from: $0 as? Dictionary)})
             }
             self.flowLayout?.itemCount = self.noveClassifyArray.count
             self.mainCollectionView.mj_footer.endRefreshing()
@@ -65,7 +65,7 @@ class NoveCollectionViewController: UIViewController {
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"categoryName":self.category!,"page":self.pageIndex]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData) { (json) in
-            print(json)
+            
             self.noveClassifyArray.removeAll()
             if let datas = json["novelList"].arrayObject{
                 self.noveClassifyArray += datas.flatMap({NoveCategoryListModel.deserialize(from: $0 as? Dictionary)})

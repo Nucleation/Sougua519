@@ -13,10 +13,8 @@ class ParameterEncode {
         var result = [String : Any ]()
         for key in parameters.keys.sorted(by: <) {
             let value = parameters[key]!
-            print(value)
             components += queryComponents(fromKey: key, value: value)
         }
-        print(components)
         print((components.map { "\($0)=\($1)" }.joined(separator: "&")))
         result["sign"] = (components.map { "\($0)=\($1)" }.joined(separator: "&")).MD5().uppercased() 
         return result
