@@ -33,6 +33,7 @@ class ReportView: UIView {
     func createUI() {
         let centerView = UIView()
         centerView.backgroundColor = .white
+        centerView.alpha = 1
         self.addSubview(centerView)
         self.centerView = centerView
         let numberLab = UILabel()
@@ -41,7 +42,7 @@ class ReportView: UIView {
         self.centerView?.addSubview(numberLab)
         self.numberLab = numberLab
         let sendBtn = UIButton(type: .custom)
-        sendBtn.backgroundColor = .blue
+        sendBtn.backgroundColor = UIColor.colorWithHexColorString("adccf9")
         sendBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         sendBtn.setTitle("确认", for: .normal)
         sendBtn.layer.cornerRadius = 5
@@ -67,7 +68,7 @@ class ReportView: UIView {
             reportBtn.showsTouchWhenHighlighted = true
             reportBtn.isSelected = false
             reportBtn.setTitle(self.reportTitleArr[i], for: .normal)
-            reportBtn.setTitleColor(.black, for: .normal)
+            reportBtn.setTitleColor(UIColor.colortext1, for: .normal)
             reportBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             reportBtn.addTarget(self, action: #selector(reportBtnClick(sender:)), for: .touchUpInside)
             self.addSubview(reportBtn)
@@ -99,9 +100,11 @@ class ReportView: UIView {
     @objc func reportBtnClick(sender: UIButton){
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
-            sender.backgroundColor = .blue
+            sender.layer.borderColor = UIColor.colorAccent.cgColor
+            sender.setTitleColor(UIColor.colorAccent, for: .normal)
         }else{
-            sender.backgroundColor = .white
+            sender.layer.borderColor = UIColor.colortext1.cgColor
+            sender.setTitleColor(UIColor.colortext1, for: .normal)
         }
         self.selectNum = 0
         for i in 0 ..< self.reportTitleArr.count {
@@ -109,6 +112,11 @@ class ReportView: UIView {
             if btn.isSelected == true{
                 self.selectNum += 1
             }
+        }
+        if self.selectNum != 0 {
+            self.sendBtn?.backgroundColor = UIColor.colorAccent
+        }else{
+            self.sendBtn?.backgroundColor = UIColor.colorWithHexColorString("adccf9")
         }
         self.numberLab?.text = "已选择\(self.selectNum)个理由"
         self.layoutIfNeeded()

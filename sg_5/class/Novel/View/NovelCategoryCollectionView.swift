@@ -80,7 +80,7 @@ class NovelCategoryCollectionViewCell: UICollectionViewCell {
     }
     func setLabColor(model: NovelTitleModel){
         self.itemLab?.text = model.title
-        self.itemLab?.textColor = model.itemIsSelected! ? .blue : .black
+        self.itemLab?.textColor = model.itemIsSelected! ? .colorAccent : .colortext1
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

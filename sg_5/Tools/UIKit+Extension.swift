@@ -51,6 +51,21 @@ extension UIColor {
             return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
         }
     }
+    class var colorAccent: UIColor{
+        get {
+            return UIColor.colorWithHexColorString("017cfa")
+        }
+    }
+    class var colortext1: UIColor{
+        get {
+            return UIColor.colorWithHexColorString("333333")
+        }
+    }
+    class var colortext2: UIColor{
+        get {
+            return UIColor.colorWithHexColorString("666666")
+        }
+    }
     // MARK:- HexString以#、0X开头
     class func colorWithHexColorString(_ color: String, alpha: CGFloat) -> UIColor {
         let whitespace = NSCharacterSet.whitespacesAndNewlines

@@ -29,17 +29,17 @@ class NovelHomeHeadView: UIView {
     }
     func createUI(){
         self.backgroundColor = UIColor.white
-        let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
-        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-        self.addSubview(backBtn)
-        self.backBtn = backBtn
+//        let backBtn = UIButton(type: .custom)
+//        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+//        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
+//        self.addSubview(backBtn)
+//        self.backBtn = backBtn
         let bookshelf = UIButton(type: .custom)
         bookshelf.setTitle("书架", for: .normal)
         bookshelf.addTarget(self, action: #selector(bookshelfBtnClick(sender: )), for: .touchUpInside)
         bookshelf.isSelected = false
-        bookshelf.setTitleColor(UIColor.black, for: .normal)
-        bookshelf.setTitleColor(UIColor.blue, for: .selected)
+        bookshelf.setTitleColor(UIColor.colortext1, for: .normal)
+        bookshelf.setTitleColor(UIColor.colorAccent, for: .selected)
         bookshelf.backgroundColor = UIColor.white
         self.addSubview(bookshelf)
         self.bookshelf = bookshelf
@@ -47,13 +47,13 @@ class NovelHomeHeadView: UIView {
         bookCity.setTitle("书城", for: .normal)
         bookCity.isSelected = true
         bookCity.addTarget(self, action: #selector(bookCityBtnClick(sender: )), for: .touchUpInside)
-        bookCity.setTitleColor(UIColor.black, for: .normal)
-        bookCity.setTitleColor(UIColor.blue, for: .selected)
+        bookCity.setTitleColor(UIColor.colortext1, for: .normal)
+        bookCity.setTitleColor(UIColor.colorAccent, for: .selected)
         bookCity.backgroundColor = UIColor.white
         self.addSubview(bookCity)
         self.bookCity = bookCity
         let underLineView = UIView()
-        underLineView.backgroundColor = UIColor.blue
+        underLineView.backgroundColor = UIColor.colorAccent
         self.addSubview(underLineView)
         self.underLineView = underLineView
         self.backBtn?.snp.makeConstraints({ (make) in

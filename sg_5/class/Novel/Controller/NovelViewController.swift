@@ -29,13 +29,12 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 60, width: screenWidth, height: screenHeight-104))
         scrollView.isPagingEnabled = true
         scrollView.contentSize = CGSize(width: screenWidth*2, height: screenHeight - 104)
-        let bookShelf = BookShelfViewController()
+        let bookShelf = BookShelfViewController(frame: CGRect(x: screenWidth, y: 0, width: screenWidth, height: screenHeight-104))
         bookShelf.delegate = self
-        bookShelf.view.frame = CGRect(x: screenWidth, y: 0, width: screenWidth, height: screenHeight-104)
         let bookCity = BookCityViewController()
         bookCity.delegate = self
         bookCity.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight-104)
-        scrollView.addSubview(bookShelf.view)
+        scrollView.addSubview(bookShelf)
         scrollView.addSubview(bookCity.view)
         scrollView.delegate = self
         self.view.addSubview(scrollView)
@@ -86,6 +85,9 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func goToBookCity() {
+        self.headView?.bookCity?.sendActions(for: .touchUpInside)
     }
 }
 extension NovelViewController: NovelHeadViewDelegate{

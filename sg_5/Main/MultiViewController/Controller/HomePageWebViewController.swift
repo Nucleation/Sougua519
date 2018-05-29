@@ -10,6 +10,9 @@ import UIKit
 import SVProgressHUD
 class HomePageWebViewController: UIViewController,UIWebViewDelegate {
     var webURL: String = ""
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white

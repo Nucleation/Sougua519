@@ -22,6 +22,14 @@ class LoginViewController: UIViewController {
     var cLeftView: UIImageView!
     var getCodeBtn: UIButton!
     var countdownTimer: Timer?
+    var firstLine: UIImageView?
+    var secondLine: UIImageView?
+    var thirdLine: UIImageView?
+    var fourLine: UIImageView?
+    var fiveLine: UIImageView?
+    var sixLine: UIImageView?
+    var sevenLine: UIImageView?
+    var eightLine: UIImageView?
     var remainingSeconds: Int = 0 {
         willSet {
             getCodeBtn.setTitle("\(newValue)秒后重新获取", for: .normal)
@@ -56,8 +64,8 @@ class LoginViewController: UIViewController {
         gradientLayer.frame = self.view.bounds
         self.view.layer.addSublayer(gradientLayer)
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        gradientLayer.colors = [UIColor.colorWithHexColorString( "80d8ee").cgColor, UIColor.colorWithHexColorString("66b3f4").cgColor]
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.colors = [UIColor.colorWithHexColorString( "7dd8f0").cgColor, UIColor.colorWithHexColorString("63adf0").cgColor]
         gradientLayer.locations = [0.0 , 1.0]
         let logoImageView = UIImageView(image: UIImage(named: "logo"))
         self.view.addSubview(logoImageView)
@@ -138,6 +146,30 @@ class LoginViewController: UIViewController {
         forgotBtn.addTarget(self, action: #selector(forgotBtnClick), for: .touchUpInside)
         self.view.addSubview(forgotBtn)
         self.forgotBtn = forgotBtn
+        let firstLine = UIImageView()
+        self.view.addSubview(firstLine)
+        self.firstLine = firstLine
+        let thirdLine = UIImageView()
+        self.view.addSubview(thirdLine)
+        self.thirdLine = thirdLine
+        let fourLine = UIImageView()
+        self.view.addSubview(fourLine)
+        self.fourLine = fourLine
+        let fiveLine = UIImageView()
+        self.view.addSubview(fiveLine)
+        self.fiveLine = fiveLine
+        let secondLine = UIImageView()
+        self.view.addSubview(secondLine)
+        self.secondLine = secondLine
+        let sixLine = UIImageView()
+        self.view.addSubview(sixLine)
+        self.sixLine = sixLine
+        let sevenLine = UIImageView()
+        self.view.addSubview(sevenLine)
+        self.sevenLine = sevenLine
+        let eightLine = UIImageView()
+        self.view.addSubview(eightLine)
+        self.eightLine = eightLine
         self.logoImageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view)
             make.width.height.equalTo(120)
@@ -149,12 +181,36 @@ class LoginViewController: UIViewController {
             make.height.equalTo(50)
             make.top.equalTo(self.logoImageView.snp.bottom).offset(70)
         }
+        self.firstLine?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.userNameTF!)
+            make.width.equalTo(self.userNameTF!).offset(-50)
+            make.centerY.equalTo(self.userNameTF!.snp.top)
+            make.height.equalTo(2)
+        })
+        self.secondLine?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.userNameTF!)
+            make.width.equalTo(self.userNameTF!).offset(-50)
+            make.centerY.equalTo(self.userNameTF!.snp.bottom)
+            make.height.equalTo(2)
+        })
         self.passWordTF.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view)
             make.width.equalTo(self.view).offset(-74)
             make.height.equalTo(50)
             make.top.equalTo(self.userNameTF.snp.bottom).offset(15)
         }
+        self.thirdLine?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.passWordTF!)
+            make.width.equalTo(self.passWordTF!).offset(-50)
+            make.centerY.equalTo(self.passWordTF!.snp.top)
+            make.height.equalTo(2)
+        })
+        self.fourLine?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.passWordTF!)
+            make.width.equalTo(self.passWordTF!).offset(-50)
+            make.centerY.equalTo(self.passWordTF!.snp.bottom)
+            make.height.equalTo(2)
+        })
         self.loginBtn.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view)
             make.width.equalTo(self.view).offset(-74)
@@ -167,6 +223,18 @@ class LoginViewController: UIViewController {
             make.height.equalTo(17)
             make.top.equalTo(self.loginBtn.snp.bottom).offset(15)
         }
+        self.fiveLine?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.registNewBtn!.snp.left).offset(25)
+            make.width.equalTo(self.registNewBtn!).multipliedBy(0.2)
+            make.centerY.equalTo(self.registNewBtn!)
+            make.height.equalTo(2)
+        })
+        self.sixLine?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self.registNewBtn!.snp.right).offset(-25)
+            make.width.equalTo(self.registNewBtn!).multipliedBy(0.2)
+            make.centerY.equalTo(self.registNewBtn!)
+            make.height.equalTo(2)
+        })
         self.remberBtn.snp.makeConstraints { (make) in
             make.left.equalTo(self.view).offset(37)
             make.bottom.equalTo(self.view).offset(-31)
@@ -183,11 +251,59 @@ class LoginViewController: UIViewController {
             make.right.equalTo(self.view).offset(-1000)
             make.size.equalTo(self.loginBtn)
         }
+        self.sevenLine?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.codeTF!)
+            make.width.equalTo(self.codeTF!).offset(-50)
+            make.centerY.equalTo(self.codeTF!.snp.top)
+            make.height.equalTo(2)
+        })
+        self.eightLine?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.codeTF!)
+            make.width.equalTo(self.codeTF!).offset(-50)
+            make.centerY.equalTo(self.codeTF!.snp.bottom)
+            make.height.equalTo(2)
+        })
         self.getCodeBtn.snp.makeConstraints { (make) in
             make.centerY.height.equalTo(self.codeTF)
             make.right.equalTo(self.codeTF).offset(-15)
             make.width.equalTo(150)
         }
+        self.view.layoutIfNeeded()
+        makeGrad(imageView: self.firstLine!)
+        makeGrad(imageView: self.secondLine!)
+        makeGrad(imageView: self.thirdLine!)
+        makeGrad(imageView: self.fourLine!)
+        makeGrad1(imageView: self.fiveLine!)
+        makeGrad2(imageView: self.sixLine!)
+        makeGrad(imageView: self.sevenLine!)
+        makeGrad(imageView: self.eightLine!)
+    }
+    func makeGrad(imageView: UIImageView) {
+        let gradientLayer1 = CAGradientLayer()
+        gradientLayer1.frame = imageView.bounds
+        imageView.layer.addSublayer(gradientLayer1)
+        gradientLayer1.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer1.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer1.colors = [UIColor.colorWithHexColorString("ffffff", alpha: 0).cgColor, UIColor.colorWithHexColorString("ffffff", alpha: 1).cgColor,UIColor.colorWithHexColorString("ffffff", alpha: 0).cgColor]
+        gradientLayer1.locations = [0.0 , 0.5 , 1.0]
+    }
+    func makeGrad1(imageView: UIImageView) {
+        let gradientLayer1 = CAGradientLayer()
+        gradientLayer1.frame = imageView.bounds
+        imageView.layer.addSublayer(gradientLayer1)
+        gradientLayer1.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer1.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer1.colors = [UIColor.colorWithHexColorString("ffffff", alpha: 0).cgColor, UIColor.colorWithHexColorString("ffffff", alpha: 1).cgColor]
+        gradientLayer1.locations = [0.0 , 1.0]
+    }
+    func makeGrad2(imageView: UIImageView) {
+        let gradientLayer1 = CAGradientLayer()
+        gradientLayer1.frame = imageView.bounds
+        imageView.layer.addSublayer(gradientLayer1)
+        gradientLayer1.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer1.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer1.colors = [UIColor.colorWithHexColorString("ffffff", alpha: 1).cgColor, UIColor.colorWithHexColorString("ffffff", alpha: 0).cgColor]
+        gradientLayer1.locations = [0.0 , 1.0]
     }
     @objc func getCodeBtnClick(){
         guard self.userNameTF.text != "" else {

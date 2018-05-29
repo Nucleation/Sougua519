@@ -11,6 +11,7 @@ import IBAnimatable
 
 class HomeNavigationView: UIView,NibLoadable {
     @IBOutlet weak var searchBtn: AnimatableButton!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scanBtn: UIButton!
     /// 搜索按钮点击
     var didSelectSearchButton: (()->())?
@@ -20,6 +21,13 @@ class HomeNavigationView: UIView,NibLoadable {
         super.awakeFromNib()
         searchBtn.setTitleColor(UIColor.lightGray, for: .normal)
         searchBtn.setImage(UIImage(named: "sousuo"), for: .normal)
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        self.imageView.layer.addSublayer(gradientLayer)
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        gradientLayer.colors = [UIColor.colorAccent.cgColor, UIColor.colorWithHexColorString("66b3ee").cgColor]
+        gradientLayer.locations = [0.0 , 1.0]
     }
     
     /// 固有的大小

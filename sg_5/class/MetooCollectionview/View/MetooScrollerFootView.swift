@@ -34,7 +34,7 @@ class MetooScrollerFootView: UIView {
         self.alpha = 0.6
         self.backgroundColor = .black
         let likesBtn = UIButton(type: .custom)
-        likesBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        likesBtn.setImage(UIImage(named: "shoucang"), for: .normal)
         likesBtn.setTitle("点赞", for: .normal)
         likesBtn.addTarget(self, action: #selector(likesBtnClick), for: .touchUpInside)
         self.addSubview(likesBtn)
@@ -46,7 +46,7 @@ class MetooScrollerFootView: UIView {
         }
         self.likesBtn = likesBtn
         let downLoadBtn = UIButton(type: .custom)
-        downLoadBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        //downLoadBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         downLoadBtn.setTitle("下载", for: .normal)
         downLoadBtn.addTarget(self, action: #selector(downLoadBtnClick), for: .touchUpInside)
         self.addSubview(downLoadBtn)
@@ -57,7 +57,7 @@ class MetooScrollerFootView: UIView {
         }
         self.downLoadBtn = downLoadBtn
         let reportBtn = UIButton(type: .custom)
-        reportBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        //reportBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         reportBtn.setTitle("举报", for: .normal)
         reportBtn.addTarget(self, action: #selector(reportBtnClick), for: .touchUpInside)
         self.addSubview(reportBtn)

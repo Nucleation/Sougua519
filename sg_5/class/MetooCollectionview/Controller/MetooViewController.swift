@@ -47,8 +47,8 @@ class MetooViewController: UIViewController {
             }
             // 标题名称的数组
             let configuration = SGPageTitleViewConfigure()
-            configuration.titleColor = UIColor.black
-            configuration.titleSelectedColor = UIColor.red
+            configuration.titleColor = UIColor.colortext1
+            configuration.titleSelectedColor = UIColor.colorAccent
             configuration.indicatorColor = .clear
             self.pageTitleView = SGPageTitleView(frame: CGRect(x: 0, y: 84, width: screenWidth, height: 40), delegate: self, titleNames: array as! [Any], configure: configuration)
             self.pageTitleView!.backgroundColor = .clear

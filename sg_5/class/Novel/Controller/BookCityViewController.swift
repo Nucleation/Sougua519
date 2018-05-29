@@ -22,6 +22,7 @@ class BookCityViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        
         self.view.addSubview(tableView)
         self.tableView = tableView
         let view = EmptyPageView.ContentView.standard
@@ -142,6 +143,7 @@ extension BookCityViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! NovelListTableViewCell
         cell.setCellwithModel(model: self.dataArr[indexPath.row])
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         return cell   
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

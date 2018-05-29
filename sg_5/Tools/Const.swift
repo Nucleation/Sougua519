@@ -14,7 +14,7 @@ enum ContentType: String {
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 //总接口
-let postUrl = "http://192.168.10.125:10001"
+let postUrl = "http://47.95.244.69:8086"
 //获取短信验证码
 let ucenterGetSecurityCode = "\(postUrl)/app/ucenter/api/getAppUserSecurityCode"
 //登陆
@@ -49,5 +49,5 @@ let getNovelShelfListUrl = "\(postUrl)/app/novel/api/entry/getShelfList"
 //根据id删除小说
 let deleteNovelShelfUrl = "\(postUrl)/app/novel/api/entry/deleteShelf"
 //增加小说
-let addNovelShelfUrl = "\(postUrl)/app/novel/api/entry/addShelf"
+let addNovelShelfUrl = "\(postUrl)/app/novel/api/entry/addShelf/"
 

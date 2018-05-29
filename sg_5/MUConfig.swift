@@ -14,6 +14,7 @@ import SwiftyJSON
 import Alamofire
 import SnapKit
 import EmptyPage
+import Toast_Swift
 
 public let SCREEN_WIDTH: CGFloat = UIScreen.main.bounds.width
 public let SCREEN_HEIGHT: CGFloat = UIScreen.main.bounds.height

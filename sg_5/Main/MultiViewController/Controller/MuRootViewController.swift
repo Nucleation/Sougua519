@@ -54,12 +54,6 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         subSearchBar.backgroundColor = UIColor.white
         self.subSearchBar = subSearchBar
         self.searchView.addSubview(self.subSearchBar!)
-        subSearchBar.snp.makeConstraints { (make) in
-            make.left.equalTo(self.searchView).offset(17)
-            make.top.equalTo(self.searchView).offset(27)
-            make.height.equalTo(56)
-            make.width.equalTo(screenWidth - 80)
-        }
         let subScanBtn = UIButton(type: .custom)
         //subScanBtn.frame = CGRect(x: screenWidth - 63, y: 27, width: 56, height: 56)
         subScanBtn.setBackgroundImage(UIImage(named: "saoyisao"), for: .normal)
@@ -67,8 +61,14 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         subScanBtn.addTarget(self, action: #selector(scanBtnClick), for: .touchUpInside)
         self.subScanBtn = subScanBtn
         self.searchView.addSubview(self.subScanBtn!)
+        subSearchBar.snp.makeConstraints { (make) in
+            make.left.equalTo(self.searchView).offset(17)
+            make.top.equalTo(self.searchView).offset(35)
+            make.height.equalTo(40)
+            make.right.equalTo(subScanBtn.snp.left)
+        }
         subScanBtn.snp.makeConstraints { (make) in
-            make.width.height.equalTo(54)
+            make.width.height.equalTo(40)
             make.centerY.equalTo(self.subSearchBar!)
             make.right.equalTo(searchView).offset(-17)
         }

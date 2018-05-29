@@ -19,7 +19,15 @@ class NovelListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        addBorder(label: self.fictionIsEndLab)
+        addBorder(label: self.categoryLab)
+        addBorder(label: self.fictionWordCountLab)
+        
+    }
+    func addBorder(label: UILabel){
+        label.layer.cornerRadius = 2
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.colortext1.cgColor
     }
     func setCellwithModel(model: NoveCategoryListModel){
         bookImage.kf.setImage(with: URL(string: model.fictionImg))

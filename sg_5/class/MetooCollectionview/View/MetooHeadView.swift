@@ -28,7 +28,7 @@ class MetooHeadView: UIView {
         self.backgroundColor = UIColor.white
         let titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 17)
-        titleLabel.textColor  = .blue
+        titleLabel.textColor  = .colorAccent
         self.addSubview(titleLabel)
         self.titleLabel = titleLabel
         

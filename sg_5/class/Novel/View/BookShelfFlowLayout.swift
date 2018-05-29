@@ -17,12 +17,16 @@ class BookShelfFlowLayout: UICollectionViewFlowLayout {
         super.prepare()
         attributeArray = []
         let itemWidth = (screenWidth - 20*4)/3
-        let itemHeight = (screenWidth - 20*4)/3 * 235/175 + 50
+        let itemHeight = (screenWidth - 20*4)/3 * 4/3 + 50
         for i in 0..<itemCount {
             let index: IndexPath = IndexPath(item: i, section: 0)
             let attris = UICollectionViewLayoutAttributes(forCellWith: index)
-            attris.frame = CGRect(x: 20 + (20 + itemWidth) * CGFloat(i % 3), y: 20+(20+itemHeight) * CGFloat(i / 3 % 3), width: itemWidth, height: itemHeight)
+            attris.frame = CGRect(x: 20 + (20 + itemWidth) * CGFloat(i % 3), y: 20+(20+itemHeight) * CGFloat(i / 3 ), width: itemWidth, height: itemHeight)
             attributeArray.append(attris)
+            if i == itemCount - 1{
+                collectionHeight = 20+(20+itemHeight) * CGFloat(i / 3 ) + itemHeight
+            }
+            
             self.itemSize = CGSize(width: itemWidth, height: itemHeight)
            
         }

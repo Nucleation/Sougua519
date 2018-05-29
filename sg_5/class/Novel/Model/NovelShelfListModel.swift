@@ -13,7 +13,7 @@ class NovelShelfBaseModel: HandyJSON {
     var updateDate: String = ""
     var delFlag: String = ""
     var id: String = ""
-    var novel: [NovelShelfListModel]?
+    var novel: NovelShelfListModel?
     var sectionId: String = ""
     var createDate: String = ""
     public required init() {}
@@ -31,3 +31,41 @@ class NovelShelfListModel: HandyJSON {
     var categoryName: String = ""
     public required init() {}
 }
+
+class testA {
+    var data = """
+[{"a":"a1","b":{"a":"b1"}}]
+"""
+    func test()  {
+        
+        let json = JSON.parse(data).arrayValue
+        
+        let c = json.map { json -> A in
+            let a  = A.deserialize(from: json.description)
+            
+//            a?.b = B.deserialize(from: json["b"].description)
+            return a!
+        }
+        
+ 
+        print(c[0].a)
+         print(c[0].b?.a)
+        
+        
+    }
+    
+    
+    class B: HandyJSON {
+        var a = ""
+        public required init() {}
+    }
+    class A: HandyJSON {
+        var a = ""
+        var b:B? = nil
+        public required init() {}
+    }
+}
+
+
+
+

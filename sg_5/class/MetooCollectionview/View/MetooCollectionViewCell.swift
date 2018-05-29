@@ -52,6 +52,7 @@ class MetooCollectionViewCell: UICollectionViewCell {
         collcetBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
         collcetBtn?.setTitle("收藏", for: .normal)
         collcetBtn?.setTitleColor(.black, for: .normal)
+        collcetBtn?.titleLabel?.textAlignment = .right
         self.addSubview(collcetBtn!)
         imageView?.snp.makeConstraints({ (make) in
             make.top.left.right.equalTo(self)
@@ -64,16 +65,17 @@ class MetooCollectionViewCell: UICollectionViewCell {
         circleImage?.snp.makeConstraints({ (make) in
             make.top.equalTo((desLab?.snp.bottom)!).offset(13)
             make.left.equalTo(self)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(0)
         })
         fromLab?.snp.makeConstraints({ (make) in
-            make.centerY.height.equalTo(circleImage!)
-            make.left.equalTo((circleImage?.snp.right)!).offset(7)
+            make.top.equalTo((desLab?.snp.bottom)!).offset(13)
+            make.height.equalTo(25)
+            make.left.equalTo(self).offset(7)
         })
         collcetBtn?.snp.makeConstraints({ (make) in
             make.right.equalTo(self)
             make.height.equalTo(30)
-            make.centerY.equalTo(circleImage!)
+            make.centerY.equalTo(fromLab!)
             make.width.equalTo(100)
         })
         self.contentView.snp.makeConstraints { (make) in

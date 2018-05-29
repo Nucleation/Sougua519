@@ -127,7 +127,7 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
 extension MetooScrollViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.index =  Int (scrollView.contentOffset.x / screenWidth)
-        self.footView?.likesBtn?.setTitle(self.pictureModelArr[self.index].id, for: .normal)
+        //self.footView?.likesBtn?.setTitle(self.pictureModelArr[self.index].id, for: .normal)
         self.view.layoutIfNeeded()
     }
     

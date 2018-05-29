@@ -15,7 +15,7 @@ class ParameterEncode {
             let value = parameters[key]!
             components += queryComponents(fromKey: key, value: value)
         }
-        print((components.map { "\($0)=\($1)" }.joined(separator: "&")))
+        print("签名参数\(components.map { "\($0)=\($1)" }.joined(separator: "&"))")
         result["sign"] = (components.map { "\($0)=\($1)" }.joined(separator: "&")).MD5().uppercased() 
         return result
     }

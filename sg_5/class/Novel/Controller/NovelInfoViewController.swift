@@ -8,7 +8,9 @@
 
 import UIKit
 
-class NovelInfoViewController: UIViewController {
+class NovelInfoViewController: UIViewController,CommentViewDelegate{
+    
+    
     var novelInfo: NoveCategoryListModel?    
     var tableView: UITableView?
     lazy var commentArr: Array = [NovelCommentModel]()
@@ -28,21 +30,84 @@ class NovelInfoViewController: UIViewController {
     var vView: UIView?
     var bookCommentLab: UILabel?
     var moreBtn: UIButton?
+    var isJoinShelf: Bool = false
+    var commentTVView: CommentView?
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default
+            .addObserver(self,selector: #selector(keyboardWillHide(notification:)),
+                         name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNav()
-        createUI()
+        self.view.backgroundColor = .white
+        
+        getCheck()
         getComment()
+        self.createUI()
         //addComment()
         // Do any additional setup after loading the view.
     }
-    func setNav(){
-       
+    @objc func keyboardWillShow(notification: NSNotification){
+        if let begin = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue, let end = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
+            if begin.size.height > 0 && begin.origin.y-end.origin.y>0 {
+                UIView.animate(withDuration: 0.1) {
+                    self.commentTVView?.frame = CGRect(x: 0, y: screenHeight - 50 - begin.height, width: screenWidth, height: 50)
+                }
+                self.view.layoutIfNeeded()
+               
+                
+            }
+            print("keyboardSize\(begin)")
+        }
     }
+    @objc func keyboardWillHide(notification: NSNotification){
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.1) {
+                self.commentTVView?.frame = CGRect(x: 0, y: screenHeight - 50, width: screenWidth, height: 50)
+            }
+             self.view.layoutIfNeeded()
+            print("keyboardSize\(keyboardSize)")
+        }
+    }
+    func getCheck(){
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"fictionId":self.novelInfo?.id ?? "","userId":KeyChain().getKeyChain()["id"] ?? ""]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: checkNovelShelfUrl, parameters: parData) { (json) in
+            self.isJoinShelf = json.boolValue
+            if !self.isJoinShelf {
+                self.joinBookshelfBtn?.setTitle("加入书架", for: UIControlState.normal)
+                self.joinBookshelfBtn?.backgroundColor = .colorAccent
+                
+            }else{
+                self.joinBookshelfBtn?.setTitle("已在书架", for: UIControlState.normal)
+                self.joinBookshelfBtn?.backgroundColor = UIColor.colorWithHexColorString("b8b8b8")
+                self.joinBookshelfBtn?.isUserInteractionEnabled = false
+            }
+        }
+    }
+    
     func createUI(){
-        let tableView = UITableView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight-64), style: .plain)
+        let navView = UIView()
+        navView.backgroundColor = .white
+        self.view.addSubview(navView)
+        let backBtn = UIButton(type: .custom)
+        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
+        navView.addSubview(backBtn)
+        navView.snp.makeConstraints { (make) in
+            make.left.right.top.equalTo(self.view)
+            make.height.equalTo(64)
+        }
+        backBtn.snp.makeConstraints { (make) in
+            make.centerY.equalTo(navView).offset(10)
+            make.left.equalTo(navView)
+            make.width.height.equalTo(44)
+        }
+        
+        let tableView = UITableView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight-64-50), style: .plain)
         tableView.separatorStyle = .none
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
@@ -61,49 +126,61 @@ class NovelInfoViewController: UIViewController {
         headView.addSubview(bookView)
         self.bookView = bookView
         let novelImageView = UIImageView()
-        novelImageView.backgroundColor = . green
         novelImageView.kf.setImage(with: URL(string: self.novelInfo?.fictionImg ?? ""))
         novelImageView.layer.cornerRadius = 5
         bookView.addSubview(novelImageView)
         self.novelImageView = novelImageView
         let novelTitleLab = UILabel()
+        novelTitleLab.font = UIFont.systemFont(ofSize: 17)
+        novelTitleLab.textColor = .colorAccent
         novelTitleLab.text = self.novelInfo?.fictionName ?? ""
         bookView.addSubview(novelTitleLab)
         self.novelTitleLab = novelTitleLab
         let novelAuthorLab = UILabel()
         novelAuthorLab.text = "作者:\(self.novelInfo?.fictionAuthor ?? "")"
-        novelTitleLab.font = UIFont.systemFont(ofSize: 11)
+        novelAuthorLab.font = UIFont.systemFont(ofSize: 14)
+        novelAuthorLab.textColor = UIColor.colortext2
         bookView.addSubview(novelAuthorLab)
         self.novelAuthorLab = novelAuthorLab
         let novelCategoryLab = UILabel()
         novelCategoryLab.text = "分类:\(self.novelInfo?.categoryName ?? "")"
-        novelCategoryLab.font = UIFont.systemFont(ofSize: 11)
+        novelCategoryLab.font = UIFont.systemFont(ofSize: 14)
+        novelCategoryLab.textColor = UIColor.colortext2
         bookView.addSubview(novelCategoryLab)
         self.novelCategoryLab = novelCategoryLab
         let novelWordCountLab = UILabel()
         novelWordCountLab.text = "字数:\(self.novelInfo?.fictionWordCount ?? "")"
-        novelWordCountLab.font = UIFont.systemFont(ofSize: 11)
+        novelWordCountLab.font = UIFont.systemFont(ofSize: 14)
+        novelWordCountLab.textColor = UIColor.colortext2
         bookView.addSubview(novelWordCountLab)
         self.novelWordCountLab = novelWordCountLab
         let novelCreatTimeLab = UILabel()
         novelCreatTimeLab.text = "创建时间:\(self.novelInfo?.createTime ?? "")"
-        novelCreatTimeLab.font = UIFont.systemFont(ofSize: 11)
-        novelCreatTimeLab.textColor = UIColor.colorWithHexColorString("8b8b8b")
+        novelCreatTimeLab.font = UIFont.systemFont(ofSize: 14)
+        novelCreatTimeLab.textColor = UIColor.colortext2
         bookView.addSubview(novelCreatTimeLab)
         self.novelCreatTimeLab = novelCreatTimeLab
-//        var beginReadBtn: UIButton?
-//        var briefLab: UILabel?
         let joinBookshelfBtn = UIButton(type: .custom)
-        joinBookshelfBtn.backgroundColor = .blue
+        
         joinBookshelfBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-        joinBookshelfBtn.setTitle("加入书架", for: UIControlState.normal)
+        if !self.isJoinShelf {
+            joinBookshelfBtn.setTitle("加入书架", for: UIControlState.normal)
+            joinBookshelfBtn.backgroundColor = .colorAccent
+            
+        }else{
+            joinBookshelfBtn.setTitle("已在书架", for: UIControlState.normal)
+            joinBookshelfBtn.backgroundColor = UIColor.colorWithHexColorString("b8b8b8")
+            joinBookshelfBtn.isUserInteractionEnabled = false
+        }
+        
         joinBookshelfBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14 )
         joinBookshelfBtn.setImage(UIImage(named: "add"), for: UIControlState.normal)
+        joinBookshelfBtn.addTarget(self, action: #selector(joinBookshelfBtnClick), for: .touchUpInside)
         joinBookshelfBtn.layer.cornerRadius = 5
         bookView.addSubview(joinBookshelfBtn)
         self.joinBookshelfBtn = joinBookshelfBtn
         let beginReadBtn = UIButton(type: .custom)
-        beginReadBtn.backgroundColor = .blue
+        beginReadBtn.backgroundColor = .colorAccent
         beginReadBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
         beginReadBtn.setTitle("开始阅读", for: UIControlState.normal)
         beginReadBtn.addTarget(self, action: #selector(beginReadBtnClick), for: .touchUpInside)
@@ -117,7 +194,8 @@ class NovelInfoViewController: UIViewController {
         bookView.addSubview(lineView)
         self.lineView = lineView
         let briefLab = UILabel()
-        briefLab.textColor = .black
+        briefLab.textColor = .colortext2
+        briefLab.font = UIFont.systemFont(ofSize: 15)
         briefLab.numberOfLines = 6
         briefLab.text = self.novelInfo?.fictionBrief.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         bookView.addSubview(briefLab)
@@ -141,6 +219,12 @@ class NovelInfoViewController: UIViewController {
         moreBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         self.commentView?.addSubview(moreBtn)
         self.moreBtn = moreBtn
+        let commentTVView = CommentView(frame: CGRect(x: 0, y: screenHeight - 50, width: screenWidth, height: 50))
+        commentTVView.delegate = self
+        commentTVView.novelInfo = self.novelInfo
+        self.view.addSubview(commentTVView)
+        self.commentTVView = commentTVView
+        
 //        self.tableView?.snp.makeConstraints({ (make) in
 //            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0))
 //        })
@@ -223,6 +307,24 @@ class NovelInfoViewController: UIViewController {
             make.right.equalTo(self.commentView!).offset(-20)
             make.centerY.height.equalTo(self.commentView!)
         })
+        
+    }
+    
+    @objc func joinBookshelfBtnClick() {
+        if self.isJoinShelf{
+            return
+        }else{
+            let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+            let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"fictionId":self.novelInfo?.id ?? "","userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+            let parData = dic.toParameterDic()
+            print(parData)
+            NetworkTool.requestData(.post, URLString: addNovelShelfUrl, parameters: parData) { (json) in
+                //添加书架后处理
+                self.isJoinShelf = true
+                self.joinBookshelfBtn?.setTitle("已在书架", for: UIControlState.normal)
+                self.joinBookshelfBtn?.backgroundColor = UIColor.colorWithHexColorString("b8b8b8")
+            }
+        }
     }
     @objc func beginReadBtnClick() {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
@@ -230,19 +332,27 @@ class NovelInfoViewController: UIViewController {
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
             let vc = NovelContentViewController()
-            vc.content = json["content"].stringValue
+            let model = NovelContentModel.deserialize(from: json.dictionaryObject)
+            vc.novelContentModel = model
+            vc.novelId = self.novelInfo?.id ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    func reloadComment() {
+        getComment()
+    }
     func getComment(){
+        self.commentArr = []
         let keyChain = KeyChain()
         let fromId = keyChain.getKeyChain()["id"] ?? ""
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","fromId":fromId]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentByType, parameters: parData) { (json) in
-            let resJson = json["commentList"].array
-            for item in resJson! {
+            guard let resJson = json["commentList"].array else{
+                return
+            }
+            for item in resJson {
                 let model = NovelCommentModel()
                 if let fromId = item["fromId"].string{
                     model.fromId = fromId
@@ -270,17 +380,11 @@ class NovelInfoViewController: UIViewController {
             self.tableView?.reloadData()
         }
     }
-    func addComment() {
-        let keyChain = KeyChain()
-        guard let mobile = keyChain.getKeyChain()["mobile"],let token = keyChain.getKeyChain()["token"],let id = keyChain.getKeyChain()["id"] else {
-            return
-        }
-        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.Picture.rawValue,"content":"测试添加评论"]
-        let parData = dic.toParameterDic()
-        NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
-           print("\(json)--add")
-        }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.commentTVView?.commentTV?.resignFirstResponder()
+    }
+    @objc func backBtnClick(){
+        self.navigationController?.popViewController(animated: true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -297,6 +401,7 @@ extension NovelInfoViewController: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "novelCommentCell") as! NovelCommentTableViewCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.comment = self.commentArr[indexPath.row]
         return cell
     }

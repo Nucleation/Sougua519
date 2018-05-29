@@ -17,6 +17,7 @@ class NoveHomeViewController: UIViewController {
     var oprateView: MUOprateView!
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
     }
     override func viewDidLoad() {
         super.viewDidLoad()
