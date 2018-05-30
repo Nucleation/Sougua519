@@ -55,22 +55,21 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         self.subSearchBar = subSearchBar
         self.searchView.addSubview(self.subSearchBar!)
         let subScanBtn = UIButton(type: .custom)
-        //subScanBtn.frame = CGRect(x: screenWidth - 63, y: 27, width: 56, height: 56)
         subScanBtn.setBackgroundImage(UIImage(named: "saoyisao"), for: .normal)
         subScanBtn.backgroundColor = UIColor.white
         subScanBtn.addTarget(self, action: #selector(scanBtnClick), for: .touchUpInside)
         self.subScanBtn = subScanBtn
-        self.searchView.addSubview(self.subScanBtn!)
+        self.subSearchBar?.addSubview(self.subScanBtn!)
         subSearchBar.snp.makeConstraints { (make) in
             make.left.equalTo(self.searchView).offset(17)
             make.top.equalTo(self.searchView).offset(35)
             make.height.equalTo(40)
-            make.right.equalTo(subScanBtn.snp.left)
+            make.right.equalTo(self.searchView).offset(-17)
         }
         subScanBtn.snp.makeConstraints { (make) in
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(38)
             make.centerY.equalTo(self.subSearchBar!)
-            make.right.equalTo(searchView).offset(-17)
+            make.right.equalTo(self.subSearchBar!)
         }
         let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth/5*2+190))
         self.headView = headView
@@ -259,6 +258,7 @@ extension MuRootViewController {
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
         let tabOffsetY:CGFloat = (self.mainTableView?.contentOffset.y)!
         if tabOffsetY >= 80 {
             UIView.animate(withDuration: 0.05) {

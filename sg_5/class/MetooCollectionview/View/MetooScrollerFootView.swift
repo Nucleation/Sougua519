@@ -36,6 +36,7 @@ class MetooScrollerFootView: UIView {
         let likesBtn = UIButton(type: .custom)
         likesBtn.setImage(UIImage(named: "shoucang"), for: .normal)
         likesBtn.setTitle("点赞", for: .normal)
+        likesBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         likesBtn.addTarget(self, action: #selector(likesBtnClick), for: .touchUpInside)
         self.addSubview(likesBtn)
         likesBtn.snp.makeConstraints { (make) in
@@ -46,6 +47,7 @@ class MetooScrollerFootView: UIView {
         }
         self.likesBtn = likesBtn
         let downLoadBtn = UIButton(type: .custom)
+        downLoadBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         //downLoadBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         downLoadBtn.setTitle("下载", for: .normal)
         downLoadBtn.addTarget(self, action: #selector(downLoadBtnClick), for: .touchUpInside)
@@ -57,6 +59,7 @@ class MetooScrollerFootView: UIView {
         }
         self.downLoadBtn = downLoadBtn
         let reportBtn = UIButton(type: .custom)
+        reportBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         //reportBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         reportBtn.setTitle("举报", for: .normal)
         reportBtn.addTarget(self, action: #selector(reportBtnClick), for: .touchUpInside)

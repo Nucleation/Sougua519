@@ -107,12 +107,12 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             make.width.height.equalTo(44)
         }
         
-        let tableView = UITableView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight-64-50), style: .plain)
+        let tableView = UITableView()
         tableView.separatorStyle = .none
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         } else {
-            // Fallback on earlier versions
+            self.automaticallyAdjustsScrollViewInsets = false
         }
         tableView.delegate = self
         tableView.dataSource = self
@@ -123,8 +123,13 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         let headView = UIView()
         headView.backgroundColor = UIColor.lightGray
         self.headView = headView
-        self.headView?.frame.size.height = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height)!
         tableView.tableHeaderView = self.headView
+        if #available(iOS 6.0, *) {
+            self.headView?.frame.size.height = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height)!
+        } else {
+            self.headView?.frame.size = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize, withHorizontalFittingPriority: UILayoutPriority.defaultLow, verticalFittingPriority: UILayoutPriority.defaultLow))!
+        }
+        
         let bookView = UIView()
         bookView.backgroundColor = .white
         headView.addSubview(bookView)
@@ -229,9 +234,11 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         self.view.addSubview(commentTVView)
         self.commentTVView = commentTVView
         
-//        self.tableView?.snp.makeConstraints({ (make) in
-//            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0))
-//        })
+        self.tableView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.view).offset(64)
+            make.left.right.equalTo(self.view)
+            make.height.equalTo(screenHeight-64-50)
+        })
         self.headView?.snp.makeConstraints({ (make) in
             make.edges.equalTo((self.tableView?.tableHeaderView)!).inset(UIEdgeInsets.zero)
             make.width.equalTo(screenWidth)
@@ -311,6 +318,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             make.right.equalTo(self.commentView!).offset(-20)
             make.centerY.height.equalTo(self.commentView!)
         })
+        
         
     }
     

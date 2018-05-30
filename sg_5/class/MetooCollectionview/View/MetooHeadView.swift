@@ -66,14 +66,14 @@ class MetooHeadView: UIView {
 //        self.underLineView = underLineView
         self.titleLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self)
-            make.centerY.equalTo(self)
+            make.centerY.equalTo(self).offset(20)
             make.height.equalTo(self)
         })
-        self.leftBtn?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self).offset(19)
-            make.bottom.equalTo(self).offset(-15)
-            make.width.height.equalTo(30)
-        })
+//        self.leftBtn?.snp.makeConstraints({ (make) in
+//            make.left.equalTo(self).offset(19)
+//            make.bottom.equalTo(self).offset(-15)
+//            make.width.height.equalTo(30)
+//        })
 //        self.newBtn?.snp.makeConstraints({ (make) in
 //            make.centerY.equalTo(self.leftBtn!)
 //            make.width.equalTo(50)
@@ -84,10 +84,10 @@ class MetooHeadView: UIView {
 //            make.width.equalTo(self.newBtn!)
 //            make.centerX.equalTo(self).offset(25)
 //        })
-        self.rightBtn?.snp.makeConstraints({ (make) in
-            make.centerY.size.equalTo(self.leftBtn!)
-            make.right.equalTo(self).offset(-19)
-        })
+//        self.rightBtn?.snp.makeConstraints({ (make) in
+//            make.centerY.size.equalTo(self.leftBtn!)
+//            make.right.equalTo(self).offset(-19)
+//        })
 //        self.underLineView?.snp.makeConstraints({ (make) in
 //            make.width.equalTo(self.newBtn!)
 //            make.bottom.equalTo(self).offset(-1)

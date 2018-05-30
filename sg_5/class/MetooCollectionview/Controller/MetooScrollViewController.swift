@@ -28,7 +28,7 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         if #available(iOS 11.0, *) {
             scrollerView.contentInsetAdjustmentBehavior = .never
         } else {
-            // Fallback on earlier versions
+            self.automaticallyAdjustsScrollViewInsets = false
         }
         scrollerView.isPagingEnabled = true
         scrollerView.bounces = false
@@ -45,7 +45,8 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         })   
         for i in 0 ..< pictureModelArr.count {
             let imageView: UIImageView = UIImageView()
-            imageView.contentMode = .scaleToFill
+            imageView.contentMode = .scaleAspectFit
+            imageView.layer.masksToBounds = true;
             imageView.kf.setImage(with: URL(string:"\(pictureModelArr[i].downloadUrl)"))
             imageView.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(imageViewTaped(sender:)))
@@ -139,6 +140,7 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
 extension MetooScrollViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.index =  Int (scrollView.contentOffset.x / screenWidth)
+        self.headView?.titleLab?.text = self.pictureModelArr[self.index].name
         //self.footView?.likesBtn?.setTitle(self.pictureModelArr[self.index].id, for: .normal)
         self.view.layoutIfNeeded()
     }

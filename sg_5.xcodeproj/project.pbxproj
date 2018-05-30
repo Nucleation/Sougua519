@@ -54,7 +54,6 @@
 		1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE9220AD891200D179AE /* NovelContentViewController.swift */; };
 		176F998A20B92E6600FF6E46 /* NovelShelfListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */; };
 		176F998E20B940AF00FF6E46 /* BookShelfFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */; };
-		17765E1F20B2D6A0008FDC6E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */; };
 		17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */; };
 		17772D7D20BE372600858803 /* NovelChapterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17772D7C20BE372600858803 /* NovelChapterModel.swift */; };
 		177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A185D20ABCB5C0025EF58 /* MetooViewController.swift */; };
@@ -245,7 +244,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */,
-				17765E1F20B2D6A0008FDC6E /* UserNotifications.framework in Frameworks */,
 				17D8CB5320A4523D00914492 /* libxml2.tbd in Frameworks */,
 				0F28CFA495528E4F7CA144CB /* Pods_sg_5.framework in Frameworks */,
 			);
@@ -713,7 +711,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1046,7 +1044,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1100,7 +1098,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1114,7 +1112,6 @@
 			baseConfigurationReference = 3926C2AAF1114154A6286F3A /* Pods-sg_5.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = sg_5/sg_5.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NU49PVLB9F;
 				HEADER_SEARCH_PATHS = (
@@ -1140,7 +1137,6 @@
 			baseConfigurationReference = E2320D7EC544693F9FC25BCE /* Pods-sg_5.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = sg_5/sg_5.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NU49PVLB9F;
 				HEADER_SEARCH_PATHS = (
