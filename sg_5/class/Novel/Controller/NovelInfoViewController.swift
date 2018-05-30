@@ -109,7 +109,11 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight-64-50), style: .plain)
         tableView.separatorStyle = .none
-        tableView.contentInsetAdjustmentBehavior = .never
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            // Fallback on earlier versions
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName:"NovelCommentTableViewCell", bundle:nil),
@@ -334,7 +338,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             let vc = NovelContentViewController()
             let model = NovelContentModel.deserialize(from: json.dictionaryObject)
             vc.novelContentModel = model
-            vc.novelId = self.novelInfo?.id ?? ""
+            vc.novelInfo = self.novelInfo
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

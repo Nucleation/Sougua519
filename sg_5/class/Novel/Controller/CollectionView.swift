@@ -37,14 +37,18 @@ class CollectionView: UIView {
         self.addSubview(collection)
         self.collection = collection
        
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (time) in
-           self.dataArr += ["1","2","3","4"]
-            print(self.dataArr.count)
-             self.flowLayout?.itemCount = self.dataArr.count
-//            DispatchQueue.main.async {
+        if #available(iOS 10.0, *) {
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (time) in
+                self.dataArr += ["1","2","3","4"]
+                print(self.dataArr.count)
+                self.flowLayout?.itemCount = self.dataArr.count
+                //            DispatchQueue.main.async {
                 self.collection?.reloadData()
-//            }
-            
+                //            }
+                
+            }
+        } else {
+            // Fallback on earlier versions
         }
     }
 }

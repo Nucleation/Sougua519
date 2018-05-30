@@ -71,8 +71,12 @@ class MetooScrollerFootView: UIView {
     }
     @objc func likesBtnClick(){
         if KeyChain().getKeyChain()["isLogin"] != "1" {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                SVProgressHUD.show(withStatus: "未登录")
+            if #available(iOS 10.0, *) {
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                    SVProgressHUD.show(withStatus: "未登录")
+                }
+            } else {
+                // Fallback on earlier versions
             }
             return
         }
@@ -87,8 +91,12 @@ class MetooScrollerFootView: UIView {
     }
     @objc func reportBtnClick(){
         if KeyChain().getKeyChain()["isLogin"] != "1" {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                SVProgressHUD.show(withStatus: "未登录")
+            if #available(iOS 10.0, *) {
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                    SVProgressHUD.show(withStatus: "未登录")
+                }
+            } else {
+                // Fallback on earlier versions
             }
             return
         }

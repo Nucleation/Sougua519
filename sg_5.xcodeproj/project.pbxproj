@@ -56,6 +56,7 @@
 		176F998E20B940AF00FF6E46 /* BookShelfFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */; };
 		17765E1F20B2D6A0008FDC6E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */; };
 		17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */; };
+		17772D7D20BE372600858803 /* NovelChapterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17772D7C20BE372600858803 /* NovelChapterModel.swift */; };
 		177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A185D20ABCB5C0025EF58 /* MetooViewController.swift */; };
 		177A4F8420A539EF0004336E /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 177A4F6E20A539EF0004336E /* NSString+AES.m */; };
 		177A4F8520A539EF0004336E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A4F6F20A539EF0004336E /* SwiftyJSON.swift */; };
@@ -177,6 +178,7 @@
 		17765E1D20B2D4AE008FDC6E /* sg_5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sg_5.entitlements; sourceTree = "<group>"; };
 		17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		17772D7C20BE372600858803 /* NovelChapterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NovelChapterModel.swift; path = sg_5/class/Novel/Model/NovelChapterModel.swift; sourceTree = SOURCE_ROOT; };
 		177A185D20ABCB5C0025EF58 /* MetooViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooViewController.swift; sourceTree = "<group>"; };
 		177A4F6E20A539EF0004336E /* NSString+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AES.m"; sourceTree = "<group>"; };
 		177A4F6F20A539EF0004336E /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				177C35DC20B6CF4000B803EF /* NovelTitleModel.swift */,
 				176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */,
 				177D2AB920BD41EF00B61F1E /* NovelContentModel.swift */,
+				17772D7C20BE372600858803 /* NovelChapterModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -924,6 +927,7 @@
 				174F766720A44C4900BB0B46 /* Foundation+Extension.swift in Sources */,
 				177A4F8420A539EF0004336E /* NSString+AES.m in Sources */,
 				174F765320A44AB900BB0B46 /* MUOprateView.swift in Sources */,
+				17772D7D20BE372600858803 /* NovelChapterModel.swift in Sources */,
 				177C35DB20B6AB5B00B803EF /* NovelCategoryCollectionView.swift in Sources */,
 				177A4F8A20A539EF0004336E /* Base64.m in Sources */,
 				174F765720A44AB900BB0B46 /* MUMultiWindowController.swift in Sources */,
@@ -1118,6 +1122,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = sg_5/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1143,6 +1148,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = sg_5/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

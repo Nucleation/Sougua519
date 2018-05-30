@@ -51,8 +51,12 @@ class BookShelfViewController: UIView, UICollectionViewDelegate,UICollectionView
         self.collectionView = collectionView
         //判断用户登录
         if KeyChain().getKeyChain()["isLogin"] != "1" {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                SVProgressHUD.show(withStatus: "未登录")
+            if #available(iOS 10.0, *) {
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                    SVProgressHUD.show(withStatus: "未登录")
+                }
+            } else {
+                // Fallback on earlier versions
             }
             return
         }else{

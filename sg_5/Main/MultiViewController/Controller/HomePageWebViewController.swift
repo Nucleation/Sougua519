@@ -16,13 +16,33 @@ class HomePageWebViewController: UIViewController,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        let navView = UIView()
+        navView.backgroundColor = .white
+        self.view.addSubview(navView)
+        let backBtn = UIButton(type: .custom)
+        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
+        navView.addSubview(backBtn)
+        navView.snp.makeConstraints { (make) in
+            make.left.right.top.equalTo(self.view)
+            make.height.equalTo(64)
+        }
+        backBtn.snp.makeConstraints { (make) in
+            make.centerY.equalTo(navView).offset(10)
+            make.left.equalTo(navView)
+            make.width.height.equalTo(44)
+        }
         let webview: UIWebView = UIWebView(frame: self.view.frame)
         webview.loadRequest(URLRequest(url: URL(string: webURL)!))
         webview.backgroundColor = .clear
         webview.delegate = self
         webview.isOpaque = false
         self.view.addSubview(webview)
+        self.view.bringSubview(toFront: navView)
         // Do any additional setup after loading the view.
+    }
+    @objc func backBtnClick(){
+        self.navigationController?.popViewController(animated: true)
     }
     func webViewDidStartLoad(_ webView: UIWebView) {
         SVProgressHUD.show()

@@ -25,7 +25,11 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         super.viewDidLoad()
          //[self setAutomaticallyAdjustsScrollViewInsets:NO];
         let scrollerView = UIScrollView()
-        scrollerView.contentInsetAdjustmentBehavior = .never
+        if #available(iOS 11.0, *) {
+            scrollerView.contentInsetAdjustmentBehavior = .never
+        } else {
+            // Fallback on earlier versions
+        }
         scrollerView.isPagingEnabled = true
         scrollerView.bounces = false
         scrollerView.showsHorizontalScrollIndicator = false
@@ -113,13 +117,21 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         
         if didFinishSavingWithError != nil {
             
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                SVProgressHUD.show(withStatus: "保存失败,请稍后再试!")
+            if #available(iOS 10.0, *) {
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                    SVProgressHUD.show(withStatus: "保存失败,请稍后再试!")
+                }
+            } else {
+                // Fallback on earlier versions
             }
             return
         }
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-            SVProgressHUD.show(withStatus: "正在保存!")
+        if #available(iOS 10.0, *) {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
+                SVProgressHUD.show(withStatus: "正在保存!")
+            }
+        } else {
+            // Fallback on earlier versions
         }
        SVProgressHUD.dismiss()
     }

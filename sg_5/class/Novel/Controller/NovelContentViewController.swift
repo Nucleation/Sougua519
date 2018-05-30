@@ -8,11 +8,12 @@
 
 import UIKit
 
-class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate{
+class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,NovelChapterViewDelegate{
+    
+    var novelInfo: NoveCategoryListModel? 
     var web: UIWebView?
     var novelContentModel:NovelContentModel?
     var tap: UITapGestureRecognizer?
-    var novelId: String?
     var pageIndex: Int = 1
     
     //弹出视图
@@ -178,7 +179,10 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate{
         
     }
     @objc func chapterListBtnClick(){
-        self.navigationController?.popViewController(animated: true)
+        let novelChapterView = NovelChapterView(frame: self.view.frame, novelInfo: self.novelInfo!)
+        novelChapterView.delegate = self
+        self.view.addSubview(novelChapterView)
+        
     }
     @objc func nextChapterBtnClick(){
         getContentByPage(page: self.pageIndex + 1, isNext: true)
@@ -189,7 +193,7 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate{
     }
     func getContentByPage(page: Int, isNext: Bool){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":self.novelId ?? "","page":String(page)]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.novelInfo?.id ?? "","page":page]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
             if json["code"] == "-1" {
@@ -203,12 +207,25 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate{
                 
                 let model = NovelContentModel.deserialize(from: json.dictionaryObject)
                 self.web?.loadHTMLString(model?.content ?? "", baseURL: nil)
+                self.titleLab?.text = model?.sectionName
             }
-            
-            
-           
     }
     
+    }
+    func reloadNovel(model: NovelChapterModel) {
+        //getContentByPage(page: model.iindex, isNext: true)
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":model.fictionId,"page":model.iindex]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
+            if json["code"] == "-1" {
+                self.view.makeToast(json["msg"].stringValue)
+            }else{
+                let model = NovelContentModel.deserialize(from: json.dictionaryObject)
+                self.web?.loadHTMLString(model?.content ?? "", baseURL: nil)
+                self.titleLab?.text = model?.sectionName
+            }
+        }
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == self.tap {
