@@ -32,6 +32,7 @@ class MetooCollectionViewCell: UICollectionViewCell {
     func setUI(){
         imageView = UIImageView(image: UIImage(named: "333"))
         imageView?.layer.masksToBounds = true
+        imageView?.contentMode = .scaleAspectFill
         //imageView?.AddTapFullScreenScan()
         //imageView?.backgroundColor = UIColor.randomColor
         imageView?.layer.cornerRadius = 5

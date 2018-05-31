@@ -21,4 +21,5 @@ target 'sg_5' do
   pod 'KeychainSwift', '~> 11.0'
   pod 'EmptyPage'
   pod 'Toast-Swift', '~> 3.0.1'
+  pod 'WKWebViewJavascriptBridge', '~> 1.1.0'
 end

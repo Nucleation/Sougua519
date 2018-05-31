@@ -23,6 +23,7 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .black
          //[self setAutomaticallyAdjustsScrollViewInsets:NO];
         let scrollerView = UIScrollView()
         if #available(iOS 11.0, *) {

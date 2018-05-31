@@ -94,10 +94,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
                                 forCellReuseIdentifier:"SingleTest")
         self.view?.addSubview(mainTableView!)
         self.mainTableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
-            
             self.pageNO += 1
             self.getNewsList(pageNO: self.pageNO)
-            self.mainTableView?.reloadData()
             self.mainTableView?.mj_footer.endRefreshing()
         })
         self.mainTableView?.tableHeaderView = self.headView
@@ -144,7 +142,10 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
                 self.addEmptyView(iconName: "", tipTitle: "无数据")
             }
             self.mainTableView?.reloadData()
-            self.mainTableView?.contentOffset = CGPoint.zero
+            if pageNO == 1{
+                self.mainTableView?.contentOffset = CGPoint.zero
+            }
+            
             
         }
     }
@@ -186,6 +187,11 @@ extension MuRootViewController {
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let aNews = newsListArr[indexPath.row]
+//        if aNews.directType == "组图" {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "Image") as! ImageTableViewCell
+//            cell.aNews = aNews
+//            return cell
+//        }
         switch aNews.modelType {
         case "1":
             let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTest") as! SingleTestTableViewCell
@@ -242,20 +248,28 @@ extension MuRootViewController {
             case "1":
                 return 95
             case "2":
-                return 150
+                return 120
             case "3":
-                return 270
+                return 320
             case "4":
-                return 150
+                return 120
             default:
-                return 270
+                return 320
             }
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.newsListArr[indexPath.row].directType == "组图" {
+            var imageURLs = self.newsListArr[indexPath.row].newsContent.components(separatedBy: ";")
+            imageURLs.removeLast()
+            let multiPictureVC = MultiPictureViewController()
+            multiPictureVC.imageURLArr = imageURLs
+            self.navigationController?.pushViewController(multiPictureVC, animated: true)
+            
+        }else{
         let webVC = HomePageWebViewController()
         webVC.webURL = newsListArr[indexPath.row].newsContent
         self.navigationController?.pushViewController(webVC, animated: true)
-        
+        }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)

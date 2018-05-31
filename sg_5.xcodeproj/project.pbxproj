@@ -95,6 +95,7 @@
 		1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724620B0162D00EAFEC0 /* LoginViewController.swift */; };
 		17857D5C20B53BF2005B028C /* HomePageNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */; };
 		17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5E20B548B6005B028C /* HomePageWebViewController.swift */; };
+		178EB39220BFE77A006C156B /* MultiPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178EB39120BFE77A006C156B /* MultiPictureViewController.swift */; };
 		17D8CB3E20A44F6800914492 /* SougouSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB3D20A44F6800914492 /* SougouSearch.swift */; };
 		17D8CB4020A44F7800914492 /* SOsearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB3F20A44F7800914492 /* SOsearch.swift */; };
 		17D8CB4820A44FFB00914492 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB4320A44FFA00914492 /* TFHpple.m */; };
@@ -224,6 +225,7 @@
 		1782724620B0162D00EAFEC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageNewsModel.swift; sourceTree = "<group>"; };
 		17857D5E20B548B6005B028C /* HomePageWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageWebViewController.swift; sourceTree = "<group>"; };
+		178EB39120BFE77A006C156B /* MultiPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPictureViewController.swift; sourceTree = "<group>"; };
 		17D8CB3D20A44F6800914492 /* SougouSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SougouSearch.swift; sourceTree = "<group>"; };
 		17D8CB3F20A44F7800914492 /* SOsearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOsearch.swift; sourceTree = "<group>"; };
 		17D8CB4220A44FFA00914492 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				174F763E20A44AB900BB0B46 /* MuRootViewController.swift */,
 				174F763F20A44AB900BB0B46 /* MUmultiWindowFlowlayout.swift */,
 				17857D5E20B548B6005B028C /* HomePageWebViewController.swift */,
+				178EB39120BFE77A006C156B /* MultiPictureViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/WKWebViewJavascriptBridge/WKWebViewJavascriptBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -859,6 +863,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WKWebViewJavascriptBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -879,6 +884,7 @@
 				177C35D320B6557100B803EF /* NovelHomeHeadView.swift in Sources */,
 				1762DE8920AD2BAA00D179AE /* NoveCategoryListModel.swift in Sources */,
 				174F767A20A44E6300BB0B46 /* VideoTableViewCell.swift in Sources */,
+				178EB39220BFE77A006C156B /* MultiPictureViewController.swift in Sources */,
 				174F765C20A44AB900BB0B46 /* MetooHeadView.swift in Sources */,
 				177A4F8520A539EF0004336E /* SwiftyJSON.swift in Sources */,
 				174F764920A44AB900BB0B46 /* MUConfig.swift in Sources */,

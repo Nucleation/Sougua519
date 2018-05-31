@@ -120,15 +120,15 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
                                 forCellReuseIdentifier:"novelCommentCell")
         self.view.addSubview(tableView)
         self.tableView = tableView
+        self.tableView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.view).offset(64)
+            make.left.right.equalTo(self.view)
+            make.height.equalTo(screenHeight-64-50)
+        })
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
         let headView = UIView()
         headView.backgroundColor = UIColor.lightGray
-        self.headView = headView
-        tableView.tableHeaderView = self.headView
-        if #available(iOS 6.0, *) {
-            self.headView?.frame.size.height = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height)!
-        } else {
-            self.headView?.frame.size = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize, withHorizontalFittingPriority: UILayoutPriority.defaultLow, verticalFittingPriority: UILayoutPriority.defaultLow))!
-        }
         
         let bookView = UIView()
         bookView.backgroundColor = .white
@@ -234,17 +234,8 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         self.view.addSubview(commentTVView)
         self.commentTVView = commentTVView
         
-        self.tableView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.view).offset(64)
-            make.left.right.equalTo(self.view)
-            make.height.equalTo(screenHeight-64-50)
-        })
-        self.headView?.snp.makeConstraints({ (make) in
-            make.edges.equalTo((self.tableView?.tableHeaderView)!).inset(UIEdgeInsets.zero)
-            make.width.equalTo(screenWidth)
-        })
         self.bookView?.snp.makeConstraints({ (make) in
-            make.top.left.right.equalTo(self.headView!)
+            make.top.left.right.equalTo(headView)
         })
         self.novelImageView?.snp.makeConstraints({ (make) in
             make.left.top.equalTo(self.bookView!).offset(30)
@@ -299,10 +290,10 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             make.bottom.equalTo(self.bookView!)
         })
         self.commentView?.snp.makeConstraints({ (make) in
-            make.left.right.equalTo(self.headView!)
+            make.left.right.equalTo(headView)
             make.top.equalTo(self.bookView!.snp.bottom).offset(10)
             make.height.equalTo(50)
-            make.bottom.equalTo(self.headView!)
+            make.bottom.equalTo(headView)
         })
         self.vView?.snp.makeConstraints({ (make) in
             make.left.equalTo(self.commentView!).offset(20)
@@ -318,12 +309,22 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             make.right.equalTo(self.commentView!).offset(-20)
             make.centerY.height.equalTo(self.commentView!)
         })
+        self.headView = headView
         
+        if #available(iOS 6.0, *) {
+            self.headView?.frame.size.height = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height)!
+        } else {
+            self.headView?.frame.size = (self.headView?.systemLayoutSizeFitting(UILayoutFittingCompressedSize, withHorizontalFittingPriority: UILayoutPriority.defaultLow, verticalFittingPriority: UILayoutPriority.defaultLow))!
+        }
+        self.tableView?.tableHeaderView = self.headView
         
     }
     
     @objc func joinBookshelfBtnClick() {
-        if self.isJoinShelf{
+        if KeyChain().getKeyChain()["mobile"]! == ""{
+            self.view.makeToast("您还没有登录")
+             return
+        }else if self.isJoinShelf{
             return
         }else{
             let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
@@ -393,7 +394,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.commentTVView?.commentTV?.resignFirstResponder()
+        self.view.endEditing(true)
     }
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)
@@ -419,5 +420,11 @@ extension NovelInfoViewController: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == self.tableView {
+            self.view.endEditing(true)
+        }
+        
     }
 }

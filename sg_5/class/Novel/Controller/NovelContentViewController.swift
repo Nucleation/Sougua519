@@ -27,7 +27,7 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
     var nextChapterBtn: UIButton?
     var chapterListBtn: UIButton?
 
-    var isPopViewShow: Bool = false
+    var isPopViewShow: Bool = true
     var sectionBtn: UIButton?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,12 +47,13 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
         webview.addGestureRecognizer(self.tap!)
         self.view.addSubview(webview)
         self.web = webview
+        createPopView()
         // Do any additional setup after loading the view.
     }
     @objc func webViewTap(sender: UIWebView){
         if !isPopViewShow {
             if self.popView == nil{
-                createPopView()
+                
                 self.isPopViewShow = true
             }else{
                 self.isPopViewShow = true
@@ -89,9 +90,6 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
         popView.backgroundColor = .black
         self.view.addSubview(popView)
         self.popView = popView
-//        var lastChapterBtn: UIButton?
-//        var nextChapterBtn: UIButton?
-//        var chapterListBtn: UIButton?
         let lastChapterBtn = UIButton(type: .custom)
         lastChapterBtn.layer.cornerRadius = 5
         lastChapterBtn.setTitle("上一章", for: .normal)

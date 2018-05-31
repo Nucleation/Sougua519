@@ -28,6 +28,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.0.0)
   - Toast-Swift (3.0.1)
+  - WKWebViewJavascriptBridge (1.1.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftyJSON
   - Toast-Swift (~> 3.0.1)
+  - WKWebViewJavascriptBridge (~> 1.1.0)
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
@@ -63,7 +65,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
+  WKWebViewJavascriptBridge: 8da532409bc489ba2c0a69cf38e5d1cd49e3d5e4
 
-PODFILE CHECKSUM: 9e303502b5f563c964fc8d708da6db6bd25e3a97
+PODFILE CHECKSUM: e253d838cfe22fb66371175704fcfcf8899b84f4
 
 COCOAPODS: 1.4.0

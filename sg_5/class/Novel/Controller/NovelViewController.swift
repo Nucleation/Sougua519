@@ -18,6 +18,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         createUI()
         
     }
