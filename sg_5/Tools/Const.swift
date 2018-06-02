@@ -49,5 +49,13 @@ let getNovelShelfListUrl = "\(postUrl)/app/novel/api/entry/getShelfList"
 //根据id删除小说
 let deleteNovelShelfUrl = "\(postUrl)/app/novel/api/entry/deleteShelf"
 //增加小说
-let addNovelShelfUrl = "\(postUrl)/app/novel/api/entry/addShelf/"
+let addNovelShelfUrl = "\(postUrl)/app/novel/api/entry/addShelf"
+//获取新闻类型
+let getNewsTypeListUrl = "\(postUrl)/app/novel/api/getNewsTypeList"
+//获取新闻列表
+let getNewsListByTypeUrl = "\(postUrl)/app/novel/api/getNewsListByTypePage"
+//获取段子接口
+let getEpisodeUrl = "\(postUrl)/app/picture/api/getEpisode"
+
+
 

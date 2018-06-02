@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+
 class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CategoryButtonViewDelegate,EmptyDataSetProtocol{
     //tableView
     var navigationBar = HomeNavigationView.loadViewFromNib()
@@ -287,9 +288,17 @@ extension MuRootViewController {
     //MARK: --点击分类跳转
     func categoryBtnClick(sender: UIButton) {
         if sender.tag == 5 {
+            //小说
             let vc = NovelViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        }else{
+        }else if sender.tag == 0 {
+            //新闻
+            let vc = NewsViewController()
+            self.navigationController?.pushViewController(vc, animated: true)            
+        }else if sender.tag == 1{
+            //段子
+        }else if sender.tag == 3{
+            //美图
             let vc = MetooViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }

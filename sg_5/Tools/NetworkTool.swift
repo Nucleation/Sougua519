@@ -37,71 +37,10 @@ extension NetworkToolProtocol{
             "index": 0
             },
             {
-            "title": "段子",
-            "imageurl": "段子",
-            "index": 1
-            },
-            {
-            "title": "视频",
-            "imageurl": "视频",
-            "index": 2
-            },
-            {
-            "title": "美图",
-            "imageurl": "美图",
-            "index": 3
-            },
-            {
-            "title": "贷款",
-            "imageurl": "贷款",
-            "index": 4
-            },
-            {
             "title": "小说",
             "imageurl": "小说",
-            "index": 5
-            },
-            {
-            "title": "抢票",
-            "imageurl": "抢票",
-            "index": 6
-            },
-            {
-            "title": "旅游",
-            "imageurl": "旅游",
-            "index": 7
-            },
-            {
-            "title": "外卖",
-            "imageurl": "外卖",
-            "index": 8
-            },
-            {
-            "title": "更多",
-            "imageurl": "更多",
-            "index": 9
-            },
-           {
-            "title": "外卖",
-            "imageurl": "外卖",
-            "index": 10
-            },
-            {
-            "title": "外卖",
-            "imageurl": "外卖",
-            "index": 11
-            },
-            {
-            "title": "更多",
-            "imageurl": "外卖",
-            "index": 12
-            },
-           {
-            "title": "外卖",
-            "imageurl": "外卖",
-            "index": 13
+            "index": 1
             }
-            ]
         }
 """
         

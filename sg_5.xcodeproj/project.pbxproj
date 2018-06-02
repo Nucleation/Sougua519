@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F28CFA495528E4F7CA144CB /* Pods_sg_5.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF282048723040960C2530E /* Pods_sg_5.framework */; };
+		1706DECF20C298E60013E726 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1706DECE20C298E60013E726 /* NewsViewController.swift */; };
 		172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CF23A20A45563005632F3 /* AppDelegate.swift */; };
 		172CF23D20A4558A005632F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172CF23C20A4558A005632F3 /* Assets.xcassets */; };
 		174F75FD20A44AA000BB0B46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174F75FB20A44AA000BB0B46 /* LaunchScreen.storyboard */; };
@@ -122,6 +123,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1706DECE20C298E60013E726 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		172CF23A20A45563005632F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172CF23C20A4558A005632F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = sg_5/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		174F75EF20A44A9E00BB0B46 /* sg_5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sg_5.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +281,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1706DECA20C298470013E726 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				1706DECD20C298C70013E726 /* View */,
+				1706DECC20C298BF0013E726 /* Model */,
+				1706DECB20C298B30013E726 /* Controller */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		1706DECB20C298B30013E726 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1706DECE20C298E60013E726 /* NewsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1706DECC20C298BF0013E726 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1706DECD20C298C70013E726 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		174F75E620A44A9E00BB0B46 = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +397,7 @@
 		174F763020A44AB900BB0B46 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				1706DECA20C298470013E726 /* News */,
 				174F763120A44AB900BB0B46 /* ViewModel */,
 				174F763320A44AB900BB0B46 /* HTML */,
 				174F764020A44AB900BB0B46 /* MetooCollectionview */,
@@ -885,6 +920,7 @@
 				1762DE8920AD2BAA00D179AE /* NoveCategoryListModel.swift in Sources */,
 				174F767A20A44E6300BB0B46 /* VideoTableViewCell.swift in Sources */,
 				178EB39220BFE77A006C156B /* MultiPictureViewController.swift in Sources */,
+				1706DECF20C298E60013E726 /* NewsViewController.swift in Sources */,
 				174F765C20A44AB900BB0B46 /* MetooHeadView.swift in Sources */,
 				177A4F8520A539EF0004336E /* SwiftyJSON.swift in Sources */,
 				174F764920A44AB900BB0B46 /* MUConfig.swift in Sources */,
