@@ -123,8 +123,30 @@ extension String
         let data = (self as NSString).data(using: String.Encoding.utf8.rawValue)! as NSData
         return data.MD5().hexedString()
     }
+    //根据开始位置和长度截取字符串
+    func subString(start:Int, length:Int = -1) -> String {
+        var len = length
+        if len == -1 {
+            len = self.count - start
+        }
+        let st = self.index(startIndex, offsetBy:start)
+        let en = self.index(st, offsetBy:len)
+        return String(self[st ..< en])
+    }
 }
-
+extension Date
+{
+    func dateNowAsString() -> String {
+        let nowDate = Date()
+        let timeZone = TimeZone.init(identifier: "UTC")
+        let formatter = DateFormatter()
+        formatter.timeZone = timeZone
+        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.dateFormat = "MM-dd"
+        let date = formatter.string(from: nowDate)
+        return date
+    }
+}
 //extension NSNumber {
 //    fileprivate var isBool: Bool { return CFBooleanGetTypeID() == CFGetTypeID(self) }
 //}

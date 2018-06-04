@@ -287,7 +287,7 @@ extension MuRootViewController {
     }
     //MARK: --点击分类跳转
     func categoryBtnClick(sender: UIButton) {
-        if sender.tag == 1 {
+        if sender.tag == 2 {
             //小说
             let vc = NovelViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -295,6 +295,15 @@ extension MuRootViewController {
             //新闻
             let vc = MetooViewController()
             self.navigationController?.pushViewController(vc, animated: true)            
+        }
+        else if sender.tag == 1 {
+            //新闻
+            let vc = NewsViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if sender.tag == 3 {
+            //新闻
+            let vc = EpisodeViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }

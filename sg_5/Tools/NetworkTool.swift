@@ -37,9 +37,24 @@ extension NetworkToolProtocol{
             "index": 0
             },
             {
+            "title": "新闻",
+            "imageurl": "新闻",
+            "index": 1
+            },
+            {
             "title": "小说",
             "imageurl": "小说",
-            "index": 1
+            "index": 2
+            },
+            {
+            "title": "段子",
+            "imageurl": "段子",
+            "index": 3
+            },
+            {
+            "title": "更多",
+            "imageurl": "更多",
+            "index": 4
             }]
         }
 """

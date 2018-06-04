@@ -66,7 +66,7 @@ class MetooHeadView: UIView {
 //        self.underLineView = underLineView
         self.titleLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self)
-            make.centerY.equalTo(self).offset(20)
+            make.centerY.equalTo(self).offset(10)
             make.height.equalTo(self)
         })
 //        self.leftBtn?.snp.makeConstraints({ (make) in

@@ -53,7 +53,7 @@ extension UIColor {
     }
     class var colorAccent: UIColor{
         get {
-            return UIColor.colorWithHexColorString("017cfa")
+            return UIColor.colorWithHexColorString("49b4fe")
         }
     }
     class var colortext1: UIColor{
@@ -211,6 +211,14 @@ extension String {
         let f = d.aesEncrypt
         let g = f.mybase64()
         return g
+    }
+    func getTextHeigh(font:UIFont,width:CGFloat) -> CGFloat {
+        
+        let normalText: NSString = self as NSString
+        let size = CGSize(width: width, height: 1000)
+        let dic = NSDictionary(object: font, forKey: NSAttributedStringKey.font as NSCopying)
+        let stringSize = normalText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : AnyObject], context:nil).size
+        return stringSize.height
     }
 }
 extension Dictionary{

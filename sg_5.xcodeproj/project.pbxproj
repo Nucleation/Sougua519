@@ -48,6 +48,15 @@
 		174F768320A44E6300BB0B46 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174F767620A44E6300BB0B46 /* ImageTableViewCell.xib */; };
 		174F768420A44E6300BB0B46 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174F767720A44E6300BB0B46 /* VideoTableViewCell.xib */; };
 		174F768720A44E6800BB0B46 /* CategoryButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F768620A44E6700BB0B46 /* CategoryButtonModel.swift */; };
+		17507CC220C4CB7200600BE1 /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17507CC120C4CB7200600BE1 /* EpisodeViewController.swift */; };
+		17507CC520C4D15000600BE1 /* EpisodeImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17507CC320C4D15000600BE1 /* EpisodeImageCell.swift */; };
+		17507CC620C4D15000600BE1 /* EpisodeImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17507CC420C4D15000600BE1 /* EpisodeImageCell.xib */; };
+		17507CC920C4D16E00600BE1 /* EpisodeVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17507CC720C4D16E00600BE1 /* EpisodeVideoCell.swift */; };
+		17507CCA20C4D16E00600BE1 /* EpisodeVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17507CC820C4D16E00600BE1 /* EpisodeVideoCell.xib */; };
+		17507CCD20C4D18C00600BE1 /* EpisodeTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17507CCB20C4D18C00600BE1 /* EpisodeTextCell.swift */; };
+		17507CCE20C4D18C00600BE1 /* EpisodeTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17507CCC20C4D18C00600BE1 /* EpisodeTextCell.xib */; };
+		17507CD020C4E6FC00600BE1 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17507CCF20C4E6FC00600BE1 /* EpisodeModel.swift */; };
+		17507CD220C5145A00600BE1 /* RegistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17507CD120C5145A00600BE1 /* RegistViewController.swift */; };
 		1762DE8720AD163500D179AE /* NoveHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE8620AD163500D179AE /* NoveHomeViewController.swift */; };
 		1762DE8920AD2BAA00D179AE /* NoveCategoryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE8820AD2BAA00D179AE /* NoveCategoryListModel.swift */; };
 		1762DE8F20AD565100D179AE /* NoveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE8E20AD565100D179AE /* NoveCollectionViewController.swift */; };
@@ -170,6 +179,15 @@
 		174F767620A44E6300BB0B46 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		174F767720A44E6300BB0B46 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		174F768620A44E6700BB0B46 /* CategoryButtonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryButtonModel.swift; sourceTree = "<group>"; };
+		17507CC120C4CB7200600BE1 /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
+		17507CC320C4D15000600BE1 /* EpisodeImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeImageCell.swift; sourceTree = "<group>"; };
+		17507CC420C4D15000600BE1 /* EpisodeImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeImageCell.xib; sourceTree = "<group>"; };
+		17507CC720C4D16E00600BE1 /* EpisodeVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeVideoCell.swift; sourceTree = "<group>"; };
+		17507CC820C4D16E00600BE1 /* EpisodeVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeVideoCell.xib; sourceTree = "<group>"; };
+		17507CCB20C4D18C00600BE1 /* EpisodeTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTextCell.swift; sourceTree = "<group>"; };
+		17507CCC20C4D18C00600BE1 /* EpisodeTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeTextCell.xib; sourceTree = "<group>"; };
+		17507CCF20C4E6FC00600BE1 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
+		17507CD120C5145A00600BE1 /* RegistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistViewController.swift; sourceTree = "<group>"; };
 		1762DE8620AD163500D179AE /* NoveHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveHomeViewController.swift; sourceTree = "<group>"; };
 		1762DE8820AD2BAA00D179AE /* NoveCategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveCategoryListModel.swift; sourceTree = "<group>"; };
 		1762DE8E20AD565100D179AE /* NoveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveCollectionViewController.swift; sourceTree = "<group>"; };
@@ -397,6 +415,7 @@
 		174F763020A44AB900BB0B46 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				17507CBD20C4C78B00600BE1 /* Episode */,
 				1706DECA20C298470013E726 /* News */,
 				174F763120A44AB900BB0B46 /* ViewModel */,
 				174F763320A44AB900BB0B46 /* HTML */,
@@ -496,6 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				1782724620B0162D00EAFEC0 /* LoginViewController.swift */,
+				17507CD120C5145A00600BE1 /* RegistViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -540,6 +560,45 @@
 				17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		17507CBD20C4C78B00600BE1 /* Episode */ = {
+			isa = PBXGroup;
+			children = (
+				17507CC020C4C98900600BE1 /* View */,
+				17507CBF20C4C97D00600BE1 /* Model */,
+				17507CBE20C4C79A00600BE1 /* Controller */,
+			);
+			path = Episode;
+			sourceTree = "<group>";
+		};
+		17507CBE20C4C79A00600BE1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				17507CC120C4CB7200600BE1 /* EpisodeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		17507CBF20C4C97D00600BE1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				17507CCF20C4E6FC00600BE1 /* EpisodeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		17507CC020C4C98900600BE1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				17507CC320C4D15000600BE1 /* EpisodeImageCell.swift */,
+				17507CC420C4D15000600BE1 /* EpisodeImageCell.xib */,
+				17507CC720C4D16E00600BE1 /* EpisodeVideoCell.swift */,
+				17507CC820C4D16E00600BE1 /* EpisodeVideoCell.xib */,
+				17507CCB20C4D18C00600BE1 /* EpisodeTextCell.swift */,
+				17507CCC20C4D18C00600BE1 /* EpisodeTextCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1762DE8220AD15AC00D179AE /* Novel */ = {
@@ -789,13 +848,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				174F75FD20A44AA000BB0B46 /* LaunchScreen.storyboard in Resources */,
+				17507CC620C4D15000600BE1 /* EpisodeImageCell.xib in Resources */,
 				174F768320A44E6300BB0B46 /* ImageTableViewCell.xib in Resources */,
 				174F768020A44E6300BB0B46 /* SingleTestTableViewCell.xib in Resources */,
 				177A4F8920A539EF0004336E /* Info-tvOS.plist in Resources */,
 				177D5ACE20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib in Resources */,
 				174F766920A44C4900BB0B46 /* homepage.json in Resources */,
 				177A4F8720A539EF0004336E /* Info-iOS.plist in Resources */,
+				17507CCE20C4D18C00600BE1 /* EpisodeTextCell.xib in Resources */,
 				174F767E20A44E6300BB0B46 /* SingleImageTableViewCell.xib in Resources */,
+				17507CCA20C4D16E00600BE1 /* EpisodeVideoCell.xib in Resources */,
 				177DEBEA20B7ABAA00E176F7 /* NovelListTableViewCell.xib in Resources */,
 				177A4F8820A539EF0004336E /* Info-watchOS.plist in Resources */,
 				174F768420A44E6300BB0B46 /* VideoTableViewCell.xib in Resources */,
@@ -921,12 +983,14 @@
 				174F767A20A44E6300BB0B46 /* VideoTableViewCell.swift in Sources */,
 				178EB39220BFE77A006C156B /* MultiPictureViewController.swift in Sources */,
 				1706DECF20C298E60013E726 /* NewsViewController.swift in Sources */,
+				17507CC220C4CB7200600BE1 /* EpisodeViewController.swift in Sources */,
 				174F765C20A44AB900BB0B46 /* MetooHeadView.swift in Sources */,
 				177A4F8520A539EF0004336E /* SwiftyJSON.swift in Sources */,
 				174F764920A44AB900BB0B46 /* MUConfig.swift in Sources */,
 				17D8CB3E20A44F6800914492 /* SougouSearch.swift in Sources */,
 				174F765920A44AB900BB0B46 /* MUmultiWindowFlowlayout.swift in Sources */,
 				174F766820A44C4900BB0B46 /* Const.swift in Sources */,
+				17507CC520C4D15000600BE1 /* EpisodeImageCell.swift in Sources */,
 				174F766520A44C4900BB0B46 /* NetworkTool.swift in Sources */,
 				1762DE9120AD5D8400D179AE /* NoveCollectionViewCell.swift in Sources */,
 				174F765120A44AB900BB0B46 /* MUMultiWindowViewModel.swift in Sources */,
@@ -957,8 +1021,11 @@
 				174F764A20A44AB900BB0B46 /* JHFundation-Extension.swift in Sources */,
 				177A4F8B20A539EF0004336E /* AES加密.swift in Sources */,
 				174F764E20A44AB900BB0B46 /* MUNaigationViewController.swift in Sources */,
+				17507CCD20C4D18C00600BE1 /* EpisodeTextCell.swift in Sources */,
 				177C35D120B64BE900B803EF /* NovelViewController.swift in Sources */,
+				17507CD220C5145A00600BE1 /* RegistViewController.swift in Sources */,
 				1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */,
+				17507CC920C4D16E00600BE1 /* EpisodeVideoCell.swift in Sources */,
 				177CC1E720AEAAB500202F14 /* NovelInfoViewController.swift in Sources */,
 				177C35DD20B6CF4000B803EF /* NovelTitleModel.swift in Sources */,
 				177C35D920B6A32900B803EF /* NovelCategoryScrollView.swift in Sources */,
@@ -986,6 +1053,7 @@
 				177C35D520B66F1900B803EF /* BookShelfViewController.swift in Sources */,
 				177D2ABC20BD4DFB00B61F1E /* NovelChapterView.swift in Sources */,
 				177DEBEE20B7F47700E176F7 /* MetooScrollerFootView.swift in Sources */,
+				17507CD020C4E6FC00600BE1 /* EpisodeModel.swift in Sources */,
 				174F765D20A44AB900BB0B46 /* JHFlowLayout.swift in Sources */,
 				177A4F8C20A539EF0004336E /* CocoaSecurity.m in Sources */,
 				177D2AB820BCFABB00B61F1E /* CommentView.swift in Sources */,
