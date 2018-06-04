@@ -72,10 +72,10 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             make.centerY.equalTo(self.subSearchBar!)
             make.right.equalTo(self.subSearchBar!)
         }
-        let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth/5*2+190))
+        let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth/5+150))
         self.headView = headView
         self.headView?.addSubview(self.navigationBar)
-        categoryButtonView = CategoryButtonView(frame: CGRect(x: 0, y: 150, width: screenWidth, height: screenWidth/5*2+40))
+        categoryButtonView = CategoryButtonView(frame: CGRect(x: 0, y: 150, width: screenWidth, height: screenWidth/5))
         categoryButtonView?.delegate = self
         self.headView?.addSubview(categoryButtonView!)
         mainTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight-50))
@@ -287,20 +287,14 @@ extension MuRootViewController {
     }
     //MARK: --点击分类跳转
     func categoryBtnClick(sender: UIButton) {
-        if sender.tag == 5 {
+        if sender.tag == 1 {
             //小说
             let vc = NovelViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if sender.tag == 0 {
             //新闻
-            let vc = NewsViewController()
-            self.navigationController?.pushViewController(vc, animated: true)            
-        }else if sender.tag == 1{
-            //段子
-        }else if sender.tag == 3{
-            //美图
             let vc = MetooViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)            
         }
         
     }

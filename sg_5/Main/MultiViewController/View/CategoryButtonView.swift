@@ -43,10 +43,10 @@ class CategoryButtonView: UIView ,UIScrollViewDelegate{
             self.scrollView?.contentSize = CGSize(width: self.width * CGFloat(pagesNumber), height: self.height)
             for buttonModel in categoryButtonList {
                 let buttonWidth = (self.scrollView?.width)!/5
-                let buttonHeight = ((self.scrollView?.height)!-40)/2
+                let buttonHeight = (self.scrollView?.width)!/5
                 let buttonX = CGFloat(buttonModel.index%5) * buttonWidth + CGFloat(buttonModel.index/10) * (self.scrollView?.width)!
                 let buttonY = CGFloat(buttonModel.index/5%2)*buttonHeight
-                let button = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonWidth, height: buttonHeight))
+                let button = UIButton(frame: CGRect(x: buttonX, y: 0, width: buttonWidth, height: buttonHeight))
                 button.tag = buttonModel.index
                 button.backgroundColor = UIColor.white
                 button.setTitleColor(UIColor.black, for: UIControlState.normal)
@@ -61,15 +61,15 @@ class CategoryButtonView: UIView ,UIScrollViewDelegate{
                 self.scrollView?.addSubview(button)
             }
         }
-        let pageControl = UIPageControl(frame: CGRect(x: self.center.x - (self.pItemWidth * CGFloat(self.pageNumber!))/2, y: self.height-self.pHeight, width: self.pItemWidth * CGFloat(self.pageNumber!), height: self.pHeight))
-        pageControl.currentPage = 0
-        pageControl.numberOfPages = self.pageNumber!
-        pageControl.backgroundColor = UIColor.clear
-        pageControl.currentPageIndicatorTintColor = UIColor.brown
-        pageControl.pageIndicatorTintColor = UIColor.gray
-        pageControl.addTarget(self, action: #selector(self.clickPageControl(_:)), for: UIControlEvents.valueChanged)
-        self.addSubview(pageControl)
-        self.pageControl = pageControl
+//        let pageControl = UIPageControl(frame: CGRect(x: self.center.x - (self.pItemWidth * CGFloat(self.pageNumber!))/2, y: self.height-self.pHeight, width: self.pItemWidth * CGFloat(self.pageNumber!), height: self.pHeight))
+//        pageControl.currentPage = 0
+//        pageControl.numberOfPages = self.pageNumber!
+//        pageControl.backgroundColor = UIColor.clear
+//        pageControl.currentPageIndicatorTintColor = UIColor.brown
+//        pageControl.pageIndicatorTintColor = UIColor.gray
+//        pageControl.addTarget(self, action: #selector(self.clickPageControl(_:)), for: UIControlEvents.valueChanged)
+//        self.addSubview(pageControl)
+//        self.pageControl = pageControl
     }
     @objc func clickPageControl(_ sender: UIPageControl){
         var frame = self.frame

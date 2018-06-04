@@ -32,15 +32,15 @@ extension NetworkToolProtocol{
  {
             "data":[
             {
-            "title": "新闻",
-            "imageurl": "新闻",
+            "title": "美图",
+            "imageurl": "美图",
             "index": 0
             },
             {
             "title": "小说",
             "imageurl": "小说",
             "index": 1
-            }
+            }]
         }
 """
         
