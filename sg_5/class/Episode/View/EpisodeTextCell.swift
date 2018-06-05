@@ -21,7 +21,7 @@ class EpisodeTextCell: UITableViewCell {
     var delegate: EpisodeTextCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.height = 0
         // Initialization code
     }
     func setCellByModel(model: EpisodeModel){
@@ -31,7 +31,14 @@ class EpisodeTextCell: UITableViewCell {
         dowmCountLab.text = String(model.down)
         upCountLab.text = String(model.up)
         commentCountLab.text = String(model.commentNum)
-        self.height = (model.content.getTextHeigh(font: UIFont.systemFont(ofSize: 16), width: screenWidth-24)) + 300
+        let textHeight = model.content.getTextHeigh(font: UIFont.systemFont(ofSize: 16), width: screenWidth-24)
+        if textHeight < 50 {
+            self.height = textHeight + 300
+            self.allBtn.isHidden = true
+        }else{
+            self.height = 350
+            self.allBtn.isHidden = false
+        }
     }
     
 

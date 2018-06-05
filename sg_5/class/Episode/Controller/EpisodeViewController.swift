@@ -96,9 +96,13 @@ class EpisodeViewController: UIViewController {
 }
 extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,EpisodeTextCellDelegate{
     func allBtnClick(sender: EpisodeTextCell) {
-        sender.contentLab.numberOfLines = 0
-        let index: IndexPath = (self.tableView?.indexPath(for: sender))!
-        self.tableView?.reloadRows(at: [index], with: .automatic)
+        DispatchQueue.main.async {
+            sender.allBtn.isHidden = true
+            sender.contentLab.numberOfLines = 0
+            let index: IndexPath = (self.tableView?.indexPath(for: sender))!
+            self.tableView?.reloadRows(at: [index], with: .automatic)
+        }
+        
     }
     
     
@@ -116,14 +120,17 @@ extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,Episo
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell") as! EpisodeTextCell
             cell.setCellByModel(model: episide)
             cell.delegate = self
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         case "2":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell") as! EpisodeImageCell
             cell.setCellByModel(model: episide)
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! EpisodeVideoCell
             cell.setCellByModel(model: episide)
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
     }
@@ -133,22 +140,9 @@ extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,Episo
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-//    - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//    {
-//    return 10;
-//    }
-//    
-//    - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//    {
-//    return UITableViewAutomaticDimension;
-//    }//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        switch self.episodeArray[indexPath.row].mark {
-//        case "1":
-//            return 150 + self.episodeArray[indexPath.row].content.getTextHeigh(font: UIFont.systemFont(ofSize: 14), width: screenWidth-24)
-//        case "2":
-//            return 285 + self.episodeArray[indexPath.row].content.getTextHeigh(font: UIFont.systemFont(ofSize: 14), width: screenWidth-24)
-//        default:
-//            return 370 + self.episodeArray[indexPath.row].title.getTextHeigh(font: UIFont.systemFont(ofSize: 14), width: screenWidth-24)
-//        }
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc  =  EpisodeInfoViewController()
+        vc.model = self.episodeArray[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)   
+    }
 }
