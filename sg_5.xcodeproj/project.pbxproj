@@ -65,6 +65,7 @@
 		176513E220C69E8600706A77 /* VideoPlayerCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176513E120C69E8600706A77 /* VideoPlayerCustomView.swift */; };
 		176F998A20B92E6600FF6E46 /* NovelShelfListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */; };
 		176F998E20B940AF00FF6E46 /* BookShelfFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */; };
+		1775678720C7E49E00ACAE52 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775678620C7E49E00ACAE52 /* NewsTableViewController.swift */; };
 		17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */; };
 		177714F120C6317A0093F3F7 /* EpisodeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177714F020C6317A0093F3F7 /* EpisodeInfoViewController.swift */; };
 		177714F320C6325D0093F3F7 /* EpisodeInfoHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177714F220C6325D0093F3F7 /* EpisodeInfoHeadView.swift */; };
@@ -201,6 +202,7 @@
 		176513E120C69E8600706A77 /* VideoPlayerCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerCustomView.swift; sourceTree = "<group>"; };
 		176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelShelfListModel.swift; sourceTree = "<group>"; };
 		176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfFlowLayout.swift; sourceTree = "<group>"; };
+		1775678620C7E49E00ACAE52 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		17765E1D20B2D4AE008FDC6E /* sg_5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sg_5.entitlements; sourceTree = "<group>"; };
 		17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		17765E2020B2D6B0008FDC6E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				1706DECE20C298E60013E726 /* NewsViewController.swift */,
+				1775678620C7E49E00ACAE52 /* NewsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -662,10 +665,10 @@
 				177D5ACB20B40FC500B4A5E8 /* NovelCommentTableViewCell.swift */,
 				177D5ACC20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib */,
 				177C35D220B6557100B803EF /* NovelHomeHeadView.swift */,
-				177C35D820B6A32900B803EF /* NovelCategoryScrollView.swift */,
 				177C35DA20B6AB5B00B803EF /* NovelCategoryCollectionView.swift */,
 				177DEBE720B7ABAA00E176F7 /* NovelListTableViewCell.swift */,
 				177DEBE820B7ABAA00E176F7 /* NovelListTableViewCell.xib */,
+				177C35D820B6A32900B803EF /* NovelCategoryScrollView.swift */,
 				176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */,
 				177D2AB720BCFABB00B61F1E /* CommentView.swift */,
 				177D2ABB20BD4DFB00B61F1E /* NovelChapterView.swift */,
@@ -1014,6 +1017,7 @@
 				17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */,
 				177D2AB620BCE21000B61F1E /* CollectionView.swift in Sources */,
 				17D8CB4020A44F7800914492 /* SOsearch.swift in Sources */,
+				1775678720C7E49E00ACAE52 /* NewsTableViewController.swift in Sources */,
 				17D8CB4820A44FFB00914492 /* TFHpple.m in Sources */,
 				174F767920A44E6300BB0B46 /* ImageTableViewCell.swift in Sources */,
 				177CC1E520AEA55E00202F14 /* NovelFlowLayout.swift in Sources */,

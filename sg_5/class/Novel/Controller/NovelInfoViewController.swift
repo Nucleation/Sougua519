@@ -244,6 +244,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         })
         self.novelTitleLab?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.novelImageView!).offset(5)
+            make.right.equalTo(self.view).offset(12)
             make.left.equalTo(self.novelImageView!.snp.right).offset(17)
             make.height.equalTo(34)
         })
@@ -264,6 +265,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         })
         self.novelCreatTimeLab?.snp.makeConstraints({ (make) in
             make.left.equalTo(self.novelTitleLab!)
+            make.right.equalTo(self.view).offset(12)
             make.height.equalTo(25)
             make.top.equalTo(self.novelWordCountLab!.snp.bottom)
         })

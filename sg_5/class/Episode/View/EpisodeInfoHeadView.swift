@@ -19,7 +19,8 @@ class EpisodeInfoHeadView: UIView {
     var upBtn: UIButton?
     var shareBtn: UIButton?
     var type: Int = 0
-    
+    var totolComment: UILabel?
+    var totolUp: UILabel?
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
@@ -51,7 +52,7 @@ class EpisodeInfoHeadView: UIView {
         self.addSubview(timeLab)
         self.timeLab = timeLab
         let focusBtn = UIButton(type: .custom)
-        focusBtn.backgroundColor = UIColor.colorWithHexColorString("ffffff")
+        focusBtn.backgroundColor = UIColor.colorWithHexColorString("f85959")
         focusBtn.setTitle("关注", for: .normal)
         focusBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         focusBtn.setTitleColor(.white, for: .normal)
@@ -78,7 +79,7 @@ class EpisodeInfoHeadView: UIView {
         self.addSubview(upBtn)
         self.upBtn = upBtn
         let shareBtn = UIButton(type: .custom)
-        shareBtn.setTitle("3", for: .normal)
+        shareBtn.setTitle("分享", for: .normal)
         shareBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         shareBtn.setImage(UIImage(named: "fenxiang"), for: .normal)
         shareBtn.layer.cornerRadius = 18
@@ -87,6 +88,23 @@ class EpisodeInfoHeadView: UIView {
         shareBtn.setTitleColor(.black, for: .normal)
         self.addSubview(shareBtn)
         self.shareBtn = shareBtn
+        let lineView = UIView()
+        lineView.backgroundColor = UIColor.colorWithHexColorString("ebebeb")
+        self.addSubview(lineView)
+        let sectionView = UIView()
+        let totolComment = UILabel()
+        totolComment.text = "评论 0"
+        totolComment.font = UIFont.systemFont(ofSize: 14)
+        totolComment.textColor = UIColor.colorWithHexColorString("666666")
+        sectionView.addSubview(totolComment)
+        let totolUp = UILabel()
+        totolUp.text = "0 赞"
+        totolUp.font = UIFont.systemFont(ofSize: 14)
+        totolUp.textColor = UIColor.colorWithHexColorString("666666")
+        sectionView.addSubview(totolUp)
+        self.addSubview(sectionView)
+        self.totolComment = totolComment
+        self.totolUp = totolUp
         self.userIcon?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(12)
             make.top.equalTo(self).offset(27)
@@ -121,16 +139,34 @@ class EpisodeInfoHeadView: UIView {
         })
         self.upBtn?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.contentImageView!.snp.bottom).offset(25)
-            make.right.equalTo(self.snp.centerX).offset(-50)
+            make.right.equalTo(self.snp.centerX).offset(-25)
             make.width.equalTo(110)
             make.height.equalTo(35)
         })
         self.shareBtn?.snp.makeConstraints({ (make) in
             make.centerY.height.width.equalTo(self.upBtn!)
-            make.left.equalTo(self.snp.centerX).offset(50)
-            make.bottom.equalToSuperview().offset(-10)
+            make.left.equalTo(self.snp.centerX).offset(25)
+            
         })
-        
+        lineView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(self)
+            make.top.equalTo(self.shareBtn!.snp.bottom).offset(25)
+            make.height.equalTo(10)
+        }
+        sectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(lineView.snp.bottom)
+            make.left.right.equalTo(self)
+            make.height.equalTo(40)
+            make.bottom.equalTo(self).offset(-10)
+        }
+        self.totolComment?.snp.makeConstraints { (make) in
+            make.centerY.height.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+        }
+        self.totolUp?.snp.makeConstraints { (make) in
+            make.centerY.height.equalToSuperview()
+            make.right.equalToSuperview().offset(-20)
+        }
     }
     func setValue() {
         if model != nil {
@@ -145,7 +181,6 @@ class EpisodeInfoHeadView: UIView {
             self.sourceLab?.text = model?.source
             self.timeLab?.text = model?.createTime.subString(start: 5, length: 5)
             self.upBtn?.setTitle(String(model!.up), for: .normal)
-            self.shareBtn?.setTitle("0", for: .normal)
         }
         if model?.mark == "1" {
             self.contentImageView?.snp.updateConstraints({ (make) in
@@ -161,5 +196,6 @@ class EpisodeInfoHeadView: UIView {
             })
         }
         self.layoutSubviews()
+        self.layoutIfNeeded()
     }
 }

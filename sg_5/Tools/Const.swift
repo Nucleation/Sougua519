@@ -57,9 +57,11 @@ let getNewsTypeListUrl = "\(postUrl)/app/novel/api/getNewsTypeList"
 let getNewsListByTypeUrl = "\(postUrl)/app/novel/api/getNewsListByTypePage"
 //获取段子接口
 let getEpisodeUrl = "\(postUrl)/app/picture/api/getEpisode"
-//获取
+//段子点赞
 let pictureUpUrl = "\(postUrl)/app/picture/api/up"
-//获取
+//段子差评
 let pictureDownUrl = "\(postUrl)/app/picture/api/down"
+//段子评论点赞
+let commentUpUrl = "\(postUrl)/app/comment/api/up"
 
 

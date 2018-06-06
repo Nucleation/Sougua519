@@ -162,7 +162,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             let vc = MUMultiWindowController()
             self.navigationController?.pushViewController(vc, animated: true)
         case 3:
-            break
+            self.navigationController?.popToRootViewController(animated: false)
         case 4:
             let vc = LoginViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -172,9 +172,12 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     }
 }
 extension MuRootViewController{
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        var dataArr = SOsearch().getData(keyWord: "1")
+        dataArr += SougouSearch().getData(keyWord: "2")
+    }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        var dataArr = SOsearch().getData(keyWord: searchText)
-        dataArr += SougouSearch().getData(keyWord: searchText)
+        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

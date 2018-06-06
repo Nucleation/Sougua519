@@ -9,6 +9,9 @@
 import UIKit
 protocol EpisodeTextCellDelegate {
     func allBtnClick(sender: EpisodeTextCell)
+    func textCellup(sender: EpisodeTextCell)
+    func textCelldown(sender: EpisodeTextCell)
+    func textCellcomment(sender: EpisodeTextCell)
 }
 class EpisodeTextCell: UITableViewCell {
     @IBOutlet weak var sourceLab: UILabel!
@@ -18,27 +21,39 @@ class EpisodeTextCell: UITableViewCell {
     @IBOutlet weak var upCountLab: UILabel!
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var allBtn: UIButton!
+    var model = EpisodeModel() {
+        didSet {
+            self.contentLab.numberOfLines = 4
+            sourceLab.text = model.source
+            createTimeLab.text = model.createTime.subString(start: 5, length: 5)
+            contentLab.text = model.content
+            dowmCountLab.text = String(model.down)
+            upCountLab.text = String(model.up )
+            commentCountLab.text = String(model.commentNum)
+            let textHeight = model.content.getTextHeigh(font: UIFont.systemFont(ofSize: 16), width: screenWidth-24)
+            if !model.isShowAll{
+                if textHeight < 50 {
+                    self.allBtn.isHidden = true
+                }else{
+                    self.allBtn.isHidden = false
+                }
+            }else{
+                self.allBtn.isHidden = true
+                self.contentLab.numberOfLines = 0
+                self.allBtn.isHidden = true
+            }
+        }
+    }
+    
     var delegate: EpisodeTextCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         self.height = 0
+        
         // Initialization code
     }
     func setCellByModel(model: EpisodeModel){
-        sourceLab.text = model.source
-         createTimeLab.text = model.createTime.subString(start: 5, length: 5)
-        contentLab.text = model.content
-        dowmCountLab.text = String(model.down)
-        upCountLab.text = String(model.up)
-        commentCountLab.text = String(model.commentNum)
-        let textHeight = model.content.getTextHeigh(font: UIFont.systemFont(ofSize: 16), width: screenWidth-24)
-        if textHeight < 50 {
-            self.height = textHeight + 300
-            self.allBtn.isHidden = true
-        }else{
-            self.height = 350
-            self.allBtn.isHidden = false
-        }
+        
     }
     
 
@@ -48,6 +63,21 @@ class EpisodeTextCell: UITableViewCell {
         }
     }
     
+    @IBAction func commentBtnClick(_ sender: Any) {
+        if self.delegate != nil {
+            delegate?.textCellcomment(sender: self)
+        }
+    }
+    @IBAction func downBtnClick(_ sender: Any) {
+        if self.delegate != nil {
+            delegate?.textCelldown(sender: self)
+        }
+    }
+    @IBAction func upBtnClick(_ sender: Any) {
+        if self.delegate != nil {
+            delegate?.textCellup(sender: self)
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

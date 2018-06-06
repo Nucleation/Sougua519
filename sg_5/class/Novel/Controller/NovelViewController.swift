@@ -70,9 +70,10 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
             self.navigationController?.pushViewController(vc, animated: true)
             
         case 3:
-            break
+            self.navigationController?.popToRootViewController(animated: false)
         case 4:
-            break
+            let vc = LoginViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

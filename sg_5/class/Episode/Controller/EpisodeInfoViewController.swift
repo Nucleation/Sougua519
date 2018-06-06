@@ -16,7 +16,7 @@ class EpisodeInfoViewController: UIViewController {
     var leftBtn: UIButton?
     var rightBtn: UIButton?
     var lineView:UIView?
-    var videoView:UIView?
+    //var videoView:UIView?
     //info
     var backView:UIView?
     var userIcon: UIView?
@@ -28,14 +28,22 @@ class EpisodeInfoViewController: UIViewController {
     var upBtn: UIButton?
     var shareBtn: UIButton?
     //tableView
-    var totolComment: UILabel?
-    var totolUp: UILabel?
+   
     var tableView: UITableView?
     var hView:EpisodeInfoHeadView?
+    var footView: UIView?
+    var textField: UITextField?
+    var commentBtn: UIButton?
+    var collectBtn: UIButton?
+    var footshare: UIButton?
+    
+    
+    
     /// 播放器
     lazy var player: BMPlayer = BMPlayer(customControlView: VideoPlayerCustomView())
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+            player.autoPlay()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +59,13 @@ class EpisodeInfoViewController: UIViewController {
         lineView.backgroundColor = UIColor.colorWithHexColorString("e6e6e6")
         self.navView?.addSubview(lineView)
         self.lineView = lineView
-        let videoView = UIView()
-        videoView.backgroundColor = .blue
-        self.view.addSubview(videoView)
-        self.videoView?.addSubview(self.player)
-        self.player.setVideo(resource: BMPlayerResource(url: URL(string:model?.videourl ?? "")!))
-        
-        self.videoView = videoView
+//        let videoView = UIView()
+//        videoView.backgroundColor = .blue
+//        self.view.addSubview(videoView)
+//        self.videoView = videoView
         let leftBtn = UIButton(type: .custom)
         leftBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        leftBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
         self.view.addSubview(leftBtn)
         self.leftBtn = leftBtn
         let tableView = UITableView()
@@ -87,15 +93,23 @@ class EpisodeInfoViewController: UIViewController {
                 make.right.bottom.equalToSuperview()
                 make.width.height.equalTo(0)
             })
-            self.videoView?.snp.makeConstraints({ (make) in
-                make.left.right.top.equalToSuperview()
-                make.height.equalTo(210)
-            })
+//            self.videoView?.snp.makeConstraints({ (make) in
+//                make.left.right.top.equalToSuperview()
+//                make.height.equalTo(videoView.snp.width).multipliedBy(9.0/16.0).priority(750)
+//            })
+            self.view?.addSubview(self.player)
+            self.player.delegate = self
+            self.player.setVideo(resource: BMPlayerResource(url: URL(string:model?.videourl ?? "")!))
+            self.player.backBlock = { [unowned self] (isFullScreen) in
+                if isFullScreen == true { return }
+                let _ = self.navigationController?.popViewController(animated: true)
+            }
             self.player.snp.makeConstraints { (make) in
-                make.top.bottom.left.right.equalToSuperview()
+                make.left.right.top.equalToSuperview()
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(500)
             }
             self.tableView?.snp.makeConstraints({ (make) in
-                make.top.equalTo(self.videoView!.snp.bottom)
+                make.top.equalTo(self.player.snp.bottom)
                 make.left.right.equalTo(self.view)
                 make.bottom.equalTo(self.view).offset(-40)
             })
@@ -143,7 +157,69 @@ class EpisodeInfoViewController: UIViewController {
         headerView?.frame = frame!
         // 重新设置tableHeaderView
         tableView.tableHeaderView = headerView
+        //将返回放到界面顶端
+        self.view.bringSubview(toFront: self.leftBtn!)
+        //footView
+        let footView = UIView()
+        footView.backgroundColor = .white
+        self.view.addSubview(footView)
+        self.footView = footView
+        let line = UIView()
+        line.backgroundColor = UIColor.colorWithHexColorString("e1e2e3")
+        self.footView?.addSubview(line)
+        let textField = UITextField()
+        textField.placeholder = "写评论..."
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.colorWithHexColorString("e1e2e3").cgColor
+        textField.layer.cornerRadius = 15
+        textField.leftViewMode = UITextFieldViewMode.always
+        textField.font = UIFont.systemFont(ofSize: 15)
+        self.footView?.addSubview(textField)
+        self.textField = textField
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
+        imageView.image = UIImage(named: "xiepinglun")
+        self.textField?.leftView = imageView
+        let commentBtn = UIButton(type: .custom)
+        commentBtn.setImage(UIImage(named: "pinglun"), for: .normal)
+        self.footView?.addSubview(commentBtn)
+        self.commentBtn = commentBtn
+        let collectBtn = UIButton(type: .custom)
+        collectBtn.setImage(UIImage(named: "shoucang"), for: .normal)
+        self.footView?.addSubview(collectBtn)
+        self.collectBtn = collectBtn
+        let footshare = UIButton(type: .custom)
+        footshare.setImage(UIImage(named: "fenxiang"), for: .normal)
+        self.footView?.addSubview(footshare)
+        self.footshare = footshare
+        self.footView?.snp.makeConstraints({ (make) in
+            make.left.right.bottom.equalTo(self.view)
+            make.height.equalTo(40)
+        })
+        self.textField?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.footView!).offset(20)
+            make.centerY.equalTo(self.footView!)
+            make.height.equalTo(30)
+            make.width.equalTo(screenWidth/2-20)
+        })
+        self.commentBtn?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.footView!)
+            make.width.height.equalTo(40)
+            make.right.equalTo(self.collectBtn!.snp.left).offset(-10)
+        })
+        self.collectBtn?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.footView!)
+            make.width.height.equalTo(40)
+            make.right.equalTo(self.footshare!.snp.left).offset(-10)
+        })
+        self.footshare?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.footView!)
+            make.width.height.equalTo(40)
+            make.right.equalTo(self.footView!.snp.right).offset(-10)
+        })
         // Do any additional setup after loading the view.
+    }
+    @objc func leftBtnClick(){
+        self.navigationController?.popViewController(animated: false)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -161,28 +237,51 @@ extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         return (cell)!
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
-        let totolComment = UILabel()
-        totolComment.text = "评论 0"
-        totolComment.font = UIFont.systemFont(ofSize: 14)
-        totolComment.textColor = UIColor.colorWithHexColorString("666666")
-        sectionView.addSubview(totolComment)
-        let totolUp = UILabel()
-        totolUp.text = "0 赞"
-        totolUp.font = UIFont.systemFont(ofSize: 14)
-        totolUp.textColor = UIColor.colorWithHexColorString("666666")
-        sectionView.addSubview(totolUp)
-        totolComment.snp.makeConstraints { (make) in
-            make.centerY.height.equalToSuperview()
-            make.left.equalToSuperview().offset(20)
+}
+// MARK:- BMPlayerDelegate example
+extension EpisodeInfoViewController: BMPlayerDelegate {
+    // Call when player orinet changed
+    func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
+        player.snp.remakeConstraints { (make) in
+            make.left.right.top.equalToSuperview()
+            if isFullscreen {
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(900)
+                self.leftBtn?.isHidden = true
+            } else {
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(900)
+                self.leftBtn?.isHidden = false
+            }
         }
-        totolUp.snp.makeConstraints { (make) in
-            make.centerY.height.equalToSuperview()
-            make.right.equalToSuperview().offset(-20)
-        }
-        self.totolComment = totolComment
-        self.totolUp = totolUp
-        return sectionView
+        self.footView?.snp.remakeConstraints({ (make) in
+            if isFullscreen {
+                make.top.equalTo(self.view.snp.bottom).offset(100)
+                print("1111111")
+            } else {
+                print("222222")
+                make.left.right.bottom.equalTo(self.view)
+                make.height.equalTo(40)
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    // Call back when playing state changed, use to detect is playing or not
+    func bmPlayer(player: BMPlayer, playerIsPlaying playing: Bool) {
+        print("| BMPlayerDelegate | playerIsPlaying | playing - \(playing)")
+    }
+    
+    // Call back when playing state changed, use to detect specefic state like buffering, bufferfinished
+    func bmPlayer(player: BMPlayer, playerStateDidChange state: BMPlayerState) {
+        print("| BMPlayerDelegate | playerStateDidChange | state - \(state)")
+    }
+    
+    // Call back when play time change
+    func bmPlayer(player: BMPlayer, playTimeDidChange currentTime: TimeInterval, totalTime: TimeInterval) {
+        //        print("| BMPlayerDelegate | playTimeDidChange | \(currentTime) of \(totalTime)")
+    }
+    
+    // Call back when the video loaded duration changed
+    func bmPlayer(player: BMPlayer, loadedTimeDidChange loadedDuration: TimeInterval, totalDuration: TimeInterval) {
+        //        print("| BMPlayerDelegate | loadedTimeDidChange | \(loadedDuration) of \(totalDuration)")
     }
 }

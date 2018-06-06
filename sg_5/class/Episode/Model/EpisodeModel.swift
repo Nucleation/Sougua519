@@ -26,5 +26,7 @@ class EpisodeModel: HandyJSON {
     var mark: String = ""//标记：1 纯文本 2带图的 3视频
     var createTime: String = ""//创建时间
     var del: String = ""//删除标记
+    var isShowAll: Bool = false
+    
     public required init() {}
 }

@@ -7,7 +7,11 @@
 //
 
 import UIKit
-
+protocol EpisodeVideoCellDelegate {
+    func videoCellup(sender: EpisodeVideoCell)
+    func videoCelldown(sender: EpisodeVideoCell)
+    func videoCellcomment(sender: EpisodeVideoCell)
+}
 class EpisodeVideoCell: UITableViewCell {
     @IBOutlet weak var sourceLab: UILabel!
     @IBOutlet weak var createTimeLab: UILabel!
@@ -16,6 +20,8 @@ class EpisodeVideoCell: UITableViewCell {
     @IBOutlet weak var upCountLab: UILabel!
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var contentImageView: UIImageView!
+    var delegate:EpisodeVideoCellDelegate?
+    
      var cellHeight:CGFloat = 0
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +36,22 @@ class EpisodeVideoCell: UITableViewCell {
         commentCountLab.text = String(model.commentNum)
         contentImageView.kf.setImage(with: URL(string: model.pic))
         self.height = (model.title.getTextHeigh(font: UIFont.systemFont(ofSize: 16), width: screenWidth-24)) + 300
+    }
+    
+    @IBAction func commentBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.videoCellcomment(sender: self)
+        }
+    }
+    @IBAction func downBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.videoCelldown(sender: self)
+        }
+    }
+    @IBAction func upBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.videoCellup(sender: self)
+        }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

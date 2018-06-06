@@ -7,7 +7,11 @@
 //
 
 import UIKit
-
+protocol EpisodeImageCellDelegate {
+    func imageCellup(sender: EpisodeImageCell)
+    func imageCelldown(sender: EpisodeImageCell)
+    func imageCellcomment(sender: EpisodeImageCell)
+}
 class EpisodeImageCell: UITableViewCell {
     @IBOutlet weak var userIcon: UIImageView!
     @IBOutlet weak var sourceLab: UILabel!
@@ -17,6 +21,8 @@ class EpisodeImageCell: UITableViewCell {
     @IBOutlet weak var upCountLab: UILabel!
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var contentImageView: UIImageView!
+    var delegate: EpisodeImageCellDelegate?
+    
     var cellHeight:CGFloat = 0
     
     override func awakeFromNib() {
@@ -32,6 +38,23 @@ class EpisodeImageCell: UITableViewCell {
         commentCountLab.text = String(model.commentNum)
         contentImageView.kf.setImage(with: URL(string: model.contentImg))
         self.height = model.content.getTextHeigh(font: UIFont.systemFont(ofSize: 16), width: screenWidth-24) + 300
+    }
+    
+    @IBAction func upBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.imageCellup(sender: self)
+        }
+    }
+    
+    @IBAction func commentBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.imageCellcomment(sender: self)
+        }
+    }
+    @IBAction func downBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.imageCelldown(sender: self)
+        }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

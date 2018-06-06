@@ -47,7 +47,7 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         for i in 0 ..< pictureModelArr.count {
             let imageView: UIImageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
-            imageView.layer.masksToBounds = true;
+            //imageView.layer.masksToBounds = true;
             imageView.kf.setImage(with: URL(string:"\(pictureModelArr[i].downloadUrl)"))
             imageView.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(imageViewTaped(sender:)))
@@ -84,15 +84,19 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         self.footView = footView
     }
     @objc func imageViewTaped(sender: UIImageView){
-        if self.headView?.isShow ?? true {
+        if (self.headView?.isShow)! {
             self.headView?.hideHeadView()
+            self.view.layoutIfNeeded()
         }else{
             self.headView?.showHeadView()
+            self.view.layoutIfNeeded()
         }
-        if self.footView?.isShow ?? true {
+        if (self.footView?.isShow)! {
             self.footView?.hideFootView()
+            self.view.layoutIfNeeded()
         }else{
             self.footView?.showFootView()
+            self.view.layoutIfNeeded()
         }
     }
     override func didReceiveMemoryWarning() {

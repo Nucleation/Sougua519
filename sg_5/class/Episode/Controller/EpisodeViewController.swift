@@ -82,9 +82,10 @@ class EpisodeViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             
         case 3:
-            break
+            self.navigationController?.popToRootViewController(animated: false)
         case 4:
-            break
+            let vc = LoginViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
@@ -94,19 +95,82 @@ class EpisodeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,EpisodeTextCellDelegate{
-    func allBtnClick(sender: EpisodeTextCell) {
-        DispatchQueue.main.async {
-            sender.allBtn.isHidden = true
-            sender.contentLab.numberOfLines = 0
-            let index: IndexPath = (self.tableView?.indexPath(for: sender))!
-            self.tableView?.reloadRows(at: [index], with: .automatic)
-        }
-        
+extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,EpisodeTextCellDelegate,EpisodeImageCellDelegate,EpisodeVideoCellDelegate{
+    func textCellup(sender: EpisodeTextCell) {
+        let model = getModel(sender: sender)
+        self.upWithIdAndMark(id: model.id, mark: model.mark)
     }
     
+    func textCelldown(sender: EpisodeTextCell) {
+        let model = getModel(sender: sender)
+        self.downWithIdAndMark(id: model.id, mark: model.mark)
+    }
     
+    func textCellcomment(sender: EpisodeTextCell) {
+        //let model = getModel(sender: sender)
+    }
     
+    func imageCellup(sender: EpisodeImageCell) {
+        let model = getModel(sender: sender)
+         self.upWithIdAndMark(id: model.id, mark: model.mark)
+    }
+    
+    func imageCelldown(sender: EpisodeImageCell) {
+        let model = getModel(sender: sender)
+        self.downWithIdAndMark(id: model.id, mark: model.mark)
+    }
+    
+    func imageCellcomment(sender: EpisodeImageCell) {
+        //let model = getModel(sender: sender)
+    }
+    
+    func videoCellup(sender: EpisodeVideoCell) {
+        let model = getModel(sender: sender)
+         self.upWithIdAndMark(id: model.id, mark: model.mark)
+    }
+    
+    func videoCelldown(sender: EpisodeVideoCell) {
+        let model = getModel(sender: sender)
+        self.downWithIdAndMark(id: model.id, mark: model.mark)
+    }
+    
+    func videoCellcomment(sender: EpisodeVideoCell) {
+        //let model = getModel(sender: sender)
+    }
+    
+    func getModel(sender: Any) -> EpisodeModel {
+        let index: IndexPath = (self.tableView?.indexPath(for: sender as! UITableViewCell))!
+        return self.episodeArray[index.row]
+    }
+    func upWithIdAndMark(id: String,mark: String){
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":id,"mark":mark]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: pictureUpUrl, parameters: parData) { (json) in
+            if json["code"] == "1" {
+                self.view.makeToast(json["msg"].stringValue)
+            }
+        }
+    }
+    func downWithIdAndMark(id: String,mark: String){
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":id,"mark":mark]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: pictureDownUrl, parameters: parData) { (json) in
+            if json["code"] == "1" {
+                self.view.makeToast(json["msg"].stringValue)
+            }
+        }
+    }
+    func allBtnClick(sender: EpisodeTextCell) {
+        DispatchQueue.main.async {
+            let index: IndexPath = (self.tableView?.indexPath(for: sender))!
+            let model = self.episodeArray[index.row]
+            model.isShowAll = true
+            self.tableView?.reloadRows(at: [index], with: .automatic)
+            self.tableView?.layoutSubviews()
+        }
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -118,18 +182,21 @@ extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,Episo
         switch episide.mark {
         case "1":
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell") as! EpisodeTextCell
-            cell.setCellByModel(model: episide)
+            //cell.setCellByModel(model: episide)
+            cell.model = episide
             cell.delegate = self
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         case "2":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell") as! EpisodeImageCell
             cell.setCellByModel(model: episide)
+            cell.delegate = self
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! EpisodeVideoCell
             cell.setCellByModel(model: episide)
+            cell.delegate = self
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }

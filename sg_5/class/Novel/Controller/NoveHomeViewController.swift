@@ -22,7 +22,7 @@ class NoveHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        let metooHeadView = MetooHeadView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 84))
+        let metooHeadView = MetooHeadView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 64))
         metooHeadView.titleLabel?.text = "小说"
         self.view.addSubview(metooHeadView)
         self.metooHeadView = metooHeadView
@@ -48,7 +48,7 @@ class NoveHomeViewController: UIViewController {
             configuration.titleColor = UIColor.black
             configuration.titleSelectedColor = UIColor.red
             configuration.indicatorColor = .clear
-            self.pageTitleView = SGPageTitleView(frame: CGRect(x: 0, y: 84, width: screenWidth, height: 40), delegate: self, titleNames: array as! [Any], configure: configuration)
+            self.pageTitleView = SGPageTitleView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: 40), delegate: self, titleNames: array as! [Any], configure: configuration)
             self.pageTitleView!.backgroundColor = .clear
             self.view.addSubview(self.pageTitleView!)
             // 设置子控制器
@@ -77,9 +77,10 @@ class NoveHomeViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             
         case 3:
-            break
+            self.navigationController?.popToRootViewController(animated: false)
         case 4:
-            break
+            let vc = LoginViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
