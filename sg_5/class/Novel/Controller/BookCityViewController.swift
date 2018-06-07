@@ -51,7 +51,7 @@ class BookCityViewController: UIViewController{
         self.view.addSubview(headView)
         self.headView = headView
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval)]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: noveGetCategorys, parameters: parData) { (json) in
             var array: Array = [NovelTitleModel]()
@@ -151,7 +151,7 @@ extension BookCityViewController: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":self.dataArr[indexPath.row].id]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.dataArr[indexPath.row].id]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
             let vc = NovelInfoViewController()

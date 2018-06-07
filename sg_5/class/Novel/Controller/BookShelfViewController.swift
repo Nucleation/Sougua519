@@ -70,7 +70,7 @@ class BookShelfViewController: UIView, UICollectionViewDelegate,UICollectionView
     }
     func requestData() {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelShelfListUrl, parameters: parData) { (json) in
             print("json--\(json)")

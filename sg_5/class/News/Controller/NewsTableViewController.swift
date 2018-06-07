@@ -26,6 +26,11 @@ class NewsTableViewController: UITableViewController {
                                 forCellReuseIdentifier:"VideoSub")
         tableView.register(UINib(nibName:"SingleTestTableViewCell", bundle:nil),
                                 forCellReuseIdentifier:"SingleTest")
+        tableView.mj_header = MJRefreshHeader(refreshingBlock: {
+            self.pageIndex = 1
+            self.getNewsList(pageNO: self.pageIndex)
+            self.tableView.mj_header.endRefreshing()
+        })
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.pageIndex += 1
             self.getNewsList(pageNO: self.pageIndex)
@@ -37,11 +42,11 @@ class NewsTableViewController: UITableViewController {
             self.newsListArr = []
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"directType":self.category!,"page":String(self.pageIndex)]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"directType":self.category!,"page":self.pageIndex]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNewsListByTypeUrl, parameters: parData) { (json) in
             //print(json["news"].arrayObject)
-            if let datas = json["newsList"].arrayObject{
+            if let datas = json["news"].arrayObject{
                 self.newsListArr += datas.compactMap({HomePageNewsModel.deserialize(from: $0 as? Dictionary)})
             }   
             self.tableView?.reloadData()
@@ -99,50 +104,35 @@ class NewsTableViewController: UITableViewController {
         }
     }
  
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let aNews = newsListArr[indexPath.row]
+        switch aNews.modelType {
+        case "1":
+            return 95
+        case "2":
+            return 120
+        case "3":
+            return 320
+        case "4":
+            return 120
+        default:
+            return 320
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.newsListArr[indexPath.row].directType == "组图" {
+            var imageURLs = self.newsListArr[indexPath.row].newsContent.components(separatedBy: ";")
+            imageURLs.removeLast()
+            let multiPictureVC = MultiPictureViewController()
+            multiPictureVC.imageURLArr = imageURLs
+            self.navigationController?.pushViewController(multiPictureVC, animated: true)
+            
+        }else{
+            let webVC = HomePageWebViewController()
+            webVC.model = newsListArr[indexPath.row]
+            self.navigationController?.pushViewController(webVC, animated: true)
+        }
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

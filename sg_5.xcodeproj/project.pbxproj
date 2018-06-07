@@ -106,6 +106,14 @@
 		177DEBEC20B7E2C400E176F7 /* MetooScrollHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DEBEB20B7E2C400E176F7 /* MetooScrollHeadView.swift */; };
 		177DEBEE20B7F47700E176F7 /* MetooScrollerFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DEBED20B7F47600E176F7 /* MetooScrollerFootView.swift */; };
 		177DEBF020B80B2C00E176F7 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DEBEF20B80B2C00E176F7 /* ReportView.swift */; };
+		177E744920C8C3180017F6CB /* FindPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E744820C8C3180017F6CB /* FindPwdViewController.swift */; };
+		177E744E20C8C6CC0017F6CB /* PersonalCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E744C20C8C6CC0017F6CB /* PersonalCenterViewController.swift */; };
+		177E745120C8D2860017F6CB /* PersonalCenterViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 177E745020C8D2860017F6CB /* PersonalCenterViewController.storyboard */; };
+		177E745320C8E2D10017F6CB /* PCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745220C8E2D10017F6CB /* PCTableViewController.swift */; };
+		177E745520C9067C0017F6CB /* AboutUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745420C9067C0017F6CB /* AboutUSViewController.swift */; };
+		177E745920C90D110017F6CB /* markAndCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745820C90D110017F6CB /* markAndCollectionViewController.swift */; };
+		177E745B20C913F80017F6CB /* RemakePwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745A20C913F80017F6CB /* RemakePwdViewController.swift */; };
+		177E745D20C914F60017F6CB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745C20C914F60017F6CB /* SettingViewController.swift */; };
 		1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */; };
 		1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */; };
 		1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724620B0162D00EAFEC0 /* LoginViewController.swift */; };
@@ -252,6 +260,14 @@
 		177DEBEB20B7E2C400E176F7 /* MetooScrollHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollHeadView.swift; sourceTree = "<group>"; };
 		177DEBED20B7F47600E176F7 /* MetooScrollerFootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollerFootView.swift; sourceTree = "<group>"; };
 		177DEBEF20B80B2C00E176F7 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		177E744820C8C3180017F6CB /* FindPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwdViewController.swift; sourceTree = "<group>"; };
+		177E744C20C8C6CC0017F6CB /* PersonalCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCenterViewController.swift; sourceTree = "<group>"; };
+		177E745020C8D2860017F6CB /* PersonalCenterViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalCenterViewController.storyboard; sourceTree = "<group>"; };
+		177E745220C8E2D10017F6CB /* PCTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCTableViewController.swift; sourceTree = "<group>"; };
+		177E745420C9067C0017F6CB /* AboutUSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUSViewController.swift; sourceTree = "<group>"; };
+		177E745820C90D110017F6CB /* markAndCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markAndCollectionViewController.swift; sourceTree = "<group>"; };
+		177E745A20C913F80017F6CB /* RemakePwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemakePwdViewController.swift; sourceTree = "<group>"; };
+		177E745C20C914F60017F6CB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollViewController.swift; sourceTree = "<group>"; };
 		1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetooCollectionViewController.swift; sourceTree = "<group>"; };
 		1782724620B0162D00EAFEC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +444,7 @@
 		174F763020A44AB900BB0B46 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				177E744A20C8C5E60017F6CB /* PersonalCenter */,
 				17507CBD20C4C78B00600BE1 /* Episode */,
 				1706DECA20C298470013E726 /* News */,
 				174F763120A44AB900BB0B46 /* ViewModel */,
@@ -529,6 +546,7 @@
 			children = (
 				1782724620B0162D00EAFEC0 /* LoginViewController.swift */,
 				17507CD120C5145A00600BE1 /* RegistViewController.swift */,
+				177E744820C8C3180017F6CB /* FindPwdViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -716,6 +734,28 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		177E744A20C8C5E60017F6CB /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				177E744B20C8C5F90017F6CB /* Controller */,
+			);
+			path = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		177E744B20C8C5F90017F6CB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				177E744C20C8C6CC0017F6CB /* PersonalCenterViewController.swift */,
+				177E745020C8D2860017F6CB /* PersonalCenterViewController.storyboard */,
+				177E745220C8E2D10017F6CB /* PCTableViewController.swift */,
+				177E745420C9067C0017F6CB /* AboutUSViewController.swift */,
+				177E745820C90D110017F6CB /* markAndCollectionViewController.swift */,
+				177E745C20C914F60017F6CB /* SettingViewController.swift */,
+				177E745A20C913F80017F6CB /* RemakePwdViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		17857D5D20B5487D005B028C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,6 +914,7 @@
 				174F766920A44C4900BB0B46 /* homepage.json in Resources */,
 				177A4F8720A539EF0004336E /* Info-iOS.plist in Resources */,
 				17507CCE20C4D18C00600BE1 /* EpisodeTextCell.xib in Resources */,
+				177E745120C8D2860017F6CB /* PersonalCenterViewController.storyboard in Resources */,
 				177714F820C68ED20093F3F7 /* EpisodeCommentTableViewCell.xib in Resources */,
 				174F767E20A44E6300BB0B46 /* SingleImageTableViewCell.xib in Resources */,
 				17507CCA20C4D16E00600BE1 /* EpisodeVideoCell.xib in Resources */,
@@ -1002,6 +1043,7 @@
 				174F767A20A44E6300BB0B46 /* VideoTableViewCell.swift in Sources */,
 				178EB39220BFE77A006C156B /* MultiPictureViewController.swift in Sources */,
 				1706DECF20C298E60013E726 /* NewsViewController.swift in Sources */,
+				177E744E20C8C6CC0017F6CB /* PersonalCenterViewController.swift in Sources */,
 				17507CC220C4CB7200600BE1 /* EpisodeViewController.swift in Sources */,
 				174F765C20A44AB900BB0B46 /* MetooHeadView.swift in Sources */,
 				177A4F8520A539EF0004336E /* SwiftyJSON.swift in Sources */,
@@ -1010,8 +1052,11 @@
 				17D8CB3E20A44F6800914492 /* SougouSearch.swift in Sources */,
 				174F765920A44AB900BB0B46 /* MUmultiWindowFlowlayout.swift in Sources */,
 				174F766820A44C4900BB0B46 /* Const.swift in Sources */,
+				177E745920C90D110017F6CB /* markAndCollectionViewController.swift in Sources */,
+				177E745B20C913F80017F6CB /* RemakePwdViewController.swift in Sources */,
 				17507CC520C4D15000600BE1 /* EpisodeImageCell.swift in Sources */,
 				174F766520A44C4900BB0B46 /* NetworkTool.swift in Sources */,
+				177E745D20C914F60017F6CB /* SettingViewController.swift in Sources */,
 				1762DE9120AD5D8400D179AE /* NoveCollectionViewCell.swift in Sources */,
 				174F765120A44AB900BB0B46 /* MUMultiWindowViewModel.swift in Sources */,
 				17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */,
@@ -1047,10 +1092,12 @@
 				17507CD220C5145A00600BE1 /* RegistViewController.swift in Sources */,
 				1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */,
 				17507CC920C4D16E00600BE1 /* EpisodeVideoCell.swift in Sources */,
+				177E745320C8E2D10017F6CB /* PCTableViewController.swift in Sources */,
 				177CC1E720AEAAB500202F14 /* NovelInfoViewController.swift in Sources */,
 				177C35DD20B6CF4000B803EF /* NovelTitleModel.swift in Sources */,
 				177C35D920B6A32900B803EF /* NovelCategoryScrollView.swift in Sources */,
 				17D8CB4A20A44FFB00914492 /* XPathQuery.m in Sources */,
+				177E744920C8C3180017F6CB /* FindPwdViewController.swift in Sources */,
 				174F767820A44E6300BB0B46 /* SingleTestTableViewCell.swift in Sources */,
 				174F766720A44C4900BB0B46 /* Foundation+Extension.swift in Sources */,
 				177A4F8420A539EF0004336E /* NSString+AES.m in Sources */,
@@ -1063,6 +1110,7 @@
 				177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */,
 				174F765620A44AB900BB0B46 /* MUMultiWindowModel.swift in Sources */,
 				17D8CB4920A44FFB00914492 /* TFHppleElement.m in Sources */,
+				177E745520C9067C0017F6CB /* AboutUSViewController.swift in Sources */,
 				1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */,
 				174F765520A44AB900BB0B46 /* MultiWindow.swift in Sources */,
 				174F765820A44AB900BB0B46 /* MuRootViewController.swift in Sources */,

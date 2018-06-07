@@ -27,6 +27,7 @@ class EpisodeModel: HandyJSON {
     var createTime: String = ""//创建时间
     var del: String = ""//删除标记
     var isShowAll: Bool = false
+    var isUp: Bool = false
     
     public required init() {}
 }

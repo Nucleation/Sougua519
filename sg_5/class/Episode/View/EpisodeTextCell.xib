@@ -229,6 +229,7 @@
                 <outlet property="createTimeLab" destination="ec3-kL-jcA" id="ova-Nr-bY6"/>
                 <outlet property="dowmCountLab" destination="KoT-bN-NAu" id="JMe-Zn-bNx"/>
                 <outlet property="sourceLab" destination="OTl-R8-xYK" id="aQ3-vd-UR1"/>
+                <outlet property="upBtn" destination="XFd-R2-Xlc" id="rIF-vI-LNG"/>
                 <outlet property="upCountLab" destination="AZp-rj-CdM" id="m6c-b2-6g8"/>
             </connections>
             <point key="canvasLocation" x="33" y="127"/>

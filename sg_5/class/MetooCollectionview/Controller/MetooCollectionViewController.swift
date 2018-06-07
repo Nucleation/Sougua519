@@ -47,7 +47,7 @@ class MetooCollectionViewController: UIViewController{
          self.pageIndex += 1
         let urlStr = picGetImgByClassify
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"category":self.category!,"pageIndex":String( self.pageIndex),"pageSize":String(20)]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"category":self.category!,"pageIndex":String( self.pageIndex),"pageSize":String(20)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (json) in
            

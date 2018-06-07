@@ -201,7 +201,7 @@ class RegistViewController: UIViewController {
         }
         let urlStr = ucenterGetSecurityCode
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["mobile":self.userNameTF.text ?? "","timestamp":String(timeInterval)]
+        let dic: Dictionary<String, Any> = ["mobile":self.userNameTF.text ?? "","timestamp":String(timeInterval)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (result) in
             print(result)
@@ -218,7 +218,7 @@ class RegistViewController: UIViewController {
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!,"securityCode":self.codeTF.text!]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!,"securityCode":self.codeTF.text!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: userRegister, parameters: parData) { (json) in
             self.rightBtnClick()

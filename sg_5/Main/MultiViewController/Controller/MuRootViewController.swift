@@ -167,7 +167,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             let vc = LoginViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
-            break
+            let vc = PersonalCenterViewController.loadStoryboard()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
@@ -270,9 +271,9 @@ extension MuRootViewController {
             self.navigationController?.pushViewController(multiPictureVC, animated: true)
             
         }else{
-        let webVC = HomePageWebViewController()
-        webVC.webURL = newsListArr[indexPath.row].newsContent
-        self.navigationController?.pushViewController(webVC, animated: true)
+            let webVC = HomePageWebViewController()
+            webVC.model = newsListArr[indexPath.row]
+            self.navigationController?.pushViewController(webVC, animated: true)
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

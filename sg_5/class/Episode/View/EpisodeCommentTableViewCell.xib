@@ -94,6 +94,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="commentLab" destination="RZt-4K-HEr" id="ikg-3C-cRf"/>
+                <outlet property="timeLab" destination="fVp-53-Sfc" id="ced-H9-zix"/>
+                <outlet property="upBtn" destination="ykS-Bq-tNO" id="W4Z-hO-1A8"/>
+                <outlet property="userIconImg" destination="ndi-pg-EBs" id="IZP-fh-qMM"/>
+                <outlet property="userNameLab" destination="QCT-AV-TA0" id="KaO-Fw-nnA"/>
+            </connections>
             <point key="canvasLocation" x="48.5" y="85"/>
         </tableViewCell>
     </objects>

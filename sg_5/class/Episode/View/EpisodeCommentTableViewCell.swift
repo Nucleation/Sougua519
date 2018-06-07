@@ -9,7 +9,20 @@
 import UIKit
 
 class EpisodeCommentTableViewCell: UITableViewCell {
-
+    var model = NovelCommentModel(){
+        didSet {
+            userNameLab.text = model.fromId
+            commentLab.text = model.content
+            timeLab.text = model.createDate
+            upBtn.setTitle(model.upCount, for: .normal)
+        }
+    }
+    @IBOutlet weak var userIconImg: UIImageView!
+    @IBOutlet weak var userNameLab: UILabel!
+    @IBOutlet weak var commentLab: UILabel!
+    @IBOutlet weak var timeLab: UILabel!
+    @IBOutlet weak var upBtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

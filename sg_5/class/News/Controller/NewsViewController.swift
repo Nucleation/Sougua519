@@ -58,7 +58,7 @@ class NewsViewController: UIViewController {
     }
     func requestNewsType() {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval)]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNewsTypeListUrl, parameters: parData) { (json) in
             let array: NSMutableArray = []

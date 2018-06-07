@@ -60,7 +60,7 @@ class EpisodeViewController: UIViewController {
     }
     func requestData(){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval)]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getEpisodeUrl, parameters: parData) { (json) in
             print(json)
@@ -144,7 +144,7 @@ extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,Episo
     }
     func upWithIdAndMark(id: String,mark: String){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":id,"mark":mark]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":id,"mark":mark]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: pictureUpUrl, parameters: parData) { (json) in
             if json["code"] == "1" {
@@ -154,7 +154,7 @@ extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,Episo
     }
     func downWithIdAndMark(id: String,mark: String){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":id,"mark":mark]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":id,"mark":mark]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: pictureDownUrl, parameters: parData) { (json) in
             if json["code"] == "1" {
@@ -189,13 +189,13 @@ extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,Episo
             return cell
         case "2":
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell") as! EpisodeImageCell
-            cell.setCellByModel(model: episide)
+            cell.model = episide
             cell.delegate = self
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! EpisodeVideoCell
-            cell.setCellByModel(model: episide)
+            cell.model = episide
             cell.delegate = self
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell

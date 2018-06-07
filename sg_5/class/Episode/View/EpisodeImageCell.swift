@@ -18,9 +18,28 @@ class EpisodeImageCell: UITableViewCell {
     @IBOutlet weak var createTimeLab: UILabel!
     @IBOutlet weak var contentLab: UILabel!
     @IBOutlet weak var dowmCountLab: UILabel!
+    @IBOutlet weak var upBtn: UIButton!
     @IBOutlet weak var upCountLab: UILabel!
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var contentImageView: UIImageView!
+    
+    var model = EpisodeModel() {
+        didSet {
+            if model.isUp {
+                self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
+            }else{
+                self.upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
+            }
+            
+            sourceLab.text = model.source
+            createTimeLab.text = model.createTime.subString(start: 5, length: 5)
+            contentLab.text = model.content
+            dowmCountLab.text = String(model.down)
+            upCountLab.text = String(model.up)
+            commentCountLab.text = String(model.commentNum)
+            contentImageView.kf.setImage(with: URL(string: model.contentImg))
+        }
+    }
     var delegate: EpisodeImageCellDelegate?
     
     var cellHeight:CGFloat = 0
@@ -29,21 +48,19 @@ class EpisodeImageCell: UITableViewCell {
         super.awakeFromNib()
     // Initialization code
     }
-    func setCellByModel(model: EpisodeModel){
-        sourceLab.text = model.source
-        createTimeLab.text = model.createTime.subString(start: 5, length: 5)
-        contentLab.text = model.content
-        dowmCountLab.text = String(model.down)
-        upCountLab.text = String(model.up)
-        commentCountLab.text = String(model.commentNum)
-        contentImageView.kf.setImage(with: URL(string: model.contentImg))
-        self.height = model.content.getTextHeigh(font: UIFont.systemFont(ofSize: 16), width: screenWidth-24) + 300
-    }
-    
     @IBAction func upBtnClick(_ sender: Any) {
-        if self.delegate != nil{
-            delegate?.imageCellup(sender: self)
+        if !model.isUp {
+            if self.delegate != nil{
+                model.isUp = true
+                model.up += 1
+                self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
+                self.upCountLab.text = String(model.up)
+                delegate?.imageCellup(sender: self)
+            }
+        }else{
+            self.makeToast("已赞")
         }
+        
     }
     
     @IBAction func commentBtnClick(_ sender: Any) {

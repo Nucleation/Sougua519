@@ -105,7 +105,7 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
     }
     func likes(){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id ,"contentType":ContentType.Picture.rawValue,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id ,"contentType":ContentType.Picture.rawValue,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentLike, parameters: parData ) { (json) in
             

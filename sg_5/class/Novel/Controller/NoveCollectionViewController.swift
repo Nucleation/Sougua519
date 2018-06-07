@@ -45,7 +45,7 @@ class NoveCollectionViewController: UIViewController {
         self.pageIndex += 1
         let urlStr = getNovelListByPage
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval)]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval)]
         //["timestamp":String(timeInterval),"categoryName":self.category!,"page":String(self.pageIndex)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (json) in

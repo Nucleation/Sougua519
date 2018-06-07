@@ -130,7 +130,7 @@ class ReportView: UIView {
         }
         let reportReason = reportReasonArr.map {"\($0)"}.joined(separator: ",")
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"contentId":self.contentId! ,"contentType":ContentType.Picture.rawValue,"reportReason":reportReason,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.contentId! ,"contentType":ContentType.Picture.rawValue,"reportReason":reportReason,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentReportUrl, parameters: parData ) { (json) in
                 self.removeFromSuperview()

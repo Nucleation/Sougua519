@@ -149,7 +149,7 @@ class LoginViewController: UIViewController {
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: userLogin, parameters: parData) { (json) in
             KeyChain().savekeyChain(dic: ["mobile":json["mobile"].stringValue,"id":json["id"].stringValue,"token":json["token"].stringValue])
@@ -164,7 +164,8 @@ class LoginViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc func findPwdBtnClick(){
-        
+        let vc = FindPwdViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

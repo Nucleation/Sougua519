@@ -65,7 +65,7 @@ class CommentView: UIView {
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.Novel.rawValue,"content":self.commentTV?.text ?? ""]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.Novel.rawValue,"content":self.commentTV?.text ?? ""]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
             print("\(json)--add")

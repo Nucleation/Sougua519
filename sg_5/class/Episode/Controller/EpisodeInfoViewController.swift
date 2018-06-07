@@ -36,14 +36,18 @@ class EpisodeInfoViewController: UIViewController {
     var commentBtn: UIButton?
     var collectBtn: UIButton?
     var footshare: UIButton?
-    
+    var commentListArray:Array<NovelCommentModel> = []
     
     
     /// 播放器
     lazy var player: BMPlayer = BMPlayer(customControlView: VideoPlayerCustomView())
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
-            player.autoPlay()
+        player.autoPlay()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default
+            .addObserver(self,selector: #selector(keyboardWillHide(notification:)),
+                         name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,10 +220,47 @@ class EpisodeInfoViewController: UIViewController {
             make.width.height.equalTo(40)
             make.right.equalTo(self.footView!.snp.right).offset(-10)
         })
+        requestComment()
         // Do any additional setup after loading the view.
+    }
+    func requestComment() {
+        let keyChain = KeyChain()
+        let fromId = keyChain.getKeyChain()["id"] ?? ""
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","fromId":fromId]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: commentByType, parameters: parData) { (json) in
+            if let datas = json["commentList"].arrayObject{
+                self.commentListArray += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
+            }
+            self.tableView?.reloadData()
+        }
     }
     @objc func leftBtnClick(){
         self.navigationController?.popViewController(animated: false)
+    }
+    @objc func keyboardWillShow(notification: NSNotification){
+        if let begin = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue, let end = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
+            if begin.size.height > 0 && begin.origin.y-end.origin.y>0 {
+                UIView.animate(withDuration: 0.1) {
+                    self.footView?.frame = CGRect(x: 0, y: screenHeight - 50 - begin.height, width: screenWidth, height: 50)
+                }
+                self.view.layoutIfNeeded()
+            }
+            print("keyboardSize\(begin)")
+        }
+    }
+    @objc func keyboardWillHide(notification: NSNotification){
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.1) {
+                self.footView?.frame = CGRect(x: 0, y: screenHeight - 50, width: screenWidth, height: 50)
+            }
+            self.view.layoutIfNeeded()
+            print("keyboardSize\(keyboardSize)")
+        }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -231,11 +272,15 @@ extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.commentListArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        return (cell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! EpisodeCommentTableViewCell
+        cell.model = self.commentListArray[indexPath.row]
+        return cell
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
 // MARK:- BMPlayerDelegate example

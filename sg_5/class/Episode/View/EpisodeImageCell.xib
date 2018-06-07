@@ -228,6 +228,7 @@
                 <outlet property="createTimeLab" destination="Y0A-YJ-ZA1" id="pvT-S0-F7e"/>
                 <outlet property="dowmCountLab" destination="OYQ-Ce-nBP" id="3fY-6w-ANg"/>
                 <outlet property="sourceLab" destination="b79-rK-s5B" id="fIb-du-teY"/>
+                <outlet property="upBtn" destination="GQj-bz-2Kd" id="O9P-RH-FvI"/>
                 <outlet property="upCountLab" destination="xPa-0y-IKG" id="v7U-15-qAp"/>
                 <outlet property="userIcon" destination="4V1-EH-qzf" id="jqu-Ny-xlO"/>
             </connections>

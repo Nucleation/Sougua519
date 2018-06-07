@@ -11,9 +11,9 @@ import SVProgressHUD
 import WebKit
 
 class HomePageWebViewController: UIViewController{
-    var webURL: String = ""
     var navView: UIView?
     var titleLab:UILabel?
+    var model: HomePageNewsModel?
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
@@ -49,14 +49,17 @@ class HomePageWebViewController: UIViewController{
             make.width.equalTo(navView).offset(-88)
             make.centerX.equalTo(navView)
         }
-//        let webview: WKWebView = WKWebView(frame: self.view.frame, configuration: WKWebViewConfiguration())
-//        webview.loadRequest(URLRequest(url: URL(string: webURL)!))
-//        webview.backgroundColor = .clear
-//        webview.delegate = self
-//        webview.isOpaque = false
-//        self.view.addSubview(webview)
         let webview: WKWebView = WKWebView(frame: self.view.frame, configuration: WKWebViewConfiguration())
-        webview.load(URLRequest(url: URL(string: webURL)!))
+        if model?.type == "0" {
+            if (model?.newsContent) != nil {
+                webview.loadHTMLString((model?.newsContent)!, baseURL: nil)
+            }
+        }else{
+            if (model?.newsContent) != nil {
+                webview.load(URLRequest(url: URL(string: (model?.newsContent)!)!))
+            }
+        }
+        
         webview.navigationDelegate = self
         self.view.addSubview(webview)
         self.view.bringSubview(toFront: navView)

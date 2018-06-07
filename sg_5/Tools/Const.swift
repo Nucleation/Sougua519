@@ -22,6 +22,9 @@ let ucenterGetSecurityCode = "\(postUrl)/app/ucenter/api/getAppUserSecurityCode"
 let userLogin = "\(postUrl)/app/ucenter/api/appUserLogin"
 //注册
 let userRegister = "\(postUrl)/app/ucenter/api/appUserRegister"
+//忘记密码，重置
+let resetPwdUrl = "\(postUrl)/app/ucenter/api/resetPwd"
+
 //获取图片分类
 let picGetClassify = "\(postUrl)/app/picture/api/getClassify"
 let picGetImgByClassify = "\(postUrl)/app/picture/api/getImgByClassify"

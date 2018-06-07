@@ -56,8 +56,6 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
                     self.commentTVView?.frame = CGRect(x: 0, y: screenHeight - 50 - begin.height, width: screenWidth, height: 50)
                 }
                 self.view.layoutIfNeeded()
-               
-                
             }
             print("keyboardSize\(begin)")
         }
@@ -73,7 +71,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
     }
     func getCheck(){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"fictionId":self.novelInfo?.id ?? "","userId":KeyChain().getKeyChain()["id"] ?? ""]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"fictionId":self.novelInfo?.id ?? "","userId":KeyChain().getKeyChain()["id"] ?? ""]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: checkNovelShelfUrl, parameters: parData) { (json) in
             self.isJoinShelf = json.boolValue
@@ -244,7 +242,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         })
         self.novelTitleLab?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.novelImageView!).offset(5)
-            make.right.equalTo(self.view).offset(12)
+            make.right.equalTo(self.bookView!).offset(-12)
             make.left.equalTo(self.novelImageView!.snp.right).offset(17)
             make.height.equalTo(34)
         })
@@ -265,7 +263,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         })
         self.novelCreatTimeLab?.snp.makeConstraints({ (make) in
             make.left.equalTo(self.novelTitleLab!)
-            make.right.equalTo(self.view).offset(12)
+            make.right.equalTo(self.bookView!).offset(-12)
             make.height.equalTo(25)
             make.top.equalTo(self.novelWordCountLab!.snp.bottom)
         })
@@ -330,7 +328,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             return
         }else{
             let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-            let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"fictionId":self.novelInfo?.id ?? "","userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+            let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"fictionId":self.novelInfo?.id ?? "","userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
             let parData = dic.toParameterDic()
             print(parData)
             NetworkTool.requestData(.post, URLString: addNovelShelfUrl, parameters: parData) { (json) in
@@ -343,7 +341,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
     }
     @objc func beginReadBtnClick() {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":self.novelInfo?.id ?? ""]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.novelInfo?.id ?? ""]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
             let vc = NovelContentViewController()

@@ -27,7 +27,7 @@ class NovelChapterView: UIView ,UITableViewDelegate,UITableViewDataSource{
     }
     func requestData(novelInfo: NoveCategoryListModel) {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":novelInfo.id]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":novelInfo.id]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelSection, parameters: parData) { (json) in
             self.novelChapterArray.removeAll()

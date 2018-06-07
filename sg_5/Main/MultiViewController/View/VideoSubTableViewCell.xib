@@ -66,14 +66,31 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUG-uF-n32">
+                        <rect key="frame" x="261" y="82" width="33" height="14"/>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="cKb-aC-RQv"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="7"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="eUG-uF-n32" firstAttribute="bottom" secondItem="inn-q8-dq2" secondAttribute="bottom" constant="-5" id="2IH-M7-upu"/>
                     <constraint firstItem="inn-q8-dq2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5E1-QH-vm3"/>
                     <constraint firstItem="4Xk-VR-f80" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="DK8-Rl-E5f"/>
                     <constraint firstItem="noK-kY-Wdh" firstAttribute="centerY" secondItem="inn-q8-dq2" secondAttribute="centerY" id="Izv-UT-iXW"/>
                     <constraint firstAttribute="bottom" secondItem="oxU-VK-W8E" secondAttribute="bottom" id="NhY-Tu-1fw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="4Xk-VR-f80" secondAttribute="bottom" constant="4" id="Q9Q-7u-CC9"/>
                     <constraint firstItem="oxU-VK-W8E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="V9E-g8-qL0"/>
+                    <constraint firstItem="eUG-uF-n32" firstAttribute="trailing" secondItem="inn-q8-dq2" secondAttribute="trailing" constant="-10" id="X3T-vr-tml"/>
                     <constraint firstItem="inn-q8-dq2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="YpW-mS-1Vn"/>
                     <constraint firstItem="ZpU-3L-F1q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="19" id="bR1-Yz-OiX"/>
                     <constraint firstItem="Lf2-4p-GGn" firstAttribute="leading" secondItem="4Xk-VR-f80" secondAttribute="trailing" constant="17" id="bgq-qF-029"/>
@@ -89,6 +106,7 @@
                 <outlet property="image1" destination="inn-q8-dq2" id="BMl-Yl-7gE"/>
                 <outlet property="newsFrom" destination="4Xk-VR-f80" id="HOk-lF-I1h"/>
                 <outlet property="reviewLab" destination="Lf2-4p-GGn" id="lPv-I7-TC7"/>
+                <outlet property="timeLab" destination="eUG-uF-n32" id="FWg-jy-9kq"/>
                 <outlet property="titleLabel" destination="ZpU-3L-F1q" id="0F2-8R-gbL"/>
             </connections>
             <point key="canvasLocation" x="34" y="124.5"/>
