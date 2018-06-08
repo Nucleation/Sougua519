@@ -70,6 +70,7 @@ class EpisodeInfoHeadView: UIView {
         self.contentImageView = contentImageView
         let upBtn = UIButton(type: .custom)
         upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
+        upBtn.addTarget(self, action: #selector(upBtnClick), for: .touchUpInside)
         upBtn.setTitle("3", for: .normal)
         upBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         upBtn.layer.cornerRadius = 18
@@ -197,5 +198,26 @@ class EpisodeInfoHeadView: UIView {
         }
         self.layoutSubviews()
         self.layoutIfNeeded()
+    }
+    @objc func upBtnClick(){
+        if !(model?.isUp)! {
+                model?.isUp = true
+                model?.up += 1
+                self.upBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
+                self.upBtn?.setTitle(String(model?.up ?? 0), for: .normal)
+            self.upWithIdAndMark(id: (model?.id)!, mark: (model?.mark)!)
+        }else{
+            self.makeToast("已赞")
+        }
+    }
+    func upWithIdAndMark(id: String,mark: String){
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":id,"mark":mark]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: pictureUpUrl, parameters: parData) { (json) in
+            if json["code"] == "1" {
+                self.makeToast(json["msg"].stringValue)
+            }
+        }
     }
 }

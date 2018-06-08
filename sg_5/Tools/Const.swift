@@ -10,6 +10,7 @@ import UIKit
 enum ContentType: String {
     case Novel = "7"
     case Picture = "3"
+    case News = "1"
 }
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
@@ -66,5 +67,6 @@ let pictureUpUrl = "\(postUrl)/app/picture/api/up"
 let pictureDownUrl = "\(postUrl)/app/picture/api/down"
 //段子评论点赞
 let commentUpUrl = "\(postUrl)/app/comment/api/up"
-
+//
+let UpHeadImageUrl = "\(postUrl)/app/ucenter/api/entry/updateAppUserHeadImg"
 

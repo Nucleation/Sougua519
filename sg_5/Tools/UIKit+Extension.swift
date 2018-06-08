@@ -227,9 +227,9 @@ extension Dictionary{
         let sign = ParameterEncode().query(dicC)
         dicC.updateValue(sign.values.first!, forKey: sign.keys.first!)
         let parameter = JSON(dicC).description
-        let parameter1 = parameter.replacingOccurrences(of: " ", with: "")
-        let parameter2 = parameter1.replacingOccurrences(of: "\n", with: "")
-        return ["data":parameter2.aesEncrypt] as! Dictionary<Key, Value>
+        //let parameter1 = parameter.replacingOccurrences(of: " ", with: "")
+        //let parameter2 = parameter1.replacingOccurrences(of: "\n", with: "")
+        return ["data":parameter.aesEncrypt] as! Dictionary<Key, Value>
     }
 }
 extension UIImageView{

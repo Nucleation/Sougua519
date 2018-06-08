@@ -54,6 +54,7 @@ class EpisodeImageCell: UITableViewCell {
                 model.isUp = true
                 model.up += 1
                 self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
+                self.upBtn.isEnabled = false
                 self.upCountLab.text = String(model.up)
                 delegate?.imageCellup(sender: self)
             }

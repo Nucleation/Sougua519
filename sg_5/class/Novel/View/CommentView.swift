@@ -13,7 +13,7 @@ protocol CommentViewDelegate {
 }
 class CommentView: UIView {
     var delegate:CommentViewDelegate?
-    var commentTV: UITextView?
+    var textField: UITextField?
     var sendBtn: UIButton?
     var novelInfo:NoveCategoryListModel?
     
@@ -27,13 +27,14 @@ class CommentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     func createUI() {
-        let commentTV = UITextView()
-        commentTV.layer.borderWidth = 1
-        commentTV.layer.borderColor = UIColor.gray.cgColor
-        commentTV.layer.cornerRadius = 5
-        commentTV.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(commentTV)
-        self.commentTV = commentTV
+        let textField = UITextField()
+        textField.layer.borderWidth = 1
+        textField.placeholder = "请输入评论"
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.cornerRadius = 5
+        textField.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(textField)
+        self.textField = textField
         let sendBtn = UIButton(type: .custom)
         sendBtn.backgroundColor = .colorAccent
         sendBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -42,21 +43,21 @@ class CommentView: UIView {
         sendBtn.addTarget(self, action: #selector(sendComment), for: .touchUpInside)
         self.addSubview(sendBtn)
         self.sendBtn = sendBtn
-        self.commentTV?.snp.makeConstraints({ (make) in
+        self.textField?.snp.makeConstraints({ (make) in
             make.top.equalTo(self).offset(10)
             make.left.equalTo(self).offset(15)
             make.height.equalTo(self).offset(-20)
             make.right.equalTo(self.sendBtn!.snp.left).offset(-10)
         })
         self.sendBtn?.snp.makeConstraints({ (make) in
-            make.centerY.equalTo(self.commentTV!)
+            make.centerY.equalTo(self.textField!)
             make.right.equalTo(self).offset(-15)
             make.height.equalTo(self).offset(-20)
             make.width.equalTo(60)
         })
     }
     @objc func sendComment() {
-        if self.commentTV?.text == "" {
+        if self.textField?.text == "" {
             return
         }
         let keyChain = KeyChain()
@@ -65,7 +66,7 @@ class CommentView: UIView {
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.Novel.rawValue,"content":self.commentTV?.text ?? ""]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.Novel.rawValue,"content":self.textField?.text ?? ""]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
             print("\(json)--add")

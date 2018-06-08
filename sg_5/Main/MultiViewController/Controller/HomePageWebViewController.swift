@@ -14,9 +14,39 @@ class HomePageWebViewController: UIViewController{
     var navView: UIView?
     var titleLab:UILabel?
     var model: HomePageNewsModel?
+    var scrollerView: UIScrollView?
+    var scrollContent: UIView?
+    
+    var webview: WKWebView?
+    var webHeitht: CGFloat?
+    
+    var contentView:UIView?
+    var upBtn: UIButton?
+    var shareBtn: UIButton?
+    var type: Int = 0
+    var lineView: UIView?
+    var sectionView: UIView?
+    
+    var totolComment: UILabel?
+    var totolUp: UILabel?
+    //tableView
+    
+    var tableView: UITableView?
+    var footView: UIView?
+    var textField: UITextField?
+    var commentBtn: UIButton?
+    var collectBtn: UIButton?
+    var footshare: UIButton?
+    var commentListArray:Array<NovelCommentModel> = []
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        if self.textField != nil {
+            let center = NotificationCenter.default
+            center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +79,14 @@ class HomePageWebViewController: UIViewController{
             make.width.equalTo(navView).offset(-88)
             make.centerX.equalTo(navView)
         }
+        let scrollview = UIScrollView()
+        scrollview.showsVerticalScrollIndicator = false
+        scrollview.showsHorizontalScrollIndicator = false
+        self.view.addSubview(scrollview)
+        self.scrollerView = scrollview
+        let scrollContent = UIView()
+        self.scrollerView?.addSubview(scrollContent)
+        self.scrollContent = scrollContent
         let webview: WKWebView = WKWebView(frame: self.view.frame, configuration: WKWebViewConfiguration())
         if model?.type == "0" {
             if (model?.newsContent) != nil {
@@ -59,24 +97,241 @@ class HomePageWebViewController: UIViewController{
                 webview.load(URLRequest(url: URL(string: (model?.newsContent)!)!))
             }
         }
-        
         webview.navigationDelegate = self
-        self.view.addSubview(webview)
+        self.scrollContent?.addSubview(webview)
         self.view.bringSubview(toFront: navView)
-        webview.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(self.view)
-            make.top.equalTo(navView.snp.bottom)
-        }
+        
+        self.webview = webview
         self.titleLab = titleLab
         self.navView = navView
+        
+        let contentView = UIView()
+        contentView.backgroundColor = .white
+        self.scrollContent?.addSubview(contentView)
+        self.contentView = contentView
+       
+        let upBtn = UIButton(type: .custom)
+        upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
+        upBtn.setTitle("3", for: .normal)
+        upBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        upBtn.layer.cornerRadius = 18
+        upBtn.layer.borderWidth = 1
+        upBtn.layer.borderColor = UIColor.colorWithHexColorString("999999").cgColor
+        upBtn.setTitleColor(.black, for: .normal)
+        contentView.addSubview(upBtn)
+        self.upBtn = upBtn
+        let shareBtn = UIButton(type: .custom)
+        shareBtn.setTitle("分享", for: .normal)
+        shareBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        shareBtn.setImage(UIImage(named: "fenxiang"), for: .normal)
+        shareBtn.layer.cornerRadius = 18
+        shareBtn.layer.borderWidth = 1
+        shareBtn.layer.borderColor = UIColor.colorWithHexColorString("999999").cgColor
+        shareBtn.setTitleColor(.black, for: .normal)
+        contentView.addSubview(shareBtn)
+        self.shareBtn = shareBtn
+        let lineView = UIView()
+        lineView.backgroundColor = UIColor.colorWithHexColorString("ebebeb")
+        contentView.addSubview(lineView)
+        self.lineView = lineView
+        let sectionView = UIView()
+        let totolComment = UILabel()
+        totolComment.text = "评论 0"
+        totolComment.font = UIFont.systemFont(ofSize: 14)
+        totolComment.textColor = UIColor.colorWithHexColorString("666666")
+        sectionView.addSubview(totolComment)
+        let totolUp = UILabel()
+        totolUp.text = "0 赞"
+        totolUp.font = UIFont.systemFont(ofSize: 14)
+        totolUp.textColor = UIColor.colorWithHexColorString("666666")
+        sectionView.addSubview(totolUp)
+        contentView.addSubview(sectionView)
+        self.sectionView = sectionView
+        self.totolComment = totolComment
+        self.totolUp = totolUp
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "EpisodeCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        self.contentView?.addSubview(tableView)
+        self.tableView = tableView
+        //footView
+        let footView = UIView()
+        footView.backgroundColor = .white
+        self.view.addSubview(footView)
+        self.footView = footView
+        let line = UIView()
+        line.backgroundColor = UIColor.colorWithHexColorString("e1e2e3")
+        self.footView?.addSubview(line)
+        let textField = UITextField()
+        textField.placeholder = "写评论..."
+        textField.layer.borderWidth = 1
+        textField.returnKeyType = .send
+        textField.delegate = self
+        textField.layer.borderColor = UIColor.colorWithHexColorString("e1e2e3").cgColor
+        textField.layer.cornerRadius = 15
+        textField.leftViewMode = UITextFieldViewMode.always
+        textField.font = UIFont.systemFont(ofSize: 15)
+        self.footView?.addSubview(textField)
+        self.textField = textField
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
+        imageView.image = UIImage(named: "xiepinglun")
+        self.textField?.leftView = imageView
+        let commentBtn = UIButton(type: .custom)
+        commentBtn.setImage(UIImage(named: "pinglun"), for: .normal)
+        self.footView?.addSubview(commentBtn)
+        self.commentBtn = commentBtn
+        let collectBtn = UIButton(type: .custom)
+        collectBtn.setImage(UIImage(named: "shoucang"), for: .normal)
+        self.footView?.addSubview(collectBtn)
+        self.collectBtn = collectBtn
+        let footshare = UIButton(type: .custom)
+        footshare.setImage(UIImage(named: "fenxiang"), for: .normal)
+        self.footView?.addSubview(footshare)
+        self.footshare = footshare
         // Do any additional setup after loading the view.
+        self.footView?.snp.makeConstraints({ (make) in
+            make.left.right.bottom.equalTo(self.view)
+            make.height.equalTo(40)
+        })
+        self.textField?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.footView!).offset(20)
+            make.centerY.equalTo(self.footView!)
+            make.height.equalTo(30)
+            make.width.equalTo(screenWidth/2-20)
+        })
+        self.commentBtn?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.footView!)
+            make.width.height.equalTo(40)
+            make.right.equalTo(self.collectBtn!.snp.left).offset(-10)
+        })
+        self.collectBtn?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.footView!)
+            make.width.height.equalTo(40)
+            make.right.equalTo(self.footshare!.snp.left).offset(-10)
+        })
+        self.footshare?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.footView!)
+            make.width.height.equalTo(40)
+            make.right.equalTo(self.footView!.snp.right).offset(-10)
+        })
+        requestComment()
+    }
+    func layoutView() {
+        self.scrollerView?.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 40, right: 0))
+        })
+        self.webview?.snp.makeConstraints({ (make) in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(self.webHeitht!)
+        })
+        self.contentView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.webview!.snp.bottom)
+            make.left.right.equalTo(self.scrollContent!)
+            make.bottom.equalTo(self.totolUp!).offset(10)
+        })
+        self.upBtn?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.contentView!).offset(25)
+            make.right.equalTo(self.contentView!.snp.centerX).offset(-25)
+            make.width.equalTo(110)
+            make.height.equalTo(35)
+        })
+        self.shareBtn?.snp.makeConstraints({ (make) in
+            make.centerY.height.width.equalTo(self.upBtn!)
+            make.left.equalTo(self.contentView!.snp.centerX).offset(25)
+            
+        })
+        self.lineView?.snp.makeConstraints { (make) in
+            make.left.right.equalTo(self.contentView!)
+            make.top.equalTo(self.shareBtn!.snp.bottom).offset(10)
+            make.height.equalTo(10)
+        }
+        self.sectionView?.snp.makeConstraints { (make) in
+            make.top.equalTo(self.lineView!.snp.bottom)
+            make.left.right.equalTo(self.contentView!)
+            make.height.equalTo(40)
+        }
+        self.totolComment?.snp.makeConstraints { (make) in
+            make.centerY.height.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+        }
+        self.totolUp?.snp.makeConstraints { (make) in
+            make.centerY.height.equalToSuperview()
+            make.right.equalToSuperview().offset(-20)
+        }
+        self.tableView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.contentView!.snp.bottom)
+            make.left.right.equalTo(self.contentView!)
+            make.height.equalTo(self.view.frame.height - 114)
+        })
+        
+        self.scrollContent?.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self.scrollerView!).inset(UIEdgeInsets.zero)
+            make.width.equalTo(self.scrollerView!)
+            make.bottom.equalTo(self.tableView!).offset(1)
+        })
+        
+        self.view.layoutIfNeeded()
+    }
+    func requestComment() {
+        let keyChain = KeyChain()
+        let fromId = keyChain.getKeyChain()["id"] ?? ""
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","fromId":fromId]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: commentByType, parameters: parData) { (json) in
+            if let datas = json["commentList"].arrayObject{
+                self.commentListArray += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
+            }
+            self.tableView?.reloadData()
+            self.view.layoutIfNeeded()
+        }
+    }
+    func sendComment(comment: String){
+        let keyChain = KeyChain()
+        guard let mobile = keyChain.getKeyChain()["mobile"],let token = keyChain.getKeyChain()["token"],let id = keyChain.getKeyChain()["id"] else {
+            self.view.makeToast("你还没有登录")
+            return
+        }
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.News.rawValue,"content":comment]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
+            self.view.makeToast("评论成功")
+            self.requestComment()
+        }
     }
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+extension HomePageWebViewController: UITableViewDelegate,UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.commentListArray.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! EpisodeCommentTableViewCell
+        cell.model = self.commentListArray[indexPath.row]
+        return cell
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
 extension HomePageWebViewController: WKNavigationDelegate {
@@ -90,14 +345,14 @@ extension HomePageWebViewController: WKNavigationDelegate {
         }
     }
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("网页由于某些原因加载失败")
+        print("网页由于某些原因加载失败\(error)")
     }
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        
+        print("网页\(error)")
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
-        
+
+        self.webHeitht = webView.scrollView.contentSize.height
         if !webView.isLoading{
  
             if (webView.url?.absoluteString ?? "").contains("toutiao.com/"){
@@ -110,6 +365,52 @@ document.getElementsByClassName("new-style-test-article-author")[0].style.displa
 """
                 webView.evaluateJavaScript(str, completionHandler: nil)
             }
+        }
+        self.layoutView()
+    }
+}
+extension HomePageWebViewController: UITextFieldDelegate {
+    //Mark:Delegate
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default
+            .addObserver(self,selector: #selector(keyboardWillHide(notification:)),
+                         name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        if let comment = textField.text {
+            self.sendComment(comment: comment)
+        }
+        textField.text = nil
+        return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.view.endEditing(true)
+    }
+    //键盘显示
+    @objc func keyboardWillShow(notification:NSNotification) {
+        let textMaxY = screenHeight
+        let keyboardH : CGFloat = ((notification.userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size.height)
+        let keyboardY : CGFloat = self.view.frame.size.height - keyboardH
+        var duration: Double  = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        if duration < 0.0 {
+            duration = 0.25
+        }
+        UIView.animate(withDuration: duration) { () -> Void in
+            if (textMaxY > keyboardY) {
+                self.view.transform = CGAffineTransform(translationX: 0, y: keyboardY - textMaxY)
+            }else{
+                self.view.transform = CGAffineTransform.identity
+            }
+        }
+        
+    }
+    //键盘隐藏
+    @objc func keyboardWillHide(notification:NSNotification){
+        let duration  = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        UIView.animate(withDuration: duration!) { () -> Void in
+            self.view.transform = CGAffineTransform.identity
         }
     }
 }

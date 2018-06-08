@@ -50,23 +50,25 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         // Do any additional setup after loading the view.
     }
     @objc func keyboardWillShow(notification: NSNotification){
-        if let begin = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue, let end = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
-            if begin.size.height > 0 && begin.origin.y-end.origin.y>0 {
-                UIView.animate(withDuration: 0.1) {
-                    self.commentTVView?.frame = CGRect(x: 0, y: screenHeight - 50 - begin.height, width: screenWidth, height: 50)
-                }
-                self.view.layoutIfNeeded()
+        let textMaxY = screenHeight
+        let keyboardH : CGFloat = ((notification.userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size.height)
+        let keyboardY : CGFloat = self.view.frame.size.height - keyboardH
+        var duration: Double  = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        if duration < 0.0 {
+            duration = 0.25
+        }
+        UIView.animate(withDuration: duration) { () -> Void in
+            if (textMaxY > keyboardY) {
+                self.view.transform = CGAffineTransform(translationX: 0, y: keyboardY - textMaxY)
+            }else{
+                self.view.transform = CGAffineTransform.identity
             }
-            print("keyboardSize\(begin)")
         }
     }
     @objc func keyboardWillHide(notification: NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.1) {
-                self.commentTVView?.frame = CGRect(x: 0, y: screenHeight - 50, width: screenWidth, height: 50)
-            }
-             self.view.layoutIfNeeded()
-            print("keyboardSize\(keyboardSize)")
+        let duration  = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        UIView.animate(withDuration: duration!) { () -> Void in
+            self.view.transform = CGAffineTransform.identity
         }
     }
     func getCheck(){
@@ -385,7 +387,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
                 if let type = item["type"].string{
                     model.type = type
                 }
-                if let upCount = item["upCount"].string{
+                if let upCount = item["upCount"].int{
                     model.upCount = upCount
                 }
                 self.commentArr += [model]

@@ -16,6 +16,9 @@ class NovelCommentModel: HandyJSON {
     var id: String = ""
     var createDate: String = ""
     var type: String = ""
-    var upCount: String = ""
+    var upCount: Int = 0
+    var fromHeadUrl: String = ""
+    var fromMobile: String = ""
+    var createBy: String = ""
     public required init() {}
 }

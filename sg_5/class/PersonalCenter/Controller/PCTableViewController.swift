@@ -8,20 +8,74 @@
 
 import UIKit
 
-class PCTableViewController: UITableViewController {
- 
-    @IBOutlet weak var userIconImageView: UIImageView!
+class PCTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    @IBOutlet weak var userName: UIButton!
+    @IBOutlet weak var subLab: UIButton!
     
+    @IBOutlet var mainTab: UITableView!
+
+    @IBOutlet weak var userIcon: UIButton!
+    override func viewWillAppear(_ animated: Bool) {
+        //判断用户登录
+        if KeyChain().getKeyChain()["isLogin"] != "1" {
+            self.userIcon.setImage(UIImage(named: "userIMG.jpg"), for: .normal)
+        }else{
+            self.userIcon.kf.setImage(with: URL(string: "\(postUrl)/images/\( KeyChain().getKeyChain()["headUrl"] ?? "")"), for: .normal)
+            self.userName.setTitle("\(KeyChain().getKeyChain()["mobile"] ?? "")", for: .normal)
+            self.subLab.isHidden = true
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
-
+var picker:UIImagePickerController!
+    @IBAction func userIconClick(_ sender: Any) {
+        //判断用户登录
+        if KeyChain().getKeyChain()["isLogin"] != "1" {
+            self.view.makeToast("未登录")
+        }else{
+            //判断设置是否支持图片库
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                picker = UIImagePickerController()
+                picker.delegate = self
+                picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                self.present(picker, animated: true, completion: nil)
+            }else{
+                self.view.makeToast("读取相册错误")
+            }
+        }
+        
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.userIcon.setImage(info[UIImagePickerControllerOriginalImage] as? UIImage, for: .normal)
+        self.uploadImage(image: (info[UIImagePickerControllerOriginalImage] as? UIImage)!)
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
+    func uploadImage(image: UIImage){
+        var imageData = UIImageJPEGRepresentation(image, 0.4)?.base64EncodedString()
+        if imageData == nil {
+            imageData = UIImagePNGRepresentation(image)?.base64EncodedString()
+        }
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"headImg":imageData ?? ""]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: UpHeadImageUrl, parameters: parData ) { (json) in
+            KeyChain().setKeyChain(value: json.stringValue, forKey: "headUrl")
+            //KeyChain().setKeyChain(value: json.stringValue, forKey: "headUrl")
+            self.userIcon.kf.setImage(with: URL(string: "\(postUrl)/images/\( KeyChain().getKeyChain()["headUrl"] ?? "")"), for: .normal)
+            self.view.makeToast("上传成功")
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func userNameClick(_ sender: Any) {
+        let vc = LoginViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)

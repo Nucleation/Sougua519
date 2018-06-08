@@ -44,10 +44,12 @@ class EpisodeInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
         player.autoPlay()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default
-            .addObserver(self,selector: #selector(keyboardWillHide(notification:)),
-                         name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        if self.textField != nil {
+            let center = NotificationCenter.default
+            center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,6 +175,7 @@ class EpisodeInfoViewController: UIViewController {
         self.footView?.addSubview(line)
         let textField = UITextField()
         textField.placeholder = "写评论..."
+        textField.delegate = self
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.colorWithHexColorString("e1e2e3").cgColor
         textField.layer.cornerRadius = 15
@@ -239,24 +242,18 @@ class EpisodeInfoViewController: UIViewController {
     @objc func leftBtnClick(){
         self.navigationController?.popViewController(animated: false)
     }
-    @objc func keyboardWillShow(notification: NSNotification){
-        if let begin = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue, let end = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
-            if begin.size.height > 0 && begin.origin.y-end.origin.y>0 {
-                UIView.animate(withDuration: 0.1) {
-                    self.footView?.frame = CGRect(x: 0, y: screenHeight - 50 - begin.height, width: screenWidth, height: 50)
-                }
-                self.view.layoutIfNeeded()
-            }
-            print("keyboardSize\(begin)")
+    func sendComment(comment: String){
+        let keyChain = KeyChain()
+        guard let mobile = keyChain.getKeyChain()["mobile"],let token = keyChain.getKeyChain()["token"],let id = keyChain.getKeyChain()["id"] else {
+            self.view.makeToast("你还没有登录")
+            return
         }
-    }
-    @objc func keyboardWillHide(notification: NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.1) {
-                self.footView?.frame = CGRect(x: 0, y: screenHeight - 50, width: screenWidth, height: 50)
-            }
-            self.view.layoutIfNeeded()
-            print("keyboardSize\(keyboardSize)")
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.News.rawValue,"content":comment]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
+            self.view.makeToast("评论成功")
+            self.requestComment()
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -265,6 +262,51 @@ class EpisodeInfoViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+extension EpisodeInfoViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default
+            .addObserver(self,selector: #selector(keyboardWillHide(notification:)),
+                         name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        
+        if let comment = textField.text {
+            self.sendComment(comment: comment)
+        }
+        textField.text = nil
+        return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.view.endEditing(true)
+    }
+    //键盘显示
+    @objc func keyboardWillShow(notification:NSNotification) {
+        let textMaxY = screenHeight
+        let keyboardH : CGFloat = ((notification.userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size.height)
+        let keyboardY : CGFloat = self.view.frame.size.height - keyboardH
+        var duration: Double  = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        if duration < 0.0 {
+            duration = 0.25
+        }
+        UIView.animate(withDuration: duration) { () -> Void in
+            if (textMaxY > keyboardY) {
+                self.view.transform = CGAffineTransform(translationX: 0, y: keyboardY - textMaxY)
+            }else{
+                self.view.transform = CGAffineTransform.identity
+            }
+        }
+        
+    }
+    //键盘隐藏
+    @objc func keyboardWillHide(notification:NSNotification){
+        let duration  = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        UIView.animate(withDuration: duration!) { () -> Void in
+            self.view.transform = CGAffineTransform.identity
+        }
     }
 }
 extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource{
@@ -277,6 +319,7 @@ extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! EpisodeCommentTableViewCell
         cell.model = self.commentListArray[indexPath.row]
+        cell.episodeModel = model
         return cell
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

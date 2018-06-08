@@ -104,18 +104,18 @@ extension NetworkToolProtocol{
     static func requestData(_ type : MethodType, URLString : String, parameters : [String : Any]? = nil, success:  @escaping (JSON) -> ()) {
         let method = type == .get ? HTTPMethod.get : HTTPMethod.post
         SVProgressHUD.show(withStatus: "加载中...")
-        print("请求的URL--:\n\(URLString)")
+        //print("请求的URL--:\n\(URLString)")
         Alamofire.request(URLString, method: method, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 if let jsons = response.result.value{
-                    print("返回的json---\(JSON(jsons))")
+                    //print("返回的json---\(JSON(jsons))")
                     let jsonDic = JSON(jsons)
                     guard jsonDic["code"].intValue == 1 else {
                         SVProgressHUD.dismiss()
                         success(jsonDic)
                         return
                     }
-                    if URLString == checkNovelShelfUrl{
+                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl{
                        success(jsonDic["data"])
                     }else{
                     let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt
