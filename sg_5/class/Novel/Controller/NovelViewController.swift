@@ -42,7 +42,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         self.scrollView = scrollView
         let oprateView = MUOprateView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height-44, width: UIScreen.main.bounds.width, height: 44))
         self.oprateView = oprateView
-        oprateView.dataArray = ["shuaxin","xinjian","搜瓜","wode","矢量智能对象"]
+        oprateView.dataArray = ["shuaxin","xinjian","搜瓜","wode","发现"]
         oprateView.OprateBlock =  { sender in
             unowned let uSelf = self
             uSelf.oprateClick(sender: sender)

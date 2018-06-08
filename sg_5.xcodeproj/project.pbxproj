@@ -11,6 +11,7 @@
 		1706DECF20C298E60013E726 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1706DECE20C298E60013E726 /* NewsViewController.swift */; };
 		172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CF23A20A45563005632F3 /* AppDelegate.swift */; };
 		172CF23D20A4558A005632F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172CF23C20A4558A005632F3 /* Assets.xcassets */; };
+		172E4AA620CAA56E00DC5AAF /* BottonPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */; };
 		174F75FD20A44AA000BB0B46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174F75FB20A44AA000BB0B46 /* LaunchScreen.storyboard */; };
 		174F760820A44AA000BB0B46 /* sg_5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F760720A44AA000BB0B46 /* sg_5Tests.swift */; };
 		174F761320A44AA000BB0B46 /* sg_5UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F761220A44AA000BB0B46 /* sg_5UITests.swift */; };
@@ -149,6 +150,7 @@
 		1706DECE20C298E60013E726 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		172CF23A20A45563005632F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172CF23C20A4558A005632F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = sg_5/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottonPopView.swift; sourceTree = "<group>"; };
 		174F75EF20A44A9E00BB0B46 /* sg_5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sg_5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174F75FC20A44AA000BB0B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		174F75FE20A44AA000BB0B46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				174F763F20A44AB900BB0B46 /* MUmultiWindowFlowlayout.swift */,
 				17857D5E20B548B6005B028C /* HomePageWebViewController.swift */,
 				178EB39120BFE77A006C156B /* MultiPictureViewController.swift */,
+				172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1122,6 +1125,7 @@
 				176513E220C69E8600706A77 /* VideoPlayerCustomView.swift in Sources */,
 				177C35D520B66F1900B803EF /* BookShelfViewController.swift in Sources */,
 				177714F720C68ED20093F3F7 /* EpisodeCommentTableViewCell.swift in Sources */,
+				172E4AA620CAA56E00DC5AAF /* BottonPopView.swift in Sources */,
 				177D2ABC20BD4DFB00B61F1E /* NovelChapterView.swift in Sources */,
 				177714F320C6325D0093F3F7 /* EpisodeInfoHeadView.swift in Sources */,
 				177DEBEE20B7F47700E176F7 /* MetooScrollerFootView.swift in Sources */,

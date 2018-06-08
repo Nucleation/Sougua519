@@ -16,9 +16,16 @@ class HomePageWebViewController: UIViewController{
     var model: HomePageNewsModel?
     var scrollerView: UIScrollView?
     var scrollContent: UIView?
+    var popview: UIView?
     
     var webview: WKWebView?
-    var webHeitht: CGFloat?
+    var webHeitht: CGFloat?{
+        didSet{
+            
+            print("---0098----\(webHeitht)")
+            self.webview?.frame = CGRect(x: 0, y: 0, width: screenWidth, height: webHeitht ?? 0)
+        }
+    }
     
     var contentView:UIView?
     var upBtn: UIButton?
@@ -58,12 +65,15 @@ class HomePageWebViewController: UIViewController{
         backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         navView.addSubview(backBtn)
+        let leftBtn = UIButton(type: .custom)
+        leftBtn.setImage(UIImage(named: "gengduo"), for: .normal)
+        leftBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
+        navView.addSubview(leftBtn)
         let titleLab = UILabel()
         titleLab.font = UIFont.systemFont(ofSize: 16)
         titleLab.textAlignment = .center
         titleLab.textColor = .white
         navView.addSubview(titleLab)
-        
         
         navView.snp.makeConstraints { (make) in
             make.left.right.top.equalTo(self.view)
@@ -72,6 +82,11 @@ class HomePageWebViewController: UIViewController{
         backBtn.snp.makeConstraints { (make) in
             make.centerY.equalTo(navView).offset(10)
             make.left.equalTo(navView)
+            make.width.height.equalTo(44)
+        }
+        leftBtn.snp.makeConstraints { (make) in
+            make.centerY.equalTo(navView).offset(10)
+            make.right.equalTo(navView)
             make.width.height.equalTo(44)
         }
         titleLab.snp.makeConstraints { (make) in
@@ -310,7 +325,15 @@ class HomePageWebViewController: UIViewController{
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)
     }
+    @objc func leftBtnClick(){
+        let popview = BottonPopView(frame: CGRect(x: 0, y: screenHeight-150, width: screenWidth, height: 150))
+        popview.delegate = self
+        self.view.addSubview(popview)
+        self.popview = popview
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.popview?.removeFromSuperview()
         self.view.endEditing(true)
     }
     override func didReceiveMemoryWarning() {
@@ -353,6 +376,9 @@ extension HomePageWebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 
         self.webHeitht = webView.scrollView.contentSize.height
+        if self.webHeitht == 0 {
+            self.webHeitht = screenHeight
+        }
         if !webView.isLoading{
  
             if (webView.url?.absoluteString ?? "").contains("toutiao.com/"){
@@ -412,5 +438,22 @@ extension HomePageWebViewController: UITextFieldDelegate {
         UIView.animate(withDuration: duration!) { () -> Void in
             self.view.transform = CGAffineTransform.identity
         }
+    }
+}
+extension HomePageWebViewController: BottonPopViewDelegate{
+    func reloadBtnClick() {
+        
+    }
+    
+    func copyBtnClick() {
+        
+    }
+    
+    func openWebClick() {
+        
+    }
+    
+    func shareBtnClick() {
+        
     }
 }
