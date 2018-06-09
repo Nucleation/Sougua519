@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 
-class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CategoryButtonViewDelegate,EmptyDataSetProtocol{
+class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CategoryButtonViewDelegate,EmptyDataSetProtocol,HomeNavigationViewDelegate{
     //tableView
     var navigationBar = HomeNavigationView.loadViewFromNib()
     var searchBar: UISearchBar?
@@ -39,8 +39,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         html = HTMLViewController()
-        MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
-        self.title = "window"
+       MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
         self.view.backgroundColor = UIColor.white
         setUI()
         getNewsList(pageNO: pageNO)
@@ -48,6 +47,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     func setUI() {
         //上划后的searchBar
         self.view.addSubview(searchView)
+
         let subSearchBar = UISearchBar()
         subSearchBar.placeholder = "输入搜索内容"
         subSearchBar.delegate = self
@@ -75,6 +75,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth/5+150))
         self.headView = headView
         self.headView?.addSubview(self.navigationBar)
+        self.navigationBar.delegate = self
         categoryButtonView = CategoryButtonView(frame: CGRect(x: 0, y: 150, width: screenWidth, height: screenWidth/5))
         categoryButtonView?.delegate = self
         self.headView?.addSubview(categoryButtonView!)
@@ -172,16 +173,21 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         default:
-            return
-            
+            let vc = FindViewController()
+            self.navigationController?.pushViewController(vc, animated: true)   
         }
+    }
+    func goSearch() {
+        let vc = SearchHistoryViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
 
 extension MuRootViewController{
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        var dataArr = SOsearch().getData(keyWord: "1")
-        dataArr += SougouSearch().getData(keyWord: "2")
+        let vc = SearchViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         

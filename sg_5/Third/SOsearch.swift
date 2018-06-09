@@ -14,7 +14,7 @@ class SOsearch: NSObject {
         super .init()
     }
     var dataArr:[Content] = []
-    func getData(keyWord:String) -> Array<Any> {
+    func getData(keyWord:String) -> Array<Content> {
         let utfStr = "https://m.so.com/index.php?q=\(keyWord)&pn=1&psid=ae25a783ea0b059863b0124e30f30e0b&src=srp_paging&fr=none"
         //let data = utfStr.data(using: String.Encoding.utf8)
         let url = NSURL(string: utfStr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)

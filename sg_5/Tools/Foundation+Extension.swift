@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 class ParameterEncode {
     func query(_ parameters: [String: Any]) -> [String:Any] {
         var components: [(String, Any)] = []
@@ -132,6 +133,44 @@ extension String
         let st = self.index(startIndex, offsetBy:start)
         let en = self.index(st, offsetBy:len)
         return String(self[st ..< en])
+    }
+    /*
+     *去掉首尾空格
+     */
+    var removeHeadAndTailSpace:String {
+        let whitespace = NSCharacterSet.whitespaces
+        return self.trimmingCharacters(in: whitespace)
+    }
+    /*
+     *去掉首尾空格 包括后面的换行 \n
+     */
+    var removeHeadAndTailSpacePro:String {
+        let whitespace = NSCharacterSet.whitespacesAndNewlines
+        return self.trimmingCharacters(in: whitespace)
+    }
+    /*
+     *去掉所有空格
+     */
+    var removeAllSapce: String {
+        return self.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+    }
+    /*
+     *去掉首尾空格 后 指定开头空格数
+     */
+    func beginSpaceNum(num: Int) -> String {
+        var beginSpace = ""
+        for _ in 0..<num {
+            beginSpace += " "
+        }
+        return beginSpace + self.removeHeadAndTailSpacePro
+    }
+    func stringToAttribute(keyWord: String) -> NSMutableAttributedString {
+        
+        let attributedString = NSMutableAttributedString(string:self)
+        let range = (self as NSString).range(of: keyWord)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.red , range: range)
+        return attributedString
+        
     }
 }
 extension Date

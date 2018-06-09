@@ -8,11 +8,15 @@
 
 import UIKit
 import IBAnimatable
-
+protocol HomeNavigationViewDelegate {
+    func goSearch()
+}
 class HomeNavigationView: UIView,NibLoadable {
     @IBOutlet weak var searchBtn: AnimatableButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scanBtn: UIButton!
+    var delegate: HomeNavigationViewDelegate?
+    
     /// 搜索按钮点击
     var didSelectSearchButton: (()->())?
     /// 扫一扫按钮点击
@@ -46,7 +50,7 @@ class HomeNavigationView: UIView,NibLoadable {
     }
     /// 搜索按钮点击
     @IBAction func searchButtonClicked(_ sender: AnimatableButton) {
-        didSelectSearchButton?()
+        self.delegate?.goSearch()
     }
 
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F28CFA495528E4F7CA144CB /* Pods_sg_5.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF282048723040960C2530E /* Pods_sg_5.framework */; };
 		1706DECF20C298E60013E726 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1706DECE20C298E60013E726 /* NewsViewController.swift */; };
+		172377DC20CBDEC600135792 /* searchHistory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 172377DB20CBDEC600135792 /* searchHistory.plist */; };
 		172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CF23A20A45563005632F3 /* AppDelegate.swift */; };
 		172CF23D20A4558A005632F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172CF23C20A4558A005632F3 /* Assets.xcassets */; };
 		172E4AA620CAA56E00DC5AAF /* BottonPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */; };
@@ -64,6 +65,13 @@
 		1762DE9120AD5D8400D179AE /* NoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE9020AD5D8400D179AE /* NoveCollectionViewCell.swift */; };
 		1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DE9220AD891200D179AE /* NovelContentViewController.swift */; };
 		176513E220C69E8600706A77 /* VideoPlayerCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176513E120C69E8600706A77 /* VideoPlayerCustomView.swift */; };
+		176F76EC20CB5ACB000DB5CF /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F76EB20CB5ACB000DB5CF /* FindViewController.swift */; };
+		176F76F220CB5E7F000DB5CF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F76F120CB5E7F000DB5CF /* SearchViewController.swift */; };
+		176F76F520CB6AD2000DB5CF /* mainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F76F320CB6AD2000DB5CF /* mainTableViewCell.swift */; };
+		176F76F620CB6AD2000DB5CF /* mainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176F76F420CB6AD2000DB5CF /* mainTableViewCell.xib */; };
+		176F76F820CB6BDB000DB5CF /* SearchWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F76F720CB6BDB000DB5CF /* SearchWebViewController.swift */; };
+		176F76FE20CBB87C000DB5CF /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F76FD20CBB87C000DB5CF /* SearchHistoryViewController.swift */; };
+		176F770220CBC90E000DB5CF /* history.plist in Resources */ = {isa = PBXBuildFile; fileRef = 176F770120CBC90E000DB5CF /* history.plist */; };
 		176F998A20B92E6600FF6E46 /* NovelShelfListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */; };
 		176F998E20B940AF00FF6E46 /* BookShelfFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */; };
 		1775678720C7E49E00ACAE52 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775678620C7E49E00ACAE52 /* NewsTableViewController.swift */; };
@@ -148,6 +156,7 @@
 
 /* Begin PBXFileReference section */
 		1706DECE20C298E60013E726 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		172377DB20CBDEC600135792 /* searchHistory.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = searchHistory.plist; sourceTree = "<group>"; };
 		172CF23A20A45563005632F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172CF23C20A4558A005632F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = sg_5/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottonPopView.swift; sourceTree = "<group>"; };
@@ -210,6 +219,13 @@
 		1762DE9020AD5D8400D179AE /* NoveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoveCollectionViewCell.swift; sourceTree = "<group>"; };
 		1762DE9220AD891200D179AE /* NovelContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelContentViewController.swift; sourceTree = "<group>"; };
 		176513E120C69E8600706A77 /* VideoPlayerCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerCustomView.swift; sourceTree = "<group>"; };
+		176F76EB20CB5ACB000DB5CF /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
+		176F76F120CB5E7F000DB5CF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		176F76F320CB6AD2000DB5CF /* mainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTableViewCell.swift; sourceTree = "<group>"; };
+		176F76F420CB6AD2000DB5CF /* mainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainTableViewCell.xib; sourceTree = "<group>"; };
+		176F76F720CB6BDB000DB5CF /* SearchWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWebViewController.swift; sourceTree = "<group>"; };
+		176F76FD20CBB87C000DB5CF /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
+		176F770120CBC90E000DB5CF /* history.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = history.plist; sourceTree = "<group>"; };
 		176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelShelfListModel.swift; sourceTree = "<group>"; };
 		176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfFlowLayout.swift; sourceTree = "<group>"; };
 		1775678620C7E49E00ACAE52 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
@@ -453,6 +469,7 @@
 				174F763320A44AB900BB0B46 /* HTML */,
 				174F764020A44AB900BB0B46 /* MetooCollectionview */,
 				1762DE8220AD15AC00D179AE /* Novel */,
+				176F76ED20CB5E29000DB5CF /* Search */,
 				174F764720A44AB900BB0B46 /* Login */,
 			);
 			path = class;
@@ -696,6 +713,44 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		176F76ED20CB5E29000DB5CF /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				176F76EF20CB5E54000DB5CF /* Model */,
+				176F76F020CB5E5C000DB5CF /* View */,
+				176F76EE20CB5E45000DB5CF /* Controller */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		176F76EE20CB5E45000DB5CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				176F76F120CB5E7F000DB5CF /* SearchViewController.swift */,
+				176F76F720CB6BDB000DB5CF /* SearchWebViewController.swift */,
+				176F76FD20CBB87C000DB5CF /* SearchHistoryViewController.swift */,
+				176F770120CBC90E000DB5CF /* history.plist */,
+				172377DB20CBDEC600135792 /* searchHistory.plist */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		176F76EF20CB5E54000DB5CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		176F76F020CB5E5C000DB5CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				176F76F320CB6AD2000DB5CF /* mainTableViewCell.swift */,
+				176F76F420CB6AD2000DB5CF /* mainTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		177A4F6D20A539EF0004336E /* AES加密 */ = {
 			isa = PBXGroup;
 			children = (
@@ -767,6 +822,7 @@
 				17857D5E20B548B6005B028C /* HomePageWebViewController.swift */,
 				178EB39120BFE77A006C156B /* MultiPictureViewController.swift */,
 				172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */,
+				176F76EB20CB5ACB000DB5CF /* FindViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -914,6 +970,7 @@
 				174F768020A44E6300BB0B46 /* SingleTestTableViewCell.xib in Resources */,
 				177A4F8920A539EF0004336E /* Info-tvOS.plist in Resources */,
 				177D5ACE20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib in Resources */,
+				172377DC20CBDEC600135792 /* searchHistory.plist in Resources */,
 				174F766920A44C4900BB0B46 /* homepage.json in Resources */,
 				177A4F8720A539EF0004336E /* Info-iOS.plist in Resources */,
 				17507CCE20C4D18C00600BE1 /* EpisodeTextCell.xib in Resources */,
@@ -921,10 +978,12 @@
 				177714F820C68ED20093F3F7 /* EpisodeCommentTableViewCell.xib in Resources */,
 				174F767E20A44E6300BB0B46 /* SingleImageTableViewCell.xib in Resources */,
 				17507CCA20C4D16E00600BE1 /* EpisodeVideoCell.xib in Resources */,
+				176F770220CBC90E000DB5CF /* history.plist in Resources */,
 				177DEBEA20B7ABAA00E176F7 /* NovelListTableViewCell.xib in Resources */,
 				177A4F8820A539EF0004336E /* Info-watchOS.plist in Resources */,
 				174F768420A44E6300BB0B46 /* VideoTableViewCell.xib in Resources */,
 				174F767B20A44E6300BB0B46 /* VideoSubTableViewCell.xib in Resources */,
+				176F76F620CB6AD2000DB5CF /* mainTableViewCell.xib in Resources */,
 				172CF23D20A4558A005632F3 /* Assets.xcassets in Resources */,
 				174F767D20A44E6300BB0B46 /* HomeNavigationView.xib in Resources */,
 				177A4F8620A539EF0004336E /* Info-OSX.plist in Resources */,
@@ -1097,6 +1156,7 @@
 				17507CC920C4D16E00600BE1 /* EpisodeVideoCell.swift in Sources */,
 				177E745320C8E2D10017F6CB /* PCTableViewController.swift in Sources */,
 				177CC1E720AEAAB500202F14 /* NovelInfoViewController.swift in Sources */,
+				176F76F220CB5E7F000DB5CF /* SearchViewController.swift in Sources */,
 				177C35DD20B6CF4000B803EF /* NovelTitleModel.swift in Sources */,
 				177C35D920B6A32900B803EF /* NovelCategoryScrollView.swift in Sources */,
 				17D8CB4A20A44FFB00914492 /* XPathQuery.m in Sources */,
@@ -1107,20 +1167,24 @@
 				174F765320A44AB900BB0B46 /* MUOprateView.swift in Sources */,
 				17772D7D20BE372600858803 /* NovelChapterModel.swift in Sources */,
 				177C35DB20B6AB5B00B803EF /* NovelCategoryCollectionView.swift in Sources */,
+				176F76F820CB6BDB000DB5CF /* SearchWebViewController.swift in Sources */,
 				177A4F8A20A539EF0004336E /* Base64.m in Sources */,
 				174F765720A44AB900BB0B46 /* MUMultiWindowController.swift in Sources */,
 				174F765B20A44AB900BB0B46 /* MetooCollectionViewCell.swift in Sources */,
 				177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */,
 				174F765620A44AB900BB0B46 /* MUMultiWindowModel.swift in Sources */,
 				17D8CB4920A44FFB00914492 /* TFHppleElement.m in Sources */,
+				176F76FE20CBB87C000DB5CF /* SearchHistoryViewController.swift in Sources */,
 				177E745520C9067C0017F6CB /* AboutUSViewController.swift in Sources */,
 				1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */,
+				176F76F520CB6AD2000DB5CF /* mainTableViewCell.swift in Sources */,
 				174F765520A44AB900BB0B46 /* MultiWindow.swift in Sources */,
 				174F765820A44AB900BB0B46 /* MuRootViewController.swift in Sources */,
 				174F765220A44AB900BB0B46 /* HTMLViewController.swift in Sources */,
 				177DEBEC20B7E2C400E176F7 /* MetooScrollHeadView.swift in Sources */,
 				1762DE8720AD163500D179AE /* NoveHomeViewController.swift in Sources */,
 				177A4F8D20A539EF0004336E /* GTMBase64.m in Sources */,
+				176F76EC20CB5ACB000DB5CF /* FindViewController.swift in Sources */,
 				174F768120A44E6300BB0B46 /* CategoryButtonView.swift in Sources */,
 				176513E220C69E8600706A77 /* VideoPlayerCustomView.swift in Sources */,
 				177C35D520B66F1900B803EF /* BookShelfViewController.swift in Sources */,

@@ -18,6 +18,8 @@ class NoveHomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+        //更新按钮状态
+        self.oprateView.subViewStatus(viewController: self)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,12 +10,25 @@ import UIKit
 
 class markAndCollectionViewController: UIViewController {
     @IBOutlet weak var titleLab: UILabel!
-    @IBOutlet weak var segControl: UISegmentedControl!
     @IBOutlet weak var mainTab: UITableView!
-    @IBOutlet weak var newFolder: UIButton!
+    var model:Content?
+    var dataArr:[Content] = []
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        let path: String = Bundle.main.path(forResource: "searchHistory", ofType:"plist")!
+        let array = NSArray(contentsOfFile: path)! as! NSMutableArray
+        if array.count != 0 {
+            for i in 0..<array.count{
+                let model = Content()
+                let dic: Dictionary<String,String> = array[i] as! Dictionary
+                model.rtitle = dic["title"]!
+                model.rurl = dic["url"]!
+                model.rcon =  ""
+                model.rimg = ""
+                self.dataArr += [model]
+            }
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +45,27 @@ class markAndCollectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+}
+extension markAndCollectionViewController: UITableViewDelegate,UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    */
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dataArr.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style:.default, reuseIdentifier: "cell")
+        cell.textLabel?.text = self.dataArr[indexPath.row].rurl
+        cell.imageView?.image = UIImage(named: "bottom浏览器打开")
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let web = SearchWebViewController()
+        let con = self.dataArr[indexPath.row]
+        web.model = con
+        self.navigationController?.pushViewController(web, animated: true)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
 }

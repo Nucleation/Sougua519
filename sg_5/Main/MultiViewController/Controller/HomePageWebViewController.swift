@@ -9,10 +9,12 @@
 import UIKit
 import SVProgressHUD
 import WebKit
+import BMPlayer
 
 class HomePageWebViewController: UIViewController{
     var navView: UIView?
     var titleLab:UILabel?
+    var backBtn: UIButton?
     var model: HomePageNewsModel?
     var scrollerView: UIScrollView?
     var scrollContent: UIView?
@@ -22,7 +24,6 @@ class HomePageWebViewController: UIViewController{
     var webHeitht: CGFloat?{
         didSet{
             
-            print("---0098----\(webHeitht)")
             self.webview?.frame = CGRect(x: 0, y: 0, width: screenWidth, height: webHeitht ?? 0)
         }
     }
@@ -45,8 +46,10 @@ class HomePageWebViewController: UIViewController{
     var collectBtn: UIButton?
     var footshare: UIButton?
     var commentListArray:Array<NovelCommentModel> = []
-    
+    /// 播放器
+    lazy var player: BMPlayer = BMPlayer(customControlView: VideoPlayerCustomView())
     override func viewWillAppear(_ animated: Bool) {
+         player.autoPlay()
         self.navigationController?.isNavigationBarHidden = true
         if self.textField != nil {
             let center = NotificationCenter.default
@@ -64,11 +67,12 @@ class HomePageWebViewController: UIViewController{
         let backBtn = UIButton(type: .custom)
         backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-        navView.addSubview(backBtn)
-        let leftBtn = UIButton(type: .custom)
-        leftBtn.setImage(UIImage(named: "gengduo"), for: .normal)
-        leftBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
-        navView.addSubview(leftBtn)
+        self.view.addSubview(backBtn)
+        self.backBtn = backBtn
+        let rightBtn = UIButton(type: .custom)
+        rightBtn.setImage(UIImage(named: "gengduo"), for: .normal)
+        rightBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
+        navView.addSubview(rightBtn)
         let titleLab = UILabel()
         titleLab.font = UIFont.systemFont(ofSize: 16)
         titleLab.textAlignment = .center
@@ -84,14 +88,14 @@ class HomePageWebViewController: UIViewController{
             make.left.equalTo(navView)
             make.width.height.equalTo(44)
         }
-        leftBtn.snp.makeConstraints { (make) in
+        rightBtn.snp.makeConstraints { (make) in
             make.centerY.equalTo(navView).offset(10)
             make.right.equalTo(navView)
             make.width.height.equalTo(44)
         }
         titleLab.snp.makeConstraints { (make) in
             make.centerY.height.equalTo(backBtn)
-            make.width.equalTo(navView).offset(-88)
+            make.width.equalTo(navView).offset(-230)
             make.centerX.equalTo(navView)
         }
         let scrollview = UIScrollView()
@@ -103,19 +107,17 @@ class HomePageWebViewController: UIViewController{
         self.scrollerView?.addSubview(scrollContent)
         self.scrollContent = scrollContent
         let webview: WKWebView = WKWebView(frame: self.view.frame, configuration: WKWebViewConfiguration())
-        if model?.type == "0" {
+        if model?.directType != "1" {
             if (model?.newsContent) != nil {
                 webview.loadHTMLString((model?.newsContent)!, baseURL: nil)
             }
         }else{
-            if (model?.newsContent) != nil {
-                webview.load(URLRequest(url: URL(string: (model?.newsContent)!)!))
-            }
+            
         }
         webview.navigationDelegate = self
         self.scrollContent?.addSubview(webview)
         self.view.bringSubview(toFront: navView)
-        
+        self.view.bringSubview(toFront: self.backBtn!)
         self.webview = webview
         self.titleLab = titleLab
         self.navView = navView
@@ -129,6 +131,7 @@ class HomePageWebViewController: UIViewController{
         upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
         upBtn.setTitle("3", for: .normal)
         upBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        upBtn.addTarget(self, action: #selector(upBtnClick), for: .touchUpInside)
         upBtn.layer.cornerRadius = 18
         upBtn.layer.borderWidth = 1
         upBtn.layer.borderColor = UIColor.colorWithHexColorString("999999").cgColor
@@ -237,17 +240,66 @@ class HomePageWebViewController: UIViewController{
             make.right.equalTo(self.footView!.snp.right).offset(-10)
         })
         requestComment()
+        self.webview?.scrollView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    @objc func upBtnClick() {
+        self.model?.up += 1
+        self.upBtn?.isEnabled = false
+        self.upBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
+        self.upBtn?.setTitle(String(self.model!.up), for: .normal)
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.model?.id ?? ""]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: UpnewLickUrl, parameters: parData ) { (json) in
+            
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize" {
+            print(change ?? "")
+            //self.webHeitht = self.webview?.scrollView.contentSize.height
+                //self.webView.scrollView.contentSize.height
+        }
+    }
+    
     func layoutView() {
         self.scrollerView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 40, right: 0))
         })
-        self.webview?.snp.makeConstraints({ (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(self.webHeitht!)
-        })
+        if model?.type == "1" {
+
+            self.view?.addSubview(self.player)
+            self.view?.bringSubview(toFront: self.backBtn!)
+            self.player.delegate = self
+            self.player.setVideo(resource: BMPlayerResource(url: URL(string:model?.newsContent ?? "")!))
+            self.player.backBlock = { [unowned self] (isFullScreen) in
+                if isFullScreen == true { return }
+                let _ = self.navigationController?.popViewController(animated: true)
+            }
+            self.player.snp.makeConstraints { (make) in
+                make.left.right.top.equalToSuperview()
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(500)
+            }
+        }else{
+            self.webview?.snp.makeConstraints({ (make) in
+                make.top.left.right.equalToSuperview()
+                make.height.equalTo(self.webHeitht!)
+            })
+        }
+        
         self.contentView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.webview!.snp.bottom)
+            if model?.type == "1"{
+                make.top.equalTo(self.player.snp.bottom)
+            }else{
+                make.top.equalTo(self.webview!.snp.bottom)
+            }
+            
             make.left.right.equalTo(self.scrollContent!)
             make.bottom.equalTo(self.totolUp!).offset(10)
         })
@@ -331,7 +383,7 @@ class HomePageWebViewController: UIViewController{
         self.view.addSubview(popview)
         self.popview = popview
     }
-    
+    //MARK:-- 键盘评论pop收回问题
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.popview?.removeFromSuperview()
         self.view.endEditing(true)
@@ -455,5 +507,52 @@ extension HomePageWebViewController: BottonPopViewDelegate{
     
     func shareBtnClick() {
         
+    }
+}
+// MARK:- BMPlayerDelegate example
+extension HomePageWebViewController: BMPlayerDelegate {
+    // Call when player orinet changed
+    func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
+        player.snp.remakeConstraints { (make) in
+            make.left.right.top.equalToSuperview()
+            if isFullscreen {
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(900)
+                //self.leftBtn?.isHidden = true
+            } else {
+                make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(900)
+                //self.leftBtn?.isHidden = false
+            }
+        }
+        self.footView?.snp.remakeConstraints({ (make) in
+            if isFullscreen {
+                make.top.equalTo(self.view.snp.bottom).offset(100)
+                print("1111111")
+            } else {
+                print("222222")
+                make.left.right.bottom.equalTo(self.view)
+                make.height.equalTo(40)
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    // Call back when playing state changed, use to detect is playing or not
+    func bmPlayer(player: BMPlayer, playerIsPlaying playing: Bool) {
+        print("| BMPlayerDelegate | playerIsPlaying | playing - \(playing)")
+    }
+    
+    // Call back when playing state changed, use to detect specefic state like buffering, bufferfinished
+    func bmPlayer(player: BMPlayer, playerStateDidChange state: BMPlayerState) {
+        print("| BMPlayerDelegate | playerStateDidChange | state - \(state)")
+    }
+    
+    // Call back when play time change
+    func bmPlayer(player: BMPlayer, playTimeDidChange currentTime: TimeInterval, totalTime: TimeInterval) {
+        //        print("| BMPlayerDelegate | playTimeDidChange | \(currentTime) of \(totalTime)")
+    }
+    
+    // Call back when the video loaded duration changed
+    func bmPlayer(player: BMPlayer, loadedTimeDidChange loadedDuration: TimeInterval, totalDuration: TimeInterval) {
+        //        print("| BMPlayerDelegate | loadedTimeDidChange | \(loadedDuration) of \(totalDuration)")
     }
 }

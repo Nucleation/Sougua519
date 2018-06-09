@@ -15,6 +15,8 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
     var headView: NovelHomeHeadView?
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        //更新按钮状态
+        self.oprateView.subViewStatus(viewController: self)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

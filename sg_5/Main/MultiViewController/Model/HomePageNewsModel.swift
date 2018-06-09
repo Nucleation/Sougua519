@@ -42,6 +42,6 @@ class HomePageNewsModel: HandyJSON {
     var modelType:String = ""
     var originalCreate_date:String = ""
     var originalPortrait:String = ""
-    var up:String = ""
+    var up:Int = 0
     public required init() {}
 }

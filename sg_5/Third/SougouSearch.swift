@@ -11,7 +11,7 @@ let sharderSougou = SougouSearch()
 
 class SougouSearch: NSObject {
     
-    func getData(keyWord: String) -> Array<Any> {
+    func getData(keyWord: String) -> Array<Content> {
         var dataArr: [Content] = []
         //手机端
         //let urlStr = "https://m.sogou.com/web/searchList.jsp?s_from=pcsearch&keyword=\(keyWord)"
