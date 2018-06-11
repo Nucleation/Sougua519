@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        configUSharePlatforms()
+        confitUShareSettings()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.resignKey()
@@ -29,6 +30,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firstWindow?.rootViewController = MUNaigationViewController(rootViewController: MuRootViewController())
         firstWindow?.makeKeyAndVisible()
         return true
+    }
+    func configUSharePlatforms() {
+        /* 设置微信的appKey和appSecret */
+        //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatSession, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
+        //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatFavorite, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
+        //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatTimeLine, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
+        /* 设置分享到QQ互联的appID*/
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "http://mobile.umeng.com/social")
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.qzone, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "http://mobile.umeng.com/social")
+        //UMSocialManager.default().removePlatformProvider(with: .tim)
+        UMSocialManager.default().removePlatformProvider(with: .wechatFavorite)
+        UMSocialManager.default().removePlatformProvider(with: .wechatSession)
+        UMSocialManager.default().removePlatformProvider(with: .wechatTimeLine)
+        
+    }
+    
+    func confitUShareSettings() {
+        
+        
+        
+        /*
+         * 打开图片水印
+         */
+        //        UMSocialGlobal.shareInstance().isUsingWaterMark = true
+        /*
+         * 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
+         <key>NSAppTransportSecurity</key>
+         <dict>
+         <key>NSAllowsArbitraryLoads</key>
+         <true/>
+         </dict>
+         */
+        //[UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
     }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -51,7 +85,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+}
+class StaticNumerical: NSObject {
+    static let sharder = StaticNumerical_guaniu()
 }
 
+class StaticNumerical_guaniu: NSObject {
+    var appname = "天天租"
+    /*  测试地址 */
+    //let AppConfig_BaseUrlValue = apiUrl1 // 正式地址
+    let buglyId = "135c25dfc0"
+    let UMessageAppkey = "5b1ddc83a40fa358f9000058"
+    /* 微信QQ分享  */
+    let SessionAppKey = "wxac6c048175533f71"
+    let SessionAppSecret = "7927a0a4815e96514048f5ddecfe9766"
+    let QQAppKey = "1106889385"
+    let QQAppSecret = "XJxeObz9fTpnSxt5"
+    
+}

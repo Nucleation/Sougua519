@@ -22,4 +22,6 @@ target 'sg_5' do
   pod 'EmptyPage'
   pod 'Toast-Swift', '~> 3.0.1'
   pod 'WKWebViewJavascriptBridge', '~> 1.1.0'
+  pod 'UMCCommon'
+  pod 'UMCSecurityPlugins'
 end

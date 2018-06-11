@@ -28,6 +28,8 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.0.0)
   - Toast-Swift (3.0.1)
+  - UMCCommon (1.5.1)
+  - UMCSecurityPlugins (1.0.6)
   - WKWebViewJavascriptBridge (1.1.0)
 
 DEPENDENCIES:
@@ -46,6 +48,8 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftyJSON
   - Toast-Swift (~> 3.0.1)
+  - UMCCommon
+  - UMCSecurityPlugins
   - WKWebViewJavascriptBridge (~> 1.1.0)
 
 SPEC CHECKSUMS:
@@ -65,8 +69,10 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
+  UMCCommon: 16b674e9de0616d3a6128c551348a686d869c3c7
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   WKWebViewJavascriptBridge: 8da532409bc489ba2c0a69cf38e5d1cd49e3d5e4
 
-PODFILE CHECKSUM: e253d838cfe22fb66371175704fcfcf8899b84f4
+PODFILE CHECKSUM: 02e1b83617233bcd4d97641cf8a245d126158cb5
 
 COCOAPODS: 1.4.0

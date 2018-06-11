@@ -492,7 +492,7 @@ extension HomePageWebViewController: UITextFieldDelegate {
         }
     }
 }
-extension HomePageWebViewController: BottonPopViewDelegate{
+extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuViewDelegate{
     func reloadBtnClick() {
         
     }
@@ -506,8 +506,18 @@ extension HomePageWebViewController: BottonPopViewDelegate{
     }
     
     func shareBtnClick() {
+        print("share")
+        DispatchQueue.main.async {
+            UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.QQ.rawValue)])
+            UMSocialUIManager.setShareMenuViewDelegate(self)
+            
+            UMSocialUIManager.showShareMenuViewInWindow { (platformType, userInfo) in
+                print(platformType.rawValue)
+            }
+        }
         
     }
+   
 }
 // MARK:- BMPlayerDelegate example
 extension HomePageWebViewController: BMPlayerDelegate {
