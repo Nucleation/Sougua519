@@ -142,6 +142,7 @@
 		17D5603320CE5C0E0074FFEA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603220CE5C0E0074FFEA /* CoreGraphics.framework */; };
 		17D5603520CE5C1B0074FFEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603420CE5C1A0074FFEA /* SystemConfiguration.framework */; };
 		17D5603720CE5C260074FFEA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603620CE5C260074FFEA /* libc++.tbd */; };
+		17D5603920CE7BDD0074FFEA /* Xcache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D5603820CE7BDD0074FFEA /* Xcache.swift */; };
 		17D8CB3E20A44F6800914492 /* SougouSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB3D20A44F6800914492 /* SougouSearch.swift */; };
 		17D8CB4020A44F7800914492 /* SOsearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB3F20A44F7800914492 /* SOsearch.swift */; };
 		17D8CB4820A44FFB00914492 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D8CB4320A44FFA00914492 /* TFHpple.m */; };
@@ -323,6 +324,7 @@
 		17D5603220CE5C0E0074FFEA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		17D5603420CE5C1A0074FFEA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		17D5603620CE5C260074FFEA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		17D5603820CE7BDD0074FFEA /* Xcache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xcache.swift; sourceTree = "<group>"; };
 		17D8CB3D20A44F6800914492 /* SougouSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SougouSearch.swift; sourceTree = "<group>"; };
 		17D8CB3F20A44F7800914492 /* SOsearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOsearch.swift; sourceTree = "<group>"; };
 		17D8CB4220A44FFA00914492 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				177D5AC520B3C84900B4A5E8 /* KeyChainTool.swift */,
 				174F766320A44C4900BB0B46 /* Const.swift */,
 				174F766420A44C4900BB0B46 /* homepage.json */,
+				17D5603820CE7BDD0074FFEA /* Xcache.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1290,6 +1293,7 @@
 				177CC1E520AEA55E00202F14 /* NovelFlowLayout.swift in Sources */,
 				174F768220A44E6300BB0B46 /* HomeNavigationView.swift in Sources */,
 				1762DE9320AD891200D179AE /* NovelContentViewController.swift in Sources */,
+				17D5603920CE7BDD0074FFEA /* Xcache.swift in Sources */,
 				177D5AC620B3C84900B4A5E8 /* KeyChainTool.swift in Sources */,
 				176F998A20B92E6600FF6E46 /* NovelShelfListModel.swift in Sources */,
 				177C35D720B66F3600B803EF /* BookCityViewController.swift in Sources */,

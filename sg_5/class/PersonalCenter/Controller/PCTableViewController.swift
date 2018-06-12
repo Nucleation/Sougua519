@@ -7,23 +7,33 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PCTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var userName: UIButton!
     @IBOutlet weak var subLab: UIButton!
     
+    @IBOutlet weak var cacheLab: UILabel!
     @IBOutlet var mainTab: UITableView!
 
     @IBOutlet weak var userIcon: UIButton!
     override func viewWillAppear(_ animated: Bool) {
         //判断用户登录
         if KeyChain().getKeyChain()["isLogin"] != "1" {
-            self.userIcon.setImage(UIImage(named: "userIMG.jpg"), for: .normal)
+            
+            self.userIcon.setImage(UIImage(named: "userIMG"), for: .normal)
         }else{
-            self.userIcon.kf.setImage(with: URL(string: "\(postUrl)/images/\( KeyChain().getKeyChain()["headUrl"] ?? "")"), for: .normal)
+            
+            if KeyChain().getKeyChain()["headUrl"] == ""{
+                self.userIcon.setImage(UIImage(named: "userIMG"), for: .normal)
+            }else{
+                self.userIcon.kf.setImage(with: URL(string: "\(postUrl)/images/\( KeyChain().getKeyChain()["headUrl"] ?? "")"), for: .normal)
+            }
+            
             self.userName.setTitle("\(KeyChain().getKeyChain()["mobile"] ?? "")", for: .normal)
             self.subLab.isHidden = true
         }
+        self.cacheLab.text =  Xcache.returnCacheSize()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +89,12 @@ var picker:UIImagePickerController!
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+        if indexPath.row == 3 {
+            Xcache.cleanCache {
+                self.cacheLab.text = Xcache.returnCacheSize()
+                self.view.makeToast("清理完成")
+            }
+        }
     }
 
     /*

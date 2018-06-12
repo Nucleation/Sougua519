@@ -129,7 +129,7 @@ class HomePageWebViewController: UIViewController{
        
         let upBtn = UIButton(type: .custom)
         upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
-        upBtn.setTitle("3", for: .normal)
+        upBtn.setTitle(String(model?.up ?? 0), for: .normal)
         upBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         upBtn.addTarget(self, action: #selector(upBtnClick), for: .touchUpInside)
         upBtn.layer.cornerRadius = 18
@@ -353,9 +353,16 @@ class HomePageWebViewController: UIViewController{
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","fromId":fromId]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentByType, parameters: parData) { (json) in
+            
+//            if let totalcomment = json["sumComment"]{
+//              self.totolComment?.text = String(totalcomment)
+//            }
+           
+            self.totolUp?.text = "\(String(json["sumComment"].intValue))赞"
             if let datas = json["commentList"].arrayObject{
                 self.commentListArray += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
             }
+            self.totolComment?.text = "评论\(self.commentListArray.count))"
             self.tableView?.reloadData()
             self.view.layoutIfNeeded()
         }
@@ -507,6 +514,7 @@ extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuView
     
     func shareBtnClick() {
         print("share")
+        self.popview?.removeFromSuperview()
         DispatchQueue.main.async {
             UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.QQ.rawValue)])
             UMSocialUIManager.setShareMenuViewDelegate(self)
