@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SVProgressHUD
 class FindViewController: UIViewController,WKNavigationDelegate {
     var navView: UIView?
     var titleLab:UILabel?
@@ -56,6 +57,27 @@ class FindViewController: UIViewController,WKNavigationDelegate {
     }
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)
+    }
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        SVProgressHUD.show()
+    }
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        print("网页开始接收网页内容")
+        webView.evaluateJavaScript("document.title") { (a, e) in
+            self.titleLab?.text = a as? String ?? ""
+        }
+    }
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("网页由于某些原因加载失败\(error)")
+    }
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("网页\(error)")
+    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+         SVProgressHUD.dismiss()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        SVProgressHUD.dismiss()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

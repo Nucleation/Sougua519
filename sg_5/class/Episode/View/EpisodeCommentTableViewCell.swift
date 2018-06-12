@@ -7,10 +7,14 @@
 //
 
 import UIKit
+protocol EpisodeCommentTableViewCellDelegate {
+    func addTooleUP()
+}
 
 class EpisodeCommentTableViewCell: UITableViewCell {
     var model = NovelCommentModel(){
         didSet {
+            self.upBtn.isEnabled = true
             userNameLab.text = model.fromMobile
             commentLab.text = model.content
             timeLab.text = model.createDate
@@ -25,6 +29,7 @@ class EpisodeCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var commentLab: UILabel!
     @IBOutlet weak var timeLab: UILabel!
     @IBOutlet weak var upBtn: UIButton!
+    var delegate: EpisodeCommentTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,6 +42,7 @@ class EpisodeCommentTableViewCell: UITableViewCell {
         self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
         self.upBtn.setTitle(String(model.upCount), for: .normal)
         //#MARK: -- 交给父视图处理
+        addTootleUP()
         self.upWithIdAndMark(id: model.id)
     }
     func upWithIdAndMark(id: String){
@@ -47,6 +53,11 @@ class EpisodeCommentTableViewCell: UITableViewCell {
             if json["code"] == "1" {
                 self.makeToast(json["msg"].stringValue)
             }
+        }
+    }
+    func addTootleUP(){
+        if delegate != nil{
+            delegate?.addTooleUP()
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

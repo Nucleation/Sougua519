@@ -128,16 +128,16 @@
 		17857D5C20B53BF2005B028C /* HomePageNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */; };
 		17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5E20B548B6005B028C /* HomePageWebViewController.swift */; };
 		178EB39220BFE77A006C156B /* MultiPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178EB39120BFE77A006C156B /* MultiPictureViewController.swift */; };
-		17D5602620CE5B8B0074FFEA /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5600F20CE5B8B0074FFEA /* UMCommon.framework */; };
-		17D5602720CE5B8B0074FFEA /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 17D5601320CE5B8B0074FFEA /* UMSocialSDKResources.bundle */; };
-		17D5602820CE5B8B0074FFEA /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5601420CE5B8B0074FFEA /* UShareUI.framework */; };
-		17D5602920CE5B8B0074FFEA /* UMShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5601520CE5B8B0074FFEA /* UMShare.framework */; };
-		17D5602A20CE5B8B0074FFEA /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5601820CE5B8B0074FFEA /* libSocialWeChat.a */; };
-		17D5602B20CE5B8B0074FFEA /* libSocialOfficialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5601B20CE5B8B0074FFEA /* libSocialOfficialWeChat.a */; };
-		17D5602C20CE5B8B0074FFEA /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17D5601E20CE5B8B0074FFEA /* README.txt */; };
-		17D5602D20CE5B8B0074FFEA /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5602020CE5B8B0074FFEA /* libWeChatSDK.a */; };
-		17D5602E20CE5B8B0074FFEA /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5602320CE5B8B0074FFEA /* libSocialQQ.a */; };
-		17D5602F20CE5B8B0074FFEA /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5602520CE5B8B0074FFEA /* TencentOpenAPI.framework */; };
+		179234D920CF53ED00893F3F /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234C220CF53ED00893F3F /* UMCommon.framework */; };
+		179234DA20CF53ED00893F3F /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 179234C620CF53ED00893F3F /* UMSocialSDKResources.bundle */; };
+		179234DB20CF53ED00893F3F /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234C720CF53ED00893F3F /* UShareUI.framework */; };
+		179234DC20CF53ED00893F3F /* UMShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234C820CF53ED00893F3F /* UMShare.framework */; };
+		179234DD20CF53ED00893F3F /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234CB20CF53ED00893F3F /* libSocialWeChat.a */; };
+		179234DE20CF53ED00893F3F /* libSocialOfficialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234CE20CF53ED00893F3F /* libSocialOfficialWeChat.a */; };
+		179234DF20CF53ED00893F3F /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 179234D120CF53ED00893F3F /* README.txt */; };
+		179234E020CF53ED00893F3F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D320CF53ED00893F3F /* libWeChatSDK.a */; };
+		179234E120CF53ED00893F3F /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D620CF53ED00893F3F /* libSocialQQ.a */; };
+		179234E220CF53ED00893F3F /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D820CF53ED00893F3F /* TencentOpenAPI.framework */; };
 		17D5603120CE5BFF0074FFEA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603020CE5BFF0074FFEA /* libsqlite3.tbd */; };
 		17D5603320CE5C0E0074FFEA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603220CE5C0E0074FFEA /* CoreGraphics.framework */; };
 		17D5603520CE5C1B0074FFEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603420CE5C1A0074FFEA /* SystemConfiguration.framework */; };
@@ -305,21 +305,21 @@
 		17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageNewsModel.swift; sourceTree = "<group>"; };
 		17857D5E20B548B6005B028C /* HomePageWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageWebViewController.swift; sourceTree = "<group>"; };
 		178EB39120BFE77A006C156B /* MultiPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPictureViewController.swift; sourceTree = "<group>"; };
-		17D5600F20CE5B8B0074FFEA /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
-		17D5601320CE5B8B0074FFEA /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
-		17D5601420CE5B8B0074FFEA /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
-		17D5601520CE5B8B0074FFEA /* UMShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMShare.framework; sourceTree = "<group>"; };
-		17D5601820CE5B8B0074FFEA /* libSocialWeChat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWeChat.a; sourceTree = "<group>"; };
-		17D5601920CE5B8B0074FFEA /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
-		17D5601B20CE5B8B0074FFEA /* libSocialOfficialWeChat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialOfficialWeChat.a; sourceTree = "<group>"; };
-		17D5601C20CE5B8B0074FFEA /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		17D5601D20CE5B8B0074FFEA /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		17D5601E20CE5B8B0074FFEA /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		17D5601F20CE5B8B0074FFEA /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		17D5602020CE5B8B0074FFEA /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		17D5602220CE5B8B0074FFEA /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
-		17D5602320CE5B8B0074FFEA /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
-		17D5602520CE5B8B0074FFEA /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		179234C220CF53ED00893F3F /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		179234C620CF53ED00893F3F /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
+		179234C720CF53ED00893F3F /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
+		179234C820CF53ED00893F3F /* UMShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMShare.framework; sourceTree = "<group>"; };
+		179234CB20CF53ED00893F3F /* libSocialWeChat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWeChat.a; sourceTree = "<group>"; };
+		179234CC20CF53ED00893F3F /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
+		179234CE20CF53ED00893F3F /* libSocialOfficialWeChat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialOfficialWeChat.a; sourceTree = "<group>"; };
+		179234CF20CF53ED00893F3F /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		179234D020CF53ED00893F3F /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		179234D120CF53ED00893F3F /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		179234D220CF53ED00893F3F /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		179234D320CF53ED00893F3F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		179234D520CF53ED00893F3F /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
+		179234D620CF53ED00893F3F /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
+		179234D820CF53ED00893F3F /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		17D5603020CE5BFF0074FFEA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		17D5603220CE5C0E0074FFEA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		17D5603420CE5C1A0074FFEA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -346,19 +346,19 @@
 			files = (
 				17D5603720CE5C260074FFEA /* libc++.tbd in Frameworks */,
 				17D5603520CE5C1B0074FFEA /* SystemConfiguration.framework in Frameworks */,
+				179234E120CF53ED00893F3F /* libSocialQQ.a in Frameworks */,
+				179234DB20CF53ED00893F3F /* UShareUI.framework in Frameworks */,
 				17D5603320CE5C0E0074FFEA /* CoreGraphics.framework in Frameworks */,
 				17D5603120CE5BFF0074FFEA /* libsqlite3.tbd in Frameworks */,
-				17D5602E20CE5B8B0074FFEA /* libSocialQQ.a in Frameworks */,
 				17765E2120B2D6B1008FDC6E /* libstdc++.6.0.9.tbd in Frameworks */,
-				17D5602620CE5B8B0074FFEA /* UMCommon.framework in Frameworks */,
-				17D5602D20CE5B8B0074FFEA /* libWeChatSDK.a in Frameworks */,
+				179234E220CF53ED00893F3F /* TencentOpenAPI.framework in Frameworks */,
+				179234DD20CF53ED00893F3F /* libSocialWeChat.a in Frameworks */,
 				17D8CB5320A4523D00914492 /* libxml2.tbd in Frameworks */,
-				17D5602B20CE5B8B0074FFEA /* libSocialOfficialWeChat.a in Frameworks */,
-				17D5602A20CE5B8B0074FFEA /* libSocialWeChat.a in Frameworks */,
+				179234DC20CF53ED00893F3F /* UMShare.framework in Frameworks */,
+				179234D920CF53ED00893F3F /* UMCommon.framework in Frameworks */,
+				179234E020CF53ED00893F3F /* libWeChatSDK.a in Frameworks */,
 				0F28CFA495528E4F7CA144CB /* Pods_sg_5.framework in Frameworks */,
-				17D5602F20CE5B8B0074FFEA /* TencentOpenAPI.framework in Frameworks */,
-				17D5602920CE5B8B0074FFEA /* UMShare.framework in Frameworks */,
-				17D5602820CE5B8B0074FFEA /* UShareUI.framework in Frameworks */,
+				179234DE20CF53ED00893F3F /* libSocialOfficialWeChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,7 +499,7 @@
 		174F762D20A44AB900BB0B46 /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				17D5600B20CE5B220074FFEA /* umeng */,
+				179234BE20CF53ED00893F3F /* umeng */,
 				177A4F6D20A539EF0004336E /* AES加密 */,
 				17D8CB4120A44FFA00914492 /* Hpple */,
 				17D8CB3F20A44F7800914492 /* SOsearch.swift */,
@@ -877,115 +877,112 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		17D5600B20CE5B220074FFEA /* umeng */ = {
+		179234BE20CF53ED00893F3F /* umeng */ = {
 			isa = PBXGroup;
 			children = (
-				17D5600C20CE5B8B0074FFEA /* common */,
-				17D5601020CE5B8B0074FFEA /* share */,
+				179234BF20CF53ED00893F3F /* common */,
+				179234C320CF53ED00893F3F /* share */,
 			);
-			name = umeng;
-			path = ume;
+			path = umeng;
 			sourceTree = "<group>";
 		};
-		17D5600C20CE5B8B0074FFEA /* common */ = {
+		179234BF20CF53ED00893F3F /* common */ = {
 			isa = PBXGroup;
 			children = (
-				17D5600D20CE5B8B0074FFEA /* common_ios_1.5.1 */,
+				179234C020CF53ED00893F3F /* common_ios_1.5.1 */,
 			);
-			name = common;
-			path = sg_5/Third/umeng/common;
-			sourceTree = SOURCE_ROOT;
+			path = common;
+			sourceTree = "<group>";
 		};
-		17D5600D20CE5B8B0074FFEA /* common_ios_1.5.1 */ = {
+		179234C020CF53ED00893F3F /* common_ios_1.5.1 */ = {
 			isa = PBXGroup;
 			children = (
-				17D5600E20CE5B8B0074FFEA /* normal */,
+				179234C120CF53ED00893F3F /* normal */,
 			);
 			path = common_ios_1.5.1;
 			sourceTree = "<group>";
 		};
-		17D5600E20CE5B8B0074FFEA /* normal */ = {
+		179234C120CF53ED00893F3F /* normal */ = {
 			isa = PBXGroup;
 			children = (
-				17D5600F20CE5B8B0074FFEA /* UMCommon.framework */,
+				179234C220CF53ED00893F3F /* UMCommon.framework */,
 			);
 			path = normal;
 			sourceTree = "<group>";
 		};
-		17D5601020CE5B8B0074FFEA /* share */ = {
+		179234C320CF53ED00893F3F /* share */ = {
 			isa = PBXGroup;
 			children = (
-				17D5601120CE5B8B0074FFEA /* share_ios_6.9.3 */,
+				179234C420CF53ED00893F3F /* share_ios_6.9.3 */,
 			);
-			name = share;
-			path = sg_5/Third/umeng/share;
-			sourceTree = SOURCE_ROOT;
+			path = share;
+			sourceTree = "<group>";
 		};
-		17D5601120CE5B8B0074FFEA /* share_ios_6.9.3 */ = {
+		179234C420CF53ED00893F3F /* share_ios_6.9.3 */ = {
 			isa = PBXGroup;
 			children = (
-				17D5601220CE5B8B0074FFEA /* UMSocialUI */,
-				17D5601520CE5B8B0074FFEA /* UMShare.framework */,
-				17D5601620CE5B8B0074FFEA /* SocialLibraries */,
+				179234C520CF53ED00893F3F /* UMSocialUI */,
+				179234C820CF53ED00893F3F /* UMShare.framework */,
+				179234C920CF53ED00893F3F /* SocialLibraries */,
 			);
 			path = share_ios_6.9.3;
 			sourceTree = "<group>";
 		};
-		17D5601220CE5B8B0074FFEA /* UMSocialUI */ = {
+		179234C520CF53ED00893F3F /* UMSocialUI */ = {
 			isa = PBXGroup;
 			children = (
-				17D5601320CE5B8B0074FFEA /* UMSocialSDKResources.bundle */,
-				17D5601420CE5B8B0074FFEA /* UShareUI.framework */,
+				179234C620CF53ED00893F3F /* UMSocialSDKResources.bundle */,
+				179234C720CF53ED00893F3F /* UShareUI.framework */,
 			);
 			path = UMSocialUI;
 			sourceTree = "<group>";
 		};
-		17D5601620CE5B8B0074FFEA /* SocialLibraries */ = {
+		179234C920CF53ED00893F3F /* SocialLibraries */ = {
 			isa = PBXGroup;
 			children = (
-				17D5601720CE5B8B0074FFEA /* WeChat */,
-				17D5602120CE5B8B0074FFEA /* QQ */,
+				179234CA20CF53ED00893F3F /* WeChat */,
+				179234D420CF53ED00893F3F /* QQ */,
 			);
 			path = SocialLibraries;
 			sourceTree = "<group>";
 		};
-		17D5601720CE5B8B0074FFEA /* WeChat */ = {
+		179234CA20CF53ED00893F3F /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
-				17D5601820CE5B8B0074FFEA /* libSocialWeChat.a */,
-				17D5601920CE5B8B0074FFEA /* UMSocialWechatHandler.h */,
-				17D5601A20CE5B8B0074FFEA /* WechatSDK */,
+				179234CB20CF53ED00893F3F /* libSocialWeChat.a */,
+				179234CC20CF53ED00893F3F /* UMSocialWechatHandler.h */,
+				179234CD20CF53ED00893F3F /* WechatSDK */,
 			);
 			path = WeChat;
 			sourceTree = "<group>";
 		};
-		17D5601A20CE5B8B0074FFEA /* WechatSDK */ = {
+		179234CD20CF53ED00893F3F /* WechatSDK */ = {
 			isa = PBXGroup;
 			children = (
-				17D5601B20CE5B8B0074FFEA /* libSocialOfficialWeChat.a */,
-				17D5601C20CE5B8B0074FFEA /* WXApi.h */,
-				17D5601D20CE5B8B0074FFEA /* WXApiObject.h */,
-				17D5601E20CE5B8B0074FFEA /* README.txt */,
-				17D5601F20CE5B8B0074FFEA /* WechatAuthSDK.h */,
-				17D5602020CE5B8B0074FFEA /* libWeChatSDK.a */,
+				179234CE20CF53ED00893F3F /* libSocialOfficialWeChat.a */,
+				179234CF20CF53ED00893F3F /* WXApi.h */,
+				179234D020CF53ED00893F3F /* WXApiObject.h */,
+				179234D120CF53ED00893F3F /* README.txt */,
+				179234D220CF53ED00893F3F /* WechatAuthSDK.h */,
+				179234D320CF53ED00893F3F /* libWeChatSDK.a */,
 			);
 			path = WechatSDK;
 			sourceTree = "<group>";
 		};
-		17D5602120CE5B8B0074FFEA /* QQ */ = {
+		179234D420CF53ED00893F3F /* QQ */ = {
 			isa = PBXGroup;
 			children = (
-				17D5602220CE5B8B0074FFEA /* UMSocialQQHandler.h */,
-				17D5602320CE5B8B0074FFEA /* libSocialQQ.a */,
-				17D5602420CE5B8B0074FFEA /* QQSDK */,
+				179234D520CF53ED00893F3F /* UMSocialQQHandler.h */,
+				179234D620CF53ED00893F3F /* libSocialQQ.a */,
+				179234D720CF53ED00893F3F /* QQSDK */,
 			);
 			path = QQ;
 			sourceTree = "<group>";
 		};
-		17D5602420CE5B8B0074FFEA /* QQSDK */ = {
+		179234D720CF53ED00893F3F /* QQSDK */ = {
 			isa = PBXGroup;
 			children = (
-				17D5602520CE5B8B0074FFEA /* TencentOpenAPI.framework */,
+				179234D820CF53ED00893F3F /* TencentOpenAPI.framework */,
 			);
 			path = QQSDK;
 			sourceTree = "<group>";
@@ -1130,17 +1127,17 @@
 				174F768320A44E6300BB0B46 /* ImageTableViewCell.xib in Resources */,
 				174F768020A44E6300BB0B46 /* SingleTestTableViewCell.xib in Resources */,
 				177A4F8920A539EF0004336E /* Info-tvOS.plist in Resources */,
-				17D5602720CE5B8B0074FFEA /* UMSocialSDKResources.bundle in Resources */,
 				177D5ACE20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib in Resources */,
 				172377DC20CBDEC600135792 /* searchHistory.plist in Resources */,
 				174F766920A44C4900BB0B46 /* homepage.json in Resources */,
 				177A4F8720A539EF0004336E /* Info-iOS.plist in Resources */,
+				179234DA20CF53ED00893F3F /* UMSocialSDKResources.bundle in Resources */,
 				17507CCE20C4D18C00600BE1 /* EpisodeTextCell.xib in Resources */,
 				177E745120C8D2860017F6CB /* PersonalCenterViewController.storyboard in Resources */,
 				177714F820C68ED20093F3F7 /* EpisodeCommentTableViewCell.xib in Resources */,
 				174F767E20A44E6300BB0B46 /* SingleImageTableViewCell.xib in Resources */,
-				17D5602C20CE5B8B0074FFEA /* README.txt in Resources */,
 				17507CCA20C4D16E00600BE1 /* EpisodeVideoCell.xib in Resources */,
+				179234DF20CF53ED00893F3F /* README.txt in Resources */,
 				176F770220CBC90E000DB5CF /* history.plist in Resources */,
 				177DEBEA20B7ABAA00E176F7 /* NovelListTableViewCell.xib in Resources */,
 				177A4F8820A539EF0004336E /* Info-watchOS.plist in Resources */,

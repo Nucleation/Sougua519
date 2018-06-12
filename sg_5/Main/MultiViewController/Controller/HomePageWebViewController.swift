@@ -37,6 +37,8 @@ class HomePageWebViewController: UIViewController{
     
     var totolComment: UILabel?
     var totolUp: UILabel?
+    var totolUpNum : Int = 0
+    
     //tableView
     
     var tableView: UITableView?
@@ -177,7 +179,7 @@ class HomePageWebViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "EpisodeCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        self.contentView?.addSubview(tableView)
+        self.scrollContent?.addSubview(tableView)
         self.tableView = tableView
         //footView
         let footView = UIView()
@@ -347,22 +349,19 @@ class HomePageWebViewController: UIViewController{
         self.view.layoutIfNeeded()
     }
     func requestComment() {
+        self.commentListArray = []
         let keyChain = KeyChain()
         let fromId = keyChain.getKeyChain()["id"] ?? ""
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","fromId":fromId]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentByType, parameters: parData) { (json) in
-            
-//            if let totalcomment = json["sumComment"]{
-//              self.totolComment?.text = String(totalcomment)
-//            }
-           
-            self.totolUp?.text = "\(String(json["sumComment"].intValue))赞"
+            self.totolUp?.text = "\(String(json["sumComment"].intValue)) 赞"
+            self.totolUpNum = json["sumComment"].intValue
             if let datas = json["commentList"].arrayObject{
                 self.commentListArray += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
             }
-            self.totolComment?.text = "评论\(self.commentListArray.count))"
+            self.totolComment?.text = "评论\(self.commentListArray.count)"
             self.tableView?.reloadData()
             self.view.layoutIfNeeded()
         }
@@ -385,7 +384,7 @@ class HomePageWebViewController: UIViewController{
         self.navigationController?.popViewController(animated: true)
     }
     @objc func leftBtnClick(){
-        let popview = BottonPopView(frame: CGRect(x: 0, y: screenHeight-150, width: screenWidth, height: 150))
+        let popview = BottonPopView(frame: CGRect(x: 0, y: screenHeight-150, width: screenWidth, height: 75))
         popview.delegate = self
         self.view.addSubview(popview)
         self.popview = popview
@@ -400,7 +399,12 @@ class HomePageWebViewController: UIViewController{
         // Dispose of any resources that can be recreated.
     }
 }
-extension HomePageWebViewController: UITableViewDelegate,UITableViewDataSource{
+extension HomePageWebViewController: UITableViewDelegate,UITableViewDataSource,EpisodeCommentTableViewCellDelegate{
+    func addTooleUP() {
+        self.totolUpNum += 1
+        self.totolUp?.text = "\(String(self.totolUpNum)) 赞"
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -409,8 +413,12 @@ extension HomePageWebViewController: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! EpisodeCommentTableViewCell
+        cell.delegate = self
         cell.model = self.commentListArray[indexPath.row]
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
@@ -501,11 +509,11 @@ extension HomePageWebViewController: UITextFieldDelegate {
 }
 extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuViewDelegate{
     func reloadBtnClick() {
-        
+        self.viewDidLoad()
     }
     
     func copyBtnClick() {
-        
+        UIPasteboard.general.string = self.model?.source
     }
     
     func openWebClick() {

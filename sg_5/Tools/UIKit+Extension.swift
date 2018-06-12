@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+
 protocol StoryboardLoadable {}
 
 extension StoryboardLoadable where Self: UIViewController {
