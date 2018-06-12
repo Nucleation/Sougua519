@@ -46,6 +46,7 @@ class HomePageWebViewController: UIViewController{
     var textField: UITextField?
     var commentBtn: UIButton?
     var collectBtn: UIButton?
+    var isCollect: Bool = false
     var footshare: UIButton?
     var commentListArray:Array<NovelCommentModel> = []
     /// 播放器
@@ -209,6 +210,7 @@ class HomePageWebViewController: UIViewController{
         self.commentBtn = commentBtn
         let collectBtn = UIButton(type: .custom)
         collectBtn.setImage(UIImage(named: "shoucang"), for: .normal)
+        collectBtn.addTarget(self, action: #selector(collectBtnClick), for: .touchUpInside)
         self.footView?.addSubview(collectBtn)
         self.collectBtn = collectBtn
         let footshare = UIButton(type: .custom)
@@ -242,12 +244,60 @@ class HomePageWebViewController: UIViewController{
             make.right.equalTo(self.footView!.snp.right).offset(-10)
         })
         requestComment()
+        requestIsCollect()
         self.webview?.scrollView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
     }
-    
+    func requestIsCollect(){
+        guard KeyChain().getKeyChain()["isLogin"] == "1" else {
+            return
+        }
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"contentId":model?.id ?? ""]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: getIsCollectUrl, parameters: parData ) { (json) in
+            if json.boolValue == false {
+                self.collectBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
+                self.isCollect = false
+            }else{
+                self.collectBtn?.setImage(UIImage(named: "收藏"), for: .normal)
+                self.isCollect = true
+            }
+          
+        }
+        
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+    }
+    @objc func collectBtnClick(){
+        if KeyChain().getKeyChain()["isLogin"] != "1" {
+            self.view.makeToast("请登录")
+        }else{
+            if !self.isCollect {
+                let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+                let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"contentId":model?.id ?? "","token":KeyChain().getKeyChain()["token"]!,"type":ContentType.News.rawValue,"title":model?.title ?? "","url":model?.imageUrl ?? "","mark": 0]
+                let parData = dic.toParameterDic()
+                NetworkTool.requestData(.post, URLString: addCollectUrl, parameters: parData ) { (json) in
+                    if json.boolValue == true {
+                        self.collectBtn?.setImage(UIImage(named: "收藏"), for: .normal)
+                        self.isCollect = true
+                    }
+                    
+                }
+            }else{
+                let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+                let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"contentId":model?.id ?? "","token":KeyChain().getKeyChain()["token"]!]
+                let parData = dic.toParameterDic()
+                NetworkTool.requestData(.post, URLString: cancleCollectUrl, parameters: parData ) { (json) in
+                    if json.boolValue == true {
+                        self.collectBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
+                        self.isCollect = false
+                    }   
+                }
+            }
+           
+        }
     }
     @objc func upBtnClick() {
         self.model?.up += 1
@@ -380,11 +430,12 @@ class HomePageWebViewController: UIViewController{
             self.requestComment()
         }
     }
+    
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)
     }
     @objc func leftBtnClick(){
-        let popview = BottonPopView(frame: CGRect(x: 0, y: screenHeight-150, width: screenWidth, height: 75))
+        let popview = BottonPopView(frame: CGRect(x: 0, y: screenHeight-75, width: screenWidth, height: 75))
         popview.delegate = self
         self.view.addSubview(popview)
         self.popview = popview
@@ -509,14 +560,23 @@ extension HomePageWebViewController: UITextFieldDelegate {
 }
 extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuViewDelegate{
     func reloadBtnClick() {
-        self.viewDidLoad()
+        if model?.directType != "1" {
+            if (model?.newsContent) != nil {
+                self.webview?.loadHTMLString((model?.newsContent)!, baseURL: nil)
+            }
+        }
     }
     
     func copyBtnClick() {
-        UIPasteboard.general.string = self.model?.source
+        UIPasteboard.general.string = self.model?.crawlurl
     }
     
     func openWebClick() {
+//        NSString *textURL = @"http://www.yoururl.com/";
+//        NSURL *cleanURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", textURL]];
+//        [[UIApplication sharedApplication] openURL:cleanURL];
+        let url = URL(string: self.model?.crawlurl ?? "")
+        UIApplication.shared.openURL(url!)
         
     }
     
@@ -526,14 +586,38 @@ extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuView
         DispatchQueue.main.async {
             UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.QQ.rawValue)])
             UMSocialUIManager.setShareMenuViewDelegate(self)
-            
-            UMSocialUIManager.showShareMenuViewInWindow { (platformType, userInfo) in
-                print(platformType.rawValue)
-            }
+            UMSocialUIManager.showShareMenuViewInWindow(platformSelectionBlock: { (type, info) in
+                var url = self.model?.crawlurl
+                if url == "" {
+                    url = "http://www.baidu.com"
+                }
+                //MARK: --设置分享图片
+                var desc = ""
+                let shareTitle = "[邀请]"
+                let share_pic = ""
+                desc = "您的好友发来一个邀请，请查看。"
+                let messageObject = UMSocialMessageObject()
+                let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")
+                let shareObject = UMShareWebpageObject.shareObject(withTitle:shareTitle, descr: desc, thumImage:pic)
+                shareObject?.webpageUrl = url
+                messageObject.shareObject = shareObject
+                UMSocialManager.default().share(to: type, messageObject:messageObject, currentViewController: self) { (data, error) in
+                    if let error = error as NSError?{
+                        print("取消分享 : \(error.description)")
+                    }else{
+                        print("分享成功")
+                    }
+                }
+            })
+        
         }
+    }
+    func umSocialParentView(_ defaultSuperView: UIView!) -> UIView! {
+        return self.view
+    }
+    func shareWebPageToPlatformType(platformType:UMSocialPlatformType,currentViewController:UIViewController,type:Int? = 1){
         
     }
-   
 }
 // MARK:- BMPlayerDelegate example
 extension HomePageWebViewController: BMPlayerDelegate {

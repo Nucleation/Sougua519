@@ -11,3 +11,4 @@
 #import "CocoaSecurity.h"
 #import <UMShare/UMShare.h>
 #import <UShareUI/UShareUI.h>
+#import <UMCommon/UMCommon.h>

@@ -13,6 +13,8 @@
 		172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CF23A20A45563005632F3 /* AppDelegate.swift */; };
 		172CF23D20A4558A005632F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172CF23C20A4558A005632F3 /* Assets.xcassets */; };
 		172E4AA620CAA56E00DC5AAF /* BottonPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */; };
+		17402C2720CFC3AD0075F6B2 /* CollectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17402C2620CFC3AD0075F6B2 /* CollectModel.swift */; };
+		17402C2920CFDC8C0075F6B2 /* 第三方分享.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17402C2820CFDC8B0075F6B2 /* 第三方分享.swift */; };
 		174F760820A44AA000BB0B46 /* sg_5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F760720A44AA000BB0B46 /* sg_5Tests.swift */; };
 		174F761320A44AA000BB0B46 /* sg_5UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F761220A44AA000BB0B46 /* sg_5UITests.swift */; };
 		174F764920A44AB900BB0B46 /* MUConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F762020A44AB700BB0B46 /* MUConfig.swift */; };
@@ -138,6 +140,7 @@
 		179234E020CF53ED00893F3F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D320CF53ED00893F3F /* libWeChatSDK.a */; };
 		179234E120CF53ED00893F3F /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D620CF53ED00893F3F /* libSocialQQ.a */; };
 		179234E220CF53ED00893F3F /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D820CF53ED00893F3F /* TencentOpenAPI.framework */; };
+		1792354D20CFC15100893F3F /* PCCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792354C20CFC15100893F3F /* PCCollectionViewController.swift */; };
 		17D5603120CE5BFF0074FFEA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603020CE5BFF0074FFEA /* libsqlite3.tbd */; };
 		17D5603320CE5C0E0074FFEA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603220CE5C0E0074FFEA /* CoreGraphics.framework */; };
 		17D5603520CE5C1B0074FFEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603420CE5C1A0074FFEA /* SystemConfiguration.framework */; };
@@ -174,6 +177,8 @@
 		172CF23A20A45563005632F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172CF23C20A4558A005632F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = sg_5/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottonPopView.swift; sourceTree = "<group>"; };
+		17402C2620CFC3AD0075F6B2 /* CollectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectModel.swift; sourceTree = "<group>"; };
+		17402C2820CFDC8B0075F6B2 /* 第三方分享.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "第三方分享.swift"; sourceTree = "<group>"; };
 		174F75EF20A44A9E00BB0B46 /* sg_5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sg_5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174F75FE20A44AA000BB0B46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		174F760320A44AA000BB0B46 /* sg_5Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sg_5Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,6 +325,7 @@
 		179234D520CF53ED00893F3F /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
 		179234D620CF53ED00893F3F /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		179234D820CF53ED00893F3F /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		1792354C20CFC15100893F3F /* PCCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCollectionViewController.swift; sourceTree = "<group>"; };
 		17D5603020CE5BFF0074FFEA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		17D5603220CE5C0E0074FFEA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		17D5603420CE5C1A0074FFEA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -427,6 +433,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		17402C2520CFC3930075F6B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				17402C2620CFC3AD0075F6B2 /* CollectModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		174F75E620A44A9E00BB0B46 = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +513,7 @@
 		174F762D20A44AB900BB0B46 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				17402C2820CFDC8B0075F6B2 /* 第三方分享.swift */,
 				179234BE20CF53ED00893F3F /* umeng */,
 				177A4F6D20A539EF0004336E /* AES加密 */,
 				17D8CB4120A44FFA00914492 /* Hpple */,
@@ -844,6 +859,7 @@
 		177E744A20C8C5E60017F6CB /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				17402C2520CFC3930075F6B2 /* Model */,
 				177E744B20C8C5F90017F6CB /* Controller */,
 			);
 			path = PersonalCenter;
@@ -859,6 +875,7 @@
 				177E745820C90D110017F6CB /* markAndCollectionViewController.swift */,
 				177E745C20C914F60017F6CB /* SettingViewController.swift */,
 				177E745A20C913F80017F6CB /* RemakePwdViewController.swift */,
+				1792354C20CFC15100893F3F /* PCCollectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1257,6 +1274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1792354D20CFC15100893F3F /* PCCollectionViewController.swift in Sources */,
 				177C617D20A9957600BDE571 /* PictureClassifyModel.swift in Sources */,
 				174F768720A44E6800BB0B46 /* CategoryButtonModel.swift in Sources */,
 				177DEBF020B80B2C00E176F7 /* ReportView.swift in Sources */,
@@ -1334,6 +1352,7 @@
 				174F765B20A44AB900BB0B46 /* MetooCollectionViewCell.swift in Sources */,
 				177A185E20ABCB5C0025EF58 /* MetooViewController.swift in Sources */,
 				174F765620A44AB900BB0B46 /* MUMultiWindowModel.swift in Sources */,
+				17402C2720CFC3AD0075F6B2 /* CollectModel.swift in Sources */,
 				17D8CB4920A44FFB00914492 /* TFHppleElement.m in Sources */,
 				176F76FE20CBB87C000DB5CF /* SearchHistoryViewController.swift in Sources */,
 				177E745520C9067C0017F6CB /* AboutUSViewController.swift in Sources */,
@@ -1356,6 +1375,7 @@
 				177DEBEE20B7F47700E176F7 /* MetooScrollerFootView.swift in Sources */,
 				17507CD020C4E6FC00600BE1 /* EpisodeModel.swift in Sources */,
 				174F765D20A44AB900BB0B46 /* JHFlowLayout.swift in Sources */,
+				17402C2920CFDC8C0075F6B2 /* 第三方分享.swift in Sources */,
 				177A4F8C20A539EF0004336E /* CocoaSecurity.m in Sources */,
 				177D2AB820BCFABB00B61F1E /* CommentView.swift in Sources */,
 			);

@@ -43,5 +43,7 @@ class HomePageNewsModel: HandyJSON {
     var originalCreate_date:String = ""
     var originalPortrait:String = ""
     var up:Int = 0
+    var crawlurl:String = ""
+    
     public required init() {}
 }

@@ -108,14 +108,14 @@ extension NetworkToolProtocol{
         Alamofire.request(URLString, method: method, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 if let jsons = response.result.value{
-                    //print("返回的json---\(JSON(jsons))")
+                    print("返回的json---\(JSON(jsons))")
                     let jsonDic = JSON(jsons)
                     guard jsonDic["code"].intValue == 1 else {
                         SVProgressHUD.dismiss()
                         success(jsonDic)
                         return
                     }
-                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl{
+                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl{
                        success(jsonDic["data"])
                     }else{
                     let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt

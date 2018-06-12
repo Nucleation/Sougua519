@@ -11,12 +11,13 @@ enum ContentType: String {
     case Novel = "7"
     case Picture = "3"
     case News = "1"
+    case Episode = "5"
 }
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 //总接口
-let postUrl = "http://47.95.244.69:8086"
-//let postUrl = "http://192.168.10.123:10001"
+//let postUrl = "http://47.95.244.69:8086"
+let postUrl = "http://192.168.10.123:10001"
 //获取短信验证码
 let ucenterGetSecurityCode = "\(postUrl)/app/ucenter/api/getAppUserSecurityCode"
 //登陆
@@ -70,4 +71,12 @@ let commentUpUrl = "\(postUrl)/app/comment/api/up"
 //
 let UpHeadImageUrl = "\(postUrl)/app/ucenter/api/entry/updateAppUserHeadImg"
 let UpnewLickUrl = "\(postUrl)/app/novel/api/getNewsLike"
+//添加收藏
+let addCollectUrl = "\(postUrl)/app/comment/api/entry/addCollect"
+let cancleCollectUrl = "\(postUrl)/app/comment/api/entry/cancleCollect"
+let getCollectsUrl = "\(postUrl)/app/comment/api/entry/getCollects"
+let getIsCollectUrl = "\(postUrl)/app/comment/api/getIsCollect"
+let getVideoByIDUrl = "\(postUrl)/app/novel/api/getVideoById"
+let getEpisodeByIDUrl = "\(postUrl)/app/picture/api/getEpisodeById"
+let getNewsByIDUrl = "\(postUrl)/app/novel/api/getNewsById"
 

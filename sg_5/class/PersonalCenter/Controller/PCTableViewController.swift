@@ -89,7 +89,7 @@ var picker:UIImagePickerController!
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        if indexPath.row == 3 {
+        if indexPath.row == 4 {
             Xcache.cleanCache {
                 self.cacheLab.text = Xcache.returnCacheSize()
                 self.view.makeToast("清理完成")

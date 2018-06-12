@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        UMConfigure.initWithAppkey("5b1ddc83a40fa358f9000058", channel: nil)
+        UMConfigure.setLogEnabled(true)
         configUSharePlatforms()
         confitUShareSettings()
         
@@ -37,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatFavorite, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
         //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatTimeLine, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
         /* 设置分享到QQ互联的appID*/
-        UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "http://mobile.umeng.com/social")
-        UMSocialManager.default().setPlaform(UMSocialPlatformType.qzone, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "http://mobile.umeng.com/social")
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "")
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.qzone, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "")
         //UMSocialManager.default().removePlatformProvider(with: .tim)
         UMSocialManager.default().removePlatformProvider(with: .wechatFavorite)
         UMSocialManager.default().removePlatformProvider(with: .wechatSession)
@@ -63,6 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          </dict>
          */
         //[UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
+    }
+    //- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options NS_AVAILABLE_IOS(9_0); // no equiv. notification. return NO if the application can't open for some reason
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return true
     }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
