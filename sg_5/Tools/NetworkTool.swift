@@ -104,6 +104,7 @@ extension NetworkToolProtocol{
     static func requestData(_ type : MethodType, URLString : String, parameters : [String : Any]? = nil, success:  @escaping (JSON) -> ()) {
         let method = type == .get ? HTTPMethod.get : HTTPMethod.post
         SVProgressHUD.show(withStatus: "加载中...")
+        SVProgressHUD.dismiss(withDelay: 3)
         //print("请求的URL--:\n\(URLString)")
         Alamofire.request(URLString, method: method, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {

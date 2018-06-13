@@ -143,6 +143,7 @@ class HomePageWebViewController: UIViewController{
         self.upBtn = upBtn
         let shareBtn = UIButton(type: .custom)
         shareBtn.setTitle("分享", for: .normal)
+        shareBtn.addTarget(self, action: #selector(share), for: .touchUpInside)
         shareBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         shareBtn.setImage(UIImage(named: "fenxiang"), for: .normal)
         shareBtn.layer.cornerRadius = 18
@@ -214,7 +215,8 @@ class HomePageWebViewController: UIViewController{
         self.footView?.addSubview(collectBtn)
         self.collectBtn = collectBtn
         let footshare = UIButton(type: .custom)
-        footshare.setImage(UIImage(named: "fenxiang"), for: .normal)
+        footshare.setImage(UIImage(named: "zhuanfa"), for: .normal)
+        footshare.addTarget(self, action: #selector(share), for: .touchUpInside)
         self.footView?.addSubview(footshare)
         self.footshare = footshare
         // Do any additional setup after loading the view.
@@ -259,7 +261,7 @@ class HomePageWebViewController: UIViewController{
                 self.collectBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
                 self.isCollect = false
             }else{
-                self.collectBtn?.setImage(UIImage(named: "收藏"), for: .normal)
+                self.collectBtn?.setImage(UIImage(named: "shoucang2"), for: .normal)
                 self.isCollect = true
             }
           
@@ -280,7 +282,7 @@ class HomePageWebViewController: UIViewController{
                 let parData = dic.toParameterDic()
                 NetworkTool.requestData(.post, URLString: addCollectUrl, parameters: parData ) { (json) in
                     if json.boolValue == true {
-                        self.collectBtn?.setImage(UIImage(named: "收藏"), for: .normal)
+                        self.collectBtn?.setImage(UIImage(named: "shoucang2"), for: .normal)
                         self.isCollect = true
                     }
                     
@@ -583,34 +585,41 @@ extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuView
     func shareBtnClick() {
         print("share")
         self.popview?.removeFromSuperview()
-        DispatchQueue.main.async {
-            UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.QQ.rawValue)])
-            UMSocialUIManager.setShareMenuViewDelegate(self)
-            UMSocialUIManager.showShareMenuViewInWindow(platformSelectionBlock: { (type, info) in
-                var url = self.model?.crawlurl
-                if url == "" {
-                    url = "http://www.baidu.com"
+        share()
+    }
+    @objc func share(){
+        UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.QQ.rawValue)])
+        UMSocialUIManager.setShareMenuViewDelegate(self)
+        UMSocialUIManager.showShareMenuViewInWindow(platformSelectionBlock: { (platformType, info) in
+            var shareTitle = ""
+            var url = ""
+            //var share_pic = ""
+            if self.model?.type == "0"{
+                url = self.model?.crawlurl ?? ""
+            }
+            
+            if self.model?.title != ""{
+                shareTitle = (self.model?.title)!
+            }else{
+                shareTitle = (self.model?.source)!
+            }
+            url = (self.model?.newsContent)!
+            let desc = "来自搜瓜"
+            let messageObject = UMSocialMessageObject()
+            //let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")
+            let shareObject = UMShareWebpageObject.shareObject(withTitle:shareTitle, descr: desc, thumImage:nil)
+            shareObject?.webpageUrl = url
+            messageObject.shareObject = shareObject
+            UMSocialManager.default().share(to: platformType, messageObject:messageObject, currentViewController: self) { (data, error) in
+                if let error = error as NSError?{
+                    print("取消分享 : \(error.description)")
+                }else{
+                    print("分享成功")
                 }
-                //MARK: --设置分享图片
-                var desc = ""
-                let shareTitle = "[邀请]"
-                let share_pic = ""
-                desc = "您的好友发来一个邀请，请查看。"
-                let messageObject = UMSocialMessageObject()
-                let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")
-                let shareObject = UMShareWebpageObject.shareObject(withTitle:shareTitle, descr: desc, thumImage:pic)
-                shareObject?.webpageUrl = url
-                messageObject.shareObject = shareObject
-                UMSocialManager.default().share(to: type, messageObject:messageObject, currentViewController: self) { (data, error) in
-                    if let error = error as NSError?{
-                        print("取消分享 : \(error.description)")
-                    }else{
-                        print("分享成功")
-                    }
-                }
-            })
+            }
+
+        })
         
-        }
     }
     func umSocialParentView(_ defaultSuperView: UIView!) -> UIView! {
         return self.view

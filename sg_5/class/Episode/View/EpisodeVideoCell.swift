@@ -21,6 +21,8 @@ class EpisodeVideoCell: UITableViewCell {
     @IBOutlet weak var upCountLab: UILabel!
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var contentImageView: UIImageView!
+    @IBOutlet weak var userIcon: UIImageView!
+    
     var model = EpisodeModel() {
         didSet {
             if model.isUp {
@@ -35,6 +37,11 @@ class EpisodeVideoCell: UITableViewCell {
             upCountLab.text = String(model.up)
             commentCountLab.text = String(model.commentNum)
             contentImageView.kf.setImage(with: URL(string: model.pic))
+            if model.authorPortrait != "" {
+                userIcon.kf.setImage(with: URL(string: model.authorPortrait))
+            }else{
+                userIcon.image = UIImage(named: "userIMG")
+            }
         }
     }
     var delegate:EpisodeVideoCellDelegate?

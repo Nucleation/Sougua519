@@ -9,7 +9,7 @@
 import UIKit
 
 class PCCollectionViewController: UIViewController {
-    @IBOutlet weak var mainTab: UITableView!
+    var mainTab: UITableView!
     var dataArr: Array<CollectModel> = [CollectModel]()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -18,8 +18,14 @@ class PCCollectionViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mainTab.delegate = self
-        self.mainTab.dataSource = self
+        let mainTab = UITableView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight-64), style: .plain)
+        mainTab.delegate = self
+        mainTab.dataSource = self
+        mainTab.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(mainTab)
+        self.mainTab = mainTab
+        let view = UIView()
+        self.mainTab.tableFooterView = view
         
         // Do any additional setup after loading the view.
     }
@@ -51,7 +57,7 @@ extension PCCollectionViewController:UITableViewDelegate,UITableViewDataSource{
         return self.dataArr.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style:.default, reuseIdentifier: "cell")
+        let cell = UITableViewCell(style:.default, reuseIdentifier: "cell")
         cell.textLabel?.text = self.dataArr[indexPath.row].title
         cell.imageView?.image = UIImage(named: "personalcenter我的收藏")
         cell.selectionStyle = .none
@@ -71,7 +77,7 @@ extension PCCollectionViewController:UITableViewDelegate,UITableViewDataSource{
         }else if self.dataArr[indexPath.row].type == "5"{
             print(ContentType.Episode.rawValue)
             let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-            let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.dataArr[indexPath.row].contentId]
+            let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.dataArr[indexPath.row].contentId,"mark": self.dataArr[indexPath.row].mark]
             let parData = dic.toParameterDic()
             NetworkTool.requestData(.post, URLString: getEpisodeByIDUrl, parameters: parData ) { (json) in
                 let webVC = EpisodeInfoViewController()
@@ -83,23 +89,35 @@ extension PCCollectionViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
-//    private  func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-//    {
-//        return true
-//    }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
         return true
     }
-    private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        return "删除"
+    }
+    
+    func  tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        
         return UITableViewCellEditingStyle.delete
     }
-    private func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "点击删除"
-    }
-    private func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    
+    
+    func  tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == UITableViewCellEditingStyle.delete {
+            
+            let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+            let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"id":self.dataArr[indexPath.row].id,"token":KeyChain().getKeyChain()["token"]!,"contentId":self.dataArr[indexPath.row].contentId]
+            let parData = dic.toParameterDic()
+            NetworkTool.requestData(.post, URLString: cancleCollectUrl, parameters: parData ) { (json) in
+                
+            }
             self.dataArr.remove(at: indexPath.row)
             self.mainTab!.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.fade)
         }
     }
+
 }

@@ -86,13 +86,8 @@ class EpisodeViewController: UIViewController {
         case 3:
             self.navigationController?.popToRootViewController(animated: false)
         case 4:
-            if KeyChain().getKeyChain()["isLogin"] == "1"{
-                let vc = PersonalCenterViewController.loadStoryboard()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }else{
-                let vc = LoginViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = PersonalCenterViewController.loadStoryboard()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		0F28CFA495528E4F7CA144CB /* Pods_sg_5.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF282048723040960C2530E /* Pods_sg_5.framework */; };
 		1706DECF20C298E60013E726 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1706DECE20C298E60013E726 /* NewsViewController.swift */; };
-		172377DC20CBDEC600135792 /* searchHistory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 172377DB20CBDEC600135792 /* searchHistory.plist */; };
 		172CF23B20A45563005632F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CF23A20A45563005632F3 /* AppDelegate.swift */; };
 		172CF23D20A4558A005632F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172CF23C20A4558A005632F3 /* Assets.xcassets */; };
 		172E4AA620CAA56E00DC5AAF /* BottonPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */; };
+		173C83F120D0FA470024EF31 /* history.plist in Resources */ = {isa = PBXBuildFile; fileRef = 173C83EF20D0FA470024EF31 /* history.plist */; };
+		173C83F220D0FA470024EF31 /* searchHistory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 173C83F020D0FA470024EF31 /* searchHistory.plist */; };
 		17402C2720CFC3AD0075F6B2 /* CollectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17402C2620CFC3AD0075F6B2 /* CollectModel.swift */; };
 		17402C2920CFDC8C0075F6B2 /* 第三方分享.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17402C2820CFDC8B0075F6B2 /* 第三方分享.swift */; };
 		174F760820A44AA000BB0B46 /* sg_5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F760720A44AA000BB0B46 /* sg_5Tests.swift */; };
@@ -72,7 +73,6 @@
 		176F76F620CB6AD2000DB5CF /* mainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176F76F420CB6AD2000DB5CF /* mainTableViewCell.xib */; };
 		176F76F820CB6BDB000DB5CF /* SearchWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F76F720CB6BDB000DB5CF /* SearchWebViewController.swift */; };
 		176F76FE20CBB87C000DB5CF /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F76FD20CBB87C000DB5CF /* SearchHistoryViewController.swift */; };
-		176F770220CBC90E000DB5CF /* history.plist in Resources */ = {isa = PBXBuildFile; fileRef = 176F770120CBC90E000DB5CF /* history.plist */; };
 		176F998A20B92E6600FF6E46 /* NovelShelfListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */; };
 		176F998E20B940AF00FF6E46 /* BookShelfFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */; };
 		1775678720C7E49E00ACAE52 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775678620C7E49E00ACAE52 /* NewsTableViewController.swift */; };
@@ -173,10 +173,11 @@
 
 /* Begin PBXFileReference section */
 		1706DECE20C298E60013E726 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
-		172377DB20CBDEC600135792 /* searchHistory.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = searchHistory.plist; sourceTree = "<group>"; };
 		172CF23A20A45563005632F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172CF23C20A4558A005632F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = sg_5/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		172E4AA520CAA56E00DC5AAF /* BottonPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottonPopView.swift; sourceTree = "<group>"; };
+		173C83EF20D0FA470024EF31 /* history.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = history.plist; sourceTree = "<group>"; };
+		173C83F020D0FA470024EF31 /* searchHistory.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = searchHistory.plist; sourceTree = "<group>"; };
 		17402C2620CFC3AD0075F6B2 /* CollectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectModel.swift; sourceTree = "<group>"; };
 		17402C2820CFDC8B0075F6B2 /* 第三方分享.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "第三方分享.swift"; sourceTree = "<group>"; };
 		174F75EF20A44A9E00BB0B46 /* sg_5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sg_5.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,7 +244,6 @@
 		176F76F420CB6AD2000DB5CF /* mainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainTableViewCell.xib; sourceTree = "<group>"; };
 		176F76F720CB6BDB000DB5CF /* SearchWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWebViewController.swift; sourceTree = "<group>"; };
 		176F76FD20CBB87C000DB5CF /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
-		176F770120CBC90E000DB5CF /* history.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = history.plist; sourceTree = "<group>"; };
 		176F998920B92E6600FF6E46 /* NovelShelfListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelShelfListModel.swift; sourceTree = "<group>"; };
 		176F998D20B940AF00FF6E46 /* BookShelfFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfFlowLayout.swift; sourceTree = "<group>"; };
 		1775678620C7E49E00ACAE52 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
@@ -791,11 +791,11 @@
 		176F76EE20CB5E45000DB5CF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				173C83EF20D0FA470024EF31 /* history.plist */,
+				173C83F020D0FA470024EF31 /* searchHistory.plist */,
 				176F76F120CB5E7F000DB5CF /* SearchViewController.swift */,
 				176F76F720CB6BDB000DB5CF /* SearchWebViewController.swift */,
 				176F76FD20CBB87C000DB5CF /* SearchHistoryViewController.swift */,
-				176F770120CBC90E000DB5CF /* history.plist */,
-				172377DB20CBDEC600135792 /* searchHistory.plist */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1145,23 +1145,23 @@
 				174F768020A44E6300BB0B46 /* SingleTestTableViewCell.xib in Resources */,
 				177A4F8920A539EF0004336E /* Info-tvOS.plist in Resources */,
 				177D5ACE20B40FC500B4A5E8 /* NovelCommentTableViewCell.xib in Resources */,
-				172377DC20CBDEC600135792 /* searchHistory.plist in Resources */,
 				174F766920A44C4900BB0B46 /* homepage.json in Resources */,
 				177A4F8720A539EF0004336E /* Info-iOS.plist in Resources */,
 				179234DA20CF53ED00893F3F /* UMSocialSDKResources.bundle in Resources */,
 				17507CCE20C4D18C00600BE1 /* EpisodeTextCell.xib in Resources */,
+				173C83F120D0FA470024EF31 /* history.plist in Resources */,
 				177E745120C8D2860017F6CB /* PersonalCenterViewController.storyboard in Resources */,
 				177714F820C68ED20093F3F7 /* EpisodeCommentTableViewCell.xib in Resources */,
 				174F767E20A44E6300BB0B46 /* SingleImageTableViewCell.xib in Resources */,
 				17507CCA20C4D16E00600BE1 /* EpisodeVideoCell.xib in Resources */,
 				179234DF20CF53ED00893F3F /* README.txt in Resources */,
-				176F770220CBC90E000DB5CF /* history.plist in Resources */,
 				177DEBEA20B7ABAA00E176F7 /* NovelListTableViewCell.xib in Resources */,
 				177A4F8820A539EF0004336E /* Info-watchOS.plist in Resources */,
 				174F768420A44E6300BB0B46 /* VideoTableViewCell.xib in Resources */,
 				174F767B20A44E6300BB0B46 /* VideoSubTableViewCell.xib in Resources */,
 				176F76F620CB6AD2000DB5CF /* mainTableViewCell.xib in Resources */,
 				172CF23D20A4558A005632F3 /* Assets.xcassets in Resources */,
+				173C83F220D0FA470024EF31 /* searchHistory.plist in Resources */,
 				174F767D20A44E6300BB0B46 /* HomeNavigationView.xib in Resources */,
 				177A4F8620A539EF0004336E /* Info-OSX.plist in Resources */,
 			);

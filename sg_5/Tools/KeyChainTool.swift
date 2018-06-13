@@ -23,6 +23,16 @@ struct KeyChain {
         keyChain.set(dic["passwd"]!, forKey: "passwd")
         
     }
+    func clearkeyChain(){
+        let keyChain = KeychainSwift()
+        keyChain.set("", forKey: "mobile")
+        keyChain.set("", forKey: "id")
+        keyChain.set("", forKey: "token")
+        keyChain.set("0", forKey: "isLogin")
+        keyChain.set("", forKey: "headUrl")
+        keyChain.set("", forKey: "passwd")
+        
+    }
     func getKeyChain() -> Dictionary<String, String>{
         let keyChain = KeychainSwift()
         return ["mobile":"\(keyChain.get("mobile") ?? "")","id":"\(keyChain.get("id") ?? "")","token":"\(keyChain.get("token") ?? "")","isLogin":"\(keyChain.get("isLogin") ?? "0")","headUrl":"\(keyChain.get("headUrl") ?? "")","passwd":"\(keyChain.get("passwd") ?? "")"]

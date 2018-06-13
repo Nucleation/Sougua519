@@ -7,8 +7,11 @@
 //
 
 import UIKit
-
+protocol EpisodeInfoHeadViewDelegate {
+    func shareE()
+}
 class EpisodeInfoHeadView: UIView {
+    var delegate:EpisodeInfoHeadViewDelegate?
     var model:EpisodeModel?
     var userIcon: UIView?
     var sourceLab: UILabel?
@@ -35,6 +38,7 @@ class EpisodeInfoHeadView: UIView {
         let userIcon = UIImageView()
         userIcon.backgroundColor = UIColor.brown
         userIcon.layer.cornerRadius = 25
+        userIcon.image = UIImage(named: "userIMG")
         self.addSubview(userIcon)
         self.userIcon = userIcon
         let sourceLab = UILabel()
@@ -86,6 +90,7 @@ class EpisodeInfoHeadView: UIView {
         shareBtn.layer.cornerRadius = 18
         shareBtn.layer.borderWidth = 1
         shareBtn.layer.borderColor = UIColor.colorWithHexColorString("999999").cgColor
+        shareBtn.addTarget(self, action: #selector(shareBtnClick), for: .touchUpInside)
         shareBtn.setTitleColor(.black, for: .normal)
         self.addSubview(shareBtn)
         self.shareBtn = shareBtn
@@ -121,12 +126,12 @@ class EpisodeInfoHeadView: UIView {
             make.top.equalTo(self.sourceLab!.snp.bottom).offset(6)
             make.height.equalTo(20)
         })
-        self.focusBtn?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self.snp.right).offset(-17)
-            make.top.equalTo(self).offset(30)
-            make.height.equalTo(30)
-            make.width.equalTo(60)
-        })
+//        self.focusBtn?.snp.makeConstraints({ (make) in
+//            make.right.equalTo(self.snp.right).offset(-17)
+//            make.top.equalTo(self).offset(30)
+//            make.height.equalTo(30)
+//            make.width.equalTo(60)
+//        })
         self.contentLab?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(12)
             make.top.equalTo(self.userIcon!.snp.bottom).offset(25)
@@ -199,13 +204,18 @@ class EpisodeInfoHeadView: UIView {
         self.layoutSubviews()
         self.layoutIfNeeded()
     }
+    @objc func shareBtnClick() {
+        if delegate != nil {
+            delegate?.shareE()
+        }
+    }
     @objc func upBtnClick(){
         if !(model?.isUp)! {
                 model?.isUp = true
                 model?.up += 1
                 self.upBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
                 self.upBtn?.setTitle(String(model?.up ?? 0), for: .normal)
-            self.upWithIdAndMark(id: (model?.id)!, mark: (model?.mark)!)
+            self.upWithIdAndMark(id: (model?.id)!, mark: model?.mark ?? "0")
         }else{
             self.makeToast("已赞")
         }

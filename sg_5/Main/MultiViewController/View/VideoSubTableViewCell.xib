@@ -67,7 +67,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUG-uF-n32">
-                        <rect key="frame" x="261" y="82" width="33" height="14"/>
+                        <rect key="frame" x="266" y="82" width="33" height="14"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="cKb-aC-RQv"/>
@@ -90,7 +90,7 @@
                     <constraint firstAttribute="bottom" secondItem="oxU-VK-W8E" secondAttribute="bottom" id="NhY-Tu-1fw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="4Xk-VR-f80" secondAttribute="bottom" constant="4" id="Q9Q-7u-CC9"/>
                     <constraint firstItem="oxU-VK-W8E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="V9E-g8-qL0"/>
-                    <constraint firstItem="eUG-uF-n32" firstAttribute="trailing" secondItem="inn-q8-dq2" secondAttribute="trailing" constant="-10" id="X3T-vr-tml"/>
+                    <constraint firstItem="eUG-uF-n32" firstAttribute="trailing" secondItem="inn-q8-dq2" secondAttribute="trailing" constant="-5" id="X3T-vr-tml"/>
                     <constraint firstItem="inn-q8-dq2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="YpW-mS-1Vn"/>
                     <constraint firstItem="ZpU-3L-F1q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="19" id="bR1-Yz-OiX"/>
                     <constraint firstItem="Lf2-4p-GGn" firstAttribute="leading" secondItem="4Xk-VR-f80" secondAttribute="trailing" constant="17" id="bgq-qF-029"/>

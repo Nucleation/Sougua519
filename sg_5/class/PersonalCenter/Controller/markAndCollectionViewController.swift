@@ -81,6 +81,10 @@ extension markAndCollectionViewController: UITableViewDelegate,UITableViewDataSo
         if editingStyle == UITableViewCellEditingStyle.delete {
             self.dataArr.remove(at: indexPath.row)
             self.mainTab!.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.fade)
+            let path: String = Bundle.main.path(forResource: "searchHistory", ofType:"plist")!
+            let array = NSArray(contentsOfFile: path)! as! NSMutableArray
+            array.removeObject(at: indexPath.row)
+            array.write(toFile: path, atomically: true)
         }
     }
 }

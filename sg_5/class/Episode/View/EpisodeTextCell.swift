@@ -22,6 +22,7 @@ class EpisodeTextCell: UITableViewCell {
     @IBOutlet weak var upCountLab: UILabel!
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var allBtn: UIButton!
+    @IBOutlet weak var userIcon: UIImageView!
     var model = EpisodeModel() {
         didSet {
             if model.isUp {
@@ -47,6 +48,11 @@ class EpisodeTextCell: UITableViewCell {
                 self.allBtn.isHidden = true
                 self.contentLab.numberOfLines = 0
                 self.allBtn.isHidden = true
+            }
+            if model.authorPortrait != "" {
+                userIcon.kf.setImage(with: URL(string: model.authorPortrait))
+            }else{
+                userIcon.image = UIImage(named: "userIMG")
             }
         }
     }

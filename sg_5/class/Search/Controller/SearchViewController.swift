@@ -124,13 +124,8 @@ class SearchViewController: UIViewController {
         case 3:
             self.navigationController?.popToRootViewController(animated: false)
         case 4:
-            if KeyChain().getKeyChain()["isLogin"] == "1"{
-                let vc = PersonalCenterViewController.loadStoryboard()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }else{
-                let vc = LoginViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = PersonalCenterViewController.loadStoryboard()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             let vc = FindViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -152,7 +147,7 @@ extension SearchViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell") as! mainTableViewCell
         let con = self.dataArr[indexPath.row]
-        
+        cell.selectionStyle = .none
         cell.titleLab?.attributedText = con.rtitle.removeHeadAndTailSpacePro.stringToAttribute(keyWord: self.searchTF!.text!)
         cell.contentLab?.attributedText = con.rcon.removeHeadAndTailSpacePro.stringToAttribute(keyWord: self.searchTF!.text!)
         cell.urlLab?.attributedText = con.rurl.removeHeadAndTailSpacePro.stringToAttribute(keyWord: self.searchTF!.text!)

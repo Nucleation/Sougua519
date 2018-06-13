@@ -8,7 +8,7 @@
 
 import UIKit
 import MJRefresh
-
+import Alamofire
 class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,CategoryButtonViewDelegate,EmptyDataSetProtocol,HomeNavigationViewDelegate{
     //tableView
     var navigationBar = HomeNavigationView.loadViewFromNib()
@@ -30,6 +30,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     let footer = MJRefreshFooter()
     var newsListArr: Array = [HomePageNewsModel]()
     var pageNO: Int = 1
+
     
     //打开的网页
     var html: HTMLViewController?
@@ -75,11 +76,12 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth/5+150))
         self.headView = headView
         self.headView?.addSubview(self.navigationBar)
+        self.navigationBar.layoutIfNeeded()
         self.navigationBar.delegate = self
         categoryButtonView = CategoryButtonView(frame: CGRect(x: 0, y: 150, width: screenWidth, height: screenWidth/5))
         categoryButtonView?.delegate = self
         self.headView?.addSubview(categoryButtonView!)
-        mainTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight-50))
+        mainTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight-44))
         mainTableView?.bounces = false
         mainTableView?.delegate = self
         mainTableView?.dataSource = self
@@ -95,10 +97,16 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         mainTableView!.register(UINib(nibName:"SingleTestTableViewCell", bundle:nil),
                                 forCellReuseIdentifier:"SingleTest")
         self.view?.addSubview(mainTableView!)
-        self.mainTableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+//        self.mainTableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+//            self.pageNO += 1
+//            self.getNewsList(pageNO: self.pageNO)
+//            self.mainTableView?.mj_footer.endRefreshing()
+//        })
+        self.mainTableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            print("上拉加载.")
             self.pageNO += 1
             self.getNewsList(pageNO: self.pageNO)
-            self.mainTableView?.mj_footer.endRefreshing()
+            self.mainTableView!.mj_footer.endRefreshing()
         })
         self.mainTableView?.tableHeaderView = self.headView
         let oprateView = MUOprateView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height-44, width: UIScreen.main.bounds.width, height: 44))
@@ -125,6 +133,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @objc func scanBtnClick() {
         print("扫一扫")
     }
@@ -147,7 +156,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             if pageNO == 1{
                 self.mainTableView?.contentOffset = CGPoint.zero
             }
-            
+           self.mainTableView?.mj_footer.endRefreshing()
             
         }
     }
@@ -156,22 +165,18 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         switch sender.tag {
         case 1:
             self.pageNO = 1
-            self.getNewsList(pageNO: self.pageNO)
-            self.mainTableView?.reloadData()
-            self.view.sendSubview(toBack: self.searchView)
+            //self.mainTableView?.contentOffset = CGPoint.zero
+            //self.getNewsList(pageNO: self.pageNO)
+            //self.mainTableView?.reloadData()
+            //self.view.sendSubview(toBack: self.searchView)
          case 2:
             let vc = MUMultiWindowController()
             self.navigationController?.pushViewController(vc, animated: true)
         case 3:
             self.navigationController?.popToRootViewController(animated: false)
         case 4:
-            if KeyChain().getKeyChain()["isLogin"] == "1"{
-                let vc = PersonalCenterViewController.loadStoryboard()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }else{
-                let vc = LoginViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = PersonalCenterViewController.loadStoryboard()
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             let vc = FindViewController()
             self.navigationController?.pushViewController(vc, animated: true)   

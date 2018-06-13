@@ -16,8 +16,8 @@ enum ContentType: String {
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 //总接口
-//let postUrl = "http://47.95.244.69:8086"
-let postUrl = "http://192.168.10.123:10001"
+let postUrl = "http://47.95.244.69:8086"
+//let postUrl = "http://192.168.10.123:10001"
 //获取短信验证码
 let ucenterGetSecurityCode = "\(postUrl)/app/ucenter/api/getAppUserSecurityCode"
 //登陆

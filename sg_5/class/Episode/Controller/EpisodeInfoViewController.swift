@@ -9,7 +9,8 @@
 import UIKit
 import BMPlayer
 
-class EpisodeInfoViewController: UIViewController {
+class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,UMSocialShareMenuViewDelegate{
+    
     var model:EpisodeModel?    
     var headView: UIView?
     var navView:UIView?
@@ -35,6 +36,7 @@ class EpisodeInfoViewController: UIViewController {
     var textField: UITextField?
     var commentBtn: UIButton?
     var collectBtn: UIButton?
+    var isCollect: Bool = false
     var footshare: UIButton?
     var commentListArray:Array<NovelCommentModel> = []
     
@@ -50,6 +52,7 @@ class EpisodeInfoViewController: UIViewController {
             center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             
         }
+        requestIsCollect()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,10 +127,10 @@ class EpisodeInfoViewController: UIViewController {
                 make.left.right.top.equalToSuperview()
                 make.height.equalTo(64)
             })
-            self.rightBtn?.snp.makeConstraints({ (make) in
-                make.right.bottom.equalToSuperview()
-                make.width.height.equalTo(44)
-            })
+//            self.rightBtn?.snp.makeConstraints({ (make) in
+//                make.right.bottom.equalToSuperview()
+//                make.width.height.equalTo(44)
+//            })
             self.lineView?.snp.makeConstraints({ (make) in
                 make.right.bottom.left.equalToSuperview()
                 make.height.equalTo(1)
@@ -144,6 +147,7 @@ class EpisodeInfoViewController: UIViewController {
             make.width.height.equalTo(44)
         })
         let hView = EpisodeInfoHeadView()
+        hView.delegate = self
         hView.model = self.model
         hView.setValue()
         self.hView = hView
@@ -192,10 +196,12 @@ class EpisodeInfoViewController: UIViewController {
         self.commentBtn = commentBtn
         let collectBtn = UIButton(type: .custom)
         collectBtn.setImage(UIImage(named: "shoucang"), for: .normal)
+        collectBtn.addTarget(self, action: #selector(collectBtnClick), for: .touchUpInside)
         self.footView?.addSubview(collectBtn)
         self.collectBtn = collectBtn
         let footshare = UIButton(type: .custom)
-        footshare.setImage(UIImage(named: "fenxiang"), for: .normal)
+        footshare.setImage(UIImage(named: "zhuanfa"), for: .normal)
+        footshare.addTarget(self, action: #selector(share), for: .touchUpInside)
         self.footView?.addSubview(footshare)
         self.footshare = footshare
         self.footView?.snp.makeConstraints({ (make) in
@@ -226,6 +232,25 @@ class EpisodeInfoViewController: UIViewController {
         requestComment()
         // Do any additional setup after loading the view.
     }
+    func requestIsCollect(){
+        guard KeyChain().getKeyChain()["isLogin"] == "1" else {
+            return
+        }
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"contentId":model?.id ?? ""]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: getIsCollectUrl, parameters: parData ) { (json) in
+            if json.boolValue == false {
+                self.collectBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
+                self.isCollect = false
+            }else{
+                self.collectBtn?.setImage(UIImage(named: "shoucang2"), for: .normal)
+                self.isCollect = true
+            }
+            
+        }
+        
+    }
     func requestComment() {
         let keyChain = KeyChain()
         let fromId = keyChain.getKeyChain()["id"] ?? ""
@@ -242,6 +267,125 @@ class EpisodeInfoViewController: UIViewController {
     @objc func leftBtnClick(){
         self.navigationController?.popViewController(animated: false)
     }
+    func shareE() {
+        share()
+    }
+    func umSocialParentView(_ defaultSuperView: UIView!) -> UIView! {
+        return self.view
+    }
+    func shareWebPageToPlatformType(platformType:UMSocialPlatformType,currentViewController:UIViewController,type:Int? = 1){
+        
+    }
+    @objc func share(){
+        UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.QQ.rawValue)])
+        UMSocialUIManager.setShareMenuViewDelegate(self)
+        UMSocialUIManager.showShareMenuViewInWindow(platformSelectionBlock: { (platformType, info) in
+            var shareTitle = ""
+            var share_pic = ""
+            var url = ""
+            if self.model?.mark == "1"{
+                let messageObject =  UMSocialMessageObject()
+                messageObject.text = self.model?.content
+                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
+                    if let error = error as NSError?{
+                        print("取消分享 : \(error.description)")
+                    }else{
+                        print("分享成功")
+                    }
+                }
+            }else if self.model?.mark == "2" {
+                share_pic = (self.model?.contentImg)!
+                shareTitle = (self.model?.content)!
+                let messageObject =  UMSocialMessageObject()
+                let shareObject = UMShareImageObject()
+                let url = URL(string: self.model?.contentImg ?? "")
+                let data = try! Data(contentsOf: url!)
+                //shareObject.thumbImage = UIImage(data: data)
+                shareObject.shareImage = UIImage(data: data)
+                messageObject.shareObject = shareObject;
+                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
+                    if let error = error as NSError?{
+                        print("取消分享 : \(error.description)")
+                    }else{
+                        print("分享成功")
+                    }
+                }
+            }else{
+                if self.model?.title != ""{
+                    shareTitle = (self.model?.title)!
+                }else{
+                    shareTitle = (self.model?.source)!
+                }
+                url = (self.model?.videourl)!
+                let desc = "来自搜瓜"
+                let messageObject = UMSocialMessageObject()
+                let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")
+                let shareObject = UMShareWebpageObject.shareObject(withTitle:shareTitle, descr: desc, thumImage:pic)
+                shareObject?.webpageUrl = url
+                messageObject.shareObject = shareObject
+                UMSocialManager.default().share(to: platformType, messageObject:messageObject, currentViewController: self) { (data, error) in
+                    if let error = error as NSError?{
+                        print("取消分享 : \(error.description)")
+                    }else{
+                        print("分享成功")
+                    }
+                }
+            }
+
+          })
+//        UMSocialUIManager.showShareMenuViewInWindow { (platformType,info ) in
+//            var shareTitle = ""
+//            var share_pic = ""
+//            var url = ""
+//            if self.model?.mark == "1"{
+//                let messageObject =  UMSocialMessageObject()
+//                messageObject.text = self.model?.content
+//                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
+//                    if let error = error as NSError?{
+//                        print("取消分享 : \(error.description)")
+//                    }else{
+//                        print("分享成功")
+//                    }
+//                }
+//            }else if self.model?.mark == "2"{
+//                share_pic = (self.model?.contentImg)!
+//                shareTitle = (self.model?.content)!
+//                let messageObject =  UMSocialMessageObject()
+//                let shareObject = UMShareImageObject()
+//                let data = try Data(contentsOf: URL(string:(self.model?.contentImg)!)!)
+//                shareObject.thumbImage = UIImage(data: data)
+//                messageObject.shareObject = shareObject;
+//                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
+//                    if let error = error as NSError?{
+//                        print("取消分享 : \(error.description)")
+//                    }else{
+//                        print("分享成功")
+//                    }
+//                }
+//            }else{
+//                if self.model?.title != ""{
+//                    shareTitle = (self.model?.title)!
+//                }else{
+//                    shareTitle = (self.model?.source)!
+//                }
+//                url = (self.model?.videourl)!
+//                let desc = "来自搜瓜"
+//                let messageObject = UMSocialMessageObject()
+//                let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")
+//                let shareObject = UMShareWebpageObject.shareObject(withTitle:shareTitle, descr: desc, thumImage:pic)
+//                shareObject?.webpageUrl = url
+//                messageObject.shareObject = shareObject
+//                UMSocialManager.default().share(to: platformType, messageObject:messageObject, currentViewController: self) { (data, error) in
+//                    if let error = error as NSError?{
+//                        print("取消分享 : \(error.description)")
+//                    }else{
+//                        print("分享成功")
+//                    }
+//                }
+//
+//            }
+        
+    }
     func sendComment(comment: String){
         let keyChain = KeyChain()
         guard let mobile = keyChain.getKeyChain()["mobile"],let token = keyChain.getKeyChain()["token"],let id = keyChain.getKeyChain()["id"] else {
@@ -254,6 +398,39 @@ class EpisodeInfoViewController: UIViewController {
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
             self.view.makeToast("评论成功")
             self.requestComment()
+        }
+    }
+    @objc func collectBtnClick(){
+        if KeyChain().getKeyChain()["isLogin"] != "1" {
+            self.view.makeToast("请登录")
+        }else{
+            if !self.isCollect {
+                let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+                var title = model?.title
+                if title == ""{
+                   title = model?.source
+                }
+                let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"contentId":model?.id ?? "","token":KeyChain().getKeyChain()["token"]!,"type":ContentType.Episode.rawValue,"title":title ?? "","url":model?.contentImg ?? "","mark": model?.mark ?? 0]
+                let parData = dic.toParameterDic()
+                NetworkTool.requestData(.post, URLString: addCollectUrl, parameters: parData ) { (json) in
+                    if json.boolValue == true {
+                        self.collectBtn?.setImage(UIImage(named: "shoucang2"), for: .normal)
+                        self.isCollect = true
+                    }
+                    
+                }
+            }else{
+                let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+                let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"contentId":model?.id ?? "","token":KeyChain().getKeyChain()["token"]!]
+                let parData = dic.toParameterDic()
+                NetworkTool.requestData(.post, URLString: cancleCollectUrl, parameters: parData ) { (json) in
+                    if json.boolValue == true {
+                        self.collectBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
+                        self.isCollect = false
+                    }
+                }
+            }
+            
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

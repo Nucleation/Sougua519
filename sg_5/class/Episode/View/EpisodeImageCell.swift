@@ -38,6 +38,12 @@ class EpisodeImageCell: UITableViewCell {
             upCountLab.text = String(model.up)
             commentCountLab.text = String(model.commentNum)
             contentImageView.kf.setImage(with: URL(string: model.contentImg))
+            if model.authorPortrait != "" {
+                userIcon.kf.setImage(with: URL(string: model.authorPortrait))
+            }else{
+                userIcon.image = UIImage(named: "userIMG")
+            }
+            
         }
     }
     var delegate: EpisodeImageCellDelegate?

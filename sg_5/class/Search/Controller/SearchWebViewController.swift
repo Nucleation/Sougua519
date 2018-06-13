@@ -39,7 +39,7 @@ class SearchWebViewController: UIViewController {
         let leftBtn = UIButton(type: .custom)
         leftBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         leftBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
-        self.view.addSubview(leftBtn)
+        self.navView?.addSubview(leftBtn)
         self.leftBtn = leftBtn
         let webview: WKWebView = WKWebView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight - 64), configuration: WKWebViewConfiguration())
         webview.load(URLRequest(url: URL(string: model!.rurl)!))
@@ -48,6 +48,10 @@ class SearchWebViewController: UIViewController {
         self.navView?.snp.makeConstraints({ (make) in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(64)
+        })
+        self.leftBtn?.snp.makeConstraints({ (make) in
+            make.left.bottom.equalToSuperview()
+            make.width.height.equalTo(44)
         })
     }
     @objc func leftBtnClick(){

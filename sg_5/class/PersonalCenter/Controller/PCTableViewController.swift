@@ -12,6 +12,7 @@ import Kingfisher
 class PCTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var userName: UIButton!
     @IBOutlet weak var subLab: UIButton!
+    @IBOutlet weak var logOutBtn: UIButton!
     
     @IBOutlet weak var cacheLab: UILabel!
     @IBOutlet var mainTab: UITableView!
@@ -20,10 +21,10 @@ class PCTableViewController: UITableViewController,UIImagePickerControllerDelega
     override func viewWillAppear(_ animated: Bool) {
         //判断用户登录
         if KeyChain().getKeyChain()["isLogin"] != "1" {
-            
+            self.logOutBtn.isHidden = true
             self.userIcon.setImage(UIImage(named: "userIMG"), for: .normal)
         }else{
-            
+            self.logOutBtn.isHidden = false
             if KeyChain().getKeyChain()["headUrl"] == ""{
                 self.userIcon.setImage(UIImage(named: "userIMG"), for: .normal)
             }else{
@@ -82,6 +83,10 @@ var picker:UIImagePickerController!
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func logOutClick(_ sender: Any) {
+        KeyChain().clearkeyChain()
+        self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func userNameClick(_ sender: Any) {
         let vc = LoginViewController()
         self.navigationController?.pushViewController(vc, animated: true)
@@ -89,14 +94,44 @@ var picker:UIImagePickerController!
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        if indexPath.row == 4 {
+        if indexPath.row == 4{
             Xcache.cleanCache {
                 self.cacheLab.text = Xcache.returnCacheSize()
                 self.view.makeToast("清理完成")
             }
         }
+//        switch indexPath.row {
+//        case 1:
+//            let vc = markAndCollectionViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        case 2:
+//            let vc = PCCollectionViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        case 3:
+//            let vc = AboutUSViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        case 4:
+//            Xcache.cleanCache {
+//                self.cacheLab.text = Xcache.returnCacheSize()
+//                self.view.makeToast("清理完成")
+//            }
+//        case 5:
+//            let vc = SettingViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        default:
+//            return
+//        }
+        
     }
-
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 6 {
+//            return 60
+//        }else if indexPath.row == 0{
+//            return 40
+//        }else{
+//            return 50
+//        }
+//    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
