@@ -60,15 +60,14 @@ class HomeNavigationView: UIView,NibLoadable {
                 
             case .success(_):
                 if let jsons = response.result.value{
-                    print("000000000\(jsons)")
                     let jsonDic = JSON(jsons)
                     self.city = jsonDic["HeWeather6"][0]["basic"]["location"].stringValue
                     self.tmp = jsonDic["HeWeather6"][0]["now"]["tmp"].stringValue
                     self.vis = jsonDic["HeWeather6"][0]["now"]["vis"].stringValue
                     self.cond_txt = jsonDic["HeWeather6"][0]["now"]["cond_txt"].stringValue
                     self.cityLab.text = self.city
-                    self.temLab.text = self.tmp
-                    self.visLab.text = "能见度:\(self.vis ?? "")"
+                    self.temLab.text = "\(self.tmp ?? "")º"
+                    self.visLab.text = "能见度\(self.vis ?? "")公里"
                     self.condtxtLab.text = self.cond_txt
                 }
                 

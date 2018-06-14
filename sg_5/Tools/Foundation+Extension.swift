@@ -172,6 +172,34 @@ extension String
         return attributedString
         
     }
+    func toRange(_ range: NSRange) -> Range<String.Index>? {
+        guard let from16 = utf16.index(utf16.startIndex, offsetBy: range.location, limitedBy: utf16.endIndex) else { return nil }
+        guard let to16 = utf16.index(from16, offsetBy: range.length, limitedBy: utf16.endIndex) else { return nil }
+        guard let from = String.Index(from16, within: self) else { return nil }
+        guard let to = String.Index(to16, within: self) else { return nil }
+        return from ..< to
+    }
+    func isTelNumber() -> Bool {
+        let mobile = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|147|145)\\d{8}$"
+        let  CM = "^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$"
+        let  CU = "^1(3[0-2]|5[256]|8[56])\\d{8}$"
+        let  CT = "^1((33|53|73|8[09])[0-9]|349)\\d{7}$"
+        let regextestmobile = NSPredicate(format: "SELF MATCHES %@",mobile)
+        let regextestcm = NSPredicate(format: "SELF MATCHES %@",CM )
+        let regextestcu = NSPredicate(format: "SELF MATCHES %@" ,CU)
+        let regextestct = NSPredicate(format: "SELF MATCHES %@" ,CT)
+        if ((regextestmobile.evaluate(with: self) == true)
+            || (regextestcm.evaluate(with: self)  == true)
+            || (regextestct.evaluate(with: self) == true)
+            || (regextestcu.evaluate(with: self) == true))
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
 }
 extension Date
 {

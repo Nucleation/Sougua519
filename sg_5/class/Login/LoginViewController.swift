@@ -148,6 +148,10 @@ class LoginViewController: UIViewController {
             print("账号密码不能为空")
             return
         }
+        guard self.userNameTF.text!.isTelNumber() else  {
+            self.view.makeToast("号码格式不正确")
+            return
+        }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!]
         let parData = dic.toParameterDic()

@@ -13,7 +13,7 @@ import MJRefresh
 protocol BookShelfViewDelegate {
     func BSPushViewController(viewController: UIViewController)
     func goToBookCity()
-    
+    func reloadData()
 }
 
 class BookShelfViewController: UIView, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -110,20 +110,24 @@ extension BookShelfViewController {
         }
     }
     @objc func longPress(longHand:UILongPressGestureRecognizer){
-//        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[gesture locationInView:self.collectionView]];
-//        if (indexPath == nil) {
-//            break;
-//        }
-//        [self.collectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
-//        //cell.layer添加抖动手势
-//        for (CollectionViewCell *cell in [self.collectionView visibleCells]) {
-//            [self starShake:cell];
-//        }
-       let indexPath = self.collectionView?.indexPathForItem(at: longHand.location(in: self.collectionView))
-        if indexPath == nil || indexPath?.row == self.bookArray.count - 1  {
+        switch (longHand.state) {
+        case UIGestureRecognizerState.began:
+            let indexPath = self.collectionView?.indexPathForItem(at: longHand.location(in: self.collectionView))
+            if indexPath == nil || indexPath?.row == self.bookArray.count - 1  {
+                return
+            }else{
+                let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+                let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.bookArray[indexPath!.row].id,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+                let parData = dic.toParameterDic()
+                NetworkTool.requestData(.post, URLString: deleteNovelShelfUrl, parameters: parData) { (json) in
+                        if self.delegate != nil{
+                            self.delegate?.reloadData()
+                    }
+                    
+                }
+            }
+        default:
             return
-        }else{
-            print("删除")
         }
     }
 }
@@ -131,6 +135,7 @@ class BookShelfItem: UICollectionViewCell {
     var titleLab: UILabel?
     var imageView: UIImageView?
     var model: NovelShelfListModel?
+    var delBtn:UIButton?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

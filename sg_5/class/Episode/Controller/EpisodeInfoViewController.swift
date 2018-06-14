@@ -35,6 +35,7 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
     var footView: UIView?
     var textField: UITextField?
     var commentBtn: UIButton?
+    var commentCountLab: UILabel?
     var collectBtn: UIButton?
     var isCollect: Bool = false
     var footshare: UIButton?
@@ -194,6 +195,14 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
         commentBtn.setImage(UIImage(named: "pinglun"), for: .normal)
         self.footView?.addSubview(commentBtn)
         self.commentBtn = commentBtn
+        let commentCountLab = UILabel()
+        commentCountLab.textAlignment = .center
+        commentCountLab.backgroundColor = .red
+        commentCountLab.textColor = .white
+        commentCountLab.font = UIFont.systemFont(ofSize: 8)
+        commentCountLab.layer.cornerRadius = 5
+        commentCountLab.layer.masksToBounds = true
+        self.footView?.addSubview(commentCountLab)
         let collectBtn = UIButton(type: .custom)
         collectBtn.setImage(UIImage(named: "shoucang"), for: .normal)
         collectBtn.addTarget(self, action: #selector(collectBtnClick), for: .touchUpInside)
@@ -218,6 +227,12 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
             make.centerY.equalTo(self.footView!)
             make.width.height.equalTo(40)
             make.right.equalTo(self.collectBtn!.snp.left).offset(-10)
+        })
+        self.commentCountLab?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.commentBtn!.snp.top).offset(15)
+            make.left.equalTo(self.commentBtn!.snp.right).offset(-15)
+            make.width.greaterThanOrEqualTo(10)
+            make.height.equalTo(10)
         })
         self.collectBtn?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.footView!)
@@ -261,8 +276,20 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
             if let datas = json["commentList"].arrayObject{
                 self.commentListArray += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
             }
+            self.setTableViewHeight(cellNum: self.commentListArray.count)
             self.tableView?.reloadData()
         }
+    }
+    func setTableViewHeight(cellNum: Int){
+//        if CGFloat(cellNum) * 124 + 50 > screenHeight - 104 {
+//            self.tableView?.snp.updateConstraints({ (make) in
+//                make.height.equalTo(self.view.frame.height - 114)
+//            })
+//        }else{
+//            self.tableView?.snp.updateConstraints({ (make) in
+//                make.height.equalTo(CGFloat(cellNum) * 124 + 50)
+//            })
+//        }
     }
     @objc func leftBtnClick(){
         self.navigationController?.popViewController(animated: false)

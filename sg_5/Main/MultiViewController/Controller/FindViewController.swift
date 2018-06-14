@@ -28,6 +28,7 @@ class FindViewController: UIViewController,WKNavigationDelegate {
         titleLab.font = UIFont.systemFont(ofSize: 16)
         titleLab.textAlignment = .center
         titleLab.textColor = .white
+        self.titleLab = titleLab
         navView.addSubview(titleLab)
         
         navView.snp.makeConstraints { (make) in

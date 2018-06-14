@@ -108,9 +108,9 @@
                 <outlet property="bookContentLab" destination="tsA-RS-y2T" id="5Ss-BT-tHV"/>
                 <outlet property="bookImage" destination="VDN-2a-1tb" id="t0g-ok-lMa"/>
                 <outlet property="bookTitleLab" destination="N6K-7z-ilX" id="YT1-tT-VFp"/>
-                <outlet property="categoryLab" destination="uaK-gv-tkT" id="rJo-n8-Zg2"/>
-                <outlet property="fictionIsEndLab" destination="Dfl-Qj-kHb" id="G6W-2O-Ok8"/>
-                <outlet property="fictionWordCountLab" destination="JKy-R8-fXf" id="npH-Ax-QRS"/>
+                <outlet property="categoryLab" destination="uaK-gv-tkT" id="Acj-xk-pJ7"/>
+                <outlet property="fictionIsEndLab" destination="Dfl-Qj-kHb" id="JOu-WN-gyS"/>
+                <outlet property="fictionWordCountLab" destination="JKy-R8-fXf" id="UCX-yA-TUc"/>
             </connections>
             <point key="canvasLocation" x="34" y="94.5"/>
         </tableViewCell>

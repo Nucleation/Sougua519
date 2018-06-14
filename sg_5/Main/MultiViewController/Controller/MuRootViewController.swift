@@ -18,10 +18,10 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     //var mainScrollerView:UIScrollView?
     var searchView:UIView = {
         let searchView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 90))
-        searchView.backgroundColor = UIColor.lightGray
+        searchView.backgroundColor = UIColor.colorWithHexColorString("f5f5f5")
         return searchView
     }()
-    var subSearchBar: UISearchBar?
+    var subSearchBtn: UIButton?
     var subScanBtn:UIButton?
     
     
@@ -48,30 +48,28 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     func setUI() {
         //上划后的searchBar
         self.view.addSubview(searchView)
-
-        let subSearchBar = UISearchBar()
-        subSearchBar.placeholder = "输入搜索内容"
-        subSearchBar.delegate = self
-        subSearchBar.barTintColor = UIColor.white
-        subSearchBar.backgroundColor = UIColor.white
-        self.subSearchBar = subSearchBar
-        self.searchView.addSubview(self.subSearchBar!)
         let subScanBtn = UIButton(type: .custom)
-        subScanBtn.setBackgroundImage(UIImage(named: "saoyisao"), for: .normal)
+        //subScanBtn.setBackgroundImage(UIImage(named: "saoyisao"), for: .normal)
+        subScanBtn.setImage(UIImage(named: "sousuo"), for: .normal)
+        subScanBtn.setTitle("请输入搜索内容", for: .normal)
+        subScanBtn.titleLabel?.textAlignment = .left
+        subScanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        subScanBtn.setTitleColor(UIColor.colorWithHexColorString("333333"), for: .normal)
+        subScanBtn.layer.cornerRadius = 3
+        subScanBtn.layer.borderColor = UIColor.colorWithHexColorString("333333").cgColor
         subScanBtn.backgroundColor = UIColor.white
+        subScanBtn.titleEdgeInsets = UIEdgeInsets(top: 0 , left: 0 , bottom: 0, right: 120)
+        //设置图片偏移：向上偏移文字高度＋向右偏移文字宽度 （偏移量是根据［文字］大小来的，这点是关键）
+        subScanBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 140)
         subScanBtn.addTarget(self, action: #selector(scanBtnClick), for: .touchUpInside)
         self.subScanBtn = subScanBtn
-        self.subSearchBar?.addSubview(self.subScanBtn!)
-        subSearchBar.snp.makeConstraints { (make) in
-            make.left.equalTo(self.searchView).offset(17)
+        self.searchView.addSubview(self.subScanBtn!)
+
+        subScanBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(self.searchView).offset(30)
             make.top.equalTo(self.searchView).offset(35)
             make.height.equalTo(40)
-            make.right.equalTo(self.searchView).offset(-17)
-        }
-        subScanBtn.snp.makeConstraints { (make) in
-            make.width.height.equalTo(38)
-            make.centerY.equalTo(self.subSearchBar!)
-            make.right.equalTo(self.subSearchBar!)
+            make.right.equalTo(self.searchView).offset(-30)
         }
         let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth/5+150))
         self.headView = headView
@@ -135,7 +133,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     }
     
     @objc func scanBtnClick() {
-        print("扫一扫")
+        let vc = SearchHistoryViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     func getNewsList(pageNO: Int){
         if pageNO == 1 {
@@ -241,29 +240,8 @@ extension MuRootViewController {
             cell.aNews = aNews
             return cell
         }
-        //            case "singletext":
-        //                let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTest") as! SingleTestTableViewCell
-        //                cell.aNews = anews
-        //                return cell
-        //            case "images":
-        //                let cell = tableView.dequeueReusableCell(withIdentifier: "Image") as! ImageTableViewCell
-        //                cell.aNews = anews
-        //                return cell
-        //            case "video":
-        //                let cell = tableView.dequeueReusableCell(withIdentifier: "Video") as! VideoTableViewCell
-        //                cell.aNews = anews
-        //                return cell
-        //            case "videosub":
-        //                let cell = tableView.dequeueReusableCell(withIdentifier: "VideoSub") as! VideoSubTableViewCell
-        //                cell.aNews = anews
-        //                return cell
-        //            default:
-        //                let cell = tableView.dequeueReusableCell(withIdentifier: "SingleImage") as! SingleImageTableViewCell
-        //                cell.aNews = anews
-        //                return cell
-        //            }
         
-        }
+     }
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             let aNews = newsListArr[indexPath.row]
             switch aNews.modelType {
@@ -308,7 +286,7 @@ extension MuRootViewController {
     }
     //MARK: --点击分类跳转
     func categoryBtnClick(sender: UIButton) {
-        if sender.tag == 2 {
+        if sender.tag == 1 {
             //小说
             let vc = NovelViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -317,13 +295,16 @@ extension MuRootViewController {
             let vc = MetooViewController()
             self.navigationController?.pushViewController(vc, animated: true)            
         }
-        else if sender.tag == 1 {
+        else if sender.tag == 2 {
             //新闻
             let vc = NewsViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if sender.tag == 3 {
             //新闻
             let vc = EpisodeViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            let vc = FindViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

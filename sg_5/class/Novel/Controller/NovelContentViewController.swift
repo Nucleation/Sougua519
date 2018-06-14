@@ -35,9 +35,9 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backImageView: UIImageView = UIImageView(frame: self.view.bounds)
-        backImageView.image = UIImage(named: "novelBGI")
-        self.view.addSubview(backImageView)
+//        let backImageView: UIImageView = UIImageView(frame: self.view.bounds)
+//        backImageView.image = UIImage(named: "novelBGI")
+//        self.view.addSubview(backImageView)
         self.tap = UITapGestureRecognizer(target: self, action: #selector(webViewTap(sender:)))
         self.tap?.delegate = self
         let webview: UIWebView = UIWebView(frame: self.view.frame)

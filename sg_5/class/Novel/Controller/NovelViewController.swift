@@ -10,19 +10,24 @@ import UIKit
 import SGPagingView
 
 class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDelegate,BookShelfViewDelegate {
+    
+    
     var oprateView: MUOprateView!
     var scrollView: UIScrollView?
     var headView: NovelHomeHeadView?
+    var bookShelf: BookShelfViewController?
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
         //更新按钮状态
+         createUI()
         self.oprateView.subViewStatus(viewController: self)
+        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        createUI()
-        
     }
     func createUI() {
         let headView = NovelHomeHeadView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 60))
@@ -34,6 +39,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         scrollView.contentSize = CGSize(width: screenWidth*2, height: screenHeight - 104)
         let bookShelf = BookShelfViewController(frame: CGRect(x: screenWidth, y: 0, width: screenWidth, height: screenHeight-104))
         bookShelf.delegate = self
+        self.bookShelf = bookShelf
         let bookCity = BookCityViewController()
         bookCity.delegate = self
         bookCity.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight-104)
@@ -65,7 +71,8 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
     func oprateClick(sender: UIButton) {
         switch sender.tag {
         case 1:
-            break
+            self.createUI()
+            //break
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
@@ -92,6 +99,9 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
     }
     func goToBookCity() {
         self.headView?.bookCity?.sendActions(for: .touchUpInside)
+    }
+    func reloadData() {
+        self.createUI()
     }
 }
 extension NovelViewController: NovelHeadViewDelegate{

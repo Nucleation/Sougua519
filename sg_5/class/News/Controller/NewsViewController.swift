@@ -68,11 +68,12 @@ class NewsViewController: UIViewController {
                 array.add(title.1.stringValue)
             }
             //MARK: --去掉最后一个视频标题
-            array.removeLastObject()
+            //array.removeLastObject()
             // 标题名称的数组
             let configuration = SGPageTitleViewConfigure()
             configuration.titleColor = UIColor.colortext1
             configuration.titleSelectedColor = UIColor.colorAccent
+            configuration.titleFont = UIFont.systemFont(ofSize: 14)
             configuration.indicatorColor = .clear
             self.pageTitleView = SGPageTitleView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: 40), delegate: self, titleNames: array as! [Any], configure: configuration)
             self.pageTitleView!.backgroundColor = .clear

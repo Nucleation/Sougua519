@@ -13,9 +13,11 @@ class NovelListTableViewCell: UITableViewCell {
     @IBOutlet weak var bookAuthorLab: UILabel!
     @IBOutlet weak var bookTitleLab: UILabel!
     @IBOutlet weak var bookContentLab: UILabel!
-    @IBOutlet weak var fictionIsEndLab: UILabel!
-    @IBOutlet weak var categoryLab: UILabel!
+
     @IBOutlet weak var fictionWordCountLab: UILabel!
+    @IBOutlet weak var categoryLab: UILabel!
+    @IBOutlet weak var fictionIsEndLab: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +31,7 @@ class NovelListTableViewCell: UITableViewCell {
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor.colortext1.cgColor
     }
+    
     func setCellwithModel(model: NoveCategoryListModel){
         bookImage.kf.setImage(with: URL(string: model.fictionImg))
         bookAuthorLab.text = model.fictionAuthor

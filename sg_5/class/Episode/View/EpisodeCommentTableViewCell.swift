@@ -19,7 +19,12 @@ class EpisodeCommentTableViewCell: UITableViewCell {
             commentLab.text = model.content
             timeLab.text = model.createDate
             upBtn.setTitle(String(model.upCount), for: .normal)
-            userIconImg.kf.setImage(with: URL(string: model.fromHeadUrl))
+            if model.fromHeadUrl == ""{
+                userIconImg.image = UIImage(named: "userIMG")
+            }else{
+                userIconImg.kf.setImage(with: URL(string: model.fromHeadUrl))
+            }
+            
         }
     }
     var episodeModel:EpisodeModel?

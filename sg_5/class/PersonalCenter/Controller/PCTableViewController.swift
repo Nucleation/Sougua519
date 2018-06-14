@@ -30,8 +30,10 @@ class PCTableViewController: UITableViewController,UIImagePickerControllerDelega
             }else{
                 self.userIcon.kf.setImage(with: URL(string: "\(postUrl)/images/\( KeyChain().getKeyChain()["headUrl"] ?? "")"), for: .normal)
             }
-            
-            self.userName.setTitle("\(KeyChain().getKeyChain()["mobile"] ?? "")", for: .normal)
+            var mobile = KeyChain().getKeyChain()["mobile"]
+            let reg = mobile?.toRange(NSMakeRange(3, 4))
+            mobile = mobile?.replacingCharacters(in: reg!, with: "****")
+            self.userName.setTitle(mobile, for: .normal)
             self.subLab.isHidden = true
         }
         self.cacheLab.text =  Xcache.returnCacheSize()
@@ -95,10 +97,20 @@ var picker:UIImagePickerController!
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         if indexPath.row == 4{
-            Xcache.cleanCache {
-                self.cacheLab.text = Xcache.returnCacheSize()
-                self.view.makeToast("清理完成")
-            }
+            let alertController = UIAlertController(title: "系统提示",
+                                                    message: "您确定要清理缓存吗？", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+                action in
+                Xcache.cleanCache {
+                    self.cacheLab.text = Xcache.returnCacheSize()
+                    self.view.makeToast("清理完成")
+                }
+            })
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            
         }
 //        switch indexPath.row {
 //        case 1:

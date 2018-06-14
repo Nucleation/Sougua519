@@ -45,6 +45,8 @@ class HomePageWebViewController: UIViewController{
     var footView: UIView?
     var textField: UITextField?
     var commentBtn: UIButton?
+    var commentCountLab: UILabel?
+    
     var collectBtn: UIButton?
     var isCollect: Bool = false
     var footshare: UIButton?
@@ -65,12 +67,12 @@ class HomePageWebViewController: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         let navView = UIView()
-        navView.backgroundColor = .colorAccent
+        navView.backgroundColor = .white
         self.view.addSubview(navView)
         let backBtn = UIButton(type: .custom)
         backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-        self.view.addSubview(backBtn)
+        navView.addSubview(backBtn)
         self.backBtn = backBtn
         let rightBtn = UIButton(type: .custom)
         rightBtn.setImage(UIImage(named: "gengduo"), for: .normal)
@@ -79,9 +81,11 @@ class HomePageWebViewController: UIViewController{
         let titleLab = UILabel()
         titleLab.font = UIFont.systemFont(ofSize: 16)
         titleLab.textAlignment = .center
-        titleLab.textColor = .white
+        titleLab.textColor = UIColor.colortext1
+        titleLab.text = model?.title
         navView.addSubview(titleLab)
-        
+        self.titleLab = titleLab
+        self.navView = navView
         navView.snp.makeConstraints { (make) in
             make.left.right.top.equalTo(self.view)
             make.height.equalTo(64)
@@ -98,9 +102,12 @@ class HomePageWebViewController: UIViewController{
         }
         titleLab.snp.makeConstraints { (make) in
             make.centerY.height.equalTo(backBtn)
-            make.width.equalTo(navView).offset(-230)
+            make.width.equalTo(navView).offset(-100)
             make.centerX.equalTo(navView)
         }
+        makeUI()
+    }
+    func makeUI(){
         let scrollview = UIScrollView()
         scrollview.showsVerticalScrollIndicator = false
         scrollview.showsHorizontalScrollIndicator = false
@@ -119,17 +126,13 @@ class HomePageWebViewController: UIViewController{
         }
         webview.navigationDelegate = self
         self.scrollContent?.addSubview(webview)
-        self.view.bringSubview(toFront: navView)
-        self.view.bringSubview(toFront: self.backBtn!)
         self.webview = webview
-        self.titleLab = titleLab
-        self.navView = navView
         
         let contentView = UIView()
         contentView.backgroundColor = .white
         self.scrollContent?.addSubview(contentView)
         self.contentView = contentView
-       
+        
         let upBtn = UIButton(type: .custom)
         upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
         upBtn.setTitle(String(model?.up ?? 0), for: .normal)
@@ -209,6 +212,15 @@ class HomePageWebViewController: UIViewController{
         commentBtn.setImage(UIImage(named: "pinglun"), for: .normal)
         self.footView?.addSubview(commentBtn)
         self.commentBtn = commentBtn
+        let commentCountLab = UILabel()
+        commentCountLab.textAlignment = .center
+        commentCountLab.backgroundColor = .red
+        commentCountLab.textColor = .white
+        commentCountLab.font = UIFont.systemFont(ofSize: 8)
+        commentCountLab.layer.cornerRadius = 5
+        commentCountLab.layer.masksToBounds = true
+        self.footView?.addSubview(commentCountLab)
+        self.commentCountLab = commentCountLab
         let collectBtn = UIButton(type: .custom)
         collectBtn.setImage(UIImage(named: "shoucang"), for: .normal)
         collectBtn.addTarget(self, action: #selector(collectBtnClick), for: .touchUpInside)
@@ -234,6 +246,12 @@ class HomePageWebViewController: UIViewController{
             make.centerY.equalTo(self.footView!)
             make.width.height.equalTo(40)
             make.right.equalTo(self.collectBtn!.snp.left).offset(-10)
+        })
+        self.commentCountLab?.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.commentBtn!.snp.top).offset(15)
+            make.left.equalTo(self.commentBtn!.snp.right).offset(-15)
+            make.width.greaterThanOrEqualTo(10)
+            make.height.equalTo(10)
         })
         self.collectBtn?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.footView!)
@@ -337,7 +355,8 @@ class HomePageWebViewController: UIViewController{
                 let _ = self.navigationController?.popViewController(animated: true)
             }
             self.player.snp.makeConstraints { (make) in
-                make.left.right.top.equalToSuperview()
+                make.top.equalToSuperview().offset(64)
+                make.left.right.equalToSuperview()
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(500)
             }
         }else{
@@ -414,8 +433,21 @@ class HomePageWebViewController: UIViewController{
                 self.commentListArray += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
             }
             self.totolComment?.text = "评论\(self.commentListArray.count)"
+            self.commentCountLab?.text = "\(self.commentListArray.count)"
+            self.setTableViewHeight(cellNum: self.commentListArray.count)
             self.tableView?.reloadData()
             self.view.layoutIfNeeded()
+        }
+    }
+    func setTableViewHeight(cellNum: Int){
+        if CGFloat(cellNum) * 124 + 50 > screenHeight - 104 {
+            self.tableView?.snp.updateConstraints({ (make) in
+                make.height.equalTo(self.view.frame.height - 114)
+            })
+        }else{
+            self.tableView?.snp.updateConstraints({ (make) in
+                make.height.equalTo(CGFloat(cellNum) * 124 + 50)
+            })
         }
     }
     func sendComment(comment: String){
@@ -484,7 +516,7 @@ extension HomePageWebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         print("网页开始接收网页内容")
         webView.evaluateJavaScript("document.title") { (a, e) in
-            self.titleLab?.text = a as? String ?? ""
+            //self.titleLab?.text = a as? String ?? ""
         }
     }
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
@@ -562,15 +594,14 @@ extension HomePageWebViewController: UITextFieldDelegate {
 }
 extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuViewDelegate{
     func reloadBtnClick() {
-        if model?.directType != "1" {
-            if (model?.newsContent) != nil {
-                self.webview?.loadHTMLString((model?.newsContent)!, baseURL: nil)
-            }
-        }
+        self.makeUI()
+        SVProgressHUD.show()
+        SVProgressHUD.dismiss(withDelay: 1)
     }
     
     func copyBtnClick() {
         UIPasteboard.general.string = self.model?.crawlurl
+        self.view.makeToast("复制成功")
     }
     
     func openWebClick() {

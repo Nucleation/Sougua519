@@ -12,15 +12,15 @@ class SearchHistoryViewController: UIViewController {
     var navView: UIView?
     var searchTF: UITextField?
     var searchBtn: UIButton?
-    var historyArr:NSMutableArray = []
+    var historyArr:Array<History> = []
     var tableView :UITableView?
+    var dataModel = DataModel()
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
-        let path: String = Bundle.main.path(forResource: "history", ofType:"plist")!
-        let array = NSArray(contentsOfFile: path)! as! NSMutableArray
-        if array.count != 0 {
-            self.historyArr = NSArray(contentsOfFile: path)! as! NSMutableArray
-        }  
+        dataModel.loadData()
+        self.historyArr = dataModel.histList
+        self.tableView?.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,26 +109,25 @@ class SearchHistoryViewController: UIViewController {
     }
     @objc func clearData(){
         self.historyArr = []
-        let path = Bundle.main.path(forResource: "history", ofType:"plist")
-        self.historyArr.write(toFile: path ?? "", atomically: true)
+        dataModel.histList = []
+        dataModel.saveData()
         self.tableView?.reloadData()
     }
     @objc func searchClick(){
+        self.view.endEditing(true)
         if self.searchTF?.text != nil{
-            let path = Bundle.main.path(forResource: "history", ofType:"plist")
-            //self.historyArr = NSArray(contentsOfFile: path!) as! NSMutableArray
-            let array: NSMutableArray = NSMutableArray(contentsOfFile: path!)!
-            array.insert(self.searchTF?.text ?? "", at: 0)
-            array.write(toFile: path ?? "", atomically: true)
-            self.historyArr = array
+            dataModel.histList.append(History(history: self.searchTF!.text ?? ""))
+            dataModel.saveData()
+            dataModel.loadData()
+            self.historyArr = dataModel.histList
             self.tableView?.reloadData()
             let vc = SearchViewController()
             vc.keyWord = self.searchTF?.text ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         }
-//        self.dataArr = SOsearch().getData(keyWord: self.searchTF?.text ?? "")
-//        self.dataArr += SougouSearch().getData(keyWord: self.searchTF?.text ?? "")
-//
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -144,7 +143,7 @@ extension SearchHistoryViewController: UITableViewDelegate,UITableViewDataSource
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style:.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = self.historyArr[indexPath.row] as? String
+        cell.textLabel?.text = self.historyArr[indexPath.row].history
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -155,5 +154,8 @@ extension SearchHistoryViewController: UITableViewDelegate,UITableViewDataSource
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }

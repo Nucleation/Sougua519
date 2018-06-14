@@ -70,6 +70,7 @@ class CommentView: UIView {
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
             print("\(json)--add")
+            self.makeToast(json["msg"].stringValue)
             if self.delegate != nil {
                 self.delegate?.reloadComment()
             }

@@ -37,13 +37,13 @@ extension NetworkToolProtocol{
             "index": 0
             },
             {
-            "title": "新闻",
-            "imageurl": "新闻",
-            "index": 1
-            },
-            {
             "title": "小说",
             "imageurl": "小说",
+            "index": 1
+            },
+{
+            "title": "新闻",
+            "imageurl": "新闻",
             "index": 2
             },
             {
@@ -116,7 +116,7 @@ extension NetworkToolProtocol{
                         success(jsonDic)
                         return
                     }
-                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl{
+                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl {
                        success(jsonDic["data"])
                     }else{
                     let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt

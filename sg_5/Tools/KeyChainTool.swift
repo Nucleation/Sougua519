@@ -38,3 +38,22 @@ struct KeyChain {
         return ["mobile":"\(keyChain.get("mobile") ?? "")","id":"\(keyChain.get("id") ?? "")","token":"\(keyChain.get("token") ?? "")","isLogin":"\(keyChain.get("isLogin") ?? "0")","headUrl":"\(keyChain.get("headUrl") ?? "")","passwd":"\(keyChain.get("passwd") ?? "")"]
     }
 }
+class history: NSObject, NSCoding {
+    var history:String
+    
+    //构造方法
+    required init(history:String="") {
+        self.history = history
+    }
+    
+    //从object解析回来
+    required init(coder decoder: NSCoder) {
+        self.history = decoder.decodeObject(forKey: "History") as? String ?? ""
+    }
+    
+    //编码成object
+    func encode(with coder: NSCoder) {
+        coder.encode(history, forKey:"History")
+    }
+}
+

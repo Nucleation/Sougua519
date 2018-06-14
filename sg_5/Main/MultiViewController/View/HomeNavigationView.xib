@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -49,32 +48,19 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中度污染" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxF-9R-vOl">
-                            <rect key="frame" x="79" y="71" width="53.5" height="16"/>
+                            <rect key="frame" x="79" y="71" width="54" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.75686274509999996" green="0.8980392157" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWO-fT-81r">
-                            <rect key="frame" x="328" y="50" width="30" height="30"/>
-                            <state key="normal" image="dingwei"/>
+                            <rect key="frame" x="328" y="46" width="30" height="34"/>
                             <connections>
                                 <action selector="localBtnClick:" destination="-1" eventType="touchUpInside" id="PYh-82-QQw"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qog-Dk-qwX">
-                            <rect key="frame" x="315" y="97" width="40" height="40"/>
-                            <state key="normal" image="saoyisao"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="cameraButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="WYA-Wx-iWR"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5M-kQ-5me" customClass="AnimatableButton" customModule="IBAnimatable">
-                            <rect key="frame" x="20" y="97" width="295" height="40"/>
+                            <rect key="frame" x="20" y="97" width="335" height="40"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="nbZ-rR-nA5"/>
@@ -99,26 +85,22 @@
                     <constraints>
                         <constraint firstItem="QxF-9R-vOl" firstAttribute="leading" secondItem="9uV-Hy-HjR" secondAttribute="leading" id="3Nd-Ty-a6l"/>
                         <constraint firstItem="QxF-9R-vOl" firstAttribute="top" secondItem="Aco-nI-KCO" secondAttribute="bottom" constant="5" id="6fs-Le-OqP"/>
-                        <constraint firstItem="Qog-Dk-qwX" firstAttribute="height" secondItem="r5M-kQ-5me" secondAttribute="height" id="8Yi-gW-bCB"/>
                         <constraint firstAttribute="trailing" secondItem="cuS-Yf-uRI" secondAttribute="trailing" id="8v6-BX-8i2"/>
                         <constraint firstItem="cuS-Yf-uRI" firstAttribute="leading" secondItem="oxK-l4-FfO" secondAttribute="leading" id="B8c-5S-I2j"/>
                         <constraint firstAttribute="bottom" secondItem="cuS-Yf-uRI" secondAttribute="bottom" constant="-7" id="BiZ-Hp-RI8"/>
                         <constraint firstItem="9uV-Hy-HjR" firstAttribute="leading" secondItem="A9q-UE-rdt" secondAttribute="trailing" constant="16" id="JPB-0Y-P7N"/>
-                        <constraint firstItem="Qog-Dk-qwX" firstAttribute="centerY" secondItem="r5M-kQ-5me" secondAttribute="centerY" id="KKt-RO-lNv"/>
                         <constraint firstAttribute="height" constant="143" id="MVO-Zn-aQp"/>
+                        <constraint firstAttribute="trailing" secondItem="r5M-kQ-5me" secondAttribute="trailing" constant="20" id="Nes-ms-WYm"/>
                         <constraint firstItem="Aco-nI-KCO" firstAttribute="top" secondItem="oxK-l4-FfO" secondAttribute="top" constant="35" id="POL-7d-ypr"/>
                         <constraint firstItem="cuS-Yf-uRI" firstAttribute="top" secondItem="oxK-l4-FfO" secondAttribute="top" id="Rfx-yU-x9e"/>
-                        <constraint firstItem="Qog-Dk-qwX" firstAttribute="top" secondItem="ZWO-fT-81r" secondAttribute="bottom" constant="17" id="Wlu-Qh-A4R"/>
                         <constraint firstItem="r5M-kQ-5me" firstAttribute="leading" secondItem="oxK-l4-FfO" secondAttribute="leading" constant="20" id="XiN-de-F90"/>
                         <constraint firstItem="Aco-nI-KCO" firstAttribute="centerY" secondItem="9uV-Hy-HjR" secondAttribute="centerY" id="a2f-nU-G96"/>
                         <constraint firstItem="A9q-UE-rdt" firstAttribute="top" secondItem="9uV-Hy-HjR" secondAttribute="top" constant="-5" id="bXC-ei-S3m"/>
                         <constraint firstItem="r5M-kQ-5me" firstAttribute="top" secondItem="QxF-9R-vOl" secondAttribute="bottom" constant="10" id="d4l-jg-B4i"/>
                         <constraint firstItem="Aco-nI-KCO" firstAttribute="leading" secondItem="9uV-Hy-HjR" secondAttribute="trailing" constant="8" symbolic="YES" id="daN-zh-5OA"/>
-                        <constraint firstItem="Qog-Dk-qwX" firstAttribute="width" secondItem="r5M-kQ-5me" secondAttribute="height" multiplier="1:1" id="fcS-Uz-Z6R"/>
                         <constraint firstItem="A9q-UE-rdt" firstAttribute="top" secondItem="oxK-l4-FfO" secondAttribute="top" constant="37" id="ieu-nd-02h"/>
                         <constraint firstItem="A9q-UE-rdt" firstAttribute="leading" secondItem="oxK-l4-FfO" secondAttribute="leading" constant="17" id="jId-bc-RtC"/>
-                        <constraint firstAttribute="trailing" secondItem="Qog-Dk-qwX" secondAttribute="trailing" constant="20" id="nft-8N-onk"/>
-                        <constraint firstItem="Qog-Dk-qwX" firstAttribute="leading" secondItem="r5M-kQ-5me" secondAttribute="trailing" id="o8R-Vk-9QR"/>
+                        <constraint firstItem="r5M-kQ-5me" firstAttribute="top" secondItem="ZWO-fT-81r" secondAttribute="bottom" constant="17" id="o11-O3-o2O"/>
                         <constraint firstAttribute="trailing" secondItem="ZWO-fT-81r" secondAttribute="trailing" constant="17" id="qSa-nz-tHT"/>
                     </constraints>
                 </view>
@@ -134,7 +116,6 @@
                 <outlet property="cityLab" destination="9uV-Hy-HjR" id="z93-tA-ioz"/>
                 <outlet property="condtxtLab" destination="Aco-nI-KCO" id="nWs-Xu-iWv"/>
                 <outlet property="imageView" destination="cuS-Yf-uRI" id="0MT-Gj-wR5"/>
-                <outlet property="scanBtn" destination="Qog-Dk-qwX" id="f3Z-W1-vKW"/>
                 <outlet property="searchBtn" destination="r5M-kQ-5me" id="TZS-U2-BvD"/>
                 <outlet property="temLab" destination="A9q-UE-rdt" id="5kH-zE-lGW"/>
                 <outlet property="visLab" destination="QxF-9R-vOl" id="KvO-Xd-QTe"/>
@@ -143,8 +124,6 @@
         </view>
     </objects>
     <resources>
-        <image name="dingwei" width="30" height="30"/>
-        <image name="saoyisao" width="30" height="30"/>
         <image name="search_small_16x16_" width="16" height="16"/>
     </resources>
 </document>

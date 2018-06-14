@@ -59,7 +59,7 @@ extension PCCollectionViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style:.default, reuseIdentifier: "cell")
         cell.textLabel?.text = self.dataArr[indexPath.row].title
-        cell.imageView?.image = UIImage(named: "personalcenter我的收藏")
+        cell.imageView?.image = UIImage(named: "bottom浏览器打开")
         cell.selectionStyle = .none
         return cell
     }

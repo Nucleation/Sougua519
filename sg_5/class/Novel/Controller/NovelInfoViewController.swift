@@ -128,7 +128,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
         let headView = UIView()
-        headView.backgroundColor = UIColor.lightGray
+        headView.backgroundColor = UIColor.colorWithHexColorString("f2f3f5")
         
         let bookView = UIView()
         bookView.backgroundColor = .white
@@ -199,7 +199,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         bookView.addSubview(beginReadBtn)
         self.beginReadBtn = beginReadBtn
         let lineView = UIView()
-        lineView.backgroundColor = .gray
+        lineView.backgroundColor = .clear
         bookView.addSubview(lineView)
         self.lineView = lineView
         let briefLab = UILabel()
@@ -272,7 +272,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         self.joinBookshelfBtn?.snp.makeConstraints({ (make) in
             make.left.equalTo(self.novelImageView!)
             make.height.equalTo(36)
-            make.width.equalTo(115)
+            make.width.equalTo((screenWidth-90)/2)
             make.top.equalTo(self.novelImageView!.snp.bottom).offset(30)
         })
         self.beginReadBtn?.snp.makeConstraints({ (make) in
@@ -307,10 +307,10 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             make.centerY.height.equalTo(self.commentView!)
             make.left.equalTo(self.vView!).offset(10)
         })
-        self.moreBtn?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self.commentView!).offset(-20)
-            make.centerY.height.equalTo(self.commentView!)
-        })
+//        self.moreBtn?.snp.makeConstraints({ (make) in
+//            make.right.equalTo(self.commentView!).offset(-20)
+//            make.centerY.height.equalTo(self.commentView!)
+//        })
         self.headView = headView
         
         if #available(iOS 6.0, *) {
