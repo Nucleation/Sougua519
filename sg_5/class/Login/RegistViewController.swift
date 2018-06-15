@@ -136,11 +136,11 @@ class RegistViewController: UIViewController {
             make.height.width.equalTo(44)
             make.top.equalTo(self.view).offset(20)
         })
-        self.rightBtn?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self.view).offset(-12)
-            make.height.width.equalTo(44)
-            make.top.equalTo(self.view).offset(20)
-        })
+//        self.rightBtn?.snp.makeConstraints({ (make) in
+//            make.right.equalTo(self.view).offset(-12)
+//            make.height.width.equalTo(44)
+//            make.top.equalTo(self.view).offset(20)
+//        })
         self.logoImageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view)
             make.width.height.equalTo(75)

@@ -9,12 +9,15 @@
 import UIKit
 
 class AboutUSViewController: UIViewController {
+    
+    @IBOutlet weak var versionLab: UILabel!
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+        self.versionLab.text = "搜瓜\(version ?? "")"
         // Do any additional setup after loading the view.
     }
 

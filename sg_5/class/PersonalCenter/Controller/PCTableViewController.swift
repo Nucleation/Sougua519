@@ -90,8 +90,13 @@ var picker:UIImagePickerController!
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func userNameClick(_ sender: Any) {
-        let vc = LoginViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        if KeyChain().getKeyChain()["isLogin"] != "1" {
+            let vc = LoginViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            self.view.makeToast("已登录")
+        }
+        
     }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

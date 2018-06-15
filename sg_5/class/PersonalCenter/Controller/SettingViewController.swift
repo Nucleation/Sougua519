@@ -15,7 +15,7 @@ class SettingViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.versionLab.text = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
         // Do any additional setup after loading the view.
     }
 

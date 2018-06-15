@@ -74,7 +74,12 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
 //        self.view.addSubview(videoView)
 //        self.videoView = videoView
         let leftBtn = UIButton(type: .custom)
-        leftBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        if model?.mark == "3" {
+            leftBtn.setImage(UIImage(named: "fanhui1"), for: .normal)
+        }else{
+           leftBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        }
+        
         leftBtn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
         self.view.addSubview(leftBtn)
         self.leftBtn = leftBtn

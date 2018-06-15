@@ -84,7 +84,7 @@ class HomeNavigationView: UIView,NibLoadable {
     
     override var frame: CGRect {
         didSet {
-            super.frame = CGRect(x: 0, y: -20, width: screenWidth, height: 150)
+            super.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 150)
         }
     }
     /// 相机按钮点击

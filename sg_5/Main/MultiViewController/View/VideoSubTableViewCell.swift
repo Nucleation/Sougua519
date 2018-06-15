@@ -21,7 +21,12 @@ class VideoSubTableViewCell: UITableViewCell {
             image1.kf.setImage(with: URL(string: aNews.imageUrl))
             newsFrom.text = aNews.source
             reviewLab.text = "评论:\(aNews.discussCount)"
-            timeLab.text = aNews.figureTime
+            if aNews.figureTime == ""{
+                timeLab.isHidden = true
+            }else{
+                 timeLab.isHidden = false
+               timeLab.text = aNews.figureTime
+            }
         }
     }
     override func awakeFromNib() {

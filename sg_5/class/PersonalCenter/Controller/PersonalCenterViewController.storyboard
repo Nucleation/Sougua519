@@ -1050,6 +1050,9 @@
                         <viewLayoutGuide key="safeArea" id="aal-o0-wWO"/>
                     </view>
                     <navigationItem key="navigationItem" id="aDZ-cb-XBd"/>
+                    <connections>
+                        <outlet property="versionLab" destination="xlA-xp-vNH" id="i9f-vj-6mz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qMc-Fp-BPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

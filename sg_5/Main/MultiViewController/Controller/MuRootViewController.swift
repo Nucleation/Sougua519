@@ -39,12 +39,26 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            mainTableView?.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+        if self.responds(to: #selector(setter: edgesForExtendedLayout)) {
+            self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
+        }
         html = HTMLViewController()
        MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
         self.view.backgroundColor = UIColor.white
         setUI()
         getNewsList(pageNO: pageNO)
     }
+//    override func viewWillLayoutSubviews() {
+//        var viewBounds = self.view.bounds
+//        let topBarOffset = self.topLayoutGuide.length
+//        viewBounds.origin.y = topBarOffset * -1
+//        self.view.bounds = viewBounds;
+//    }
     func setUI() {
         //上划后的searchBar
         self.view.addSubview(searchView)
@@ -58,19 +72,19 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         subScanBtn.layer.cornerRadius = 3
         subScanBtn.layer.borderColor = UIColor.colorWithHexColorString("333333").cgColor
         subScanBtn.backgroundColor = UIColor.white
-        subScanBtn.titleEdgeInsets = UIEdgeInsets(top: 0 , left: 0 , bottom: 0, right: 120)
-        //设置图片偏移：向上偏移文字高度＋向右偏移文字宽度 （偏移量是根据［文字］大小来的，这点是关键）
-        subScanBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 140)
+        subScanBtn.contentHorizontalAlignment = .left
         subScanBtn.addTarget(self, action: #selector(scanBtnClick), for: .touchUpInside)
         self.subScanBtn = subScanBtn
         self.searchView.addSubview(self.subScanBtn!)
 
         subScanBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.searchView).offset(30)
+            make.left.equalTo(self.searchView).offset(20)
             make.top.equalTo(self.searchView).offset(35)
             make.height.equalTo(40)
-            make.right.equalTo(self.searchView).offset(-30)
+            make.right.equalTo(self.searchView).offset(-20)
         }
+        subScanBtn.titleEdgeInsets = UIEdgeInsets(top: 0 , left: 10 , bottom: 0, right: 0)
+        subScanBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth/5+150))
         self.headView = headView
         self.headView?.addSubview(self.navigationBar)
@@ -79,8 +93,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         categoryButtonView = CategoryButtonView(frame: CGRect(x: 0, y: 150, width: screenWidth, height: screenWidth/5))
         categoryButtonView?.delegate = self
         self.headView?.addSubview(categoryButtonView!)
-        mainTableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight-44))
-        mainTableView?.bounces = false
+        mainTableView = UITableView(frame: CGRect(x: 0, y: -20, width: screenWidth, height: screenHeight-24))
+        mainTableView?.showsVerticalScrollIndicator = false
         mainTableView?.delegate = self
         mainTableView?.dataSource = self
         mainTableView?.separatorStyle = .none
@@ -123,10 +137,10 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         self.oprateView.subViewStatus(viewController: self)
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        self.navigationController?.isNavigationBarHidden = false
+//    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -153,10 +167,9 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             }
             self.mainTableView?.reloadData()
             if pageNO == 1{
-                self.mainTableView?.contentOffset = CGPoint.zero
+                self.mainTableView?.scrollsToTop = true
+                //self.mainTableView?.contentOffset = CGPoint(x: 0, y: -20)
             }
-           self.mainTableView?.mj_footer.endRefreshing()
-            
         }
     }
     //MARK:--操作视图点击回调操作
@@ -165,7 +178,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         case 1:
             self.pageNO = 1
             //self.mainTableView?.contentOffset = CGPoint.zero
-            //self.getNewsList(pageNO: self.pageNO)
+            self.getNewsList(pageNO: self.pageNO)
             //self.mainTableView?.reloadData()
             //self.view.sendSubview(toBack: self.searchView)
          case 2:

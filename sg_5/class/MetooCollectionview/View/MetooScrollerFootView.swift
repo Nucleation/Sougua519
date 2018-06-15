@@ -34,9 +34,9 @@ class MetooScrollerFootView: UIView {
         self.alpha = 0.6
         self.backgroundColor = .black
         let likesBtn = UIButton(type: .custom)
-        likesBtn.setImage(UIImage(named: "shoucang"), for: .normal)
+        likesBtn.setImage(UIImage(named: "dianzan"), for: .normal)
         likesBtn.setTitle("点赞", for: .normal)
-        likesBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        likesBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         likesBtn.addTarget(self, action: #selector(likesBtnClick), for: .touchUpInside)
         self.addSubview(likesBtn)
         likesBtn.snp.makeConstraints { (make) in
@@ -75,9 +75,7 @@ class MetooScrollerFootView: UIView {
     @objc func likesBtnClick(){
         if KeyChain().getKeyChain()["isLogin"] != "1" {
             if #available(iOS 10.0, *) {
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                    SVProgressHUD.show(withStatus: "未登录")
-                }
+                 self.makeToast("未登录")
             } else {
                 // Fallback on earlier versions
             }
@@ -95,9 +93,7 @@ class MetooScrollerFootView: UIView {
     @objc func reportBtnClick(){
         if KeyChain().getKeyChain()["isLogin"] != "1" {
             if #available(iOS 10.0, *) {
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (time) in
-                    SVProgressHUD.show(withStatus: "未登录")
-                }
+                 self.makeToast("未登录")
             } else {
                 // Fallback on earlier versions
             }

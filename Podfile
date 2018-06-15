@@ -24,4 +24,5 @@ target 'sg_5' do
   pod 'WKWebViewJavascriptBridge', '~> 1.1.0'
   pod 'UMCCommon'
   pod 'UMCSecurityPlugins'
+  pod 'NVActivityIndicatorView'
 end

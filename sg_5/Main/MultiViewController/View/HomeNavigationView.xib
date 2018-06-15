@@ -59,7 +59,7 @@
                                 <action selector="localBtnClick:" destination="-1" eventType="touchUpInside" id="PYh-82-QQw"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5M-kQ-5me" customClass="AnimatableButton" customModule="IBAnimatable">
+                        <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5M-kQ-5me" customClass="AnimatableButton" customModule="IBAnimatable">
                             <rect key="frame" x="20" y="97" width="335" height="40"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>

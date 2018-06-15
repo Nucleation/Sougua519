@@ -50,10 +50,12 @@ class MetooCollectionViewCell: UICollectionViewCell {
         fromLab?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(fromLab!)
         collcetBtn = UIButton(type: .custom)
-        collcetBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
+        collcetBtn?.setImage(UIImage(named: "dianzan"), for: .normal)
         collcetBtn?.setTitle("收藏", for: .normal)
         collcetBtn?.setTitleColor(.black, for: .normal)
         collcetBtn?.titleLabel?.textAlignment = .right
+        collcetBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        collcetBtn?.contentHorizontalAlignment = .right
         self.addSubview(collcetBtn!)
         imageView?.snp.makeConstraints({ (make) in
             make.top.left.right.equalTo(self)

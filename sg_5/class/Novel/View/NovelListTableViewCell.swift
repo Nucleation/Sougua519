@@ -14,9 +14,9 @@ class NovelListTableViewCell: UITableViewCell {
     @IBOutlet weak var bookTitleLab: UILabel!
     @IBOutlet weak var bookContentLab: UILabel!
 
-    @IBOutlet weak var fictionWordCountLab: UILabel!
-    @IBOutlet weak var categoryLab: UILabel!
-    @IBOutlet weak var fictionIsEndLab: UILabel!
+    @IBOutlet weak var fictionWordCountLab: UILabelPadding!
+    @IBOutlet weak var categoryLab: UILabelPadding!
+    @IBOutlet weak var fictionIsEndLab: UILabelPadding!
     
     
     override func awakeFromNib() {

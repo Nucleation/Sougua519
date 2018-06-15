@@ -42,7 +42,7 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
         self.tap?.delegate = self
         let webview: UIWebView = UIWebView(frame: self.view.frame)
         webview.loadHTMLString(self.novelContentModel?.content ?? "", baseURL: nil)
-        webview.backgroundColor = .clear
+        webview.backgroundColor = .white
         webview.isOpaque = false
         webview.addGestureRecognizer(self.tap!)
         self.view.addSubview(webview)
@@ -145,7 +145,7 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
         self.topPopView?.addSubview(titleLab)
         self.titleLab = titleLab
         let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.setImage(UIImage(named: "fanhui1"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         self.topPopView?.addSubview(backBtn)
         self.backBtn = backBtn

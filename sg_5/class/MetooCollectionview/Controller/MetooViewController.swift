@@ -75,8 +75,7 @@ class MetooViewController: UIViewController {
     func oprateClick(sender: UIButton) {
         switch sender.tag {
         case 1:
-            
-            break
+            super.viewDidLoad()
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)

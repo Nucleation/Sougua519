@@ -444,11 +444,17 @@ class HomePageWebViewController: UIViewController{
             self.tableView?.snp.updateConstraints({ (make) in
                 make.height.equalTo(self.view.frame.height - 114)
             })
+           
         }else{
             self.tableView?.snp.updateConstraints({ (make) in
                 make.height.equalTo(CGFloat(cellNum) * 124 + 50)
             })
         }
+        self.scrollContent?.snp.remakeConstraints({ (make) in
+            make.edges.equalTo(self.scrollerView!).inset(UIEdgeInsets.zero)
+            make.width.equalTo(self.scrollerView!)
+            make.bottom.equalTo(self.tableView!).offset(1)
+        })
     }
     func sendComment(comment: String){
         let keyChain = KeyChain()
@@ -460,8 +466,11 @@ class HomePageWebViewController: UIViewController{
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.News.rawValue,"content":comment]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
-            self.view.makeToast("评论成功")
-            self.requestComment()
+            if json["code"] == "-1"{
+                self.view.makeToast(json["msg"].stringValue)
+            }else{
+                 self.requestComment()
+            }
         }
     }
     
@@ -664,7 +673,8 @@ extension HomePageWebViewController: BMPlayerDelegate {
     // Call when player orinet changed
     func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
         player.snp.remakeConstraints { (make) in
-            make.left.right.top.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.navView!.snp.bottom)
             if isFullscreen {
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(900)
                 //self.leftBtn?.isHidden = true

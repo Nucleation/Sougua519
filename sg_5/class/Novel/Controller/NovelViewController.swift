@@ -72,7 +72,6 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         switch sender.tag {
         case 1:
             self.createUI()
-            //break
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
@@ -101,6 +100,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         self.headView?.bookCity?.sendActions(for: .touchUpInside)
     }
     func reloadData() {
+        super.viewDidLoad()
         self.createUI()
     }
 }

@@ -14,13 +14,13 @@ class SearchWebViewController: UIViewController {
     var rightBtn: UIButton?
     var lineView:UIView?
     var model: Content?
-    var historyArr:NSMutableArray = []
+    var scanModel = ScanModel()
+    
     override func viewWillAppear(_ animated: Bool) {
-        let path: String = Bundle.main.path(forResource: "searchHistory", ofType:"plist")!
-        let array: NSMutableArray = NSMutableArray(contentsOfFile: path)!
-        array.insert(["title":self.model?.rtitle,"url":self.model?.rurl], at: 0)
-        array.write(toFile: path , atomically: true)
+        scanModel.scanList.append(ScanInfo(title: self.model?.rtitle ?? "", url: self.model?.rurl ?? ""))
+        scanModel.saveData()
         self.navigationController?.isNavigationBarHidden = true
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

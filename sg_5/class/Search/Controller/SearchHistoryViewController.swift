@@ -10,16 +10,17 @@ import UIKit
 
 class SearchHistoryViewController: UIViewController {
     var navView: UIView?
+    var backBtn: UIButton?
     var searchTF: UITextField?
     var searchBtn: UIButton?
-    var historyArr:Array<History> = []
+    var historyArr:Array<Histroy> = []
     var tableView :UITableView?
     var dataModel = DataModel()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
         dataModel.loadData()
-        self.historyArr = dataModel.histList
+        self.historyArr = dataModel.historyList
         self.tableView?.reloadData()
     }
     override func viewDidLoad() {
@@ -29,6 +30,11 @@ class SearchHistoryViewController: UIViewController {
         navView.backgroundColor = .white
         self.view.addSubview(navView)
         self.navView = navView
+        let backBtn = UIButton(type: .custom)
+        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
+        self.navView?.addSubview(backBtn)
+        self.backBtn = backBtn
         let searchTF = UITextField()
         searchTF.layer.borderWidth = 1
         searchTF.layer.cornerRadius = 3
@@ -54,8 +60,13 @@ class SearchHistoryViewController: UIViewController {
             make.left.right.top.equalToSuperview()
             make.height.equalTo(64)
         })
+        self.backBtn?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.navView!).offset(0)
+            make.height.width.equalTo(44)
+            make.bottom.equalTo(self.navView!.snp.bottom)
+        })
         self.searchTF?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self.navView!).offset(15)
+            make.left.equalTo(self.backBtn!.snp.right).offset(0)
             make.height.equalTo(38)
             make.bottom.equalTo(self.navView!).offset(-5)
             make.right.equalTo(self.searchBtn!.snp.left).offset(1)
@@ -109,17 +120,17 @@ class SearchHistoryViewController: UIViewController {
     }
     @objc func clearData(){
         self.historyArr = []
-        dataModel.histList = []
+        dataModel.historyList = []
         dataModel.saveData()
         self.tableView?.reloadData()
     }
     @objc func searchClick(){
         self.view.endEditing(true)
         if self.searchTF?.text != nil{
-            dataModel.histList.append(History(history: self.searchTF!.text ?? ""))
+            dataModel.historyList.append(Histroy(his: self.searchTF?.text ?? ""))
             dataModel.saveData()
             dataModel.loadData()
-            self.historyArr = dataModel.histList
+            self.historyArr = dataModel.historyList
             self.tableView?.reloadData()
             let vc = SearchViewController()
             vc.keyWord = self.searchTF?.text ?? ""
@@ -128,6 +139,9 @@ class SearchHistoryViewController: UIViewController {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    @objc func backBtnClick(){
+        self.navigationController?.popViewController(animated: true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -143,7 +157,8 @@ extension SearchHistoryViewController: UITableViewDelegate,UITableViewDataSource
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style:.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = self.historyArr[indexPath.row].history
+        cell.selectionStyle = .none
+        cell.textLabel?.text = self.historyArr[indexPath.row].his
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

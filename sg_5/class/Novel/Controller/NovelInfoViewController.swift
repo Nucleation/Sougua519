@@ -214,7 +214,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         headView.addSubview(commentView)
         self.commentView = commentView
         let vView = UIView()
-        vView.backgroundColor = UIColor.blue
+        vView.backgroundColor = UIColor.colorAccent
         self.commentView?.addSubview(vView)
         self.vView = vView
         let bookCommentLab = UILabel()

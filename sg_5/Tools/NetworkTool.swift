@@ -11,6 +11,7 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 import SVProgressHUD
+import NVActivityIndicatorView
 
 enum MethodType {
     case get
@@ -102,9 +103,18 @@ extension NetworkToolProtocol{
         }
     }
     static func requestData(_ type : MethodType, URLString : String, parameters : [String : Any]? = nil, success:  @escaping (JSON) -> ()) {
+        let nva = NVActivityIndicatorView(frame: CGRect(x: screenWidth/2 - 30 , y: screenHeight/2 - 40, width: 60, height: 80), type: .pacman, color: UIColor.colorAccent, padding: 0)
+        UIApplication.shared.keyWindow?.addSubview(nva)
+        nva.startAnimating()
+        if #available(iOS 10.0, *) {
+            Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { (time) in
+               nva.stopAnimating()
+               //UIApplication.shared.keyWindow?.makeToast("请求失败")
+            }
+        } else {
+            // Fallback on earlier versions
+        }
         let method = type == .get ? HTTPMethod.get : HTTPMethod.post
-        SVProgressHUD.show(withStatus: "加载中...")
-        SVProgressHUD.dismiss(withDelay: 3)
         //print("请求的URL--:\n\(URLString)")
         Alamofire.request(URLString, method: method, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
@@ -112,7 +122,6 @@ extension NetworkToolProtocol{
                     print("返回的json---\(JSON(jsons))")
                     let jsonDic = JSON(jsons)
                     guard jsonDic["code"].intValue == 1 else {
-                        SVProgressHUD.dismiss()
                         success(jsonDic)
                         return
                     }
@@ -122,12 +131,14 @@ extension NetworkToolProtocol{
                     let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt
                     let jsonData = jsonDataStr?.data(using: String.Encoding.utf8, allowLossyConversion: true)
                     success(JSON(data: jsonData!))
-                    SVProgressHUD.dismiss()
+                    
                     }
             }else{
-                SVProgressHUD.dismiss()
+                nva.stopAnimating()
             }
+                nva.stopAnimating()
         }
+        nva.stopAnimating()
       }
     }
 //    static func getToken() -> String {

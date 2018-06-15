@@ -22,10 +22,17 @@ class VideoTableViewCell: UITableViewCell {
             newsFrom.text = aNews.source
             reviewLab.text = "评论:\(aNews.discussCount)"
             if aNews.modelType == "5" {
-                videoTimeLab.text = aNews.figureTime
+                if aNews.figureTime == ""{
+                    videoTimeLab.isHidden = true
+                }else{
+                    videoTimeLab.isHidden = false
+                    videoTimeLab.text = aNews.figureTime
+                }
+                videoPlayImage.isHidden = false
             }else{
                 videoPlayImage.isHidden = true
-                videoTimeLab.text = ""
+                videoTimeLab.isHidden = true
+                
             }
         }
     }

@@ -12,6 +12,8 @@ import SVProgressHUD
 class FindViewController: UIViewController,WKNavigationDelegate {
     var navView: UIView?
     var titleLab:UILabel?
+    var progressView: UIProgressView?
+    var webview: WKWebView?
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
@@ -21,7 +23,7 @@ class FindViewController: UIViewController,WKNavigationDelegate {
         navView.backgroundColor = .colorAccent
         self.view.addSubview(navView)
         let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.setImage(UIImage(named: "fanhui1"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         navView.addSubview(backBtn)
         let titleLab = UILabel()
@@ -54,13 +56,37 @@ class FindViewController: UIViewController,WKNavigationDelegate {
             make.top.equalTo(navView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }
+        self.webview = webview
+//        self.webview?.addObserver(self, forKeyPath: "estimatedProgress", options: NSKeyValueObservingOptions.new, context: nil)
+//        let progressView = UIProgressView(frame: CGRect(x: 0, y: 164, width: screenWidth, height: 1))
+//        progressView.backgroundColor = .colorAccent
+//        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//        self.view.addSubview(progressView)
+//        self.progressView = progressView
         // Do any additional setup after loading the view.
     }
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)
     }
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        if keyPath == "estimatedProgress" {
+//            self.progressView?.progress = Float((self.webview?.estimatedProgress)!)
+//            if self.progressView?.progress == Float(1) {
+//                unowned let uSelf = self
+//                UIView.animate(withDuration: 0.25, delay: 0.3, options: UIViewAnimationOptions.curveEaseOut, animations: {
+//                    uSelf.progressView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.4)
+//                }) { (finished) in
+//                    uSelf.progressView?.isHidden = true
+//                }
+//            }else{
+//                super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+//            }
+//        }
+//    }
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        SVProgressHUD.show()
+//        self.progressView?.isHidden = false
+//        self.progressView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//        self.view.bringSubview(toFront: self.progressView!)
     }
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         print("网页开始接收网页内容")
@@ -69,23 +95,26 @@ class FindViewController: UIViewController,WKNavigationDelegate {
         }
     }
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+       // self.progressView?.isHidden = true
         print("网页由于某些原因加载失败\(error)")
     }
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("网页\(error)")
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-         SVProgressHUD.dismiss()
+       // self.progressView?.isHidden = true
     }
     override func viewWillDisappear(_ animated: Bool) {
-        SVProgressHUD.dismiss()
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+//    deinit {
+//        self.webview?.removeObserver(self, forKeyPath: "estimatedProgress")
+//    }
     /*
     // MARK: - Navigation
 

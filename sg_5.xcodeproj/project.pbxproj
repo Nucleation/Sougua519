@@ -124,11 +124,13 @@
 		177E745920C90D110017F6CB /* markAndCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745820C90D110017F6CB /* markAndCollectionViewController.swift */; };
 		177E745B20C913F80017F6CB /* RemakePwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745A20C913F80017F6CB /* RemakePwdViewController.swift */; };
 		177E745D20C914F60017F6CB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E745C20C914F60017F6CB /* SettingViewController.swift */; };
+		1781D6B020D344B10085BD1B /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1781D6AF20D344B00085BD1B /* ScanModel.swift */; };
+		1781D6B220D344B80085BD1B /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1781D6B120D344B70085BD1B /* DataModel.swift */; };
+		1781D6B820D398160085BD1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1781D6B720D398160085BD1B /* LaunchScreen.storyboard */; };
 		1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */; };
 		1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */; };
 		1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724620B0162D00EAFEC0 /* LoginViewController.swift */; };
 		1785760720D25953005215DE /* help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1785760620D25952005215DE /* help.swift */; };
-		1785760920D27318005215DE /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1785760820D27318005215DE /* DataModel.swift */; };
 		17857D5C20B53BF2005B028C /* HomePageNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */; };
 		17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5E20B548B6005B028C /* HomePageWebViewController.swift */; };
 		178EB39220BFE77A006C156B /* MultiPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178EB39120BFE77A006C156B /* MultiPictureViewController.swift */; };
@@ -306,11 +308,13 @@
 		177E745820C90D110017F6CB /* markAndCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markAndCollectionViewController.swift; sourceTree = "<group>"; };
 		177E745A20C913F80017F6CB /* RemakePwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemakePwdViewController.swift; sourceTree = "<group>"; };
 		177E745C20C914F60017F6CB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		1781D6AF20D344B00085BD1B /* ScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
+		1781D6B120D344B70085BD1B /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		1781D6B720D398160085BD1B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollViewController.swift; sourceTree = "<group>"; };
 		1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetooCollectionViewController.swift; sourceTree = "<group>"; };
 		1782724620B0162D00EAFEC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1785760620D25952005215DE /* help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = help.swift; sourceTree = "<group>"; };
-		1785760820D27318005215DE /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageNewsModel.swift; sourceTree = "<group>"; };
 		17857D5E20B548B6005B028C /* HomePageWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageWebViewController.swift; sourceTree = "<group>"; };
 		178EB39120BFE77A006C156B /* MultiPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPictureViewController.swift; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 				174F762020A44AB700BB0B46 /* MUConfig.swift */,
 				174F762420A44AB800BB0B46 /* MUltiWindow-Bridging-Header.h */,
 				174F762120A44AB700BB0B46 /* JHFundation-Extension.swift */,
+				1781D6B720D398160085BD1B /* LaunchScreen.storyboard */,
 				172CF23C20A4558A005632F3 /* Assets.xcassets */,
 				174F765F20A44C4900BB0B46 /* Tools */,
 				174F763020A44AB900BB0B46 /* class */,
@@ -649,7 +654,8 @@
 				174F766320A44C4900BB0B46 /* Const.swift */,
 				174F766420A44C4900BB0B46 /* homepage.json */,
 				17D5603820CE7BDD0074FFEA /* Xcache.swift */,
-				1785760820D27318005215DE /* DataModel.swift */,
+				1781D6B120D344B70085BD1B /* DataModel.swift */,
+				1781D6AF20D344B00085BD1B /* ScanModel.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1154,6 +1160,7 @@
 				174F766920A44C4900BB0B46 /* homepage.json in Resources */,
 				177A4F8720A539EF0004336E /* Info-iOS.plist in Resources */,
 				179234DA20CF53ED00893F3F /* UMSocialSDKResources.bundle in Resources */,
+				1781D6B820D398160085BD1B /* LaunchScreen.storyboard in Resources */,
 				17507CCE20C4D18C00600BE1 /* EpisodeTextCell.xib in Resources */,
 				173C83F120D0FA470024EF31 /* history.plist in Resources */,
 				177E745120C8D2860017F6CB /* PersonalCenterViewController.storyboard in Resources */,
@@ -1369,7 +1376,7 @@
 				174F765820A44AB900BB0B46 /* MuRootViewController.swift in Sources */,
 				174F765220A44AB900BB0B46 /* HTMLViewController.swift in Sources */,
 				177DEBEC20B7E2C400E176F7 /* MetooScrollHeadView.swift in Sources */,
-				1785760920D27318005215DE /* DataModel.swift in Sources */,
+				1781D6B220D344B80085BD1B /* DataModel.swift in Sources */,
 				1762DE8720AD163500D179AE /* NoveHomeViewController.swift in Sources */,
 				177A4F8D20A539EF0004336E /* GTMBase64.m in Sources */,
 				176F76EC20CB5ACB000DB5CF /* FindViewController.swift in Sources */,
@@ -1378,6 +1385,7 @@
 				177C35D520B66F1900B803EF /* BookShelfViewController.swift in Sources */,
 				177714F720C68ED20093F3F7 /* EpisodeCommentTableViewCell.swift in Sources */,
 				172E4AA620CAA56E00DC5AAF /* BottonPopView.swift in Sources */,
+				1781D6B020D344B10085BD1B /* ScanModel.swift in Sources */,
 				177D2ABC20BD4DFB00B61F1E /* NovelChapterView.swift in Sources */,
 				177714F320C6325D0093F3F7 /* EpisodeInfoHeadView.swift in Sources */,
 				177DEBEE20B7F47700E176F7 /* MetooScrollerFootView.swift in Sources */,
@@ -1540,8 +1548,9 @@
 			baseConfigurationReference = 3926C2AAF1114154A6286F3A /* Pods-sg_5.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NU49PVLB9F;
+				DEVELOPMENT_TEAM = SBG27Y7XSW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/common/common_ios_1.5.1/normal",
@@ -1565,7 +1574,7 @@
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/QQ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jh.sg-5";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zesen.sg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/sg_5/MUltiWindow-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -1578,8 +1587,9 @@
 			baseConfigurationReference = E2320D7EC544693F9FC25BCE /* Pods-sg_5.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NU49PVLB9F;
+				DEVELOPMENT_TEAM = SBG27Y7XSW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/common/common_ios_1.5.1/normal",
@@ -1603,7 +1613,7 @@
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/QQ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jh.sg-5";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zesen.sg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/sg_5/MUltiWindow-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

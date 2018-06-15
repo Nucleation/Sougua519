@@ -26,7 +26,7 @@ class MetooScrollHeadView: UIView {
         self.alpha = 0.6
         self.backgroundColor = .black
         let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.setImage(UIImage(named: "fanhui1"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         self.addSubview(backBtn)
         self.backBtn = backBtn

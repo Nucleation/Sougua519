@@ -43,6 +43,7 @@ DEPENDENCIES:
   - Kingfisher
   - lottie-ios
   - MJRefresh
+  - NVActivityIndicatorView
   - SGPagingView
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
@@ -73,6 +74,6 @@ SPEC CHECKSUMS:
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   WKWebViewJavascriptBridge: 8da532409bc489ba2c0a69cf38e5d1cd49e3d5e4
 
-PODFILE CHECKSUM: 02e1b83617233bcd4d97641cf8a245d126158cb5
+PODFILE CHECKSUM: fc781284c81a3f4ca41534efe41b727d722518d4
 
 COCOAPODS: 1.4.0
