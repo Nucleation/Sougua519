@@ -72,15 +72,8 @@ class MetooScrollerFootView: UIView {
         }
         self.reportBtn = reportBtn
     }
+    //MARK: --  未处理
     @objc func likesBtnClick(){
-        if KeyChain().getKeyChain()["isLogin"] != "1" {
-            if #available(iOS 10.0, *) {
-                 self.makeToast("未登录")
-            } else {
-                // Fallback on earlier versions
-            }
-            return
-        }
         if self.delegate != nil {
             self.delegate?.likes()
         }

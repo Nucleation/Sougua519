@@ -132,6 +132,9 @@
                                     <constraint firstAttribute="width" secondItem="W4c-rE-vJt" secondAttribute="height" multiplier="1:1" id="GCO-CL-v79"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="zhuanfa"/>
+                                <connections>
+                                    <action selector="shareBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3Li-yz-wM3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzF-Ys-7fW">
                                 <rect key="frame" x="165" y="7" width="30" height="30"/>

@@ -65,7 +65,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         let subScanBtn = UIButton(type: .custom)
         //subScanBtn.setBackgroundImage(UIImage(named: "saoyisao"), for: .normal)
         subScanBtn.setImage(UIImage(named: "sousuo"), for: .normal)
-        subScanBtn.setTitle("请输入搜索内容", for: .normal)
+        subScanBtn.setTitle("在此输入你想要搜索的内容", for: .normal)
         subScanBtn.titleLabel?.textAlignment = .left
         subScanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         subScanBtn.setTitleColor(UIColor.colorWithHexColorString("333333"), for: .normal)

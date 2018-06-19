@@ -22,7 +22,7 @@ class EpisodeCommentTableViewCell: UITableViewCell {
             if model.fromHeadUrl == ""{
                 userIconImg.image = UIImage(named: "userIMG")
             }else{
-                userIconImg.kf.setImage(with: URL(string: model.fromHeadUrl))
+                userIconImg.kf.setImage(with: URL(string: "\(postUrl)/images/\(model.fromHeadUrl)"))
             }
             
         }

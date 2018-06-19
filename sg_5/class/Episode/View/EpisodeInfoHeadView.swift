@@ -73,7 +73,7 @@ class EpisodeInfoHeadView: UIView {
         self.addSubview(contentImageView)
         self.contentImageView = contentImageView
         let upBtn = UIButton(type: .custom)
-        upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
+        upBtn.setImage(UIImage(named: "dianzan_b"), for: .normal)
         upBtn.addTarget(self, action: #selector(upBtnClick), for: .touchUpInside)
         upBtn.setTitle("3", for: .normal)
         upBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)

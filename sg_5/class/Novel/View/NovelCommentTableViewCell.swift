@@ -24,7 +24,7 @@ class NovelCommentTableViewCell: UITableViewCell {
             if comment.fromHeadUrl == ""{
                 userIconImg.image = UIImage(named: "userIMG")
             }else{
-                userIconImg.kf.setImage(with: URL(string: comment.fromHeadUrl))
+                userIconImg.kf.setImage(with: URL(string: "\(postUrl)/images/\(comment.fromHeadUrl)"))
             }
         }
     }

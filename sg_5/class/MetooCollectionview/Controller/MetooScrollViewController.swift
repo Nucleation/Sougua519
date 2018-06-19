@@ -76,6 +76,7 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         headView.backBlock {
             self.navigationController?.popViewController(animated: false)
         }
+        self.headView?.titleLab?.text = self.pictureModelArr[self.index].name
         self.view.addSubview(headView)
         self.headView = headView
         let footView = MetooScrollerFootView(frame: CGRect(x: 0, y: screenHeight - 60, width: screenWidth, height: 60))
@@ -104,12 +105,19 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         
     }
     func likes(){
+//        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+//        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id ,"contentType":ContentType.Picture.rawValue,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+//        let parData = dic.toParameterDic()
+//        NetworkTool.requestData(.post, URLString: commentLike, parameters: parData ) { (json) in
+//
+//        }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id ,"contentType":ContentType.Picture.rawValue,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id,"contentType":ContentType.Picture.rawValue]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentLike, parameters: parData ) { (json) in
             
         }
+
     }
     func report(){
         let reportView = ReportView(frame: UIScreen.main.bounds)

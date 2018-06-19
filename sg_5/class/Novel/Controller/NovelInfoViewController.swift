@@ -91,12 +91,17 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
     
     func createUI(){
         let navView = UIView()
-        navView.backgroundColor = .white
+        navView.backgroundColor = .colorAccent
         self.view.addSubview(navView)
         let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.setImage(UIImage(named: "fanhui1"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         navView.addSubview(backBtn)
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
+        titleLabel.text = "小说详情"
+        titleLabel.textColor  = .white
+        navView.addSubview(titleLabel)
         navView.snp.makeConstraints { (make) in
             make.left.right.top.equalTo(self.view)
             make.height.equalTo(64)
@@ -106,7 +111,11 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             make.left.equalTo(navView)
             make.width.height.equalTo(44)
         }
-        
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(backBtn)
+            make.left.equalTo(backBtn.snp.right).offset(5)
+            make.height.equalTo(44)
+        }
         let tableView = UITableView()
         tableView.separatorStyle = .none
         if #available(iOS 11.0, *) {
@@ -276,7 +285,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             make.top.equalTo(self.novelImageView!.snp.bottom).offset(30)
         })
         self.beginReadBtn?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self.joinBookshelfBtn!.snp.right).offset(13)
+            make.right.equalTo(self.bookView!.snp.right).offset(-30)
             make.height.width.equalTo(self.joinBookshelfBtn!)
             make.top.equalTo(self.joinBookshelfBtn!)
         })

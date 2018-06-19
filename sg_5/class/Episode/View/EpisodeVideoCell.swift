@@ -11,6 +11,7 @@ protocol EpisodeVideoCellDelegate {
     func videoCellup(sender: EpisodeVideoCell)
     func videoCelldown(sender: EpisodeVideoCell)
     func videoCellcomment(sender: EpisodeVideoCell)
+    func videoCellShare(sender: EpisodeVideoCell)
 }
 class EpisodeVideoCell: UITableViewCell {
     @IBOutlet weak var sourceLab: UILabel!
@@ -74,6 +75,11 @@ class EpisodeVideoCell: UITableViewCell {
             }
         }else{
             self.makeToast("已赞")
+        }
+    }
+    @IBAction func shareBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.videoCellShare(sender: self)
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

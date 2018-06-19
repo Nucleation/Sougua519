@@ -14,7 +14,19 @@ class MetooCollectionViewCell: UICollectionViewCell {
     var circleImage: UIImageView?
     var fromLab: UILabel?
     var collcetBtn: UIButton?
-    
+    var model = PictureClassifyModel() {
+        didSet {
+            self.imageView?.kf.setImage(with: URL(string:"\(model.downloadUrl)"))
+            self.fromLab?.text = model.source
+            self.desLab?.text = model.name
+            self.collcetBtn?.setTitle(model.countPraise, for: .normal)
+            if model.isUp {
+                self.collcetBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
+            }else{
+                self.collcetBtn?.setImage(UIImage(named: "dianzan"), for: .normal)
+            }
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setUI()
@@ -23,12 +35,13 @@ class MetooCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setCellWithModel(model: PictureClassifyModel){
-        self.imageView?.kf.setImage(with: URL(string:"\(model.downloadUrl)"))
-        self.fromLab?.text = model.source
-        self.desLab?.text = model.name
-        self.collcetBtn?.setTitle(model.countPraise, for: .normal)
-    }
+//    func setCellWithModel(model: PictureClassifyModel){
+//        self.model = model
+//        self.imageView?.kf.setImage(with: URL(string:"\(model.downloadUrl)"))
+//        self.fromLab?.text = model.source
+//        self.desLab?.text = model.name
+//        self.collcetBtn?.setTitle(model.countPraise, for: .normal)
+//    }
     func setUI(){
         imageView = UIImageView(image: UIImage(named: "333"))
         imageView?.layer.masksToBounds = true
@@ -52,6 +65,7 @@ class MetooCollectionViewCell: UICollectionViewCell {
         collcetBtn = UIButton(type: .custom)
         collcetBtn?.setImage(UIImage(named: "dianzan"), for: .normal)
         collcetBtn?.setTitle("收藏", for: .normal)
+        collcetBtn?.addTarget(self, action: #selector(collectionBtnClick), for: .touchUpInside)
         collcetBtn?.setTitleColor(.black, for: .normal)
         collcetBtn?.titleLabel?.textAlignment = .right
         collcetBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -105,4 +119,18 @@ class MetooCollectionViewCell: UICollectionViewCell {
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
+    @objc func collectionBtnClick(){
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.model.id ,"contentType":ContentType.Picture.rawValue]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: commentLike, parameters: parData ) { (json) in
+            var count = Int(self.model.countPraise)!
+            count += 1
+            self.model.countPraise = String(count)
+            self.collcetBtn?.setTitle(self.model.countPraise, for: .normal)
+            self.collcetBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
+            self.model.isUp = true
+        }
+    }
+    
 }

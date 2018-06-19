@@ -134,7 +134,7 @@ class HomePageWebViewController: UIViewController{
         self.contentView = contentView
         
         let upBtn = UIButton(type: .custom)
-        upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
+        upBtn.setImage(UIImage(named: "dianzan_b"), for: .normal)
         upBtn.setTitle(String(model?.up ?? 0), for: .normal)
         upBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         upBtn.addTarget(self, action: #selector(upBtnClick), for: .touchUpInside)

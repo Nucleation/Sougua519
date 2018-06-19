@@ -96,7 +96,82 @@ class EpisodeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,EpisodeTextCellDelegate,EpisodeImageCellDelegate,EpisodeVideoCellDelegate{
+extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,EpisodeTextCellDelegate,EpisodeImageCellDelegate,EpisodeVideoCellDelegate,UMSocialShareMenuViewDelegate{
+    func textCellShare(sender: EpisodeTextCell) {
+        let model = getModel(sender: sender)
+        share(model: model)
+    }
+    
+    func imageCellShare(sender: EpisodeImageCell) {
+        let model = getModel(sender: sender)
+        share(model: model)
+    }
+    
+    func videoCellShare(sender: EpisodeVideoCell) {
+        let model = getModel(sender: sender)
+        share(model: model)
+    }
+    func share(model: EpisodeModel){
+        UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.QQ.rawValue)])
+        UMSocialUIManager.setShareMenuViewDelegate(self)
+        UMSocialUIManager.showShareMenuViewInWindow(platformSelectionBlock: { (platformType, info) in
+            var shareTitle = ""
+            var share_pic = ""
+            var url = ""
+            if model.mark == "1"{
+                let messageObject =  UMSocialMessageObject()
+                messageObject.text = model.content
+                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
+                    if let error = error as NSError?{
+                        print("取消分享 : \(error.description)")
+                    }else{
+                        print("分享成功")
+                    }
+                }
+            }else if model.mark == "2" {
+                share_pic = model.contentImg
+                shareTitle = model.content
+                let messageObject =  UMSocialMessageObject()
+                let shareObject = UMShareImageObject()
+                let url = URL(string: model.contentImg )
+                let data = try! Data(contentsOf: url!)
+                //shareObject.thumbImage = UIImage(data: data)
+                shareObject.shareImage = UIImage(data: data)
+                messageObject.shareObject = shareObject;
+                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
+                    if let error = error as NSError?{
+                        print("取消分享 : \(error.description)")
+                    }else{
+                        print("分享成功")
+                    }
+                }
+            }else{
+                if model.title != ""{
+                    shareTitle = model.title
+                }else{
+                    shareTitle = model.source
+                }
+                url = model.videourl
+                let desc = "来自搜瓜"
+                let messageObject = UMSocialMessageObject()
+                let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")
+                let shareObject = UMShareWebpageObject.shareObject(withTitle:shareTitle, descr: desc, thumImage:pic)
+                shareObject?.webpageUrl = url
+                messageObject.shareObject = shareObject
+                UMSocialManager.default().share(to: platformType, messageObject:messageObject, currentViewController: self) { (data, error) in
+                    if let error = error as NSError?{
+                        print("取消分享 : \(error.description)")
+                    }else{
+                        print("分享成功")
+                    }
+                }
+            }
+            
+        })
+    }
+    func umSocialParentView(_ defaultSuperView: UIView!) -> UIView! {
+        return self.view
+    }
     func textCellup(sender: EpisodeTextCell) {
         let model = getModel(sender: sender)
         self.upWithIdAndMark(id: model.id, mark: model.mark)

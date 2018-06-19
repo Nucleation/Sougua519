@@ -91,8 +91,7 @@ extension MetooCollectionViewController:UICollectionViewDelegateFlowLayout,UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MetooCollectionViewCell
-        cell.collcetBtn?.setTitle(String(indexPath.row), for: .normal)
-        cell.setCellWithModel(model: self.pictureClassifyArray[indexPath.row])
+        cell.model = self.pictureClassifyArray[indexPath.row]
         cell.setImageViewHeight(indexPath: indexPath)
         return cell
     }

@@ -11,6 +11,7 @@ protocol EpisodeImageCellDelegate {
     func imageCellup(sender: EpisodeImageCell)
     func imageCelldown(sender: EpisodeImageCell)
     func imageCellcomment(sender: EpisodeImageCell)
+    func imageCellShare(sender: EpisodeImageCell)
 }
 class EpisodeImageCell: UITableViewCell {
     @IBOutlet weak var userIcon: UIImageView!
@@ -78,6 +79,11 @@ class EpisodeImageCell: UITableViewCell {
     @IBAction func downBtnClick(_ sender: Any) {
         if self.delegate != nil{
             delegate?.imageCelldown(sender: self)
+        }
+    }
+    @IBAction func shareBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.imageCellShare(sender: self)
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

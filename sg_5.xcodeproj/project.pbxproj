@@ -1574,7 +1574,7 @@
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/QQ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zesen.sg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhishen.sougua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/sg_5/MUltiWindow-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -1613,7 +1613,7 @@
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/QQ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zesen.sg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhishen.sougua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/sg_5/MUltiWindow-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

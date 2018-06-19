@@ -12,6 +12,7 @@ protocol EpisodeTextCellDelegate {
     func textCellup(sender: EpisodeTextCell)
     func textCelldown(sender: EpisodeTextCell)
     func textCellcomment(sender: EpisodeTextCell)
+    func textCellShare(sender: EpisodeTextCell)
 }
 class EpisodeTextCell: UITableViewCell {
     @IBOutlet weak var sourceLab: UILabel!
@@ -97,6 +98,11 @@ class EpisodeTextCell: UITableViewCell {
             }
         }else{
             self.makeToast("已赞")
+        }
+    }
+    @IBAction func shareBtnClick(_ sender: Any) {
+        if self.delegate != nil{
+            delegate?.textCellShare(sender: self)
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
