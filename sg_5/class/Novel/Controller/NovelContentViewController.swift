@@ -9,7 +9,6 @@
 import UIKit
 
 class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,NovelChapterViewDelegate{
-    
     var novelInfo: NoveCategoryListModel? 
     var web: UIWebView?
     var novelContentModel:NovelContentModel?
@@ -169,7 +168,7 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
         self.navigationController?.popViewController(animated: true)
     }
     @objc func lastChapterBtnClick(){
-        if self.pageIndex > 2 {
+        if self.pageIndex > 1 {
             getContentByPage(page: self.pageIndex - 1,isNext: false)
         }else{
            self.view.makeToast("到顶了")
@@ -188,6 +187,9 @@ class NovelContentViewController: UIViewController,UIGestureRecognizerDelegate,N
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func changeIndex(index: Int) {
+        self.pageIndex = index
     }
     func getContentByPage(page: Int, isNext: Bool){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)

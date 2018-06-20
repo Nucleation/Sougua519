@@ -100,7 +100,7 @@ extension NoveCollectionViewController:UICollectionViewDelegateFlowLayout,UIColl
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"id":self.noveClassifyArray[indexPath.row].id]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.noveClassifyArray[indexPath.row].id,"page": 1 ]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
             let vc = NovelInfoViewController()

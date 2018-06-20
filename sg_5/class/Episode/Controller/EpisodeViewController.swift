@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MJRefresh
 class EpisodeViewController: UIViewController {
     var naviView: UIView?
     var tableView: UITableView?
@@ -21,7 +21,7 @@ class EpisodeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestData()
+        
         let naviView = MetooHeadView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 64))
         naviView.titleLabel?.text = "段子"
         self.view.addSubview(naviView)
@@ -45,6 +45,9 @@ class EpisodeViewController: UIViewController {
         tableView.estimatedRowHeight = 50
         self.view.addSubview(tableView)
         self.tableView = tableView
+        self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.requestData()
+        })
         self.tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view).offset(64)
             make.left.right.equalTo(self.view)
@@ -58,6 +61,7 @@ class EpisodeViewController: UIViewController {
             uSelf.oprateClick(sender: sender)
         }
         self.view.addSubview(oprateView)
+        requestData()
         // Do any additional setup after loading the view.
     }
     func requestData(){
@@ -69,6 +73,7 @@ class EpisodeViewController: UIViewController {
             if let datas = json.arrayObject{
                 self.episodeArray += datas.compactMap({EpisodeModel.deserialize(from: $0 as? Dictionary)})
             }
+            self.tableView?.mj_header.endRefreshing()
             self.tableView?.reloadData()
         }
     }
@@ -76,7 +81,7 @@ class EpisodeViewController: UIViewController {
     func oprateClick(sender: UIButton) {
         switch sender.tag {
         case 1:
-            super.viewDidLoad()
+            self.tableView?.mj_header.beginRefreshing()
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
@@ -88,7 +93,8 @@ class EpisodeViewController: UIViewController {
             let vc = PersonalCenterViewController.loadStoryboard()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
-            break
+            let vc = FindViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     override func didReceiveMemoryWarning() {

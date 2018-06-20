@@ -123,15 +123,17 @@ extension NetworkToolProtocol{
                     let jsonDic = JSON(jsons)
                     guard jsonDic["code"].intValue == 1 else {
                         success(jsonDic)
+                        nva.stopAnimating()
                         return
                     }
                     if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl {
                        success(jsonDic["data"])
+                        nva.stopAnimating()
                     }else{
                     let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt
                     let jsonData = jsonDataStr?.data(using: String.Encoding.utf8, allowLossyConversion: true)
                     success(JSON(data: jsonData!))
-                    
+                    nva.stopAnimating()
                     }
             }else{
                 nva.stopAnimating()

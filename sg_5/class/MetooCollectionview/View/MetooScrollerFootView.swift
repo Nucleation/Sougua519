@@ -21,7 +21,6 @@ class MetooScrollerFootView: UIView {
     var likesBtn: UIButton?
     var downLoadBtn:UIButton?
     var reportBtn: UIButton?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
          createUI()
@@ -35,7 +34,7 @@ class MetooScrollerFootView: UIView {
         self.backgroundColor = .black
         let likesBtn = UIButton(type: .custom)
         likesBtn.setImage(UIImage(named: "dianzan"), for: .normal)
-        likesBtn.setTitle("点赞", for: .normal)
+        likesBtn.setTitle("0", for: .normal)
         likesBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         likesBtn.addTarget(self, action: #selector(likesBtnClick), for: .touchUpInside)
         self.addSubview(likesBtn)
@@ -76,6 +75,7 @@ class MetooScrollerFootView: UIView {
     @objc func likesBtnClick(){
         if self.delegate != nil {
             self.delegate?.likes()
+            
         }
     }
     @objc func downLoadBtnClick(){

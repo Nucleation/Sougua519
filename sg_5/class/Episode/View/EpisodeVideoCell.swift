@@ -61,6 +61,8 @@ class EpisodeVideoCell: UITableViewCell {
     @IBAction func downBtnClick(_ sender: Any) {
         if self.delegate != nil{
             delegate?.videoCelldown(sender: self)
+            model.down += 1
+            dowmCountLab.text = String(model.down)
         }
     }
     @IBAction func upBtnClick(_ sender: Any) {

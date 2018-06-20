@@ -55,6 +55,9 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
         }
         requestIsCollect()
     }
+    deinit {
+        player.prepareToDealloc()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let navView = UIView()
@@ -185,6 +188,7 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
         self.footView?.addSubview(line)
         let textField = UITextField()
         textField.placeholder = "写评论..."
+        textField.returnKeyType = .send
         textField.delegate = self
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.colorWithHexColorString("e1e2e3").cgColor
@@ -281,20 +285,15 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
             if let datas = json["commentList"].arrayObject{
                 self.commentListArray += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
             }
+            self.hView?.totolComment?.text = "评论 \(self.commentListArray.count)"
+            self.hView?.totolUp?.text = "\(json["sumComment"].stringValue) 赞"
             self.setTableViewHeight(cellNum: self.commentListArray.count)
             self.tableView?.reloadData()
+            self.view.layoutIfNeeded()
         }
     }
     func setTableViewHeight(cellNum: Int){
-//        if CGFloat(cellNum) * 124 + 50 > screenHeight - 104 {
-//            self.tableView?.snp.updateConstraints({ (make) in
-//                make.height.equalTo(self.view.frame.height - 114)
-//            })
-//        }else{
-//            self.tableView?.snp.updateConstraints({ (make) in
-//                make.height.equalTo(CGFloat(cellNum) * 124 + 50)
-//            })
-//        }
+
     }
     @objc func leftBtnClick(){
         self.navigationController?.popViewController(animated: false)
@@ -364,68 +363,15 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
                 }
             }
 
-          })
-//        UMSocialUIManager.showShareMenuViewInWindow { (platformType,info ) in
-//            var shareTitle = ""
-//            var share_pic = ""
-//            var url = ""
-//            if self.model?.mark == "1"{
-//                let messageObject =  UMSocialMessageObject()
-//                messageObject.text = self.model?.content
-//                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
-//                    if let error = error as NSError?{
-//                        print("取消分享 : \(error.description)")
-//                    }else{
-//                        print("分享成功")
-//                    }
-//                }
-//            }else if self.model?.mark == "2"{
-//                share_pic = (self.model?.contentImg)!
-//                shareTitle = (self.model?.content)!
-//                let messageObject =  UMSocialMessageObject()
-//                let shareObject = UMShareImageObject()
-//                let data = try Data(contentsOf: URL(string:(self.model?.contentImg)!)!)
-//                shareObject.thumbImage = UIImage(data: data)
-//                messageObject.shareObject = shareObject;
-//                UMSocialManager.default().share(to: platformType, messageObject: messageObject, currentViewController: self) { (data, error) in
-//                    if let error = error as NSError?{
-//                        print("取消分享 : \(error.description)")
-//                    }else{
-//                        print("分享成功")
-//                    }
-//                }
-//            }else{
-//                if self.model?.title != ""{
-//                    shareTitle = (self.model?.title)!
-//                }else{
-//                    shareTitle = (self.model?.source)!
-//                }
-//                url = (self.model?.videourl)!
-//                let desc = "来自搜瓜"
-//                let messageObject = UMSocialMessageObject()
-//                let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")
-//                let shareObject = UMShareWebpageObject.shareObject(withTitle:shareTitle, descr: desc, thumImage:pic)
-//                shareObject?.webpageUrl = url
-//                messageObject.shareObject = shareObject
-//                UMSocialManager.default().share(to: platformType, messageObject:messageObject, currentViewController: self) { (data, error) in
-//                    if let error = error as NSError?{
-//                        print("取消分享 : \(error.description)")
-//                    }else{
-//                        print("分享成功")
-//                    }
-//                }
-//
-//            }
-        
+          })        
     }
     func sendComment(comment: String){
-        let keyChain = KeyChain()
-        guard let mobile = keyChain.getKeyChain()["mobile"],let token = keyChain.getKeyChain()["token"],let id = keyChain.getKeyChain()["id"] else {
+        guard KeyChain().getKeyChain()["isLogin"] == "1" else {
             self.view.makeToast("你还没有登录")
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.News.rawValue,"content":comment]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","mobile":KeyChain().getKeyChain()["mobile"] ?? "","token":KeyChain().getKeyChain()["token"] ?? "","fromId":KeyChain().getKeyChain()["id"] ?? "","type":ContentType.News.rawValue,"content":comment]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
             self.view.makeToast("评论成功")
@@ -581,4 +527,5 @@ extension EpisodeInfoViewController: BMPlayerDelegate {
     func bmPlayer(player: BMPlayer, loadedTimeDidChange loadedDuration: TimeInterval, totalDuration: TimeInterval) {
         //        print("| BMPlayerDelegate | loadedTimeDidChange | \(loadedDuration) of \(totalDuration)")
     }
+    
 }

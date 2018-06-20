@@ -108,6 +108,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
                                 forCellReuseIdentifier:"VideoSub")
         mainTableView!.register(UINib(nibName:"SingleTestTableViewCell", bundle:nil),
                                 forCellReuseIdentifier:"SingleTest")
+        mainTableView!.rowHeight = UITableViewAutomaticDimension // 自适应单元格高度
+        mainTableView!.estimatedRowHeight = 50
         self.view?.addSubview(mainTableView!)
 //        self.mainTableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
 //            self.pageNO += 1
@@ -255,21 +257,24 @@ extension MuRootViewController {
         }
         
      }
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            let aNews = newsListArr[indexPath.row]
-            switch aNews.modelType {
-            case "1":
-                return 95
-            case "2":
-                return 120
-            case "3":
-                return 320
-            case "4":
-                return 120
-            default:
-                return 320
-            }
-        }
+//        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//            let aNews = newsListArr[indexPath.row]
+//            switch aNews.modelType {
+//            case "1":
+//                return 95
+//            case "2":
+//                return 120
+//            case "3":
+//                return 320
+//            case "4":
+//                return 120
+//            default:
+//                return 320
+//            }
+//        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.newsListArr[indexPath.row].directType == "组图" {
             var imageURLs = self.newsListArr[indexPath.row].newsContent.components(separatedBy: ";")

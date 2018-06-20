@@ -76,11 +76,12 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         headView.backBlock {
             self.navigationController?.popViewController(animated: false)
         }
-        self.headView?.titleLab?.text = self.pictureModelArr[self.index].name
+        headView.titleLab?.text = self.pictureModelArr[self.index].name
         self.view.addSubview(headView)
         self.headView = headView
         let footView = MetooScrollerFootView(frame: CGRect(x: 0, y: screenHeight - 60, width: screenWidth, height: 60))
         footView.delegate = self
+        footView.likesBtn?.setTitle(self.pictureModelArr[self.index].countPraise, for: .normal)
         self.view.addSubview(footView)
         self.footView = footView
     }
@@ -105,17 +106,16 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         
     }
     func likes(){
-//        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-//        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id ,"contentType":ContentType.Picture.rawValue,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
-//        let parData = dic.toParameterDic()
-//        NetworkTool.requestData(.post, URLString: commentLike, parameters: parData ) { (json) in
-//
-//        }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.pictureModelArr[self.index].id,"contentType":ContentType.Picture.rawValue]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentLike, parameters: parData ) { (json) in
-            
+            var count = Int(self.pictureModelArr[self.index].countPraise)!
+            count += 1
+            self.pictureModelArr[self.index].countPraise = String(count)
+            self.footView?.likesBtn?.setTitle(self.pictureModelArr[self.index].countPraise, for: .normal)
+            self.footView?.likesBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
+            self.pictureModelArr[self.index].isUp = true
         }
 
     }
@@ -154,7 +154,14 @@ extension MetooScrollViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.index =  Int (scrollView.contentOffset.x / screenWidth)
         self.headView?.titleLab?.text = self.pictureModelArr[self.index].name
-        //self.footView?.likesBtn?.setTitle(self.pictureModelArr[self.index].id, for: .normal)
+        self.footView?.likesBtn?.setTitle(self.pictureModelArr[self.index].countPraise, for: .normal)
+        if self.pictureModelArr[self.index].isUp {
+            self.footView?.likesBtn?.isEnabled = false
+           self.footView?.likesBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
+        }else{
+            self.footView?.likesBtn?.isEnabled = true
+            self.footView?.likesBtn?.setImage(UIImage(named: "dianzan"), for: .normal)
+        }
         self.view.layoutIfNeeded()
     }
     

@@ -79,6 +79,8 @@ class EpisodeImageCell: UITableViewCell {
     @IBAction func downBtnClick(_ sender: Any) {
         if self.delegate != nil{
             delegate?.imageCelldown(sender: self)
+            model.down += 1
+            dowmCountLab.text = String(model.down)
         }
     }
     @IBAction func shareBtnClick(_ sender: Any) {

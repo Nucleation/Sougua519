@@ -352,7 +352,7 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
     }
     @objc func beginReadBtnClick() {
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.novelInfo?.id ?? ""]
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.novelInfo?.id ?? "","page": 1 ]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
             let vc = NovelContentViewController()

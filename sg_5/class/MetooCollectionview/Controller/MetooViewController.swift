@@ -16,6 +16,8 @@ class MetooViewController: UIViewController {
     var pageTitleArr: Array<String> = []
     var pageContentView: SGPageContentView?
     var titleNameArr: Array<String>?
+    var index:Int = 0
+    
     //操作视图
     var oprateView: MUOprateView!
     override func viewWillAppear(_ animated: Bool) {
@@ -52,17 +54,19 @@ class MetooViewController: UIViewController {
             configuration.titleColor = UIColor.colortext1
             configuration.titleSelectedColor = UIColor.colorAccent
             configuration.indicatorColor = .clear
-            self.pageTitleView = SGPageTitleView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: 40), delegate: self, titleNames: array as! [Any], configure: configuration)
-            self.pageTitleView!.backgroundColor = .clear
-            self.view.addSubview(self.pageTitleView!)
-            // 设置子控制器
-            _ = array.flatMap({ (title) -> () in
+            
+            let pageTitleView = SGPageTitleView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: 40), delegate: self, titleNames: array as! [Any], configure: configuration)
+            pageTitleView?.backgroundColor = .clear
+            pageTitleView?.isShowBottomSeparator = true
+            self.view.addSubview(pageTitleView!)
+            self.pageTitleView = pageTitleView
+            for i in 0 ..< array.count {
                 // 图片,组图
                 let metooView = MetooCollectionViewController()
-                metooView.category = title as? String
+                metooView.category = array[i] as? String
+                metooView.view.tag = i
                 self.addChildViewController(metooView)
-                
-            })
+            }
             // 内容视图
             self.pageContentView = SGPageContentView(frame: CGRect(x: 0, y: 124, width: screenWidth, height: self.view.height - 168), parentVC: self, childVCs: self.childViewControllers)
             self.pageContentView!.delegatePageContentView = self
@@ -75,7 +79,12 @@ class MetooViewController: UIViewController {
     func oprateClick(sender: UIButton) {
         switch sender.tag {
         case 1:
-            super.viewDidLoad()
+            for vc in self.childViewControllers{
+                if vc.view.tag == self.index {
+                    let indexVc = vc as? MetooCollectionViewController
+                    indexVc?.mjHead?.beginRefreshing()
+                }
+            }
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
@@ -87,7 +96,8 @@ class MetooViewController: UIViewController {
             let vc = PersonalCenterViewController.loadStoryboard()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
-            break
+            let vc = FindViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     override func didReceiveMemoryWarning() {
@@ -100,10 +110,12 @@ extension MetooViewController: SGPageTitleViewDelegate, SGPageContentViewDelegat
     /// 联动 pageContent 的方法
     func pageTitleView(_ pageTitleView: SGPageTitleView!, selectedIndex: Int) {
         self.pageContentView!.setPageContentViewCurrentIndex(selectedIndex)
+        self.index = selectedIndex
     }
     
     /// 联动 SGPageTitleView 的方法
     func pageContentView(_ pageContentView: SGPageContentView!, progress: CGFloat, originalIndex: Int, targetIndex: Int) {
         self.pageTitleView!.setPageTitleViewWithProgress(progress, originalIndex: originalIndex, targetIndex: targetIndex)
+        self.index = targetIndex
     }
 }

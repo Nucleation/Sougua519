@@ -84,6 +84,8 @@ class EpisodeTextCell: UITableViewCell {
     @IBAction func downBtnClick(_ sender: Any) {
         if self.delegate != nil {
             delegate?.textCelldown(sender: self)
+            model.down += 1
+            dowmCountLab.text = String(model.down)
         }
     }
     @IBAction func upBtnClick(_ sender: Any) {

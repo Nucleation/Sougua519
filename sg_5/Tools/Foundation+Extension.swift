@@ -214,6 +214,4 @@ extension Date
         return date
     }
 }
-//extension NSNumber {
-//    fileprivate var isBool: Bool { return CFBooleanGetTypeID() == CFGetTypeID(self) }
-//}
+

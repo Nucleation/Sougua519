@@ -13,24 +13,24 @@ class NovelShelfBaseModel: HandyJSON {
     var updateDate: String = ""
     var delFlag: String = ""
     var id: String = ""
-    var novel: NovelShelfListModel?
+    var novel: NoveCategoryListModel?
     var sectionId: String = ""
     var createDate: String = ""
     public required init() {}
 }
-class NovelShelfListModel: HandyJSON {
-    var del: String = ""
-    var id: String = ""
-    var fictionImg: String = ""
-    var fictionAuthor: String = ""
-    var fictionIsEnd: String = ""
-    var fictionWordCount: String = ""
-    var fictionName: String = ""
-    var fictionBrief: String = ""
-    var createTime: String = ""
-    var categoryName: String = ""
-    public required init() {}
-}
+//class NovelShelfListModel: HandyJSON {
+//    var del: String = ""
+//    var id: String = ""
+//    var fictionImg: String = ""
+//    var fictionAuthor: String = ""
+//    var fictionIsEnd: String = ""
+//    var fictionWordCount: String = ""
+//    var fictionName: String = ""
+//    var fictionBrief: String = ""
+//    var createTime: String = ""
+//    var categoryName: String = ""
+//    public required init() {}
+//}
 
 class testA {
     var data = """

@@ -9,6 +9,7 @@
 import UIKit
 protocol NovelChapterViewDelegate {
     func reloadNovel(model:NovelChapterModel)
+    func changeIndex(index: Int)
 }
 class NovelChapterView: UIView ,UITableViewDelegate,UITableViewDataSource{
     var tableView: UITableView?
@@ -122,6 +123,7 @@ class NovelChapterView: UIView ,UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.delegate != nil {
             delegate?.reloadNovel(model: self.novelChapterArray[indexPath.row])
+            delegate?.changeIndex(index: indexPath.row + 1)
             self.removeFromSuperview()
         }
     }

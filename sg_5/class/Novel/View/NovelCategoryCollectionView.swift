@@ -34,6 +34,7 @@ class NovelCategoryCollectionView: UIView ,UICollectionViewDelegate,UICollection
         collectionView.register(NovelCategoryCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.showsHorizontalScrollIndicator = false
         self.addSubview(collectionView)
         self.collectionView = collectionView

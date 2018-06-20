@@ -47,7 +47,7 @@ class FindViewController: UIViewController,WKNavigationDelegate {
             make.width.equalTo(navView).offset(-88)
             make.centerX.equalTo(navView)
         }
-        let webview: WKWebView = WKWebView(frame: self.view.frame, configuration: WKWebViewConfiguration())
+        let webview: WKWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight - 64), configuration: WKWebViewConfiguration())
         webview.load(URLRequest(url: URL(string: "http://daiduoduo.zhishensoft.com/h5/index/index?channel=10001")!))
         webview.navigationDelegate = self
         self.view.addSubview(webview)

@@ -8,6 +8,8 @@
 
 import UIKit
 import EmptyPage
+import MJRefresh
+
 protocol BookCityViewDelegate {
     func pushViewController(viewController: UIViewController)
 }
@@ -22,7 +24,12 @@ class BookCityViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.requestData()
+        })
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.requestMoreData()
+        })
         self.view.addSubview(tableView)
         self.tableView = tableView
         let view = EmptyPageView.ContentView.standard
@@ -100,6 +107,7 @@ class BookCityViewController: UIViewController{
     }
     func requestData() {
         self.pageIndex = 1
+        self.dataArr = []
         let urlStr = getNovelListByPage
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         if self.category == "全部" {
@@ -122,9 +130,36 @@ class BookCityViewController: UIViewController{
                 self.dataArr += datas.compactMap({NoveCategoryListModel.deserialize(from: $0 as? Dictionary)})
             }
             self.tableView.reloadData()
-//            self.tableView.mj_header.endRefreshing()
-//            self.tableView.reloadData()
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.reloadData()
             
+        }
+    }
+    func requestMoreData() {
+        self.pageIndex += 1
+        let urlStr = getNovelListByPage
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        if self.category == "全部" {
+            self.category = ""
+        }
+        if self.subCategory == "全部" {
+            self.category = ""
+        }
+        if self.subCategory == "完结" {
+            self.subCategory = "已完结"
+        }
+        if self.subCategory == "连载" {
+            self.subCategory = "连载中"
+        }
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"categoryName":self.category,"page":self.pageIndex,"fictionIsEnd": self.subCategory]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: urlStr, parameters: parData) { (json) in
+            if let datas = json["novelList"].arrayObject{
+                self.dataArr += datas.compactMap({NoveCategoryListModel.deserialize(from: $0 as? Dictionary)})
+            }
+            self.tableView.reloadData()
+            self.tableView.mj_footer.endRefreshing()
+            self.tableView.reloadData()
         }
     }
     override func didReceiveMemoryWarning() {

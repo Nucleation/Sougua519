@@ -105,6 +105,18 @@ extension BookShelfViewController {
         if (self.delegate != nil) {
             self.delegate?.goToBookCity()
            }
+        }else{
+            let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+            let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.bookArray[indexPath.row].novel?.id ?? ""]
+            let parData = dic.toParameterDic()
+            NetworkTool.requestData(.post, URLString: getNovelContent, parameters: parData) { (json) in
+                let vc = NovelInfoViewController()
+                vc.novelInfo = (self.bookArray[indexPath.row].novel)!
+                if self.delegate != nil {
+                    self.delegate?.BSPushViewController(viewController: vc)
+                }
+                
+            }
         }
     }
     @objc func longPress(longHand:UILongPressGestureRecognizer){
@@ -114,15 +126,24 @@ extension BookShelfViewController {
             if indexPath == nil || indexPath?.row == self.bookArray.count - 1  {
                 return
             }else{
-                let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-                let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.bookArray[indexPath!.row].id,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
-                let parData = dic.toParameterDic()
-                NetworkTool.requestData(.post, URLString: deleteNovelShelfUrl, parameters: parData) { (json) in
+                let alertController = UIAlertController(title: "系统提示",
+                                                        message: "您确定要从书架删除吗？", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+                    action in
+                    let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+                    let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.bookArray[indexPath!.row].id,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
+                    let parData = dic.toParameterDic()
+                    NetworkTool.requestData(.post, URLString: deleteNovelShelfUrl, parameters: parData) { (json) in
                         if self.delegate != nil{
                             self.delegate?.reloadData()
+                        }
+                        
                     }
-                    
-                }
+                })
+                alertController.addAction(cancelAction)
+                alertController.addAction(okAction)
+                UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
             }
         default:
             return
@@ -132,7 +153,7 @@ extension BookShelfViewController {
 class BookShelfItem: UICollectionViewCell {
     var titleLab: UILabel?
     var imageView: UIImageView?
-    var model: NovelShelfListModel?
+    var model: NoveCategoryListModel?
     var delBtn:UIButton?
     
     override init(frame: CGRect) {

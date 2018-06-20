@@ -18,6 +18,7 @@ class MetooCollectionViewController: UIViewController{
     var pictureClassifyArray: Array = [PictureClassifyModel]()
     var flowLayout:JHFlowLayout?
     var pageIndex: Int = 0
+    var mjHead: MJRefreshNormalHeader?
     
     lazy var mainCollectionView: UICollectionView = {
         let flowLayout = JHFlowLayout()
@@ -29,9 +30,12 @@ class MetooCollectionViewController: UIViewController{
         mainCollectionView.register(MetooCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
-        mainCollectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.requestData()
-        })
+        self.mjHead = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(requestData))
+        mainCollectionView.mj_header = self.mjHead
+        
+//        mainCollectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+//            self.requestData()
+//        })
         mainCollectionView.mj_header.ignoredScrollViewContentInsetTop = 10;
         mainCollectionView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.loadMoreData()
@@ -59,7 +63,7 @@ class MetooCollectionViewController: UIViewController{
             self.mainCollectionView.reloadData()
         }
     }
-    func requestData() {
+    @objc func requestData() {
         self.pageIndex = 0
         let urlStr = picGetImgByClassify
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)

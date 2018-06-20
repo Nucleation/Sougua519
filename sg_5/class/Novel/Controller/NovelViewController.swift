@@ -10,12 +10,12 @@ import UIKit
 import SGPagingView
 
 class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDelegate,BookShelfViewDelegate {
-    
-    
+
     var oprateView: MUOprateView!
     var scrollView: UIScrollView?
     var headView: NovelHomeHeadView?
     var bookShelf: BookShelfViewController?
+    var bookCity: BookCityViewController?
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
@@ -43,6 +43,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         let bookCity = BookCityViewController()
         bookCity.delegate = self
         bookCity.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight-104)
+        self.bookCity = bookCity
         scrollView.addSubview(bookShelf)
         scrollView.addSubview(bookCity.view)
         scrollView.delegate = self
@@ -71,7 +72,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
     func oprateClick(sender: UIButton) {
         switch sender.tag {
         case 1:
-            self.createUI()
+            self.bookCity?.tableView.mj_header.beginRefreshing()
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
@@ -83,7 +84,8 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
             let vc = PersonalCenterViewController.loadStoryboard()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
-            break
+            let vc = FindViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     func pushViewController(viewController:UIViewController) {
