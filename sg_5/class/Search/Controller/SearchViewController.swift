@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class SearchViewController: UIViewController {
     var navView: UIView?
@@ -85,6 +86,9 @@ class SearchViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension // 自适应单元格高度
         tableView.estimatedRowHeight = 50
         tableView.register(UINib(nibName: "mainTableViewCell", bundle: nil), forCellReuseIdentifier: "myCell")
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.searchClick()
+        })
         self.view.addSubview(tableView)
         self.tableView = tableView
         self.tableView?.snp.makeConstraints({ (make) in
@@ -105,9 +109,11 @@ class SearchViewController: UIViewController {
     @objc func searchClick(){
         self.dataArr = SOsearch().getData(keyWord: self.searchTF?.text ?? "")
         self.dataArr += SougouSearch().getData(keyWord: self.searchTF?.text ?? "")
+        self.tableView?.mj_header.endRefreshing()
         self.tableView?.reloadData()
     }
     func search(keyWord:String){
+        self.view.endEditing(true)
         self.dataArr = SOsearch().getData(keyWord: keyWord)
         self.dataArr += SougouSearch().getData(keyWord:keyWord)
         self.tableView?.reloadData()
@@ -116,7 +122,7 @@ class SearchViewController: UIViewController {
     func oprateClick(sender: UIButton) {
         switch sender.tag {
         case 1:
-            self.searchClick()
+            self.tableView?.mj_header.beginRefreshing()
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
@@ -130,6 +136,9 @@ class SearchViewController: UIViewController {
             let vc = FindViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -163,5 +172,8 @@ extension SearchViewController: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
          return UITableViewAutomaticDimension
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }

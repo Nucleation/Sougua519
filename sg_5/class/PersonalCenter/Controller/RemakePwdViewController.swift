@@ -49,6 +49,7 @@ class RemakePwdViewController: UIViewController {
     }
 
     @IBAction func changePwdBtnClick(_ sender: Any) {
+        self.view.endEditing(true)
         guard self.newPwdTF.text == self.surePwdTF.text else {
             self.view.makeToast("两次输入密码不一致")
             return

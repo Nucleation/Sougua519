@@ -18,8 +18,10 @@ class NewsViewController: UIViewController {
     var oprateView: MUOprateView!
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         //更新按钮状态
         self.oprateView.subViewStatus(viewController: self)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +56,8 @@ class NewsViewController: UIViewController {
             let vc = PersonalCenterViewController.loadStoryboard()
             self.navigationController?.pushViewController(vc, animated: true)
         default:
-            break
+            let vc = FindViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     func requestNewsType() {

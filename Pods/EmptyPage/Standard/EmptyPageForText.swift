@@ -32,7 +32,7 @@ open class EmptyPageForText: UIView {
   ///   - text: 文本
   ///   - color: 文本颜色
   ///   - font: 文本字体
-  open func config(text: String, color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 18)) {
+  open func config(text: String, color: UIColor = .black, font: UIFont = UIFont.systemFont(ofSize: 15)) {
     label.text = text
     label.textColor = color
     label.font = font

@@ -16,9 +16,15 @@ class FindViewController: UIViewController,WKNavigationDelegate {
     var webview: WKWebView?
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        if #available(iOS 11.0, *) {
+            self.webview?.scrollView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let navView = UIView()
         navView.backgroundColor = .colorAccent
         self.view.addSubview(navView)
@@ -47,23 +53,12 @@ class FindViewController: UIViewController,WKNavigationDelegate {
             make.width.equalTo(navView).offset(-88)
             make.centerX.equalTo(navView)
         }
-        let webview: WKWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight - 64), configuration: WKWebViewConfiguration())
+        let webview: WKWebView = WKWebView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight - 64), configuration: WKWebViewConfiguration())
         webview.load(URLRequest(url: URL(string: "http://daiduoduo.zhishensoft.com/h5/index/index?channel=10001")!))
         webview.navigationDelegate = self
         self.view.addSubview(webview)
         self.view.bringSubview(toFront: navView)
-        webview.snp.makeConstraints { (make) in
-            make.top.equalTo(navView.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
-        }
         self.webview = webview
-//        self.webview?.addObserver(self, forKeyPath: "estimatedProgress", options: NSKeyValueObservingOptions.new, context: nil)
-//        let progressView = UIProgressView(frame: CGRect(x: 0, y: 164, width: screenWidth, height: 1))
-//        progressView.backgroundColor = .colorAccent
-//        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-//        self.view.addSubview(progressView)
-//        self.progressView = progressView
-        // Do any additional setup after loading the view.
     }
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)

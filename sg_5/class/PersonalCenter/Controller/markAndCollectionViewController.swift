@@ -6,10 +6,11 @@
 //  Copyright © 2018年 zhishen－mac. All rights reserved.
 //
 import UIKit
+import EmptyPage
 
 class markAndCollectionViewController: UIViewController {
     @IBOutlet weak var titleLab: UILabel!
-    @IBOutlet weak var mainTab: UITableView!
+    var mainTab: UITableView?
     var model:Content?
     var dataArr:Array<ScanInfo> = []
     var scanModel = ScanModel()
@@ -18,10 +19,23 @@ class markAndCollectionViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         scanModel.loadData()
         self.dataArr = scanModel.scanList
+        self.mainTab?.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let mainTab = UITableView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight-64), style: .plain)
+        mainTab.delegate = self
+        mainTab.dataSource = self
+        mainTab.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(mainTab)
+        self.mainTab = mainTab
+        let view = EmptyPageView.ContentView.onlyText
+        view.label.text = "浏览记录为空"
+        let emptyView: EmptyPageView = .mix(view: view)
+        self.mainTab?.setEmpty(view: emptyView)
+        let fview = UIView()
+        self.mainTab?.tableFooterView = fview
+        EmptyPage.begin()
         // Do any additional setup after loading the view.
     }
     
@@ -43,9 +57,11 @@ extension markAndCollectionViewController: UITableViewDelegate,UITableViewDataSo
         return self.dataArr.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style:.default, reuseIdentifier: "cell")
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style:.default, reuseIdentifier: "cell")
+        let cell = UITableViewCell(style:.default, reuseIdentifier: "cell")
         cell.textLabel?.text = self.dataArr[indexPath.row].url
-        cell.imageView?.image = UIImage(named: "bottom浏览器打开")
+        cell.imageView?.image = UIImage(named: "scan")
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -59,22 +75,32 @@ extension markAndCollectionViewController: UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
         return true
     }
-    private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        return "删除"
+    }
+    
+    func  tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        
         return UITableViewCellEditingStyle.delete
     }
-    private func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "点击删除"
-    }
-    private func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    
+    
+    func  tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == UITableViewCellEditingStyle.delete {
             scanModel.loadData()
             scanModel.scanList.remove(at: indexPath.row)
             scanModel.saveData()
-            //self.dataArr = scanModel.scanList
+            self.dataArr = scanModel.scanList
             self.mainTab!.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.fade)
         }
     }
+
 }

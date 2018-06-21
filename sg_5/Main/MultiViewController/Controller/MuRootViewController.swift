@@ -48,8 +48,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
         }
         html = HTMLViewController()
-       MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
-        self.view.backgroundColor = UIColor.white
+        MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)
         setUI()
         getNewsList(pageNO: pageNO)
     }
@@ -120,7 +119,6 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             print("上拉加载.")
             self.pageNO += 1
             self.getNewsList(pageNO: self.pageNO)
-            self.mainTableView!.mj_footer.endRefreshing()
         })
         self.mainTableView?.tableHeaderView = self.headView
         let oprateView = MUOprateView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height-44, width: UIScreen.main.bounds.width, height: 44))
@@ -132,9 +130,14 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         }
         self.view.addSubview(oprateView)
     }
+    override func viewWillDisappear(_ animated:Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        
         //更新按钮状态
         self.oprateView.subViewStatus(viewController: self)
         
@@ -153,6 +156,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func getNewsList(pageNO: Int){
+        self.mainTableView?.backgroundColor = UIColor.white
         if pageNO == 1 {
             self.newsListArr = []
         }
@@ -162,15 +166,18 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         parData["pageNo"] = pageNO
         NetworkTool.requestData(.post, URLString: getNewsUrl, parameters: parData) { (json) in
             if let datas = json["news"].arrayObject{
+                self.hideEmptyView()
                 self.newsListArr += datas.compactMap({HomePageNewsModel.deserialize(from: $0 as? Dictionary)})
             }
             else{
                 self.addEmptyView(iconName: "", tipTitle: "无数据")
             }
+            self.mainTableView?.backgroundColor = UIColor.colorAccent
+            self.mainTableView!.mj_footer.endRefreshing()
             self.mainTableView?.reloadData()
             if pageNO == 1{
-                self.mainTableView?.scrollsToTop = true
-                //self.mainTableView?.contentOffset = CGPoint(x: 0, y: -20)
+                //self.mainTableView?.scrollsToTop = true
+                self.mainTableView?.contentOffset = CGPoint(x: 0, y: -20)
             }
         }
     }
@@ -179,10 +186,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         switch sender.tag {
         case 1:
             self.pageNO = 1
-            //self.mainTableView?.contentOffset = CGPoint.zero
             self.getNewsList(pageNO: self.pageNO)
-            //self.mainTableView?.reloadData()
-            //self.view.sendSubview(toBack: self.searchView)
          case 2:
             let vc = MUMultiWindowController()
             self.navigationController?.pushViewController(vc, animated: true)

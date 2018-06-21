@@ -45,6 +45,11 @@ class MetooCollectionViewController: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            mainCollectionView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
         self.requestData()
     }
     func loadMoreData(){

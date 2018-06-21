@@ -64,16 +64,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUG-uF-n32" customClass="UILabelPadding" customModule="sg_5" customModuleProvider="target">
-                        <rect key="frame" x="266" y="74.5" width="41" height="14"/>
+                        <rect key="frame" x="272.5" y="74.5" width="34.5" height="14"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="cKb-aC-RQv"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <color key="highlightedColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="6"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -102,10 +102,10 @@
                     <constraint firstAttribute="bottom" secondItem="oxU-VK-W8E" secondAttribute="bottom" id="NhY-Tu-1fw"/>
                     <constraint firstItem="oxU-VK-W8E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="V9E-g8-qL0"/>
                     <constraint firstItem="eUG-uF-n32" firstAttribute="trailing" secondItem="inn-q8-dq2" secondAttribute="trailing" constant="-5" id="X3T-vr-tml"/>
-                    <constraint firstItem="inn-q8-dq2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="8" id="YpW-mS-1Vn"/>
                     <constraint firstAttribute="bottom" secondItem="inn-q8-dq2" secondAttribute="bottom" constant="13" id="ZqJ-pv-kCc"/>
                     <constraint firstItem="ZpU-3L-F1q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="bR1-Yz-OiX"/>
                     <constraint firstItem="Lf2-4p-GGn" firstAttribute="leading" secondItem="4Xk-VR-f80" secondAttribute="trailing" constant="16" id="bgq-qF-029"/>
+                    <constraint firstAttribute="trailing" secondItem="inn-q8-dq2" secondAttribute="trailing" constant="8" id="bwk-Lh-Sd4"/>
                     <constraint firstItem="ZpU-3L-F1q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="gtM-ID-hXe"/>
                     <constraint firstItem="inn-q8-dq2" firstAttribute="leading" secondItem="ZpU-3L-F1q" secondAttribute="trailing" constant="8" id="nbH-Bt-mU2"/>
                     <constraint firstItem="4Xk-VR-f80" firstAttribute="bottom" secondItem="inn-q8-dq2" secondAttribute="bottom" id="uu3-Je-EQY"/>

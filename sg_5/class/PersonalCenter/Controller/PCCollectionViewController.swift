@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EmptyPage
 
 class PCCollectionViewController: UIViewController {
     var mainTab: UITableView!
@@ -24,8 +25,12 @@ class PCCollectionViewController: UIViewController {
         mainTab.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(mainTab)
         self.mainTab = mainTab
-        let view = UIView()
-        self.mainTab.tableFooterView = view
+        let view = EmptyPageView.ContentView.onlyText
+        view.label.text = "你还没有收藏"
+        let emptyView: EmptyPageView = .mix(view: view)
+        mainTab.setEmpty(view: emptyView)
+        let fview = UIView()
+        self.mainTab.tableFooterView = fview
         
         // Do any additional setup after loading the view.
     }
@@ -35,9 +40,11 @@ class PCCollectionViewController: UIViewController {
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: getCollectsUrl, parameters: parData ) { (json) in
+            
             if let datas = json.arrayObject{
                self.dataArr  += datas.compactMap({CollectModel.deserialize(from: $0 as? Dictionary)})
             }
+            EmptyPage.begin()
             self.mainTab.reloadData()
         }
     }

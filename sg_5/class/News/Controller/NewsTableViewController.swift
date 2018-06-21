@@ -14,6 +14,11 @@ class NewsTableViewController: UITableViewController {
     var newsListArr: Array = [HomePageNewsModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
         getNewsList(pageNO: pageIndex)
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName:"ImageTableViewCell", bundle:nil),
@@ -29,13 +34,15 @@ class NewsTableViewController: UITableViewController {
         tableView.mj_header = MJRefreshHeader(refreshingBlock: {
             self.pageIndex = 1
             self.getNewsList(pageNO: self.pageIndex)
-            self.tableView.mj_header.endRefreshing()
+            
         })
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.pageIndex += 1
             self.getNewsList(pageNO: self.pageIndex)
-            self.tableView.mj_footer.endRefreshing()
+            
         })
+        tableView.rowHeight = UITableViewAutomaticDimension // 自适应单元格高度
+        tableView.estimatedRowHeight = 50
     }
     func getNewsList(pageNO: Int){
         if self.pageIndex == 1 {
@@ -53,6 +60,8 @@ class NewsTableViewController: UITableViewController {
             if self.pageIndex == 1{
                 self.tableView?.contentOffset = CGPoint.zero
             }
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
         }
     }
     override func didReceiveMemoryWarning() {
@@ -103,22 +112,24 @@ class NewsTableViewController: UITableViewController {
             return cell
         }
     }
- 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let aNews = newsListArr[indexPath.row]
-        switch aNews.modelType {
-        case "1":
-            return 95
-        case "2":
-            return 120
-        case "3":
-            return 320
-        case "4":
-            return 120
-        default:
-            return 320
-        }
+        return UITableViewAutomaticDimension
     }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let aNews = newsListArr[indexPath.row]
+//        switch aNews.modelType {
+//        case "1":
+//            return 95
+//        case "2":
+//            return 120
+//        case "3":
+//            return 320
+//        case "4":
+//            return 120
+//        default:
+//            return 320
+//        }
+//    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.newsListArr[indexPath.row].directType == "组图" {
             var imageURLs = self.newsListArr[indexPath.row].newsContent.components(separatedBy: ";")

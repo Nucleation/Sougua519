@@ -147,7 +147,14 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         } else {
             // Fallback on earlier versions
         }
-       SVProgressHUD.dismiss()
+        if #available(iOS 10.0, *) {
+            Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { (time) in
+                SVProgressHUD.dismiss()
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+       
     }
 }
 extension MetooScrollViewController: UIScrollViewDelegate{

@@ -15,6 +15,12 @@ class HomePageWebViewController: UIViewController{
     var navView: UIView?
     var titleLab:UILabel?
     var backBtn: UIButton?
+    lazy private var progressView: UIProgressView = {
+        self.progressView = UIProgressView.init(frame: CGRect(x: CGFloat(0), y: CGFloat(65), width: UIScreen.main.bounds.width, height: 2))
+        self.progressView.tintColor = UIColor.colorAccent      // 进度条颜色
+        self.progressView.trackTintColor = UIColor.white // 进度条背景色
+        return self.progressView
+    }()
     var model: HomePageNewsModel?
     var scrollerView: UIScrollView?
     var scrollContent: UIView?
@@ -63,6 +69,13 @@ class HomePageWebViewController: UIViewController{
             
         }
     }
+    deinit {
+        player.prepareToDealloc()
+        self.webview?.removeObserver(self, forKeyPath: "estimatedProgress")
+        self.webview?.uiDelegate = nil
+        self.webview?.navigationDelegate = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -127,7 +140,8 @@ class HomePageWebViewController: UIViewController{
         webview.navigationDelegate = self
         self.scrollContent?.addSubview(webview)
         self.webview = webview
-        
+        self.view.addSubview(progressView)
+        self.webview?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         let contentView = UIView()
         contentView.backgroundColor = .white
         self.scrollContent?.addSubview(contentView)
@@ -184,6 +198,8 @@ class HomePageWebViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "EpisodeCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.rowHeight = UITableViewAutomaticDimension // 自适应单元格高度
+        tableView.estimatedRowHeight = 50
         self.scrollContent?.addSubview(tableView)
         self.tableView = tableView
         //footView
@@ -265,7 +281,6 @@ class HomePageWebViewController: UIViewController{
         })
         requestComment()
         requestIsCollect()
-        self.webview?.scrollView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
     }
     func requestIsCollect(){
         guard KeyChain().getKeyChain()["isLogin"] == "1" else {
@@ -330,16 +345,7 @@ class HomePageWebViewController: UIViewController{
         NetworkTool.requestData(.post, URLString: UpnewLickUrl, parameters: parData ) { (json) in
             
         }
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentSize" {
-            print(change ?? "")
-            //self.webHeitht = self.webview?.scrollView.contentSize.height
-                //self.webView.scrollView.contentSize.height
-        }
-    }
-    
+    }    
     func layoutView() {
         self.scrollerView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 40, right: 0))
@@ -511,6 +517,9 @@ extension HomePageWebViewController: UITableViewDelegate,UITableViewDataSource,E
         cell.model = self.commentListArray[indexPath.row]
         return cell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
     }
@@ -519,6 +528,20 @@ extension HomePageWebViewController: UITableViewDelegate,UITableViewDataSource,E
     }
 }
 extension HomePageWebViewController: WKNavigationDelegate {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == "estimatedProgress"{
+            progressView.alpha = 1.0
+            progressView.setProgress(Float((self.webview?.estimatedProgress)!), animated: true)
+            if Float((self.webview?.estimatedProgress)!) >= 1.0 {
+                UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
+                    self.progressView.alpha = 0
+                }, completion: { (finish) in
+                    self.progressView.setProgress(0.0, animated: false)
+                })
+            }
+        }
+    }
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         
     }
@@ -636,6 +659,8 @@ extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuView
             //var share_pic = ""
             if self.model?.type == "0"{
                 url = self.model?.crawlurl ?? ""
+            }else{
+              url = (self.model?.newsContent)!
             }
             
             if self.model?.title != ""{
@@ -643,7 +668,7 @@ extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuView
             }else{
                 shareTitle = (self.model?.source)!
             }
-            url = (self.model?.newsContent)!
+            
             let desc = "来自搜瓜"
             let messageObject = UMSocialMessageObject()
             //let pic = share_pic.replacingOccurrences(of: "http://", with: "https://")

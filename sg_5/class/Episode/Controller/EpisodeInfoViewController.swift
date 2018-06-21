@@ -96,6 +96,8 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "EpisodeCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.rowHeight = UITableViewAutomaticDimension // 自适应单元格高度
+        tableView.estimatedRowHeight = 50
         self.view.addSubview(tableView)
         self.tableView = tableView
         if model?.mark == "3" {
@@ -276,6 +278,7 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
         
     }
     func requestComment() {
+        self.commentListArray.removeAll()
         let keyChain = KeyChain()
         let fromId = keyChain.getKeyChain()["id"] ?? ""
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
@@ -374,8 +377,12 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","mobile":KeyChain().getKeyChain()["mobile"] ?? "","token":KeyChain().getKeyChain()["token"] ?? "","fromId":KeyChain().getKeyChain()["id"] ?? "","type":ContentType.News.rawValue,"content":comment]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
-            self.view.makeToast("评论成功")
-            self.requestComment()
+            if json["code"] == "-1" {
+                self.view.makeToast(json["msg"].stringValue)
+            }else{
+                self.requestComment()                                                                                                                                
+            }
+            
         }
     }
     @objc func collectBtnClick(){
@@ -476,6 +483,9 @@ extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource{
         cell.model = self.commentListArray[indexPath.row]
         cell.episodeModel = model
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)

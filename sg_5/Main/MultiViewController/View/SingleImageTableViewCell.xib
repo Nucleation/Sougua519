@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,8 +62,8 @@
                     <constraint firstItem="8uC-zx-MHK" firstAttribute="leading" secondItem="0IR-CW-EnS" secondAttribute="leading" id="6ld-uD-BGr"/>
                     <constraint firstItem="hAe-FI-m9q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Cg5-Fv-rgX"/>
                     <constraint firstItem="0IR-CW-EnS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Lz4-4k-m5P"/>
-                    <constraint firstItem="hAe-FI-m9q" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="8" id="T9Q-Bw-9NS"/>
                     <constraint firstItem="hAe-FI-m9q" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Zxo-07-ioL"/>
+                    <constraint firstAttribute="trailing" secondItem="hAe-FI-m9q" secondAttribute="trailing" constant="8" id="ebO-gI-Slo"/>
                     <constraint firstAttribute="bottom" secondItem="hAe-FI-m9q" secondAttribute="bottom" constant="8" id="mb5-OH-LfG"/>
                     <constraint firstItem="o6v-XY-jnD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qhO-fG-j5S"/>
                     <constraint firstAttribute="trailing" secondItem="o6v-XY-jnD" secondAttribute="trailing" id="qoT-ty-v2s"/>

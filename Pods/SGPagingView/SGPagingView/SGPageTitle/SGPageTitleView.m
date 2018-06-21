@@ -307,12 +307,16 @@
 - (void)P_changeSelectedButton:(UIButton *)button {
     if (self.tempBtn == nil) {
         button.selected = YES;
+        button.userInteractionEnabled = NO;
         self.tempBtn = button;
     } else if (self.tempBtn != nil && self.tempBtn == button){
         button.selected = YES;
+        button.userInteractionEnabled = NO;
     } else if (self.tempBtn != button && self.tempBtn != nil){
         self.tempBtn.selected = NO;
+        self.tempBtn.userInteractionEnabled = YES;
         button.selected = YES;
+        button.userInteractionEnabled = NO;
         self.tempBtn = button;
     }
     

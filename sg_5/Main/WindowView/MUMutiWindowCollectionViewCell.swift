@@ -64,7 +64,7 @@ class MUMutiWindowCollectionViewCell: UICollectionViewCell {
     }
     //赋值
     func addData() {
-        titleButton.setTitle((self.multiWindow?.title?.lengthOfBytes(using: String.Encoding.utf8) == 0) ? (self.multiWindow?.title) : "首页", for: UIControlState.normal)
+        titleButton.setTitle((self.multiWindow?.title?.lengthOfBytes(using: String.Encoding.utf8) != 0) ? (self.multiWindow?.title) : "首页", for: UIControlState.normal)
         titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
         imageView.image = self.multiWindow?.image
     }
@@ -76,7 +76,8 @@ class MUMutiWindowCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(40)
         }
         titleButton.snp.makeConstraints { (make) ->Void in
-            make.top.left.equalTo(self)
+            make.top.equalTo(self)
+            make.left.equalTo(self).offset(16)
             make.right.equalTo(deleteButton).offset(30)
             make.height.equalTo(40)
         }

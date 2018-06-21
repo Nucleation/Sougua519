@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EmptyPage
 
 class SearchHistoryViewController: UIViewController {
     var navView: UIView?
@@ -18,9 +19,12 @@ class SearchHistoryViewController: UIViewController {
     var dataModel = DataModel()
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         self.navigationController?.isNavigationBarHidden = true
         dataModel.loadData()
         self.historyArr = dataModel.historyList
+         EmptyPage.begin()
         self.tableView?.reloadData()
     }
     override func viewDidLoad() {
@@ -76,23 +80,7 @@ class SearchHistoryViewController: UIViewController {
             make.right.equalTo(self.navView!).offset(-15)
             make.width.equalTo(90)
         })
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            self.automaticallyAdjustsScrollViewInsets = false
-        }
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.view.addSubview(tableView)
-        self.tableView = tableView
-        self.tableView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.navView!.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-44)
-        })
-        let headView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 40))
+        let headView = UIView()
         let lab = UILabel()
         lab.text = "历史记录"
         lab.font = UIFont.systemFont(ofSize: 14)
@@ -114,7 +102,35 @@ class SearchHistoryViewController: UIViewController {
             make.right.equalToSuperview().offset(-15)
             make.width.equalTo(100)
         }
-        self.tableView?.tableHeaderView = headView
+        self.view.addSubview(headView)
+        headView.snp.makeConstraints { (make) in
+            make.top.equalTo(navView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        let tableView = UITableView()
+        tableView.separatorStyle = .singleLine
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        let view = EmptyPageView.ContentView.onlyText
+        view.label.text = "历史记录为空"
+        let emptyView: EmptyPageView = .mix(view: view)
+        tableView.setEmpty(view: emptyView)
+        let fview = UIView()
+        tableView.tableFooterView = fview
+        self.view.addSubview(tableView)
+        self.tableView = tableView
+        self.tableView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(headView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-44)
+        })
+        
         
         // Do any additional setup after loading the view.
     }

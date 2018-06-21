@@ -20,13 +20,14 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
         //更新按钮状态
-         createUI()
+        //
         self.oprateView.subViewStatus(viewController: self)
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createUI()
         self.view.backgroundColor = .white
     }
     func createUI() {

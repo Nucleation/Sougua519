@@ -136,7 +136,11 @@ extension EpisodeViewController: UITableViewDelegate,UITableViewDataSource,Episo
                 }
             }else if model.mark == "2" {
                 share_pic = model.contentImg
-                shareTitle = model.content
+                if model.title == "" {
+                    shareTitle = model.content
+                } else{
+                    shareTitle = model.title
+                }
                 let messageObject =  UMSocialMessageObject()
                 let shareObject = UMShareImageObject()
                 let url = URL(string: model.contentImg )

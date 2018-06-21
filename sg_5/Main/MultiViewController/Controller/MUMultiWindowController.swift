@@ -112,7 +112,7 @@ class MUMultiWindowController: UIViewController,UICollectionViewDelegate,UIColle
         collectionView?.register(MUMutiWindowCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.backgroundColor = UIColor.white
+        collectionView?.backgroundColor = UIColor.black
         self.view.addSubview(collectionView!)
         collectionView?.setContentOffset(CGPoint(x: 0, y: (collectionView?.contentSize.height)! - (collectionView?.frame.height)!), animated: false)
         //设置底部操作视图
@@ -189,7 +189,21 @@ class MUMultiWindowController: UIViewController,UICollectionViewDelegate,UIColle
         }else if vc is HTMLViewController {
             title = (vc as! HTMLViewController).webTitle!
             icon = (vc as! HTMLViewController).str!
+        }else{
+            switch vc {
+            case  is MetooViewController:
+                title = "美图"
+            case  is NovelViewController:
+                title = "小说"
+            case  is NewsViewController:
+                title = "新闻"
+            case  is EpisodeViewController:
+                title = "段子"
+            default:
+                return
+            }
         }
+        
         let img = captureView(viewController: vc!)
         let multiWindow = MUMultiWindowModel().initWithImageAndTitleAndIconAndwindow(image: img, title: title, icon: icon, window: window)
         self.baseProductsData.append(multiWindow)

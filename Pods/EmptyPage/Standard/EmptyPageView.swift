@@ -23,8 +23,8 @@ extension EmptyPageViewProtocol {
 open class EmptyPageView: UIView {
   
   /// 预设默认背景色
-  open static var backColor: UIColor = UIColor(red: 244 / 255, green: 244 / 255, blue: 244 / 255, alpha: 1)
-  
+  //open static var backColor: UIColor = UIColor(red: 244 / 255, green: 244 / 255, blue: 244 / 255, alpha: 1)
+  open static var backColor: UIColor = UIColor.white
   /// 获取一个空白页背景View
   open class var backgroundView: EmptyPageView {
     let view = EmptyPageView(frame: UIScreen.main.bounds)

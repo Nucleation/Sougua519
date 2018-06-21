@@ -14,9 +14,17 @@ class SearchWebViewController: UIViewController {
     var rightBtn: UIButton?
     var lineView:UIView?
     var model: Content?
-    var scanModel = ScanModel()
+    var webview: WKWebView?
     
+    var scanModel = ScanModel()
+    lazy private var progressView: UIProgressView = {
+        self.progressView = UIProgressView.init(frame: CGRect(x: CGFloat(0), y: CGFloat(65), width: UIScreen.main.bounds.width, height: 2))
+        self.progressView.tintColor = UIColor.colorAccent      // 进度条颜色
+        self.progressView.trackTintColor = UIColor.white // 进度条背景色
+        return self.progressView
+    }()
     override func viewWillAppear(_ animated: Bool) {
+        scanModel.loadData()
         scanModel.scanList.append(ScanInfo(title: self.model?.rtitle ?? "", url: self.model?.rurl ?? ""))
         scanModel.saveData()
         self.navigationController?.isNavigationBarHidden = true
@@ -45,6 +53,7 @@ class SearchWebViewController: UIViewController {
         webview.load(URLRequest(url: URL(string: model!.rurl)!))
         webview.navigationDelegate = self
         self.view?.addSubview(webview)
+        self.webview = webview
         self.navView?.snp.makeConstraints({ (make) in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(64)
@@ -57,12 +66,34 @@ class SearchWebViewController: UIViewController {
     @objc func leftBtnClick(){
         self.navigationController?.popViewController(animated: false)
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    deinit {
+        self.webview?.removeObserver(self, forKeyPath: "estimatedProgress")
+        self.webview?.uiDelegate = nil
+        self.webview?.navigationDelegate = nil
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
 extension SearchWebViewController: WKNavigationDelegate {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == "estimatedProgress"{
+            progressView.alpha = 1.0
+            progressView.setProgress(Float((self.webview?.estimatedProgress)!), animated: true)
+            if Float((self.webview?.estimatedProgress)!) >= 1.0 {
+                UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
+                    self.progressView.alpha = 0
+                }, completion: { (finish) in
+                    self.progressView.setProgress(0.0, animated: false)
+                })
+            }
+        }
+    }
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         
     }
