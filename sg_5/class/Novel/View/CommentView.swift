@@ -9,7 +9,7 @@
 import UIKit
 import Toast_Swift
 protocol CommentViewDelegate {
-    func reloadComment()
+    func reloadComment(model: NovelCommentModel)
 }
 class CommentView: UIView {
     var delegate:CommentViewDelegate?
@@ -29,7 +29,7 @@ class CommentView: UIView {
     func createUI() {
         let textField = UITextField()
         textField.layer.borderWidth = 1
-        textField.placeholder = "请输入评论"
+        textField.placeholder = " 请输入评论"
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.cornerRadius = 5
         textField.font = UIFont.systemFont(ofSize: 14)
@@ -69,10 +69,27 @@ class CommentView: UIView {
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","mobile":mobile,"token":token,"fromId":id,"type":ContentType.Novel.rawValue,"content":self.textField?.text ?? ""]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: addCommentUrl, parameters: parData) { (json) in
-            print("\(json)--add")
-            self.makeToast(json["msg"].stringValue)
+            if json["code"] == "-1" {
+                self.makeToast(json["msg"].stringValue)
+            }else{
+                self.makeToast("评论成功")
+            }
+            self.textField?.text = " 请输入评论"
+            self.textField?.resignFirstResponder()
             if self.delegate != nil {
-                self.delegate?.reloadComment()
+                
+                let model = NovelCommentModel()
+                model.fromMobile = keyChain.getKeyChain()["mobile"] ?? ""
+                model.content = self.textField?.text ?? ""
+                model.fromHeadUrl = keyChain.getKeyChain()["headUrl"] ?? ""
+                let now = Date()
+                let timeInterval:TimeInterval = now.timeIntervalSince1970
+                let timeStamp = Int(timeInterval)
+                let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+                let dformatter = DateFormatter()
+                dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                model.createDate = dformatter.string(from: date)
+                self.delegate?.reloadComment(model:model)
             }
         }
     }

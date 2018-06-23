@@ -35,11 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     func configUSharePlatforms() {
-        /* 设置微信的appKey和appSecret */
-        //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatSession, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
-        //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatFavorite, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
-        //        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatTimeLine, appKey:StaticNumerical.sharder.SessionAppKey, appSecret: StaticNumerical.sharder.SessionAppSecret, redirectURL: "")
-        /* 设置分享到QQ互联的appID*/
         UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "")
         UMSocialManager.default().setPlaform(UMSocialPlatformType.qzone, appKey: StaticNumerical.sharder.QQAppKey, appSecret: StaticNumerical.sharder.QQAppSecret, redirectURL: "")
         //UMSocialManager.default().removePlatformProvider(with: .tim)
@@ -67,7 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          */
         //[UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
     }
-    //- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options NS_AVAILABLE_IOS(9_0); // no equiv. notification. return NO if the application can't open for some reason
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return true
     }

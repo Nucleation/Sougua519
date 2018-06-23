@@ -9,7 +9,7 @@
 import UIKit
 import EmptyPage
 
-class SearchHistoryViewController: UIViewController {
+class SearchHistoryViewController: UIViewController ,UITextFieldDelegate{
     var navView: UIView?
     var backBtn: UIButton?
     var searchTF: UITextField?
@@ -45,6 +45,7 @@ class SearchHistoryViewController: UIViewController {
         searchTF.layer.borderColor = UIColor.colorWithHexColorString("dddddd").cgColor
         searchTF.placeholder = "请输入搜索内容"
         searchTF.font = UIFont.systemFont(ofSize: 15)
+        searchTF.returnKeyType = .search
         searchTF.leftViewMode = UITextFieldViewMode.always
         self.navView?.addSubview(searchTF)
         let imageView = UIImageView(frame: CGRect(x: 18, y: 0, width: 30, height: 30))
@@ -135,14 +136,24 @@ class SearchHistoryViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @objc func clearData(){
-        self.historyArr = []
-        dataModel.historyList = []
-        dataModel.saveData()
-        self.tableView?.reloadData()
+        let alertController = UIAlertController(title: "系统提示",
+                                                message: "您确定要清除记录吗？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+            action in
+            self.historyArr = []
+            self.dataModel.historyList = []
+            self.dataModel.saveData()
+            self.tableView?.reloadData()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     @objc func searchClick(){
         self.view.endEditing(true)
-        if self.searchTF?.text != nil{
+        if self.searchTF?.text != "" {
             dataModel.historyList.append(Histroy(his: self.searchTF?.text ?? ""))
             dataModel.saveData()
             dataModel.loadData()
@@ -151,7 +162,24 @@ class SearchHistoryViewController: UIViewController {
             let vc = SearchViewController()
             vc.keyWord = self.searchTF?.text ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            let alertController = UIAlertController(title: "系统提示",
+                                                    message: "搜索内容不能为空", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "确定", style: .cancel, handler: {
+                action in
+                
+            })
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.searchTF?.resignFirstResponder()
+        guard textField.text != "" else {
+            return true
+        }
+        searchClick()
+        return true
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -188,5 +216,30 @@ extension SearchHistoryViewController: UITableViewDelegate,UITableViewDataSource
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        return "删除"
+    }
+    
+    func  tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        
+        return UITableViewCellEditingStyle.delete
+    }
+    
+    
+    func  tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            self.historyArr.remove(at: indexPath.row)
+            dataModel.historyList = self.historyArr
+            dataModel.saveData()
+            self.tableView!.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.fade)
+        }
     }
 }

@@ -40,6 +40,7 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
     var isCollect: Bool = false
     var footshare: UIButton?
     var commentListArray:Array<NovelCommentModel> = []
+    var totolUP: Int = 0
     
     
     /// 播放器
@@ -290,7 +291,9 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
             }
             self.hView?.totolComment?.text = "评论 \(self.commentListArray.count)"
             self.hView?.totolUp?.text = "\(json["sumComment"].stringValue) 赞"
+            self.totolUP = Int(json["sumComment"].stringValue) ?? 0
             self.setTableViewHeight(cellNum: self.commentListArray.count)
+            self.commentListArray = self.commentListArray.reversed()
             self.tableView?.reloadData()
             self.view.layoutIfNeeded()
         }
@@ -373,6 +376,10 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
             self.view.makeToast("你还没有登录")
             return
         }
+        guard comment != "" else {
+            self.view.makeToast("评论内容不能为空")
+            return
+        }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"typeId":self.model?.id ?? "","mobile":KeyChain().getKeyChain()["mobile"] ?? "","token":KeyChain().getKeyChain()["token"] ?? "","fromId":KeyChain().getKeyChain()["id"] ?? "","type":ContentType.News.rawValue,"content":comment]
         let parData = dic.toParameterDic()
@@ -399,6 +406,7 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
                 let parData = dic.toParameterDic()
                 NetworkTool.requestData(.post, URLString: addCollectUrl, parameters: parData ) { (json) in
                     if json.boolValue == true {
+                         self.view.makeToast("收藏成功", point: self.view.center, title: nil, image: nil, completion: nil)
                         self.collectBtn?.setImage(UIImage(named: "shoucang2"), for: .normal)
                         self.isCollect = true
                     }
@@ -410,6 +418,7 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
                 let parData = dic.toParameterDic()
                 NetworkTool.requestData(.post, URLString: cancleCollectUrl, parameters: parData ) { (json) in
                     if json.boolValue == true {
+                        self.view.makeToast("取消收藏", point: self.view.center, title: nil, image: nil, completion: nil)
                         self.collectBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
                         self.isCollect = false
                     }
@@ -471,7 +480,12 @@ extension EpisodeInfoViewController: UITextFieldDelegate{
         }
     }
 }
-extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource{
+extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource,EpisodeCommentTableViewCellDelegate{
+    func addTooleUP() {
+        self.totolUP += 1
+        self.hView?.totolUp?.text = "\(self.totolUP) 赞"
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -482,6 +496,7 @@ extension EpisodeInfoViewController: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! EpisodeCommentTableViewCell
         cell.model = self.commentListArray[indexPath.row]
         cell.episodeModel = model
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

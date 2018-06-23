@@ -20,5 +20,7 @@ class NovelCommentModel: HandyJSON {
     var fromHeadUrl: String = ""
     var fromMobile: String = ""
     var createBy: String = ""
+    var isUp:Bool = false
+    
     public required init() {}
 }

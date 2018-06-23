@@ -65,6 +65,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         if scrollView.contentOffset.x == 0 {
             self.headView?.bookCity?.sendActions(for: .touchUpInside)
         }else if scrollView.contentOffset.x == screenWidth {
+            self.bookShelf?.requestData()
             self.headView?.bookshelf?.sendActions(for: .touchUpInside)
         }
         
@@ -74,6 +75,7 @@ class NovelViewController: UIViewController,UIScrollViewDelegate,BookCityViewDel
         switch sender.tag {
         case 1:
             self.bookCity?.tableView.mj_header.beginRefreshing()
+            self.bookShelf?.requestData()
         case 2:
             let vc = MUMultiWindowController()
             MUMultiWindowViewModel.addNewViewControllerToNavigationController(viewController: self)

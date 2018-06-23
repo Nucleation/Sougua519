@@ -1548,6 +1548,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SBG27Y7XSW;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/common/common_ios_1.5.1/normal",
@@ -1571,7 +1572,7 @@
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/QQ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jh.sougua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhishen.sougua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1590,6 +1591,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SBG27Y7XSW;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/common/common_ios_1.5.1/normal",
@@ -1613,7 +1615,7 @@
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/WeChat/WechatSDK",
 					"$(PROJECT_DIR)/sg_5/Third/umeng/share/share_ios_6.9.3/SocialLibraries/QQ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jh.sougua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhishen.sougua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

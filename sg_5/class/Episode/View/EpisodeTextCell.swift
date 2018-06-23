@@ -24,12 +24,18 @@ class EpisodeTextCell: UITableViewCell {
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var allBtn: UIButton!
     @IBOutlet weak var userIcon: UIImageView!
+    @IBOutlet weak var downBtn: UIButton!
     var model = EpisodeModel() {
         didSet {
             if model.isUp {
                 self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
             }else{
                 self.upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
+            }
+            if model.isDown {
+                self.downBtn.setImage(UIImage(named: "dianzan4"), for: .normal)
+            }else{
+                self.downBtn.setImage(UIImage(named: "dianzan1"), for: .normal)
             }
             self.contentLab.numberOfLines = 4
             sourceLab.text = model.source
@@ -86,6 +92,9 @@ class EpisodeTextCell: UITableViewCell {
             delegate?.textCelldown(sender: self)
             model.down += 1
             dowmCountLab.text = String(model.down)
+            model.isDown = true
+            self.downBtn.setImage(UIImage(named: "dianzan4"), for: .normal)
+            self.downBtn.isEnabled = false
         }
     }
     @IBAction func upBtnClick(_ sender: Any) {

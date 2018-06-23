@@ -154,7 +154,14 @@ class MetooScrollViewController: UIViewController ,MetooFootDelegate{
         } else {
             // Fallback on earlier versions
         }
-       
+      
+        if #available(iOS 10.0, *) {
+            Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { (time) in
+                self.view.makeToast("保存成功", point: self.view.center, title: nil, image: nil, completion: nil)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 extension MetooScrollViewController: UIScrollViewDelegate{

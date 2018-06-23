@@ -136,11 +136,11 @@ class FindPwdViewController: UIViewController {
             make.height.width.equalTo(44)
             make.top.equalTo(self.view).offset(20)
         })
-        self.rightBtn?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self.view).offset(-12)
-            make.height.width.equalTo(44)
-            make.top.equalTo(self.view).offset(20)
-        })
+//        self.rightBtn?.snp.makeConstraints({ (make) in
+//            make.right.equalTo(self.view).offset(-12)
+//            make.height.width.equalTo(44)
+//            make.top.equalTo(self.view).offset(20)
+//        })
         self.logoImageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view)
             make.width.height.equalTo(75)
@@ -196,7 +196,7 @@ class FindPwdViewController: UIViewController {
     }
     @objc func getCodeBtnClick(){
         guard self.userNameTF.text != "" else {
-            print("账号为空")
+            messageAlert("账号为空")
             return
         }
         let urlStr = ucenterGetSecurityCode
@@ -204,7 +204,6 @@ class FindPwdViewController: UIViewController {
         let dic: Dictionary<String, Any> = ["mobile":self.userNameTF.text ?? "","timestamp":String(timeInterval)]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: urlStr, parameters: parData ) { (result) in
-            print(result)
         }
         isCounting = true
     }
@@ -213,15 +212,30 @@ class FindPwdViewController: UIViewController {
         remainingSeconds -= 1
     }
     @objc func registBtnClick() {
-        guard self.userNameTF.text != "", self.passWordTF.text != "" ,self.passWordTF.text != "" else {
-            print("账号/密码/验证码不能为空")
+        guard self.userNameTF.text != "", self.passWordTF.text != "" ,self.codeTF.text != "" else {
+            messageAlert("账号/密码/验证码不能为空")
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!,"securityCode":self.codeTF.text!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: resetPwdUrl, parameters: parData) { (json) in
-            self.rightBtnClick()
+            self.userNameTF.text = ""
+            self.passWordTF.text = ""
+            self.codeTF.text = ""
+            if json["code"] == "-1" {
+                messageAlert(json["msg"].stringValue)
+            }else{
+                KeyChain().savekeyChain(dic: ["mobile":KeyChain().getKeyChain()["mobile"] ?? "","id":KeyChain().getKeyChain()["id"] ?? "","token":KeyChain().getKeyChain()["token"] ?? "","headUrl" : KeyChain().getKeyChain()["headUrl"] ?? "","isLogin" : KeyChain().getKeyChain()["isLogin"] ?? "0","passwd" : self.passWordTF.text ?? ""])
+                let alertController = UIAlertController(title: "系统提示",
+                                                        message: "修改成功", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+                    action in
+                     self.navigationController?.popViewController(animated: true)
+                })
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     @objc func leftBtnClick(){

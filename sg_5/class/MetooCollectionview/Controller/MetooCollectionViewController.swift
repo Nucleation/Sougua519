@@ -17,7 +17,7 @@ class MetooCollectionViewController: UIViewController{
     var category: String?
     var pictureClassifyArray: Array = [PictureClassifyModel]()
     var flowLayout:JHFlowLayout?
-    var pageIndex: Int = 0
+    var pageIndex: Int = 1
     var mjHead: MJRefreshNormalHeader?
     
     lazy var mainCollectionView: UICollectionView = {
@@ -69,7 +69,7 @@ class MetooCollectionViewController: UIViewController{
         }
     }
     @objc func requestData() {
-        self.pageIndex = 0
+        self.pageIndex = 1
         let urlStr = picGetImgByClassify
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"category":self.category!,"pageIndex":String(self.pageIndex),"pageSize":String(20)]

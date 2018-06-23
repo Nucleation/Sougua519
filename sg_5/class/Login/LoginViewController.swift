@@ -144,12 +144,13 @@ class LoginViewController: UIViewController {
         })
     }
     @objc func loginBtnClick() {
+        self.view.endEditing(true)
         guard self.userNameTF.text != "", self.passWordTF.text != "" else {
-            print("账号密码不能为空")
+            messageAlert("账号密码不能为空")
             return
         }
         guard self.userNameTF.text!.isTelNumber() else  {
-            self.view.makeToast("号码格式不正确")
+            messageAlert("号码格式不正确")
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
@@ -158,9 +159,9 @@ class LoginViewController: UIViewController {
         NetworkTool.requestData(.post, URLString: userLogin, parameters: parData) { (json) in
             
             if json["code"] == "-1" {
-                self.view.makeToast(json["msg"].stringValue)
+                 messageAlert(json["msg"].stringValue)
             }else{
-                KeyChain().savekeyChain(dic: ["mobile":json["mobile"].stringValue,"id":json["id"].stringValue,"token":json["token"].stringValue,"headUrl" : json["headUrl"].stringValue,"isLogin" : "1","passwd" : self.passWordTF.text ?? ""])
+                KeyChain().savekeyChain(dic: ["mobile":json["mobile"].stringValue,"id":json["id"].stringValue,"token":json["token"].stringValue,"headUrl" : json["headUrl"].stringValue,"isLogin" : "1","passwd" : self.passWordTF.text ?? ""])                    
                 self.navigationController?.popViewController(animated: false)
             }
             

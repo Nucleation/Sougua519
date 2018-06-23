@@ -31,8 +31,9 @@ class PCTableViewController: UITableViewController,UIImagePickerControllerDelega
                 self.userIcon.kf.setImage(with: URL(string: "\(postUrl)/images/\( KeyChain().getKeyChain()["headUrl"] ?? "")"), for: .normal)
             }
             var mobile = KeyChain().getKeyChain()["mobile"]
-            let reg = mobile?.toRange(NSMakeRange(3, 4))
-            mobile = mobile?.replacingCharacters(in: reg!, with: "****")
+            if let reg = mobile?.toRange(NSMakeRange(3, 4)) {
+                mobile = mobile?.replacingCharacters(in: reg, with: "****")
+            }
             self.userName.setTitle(mobile, for: .normal)
             self.subLab.isHidden = true
         }

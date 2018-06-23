@@ -195,8 +195,9 @@ class RegistViewController: UIViewController {
         }
     }
     @objc func getCodeBtnClick(){
+        self.view.endEditing(true)
         guard self.userNameTF.text != "" else {
-            print("账号为空")
+            messageAlert("账号为空")
             return
         }
         let urlStr = ucenterGetSecurityCode
@@ -213,15 +214,20 @@ class RegistViewController: UIViewController {
         remainingSeconds -= 1
     }
     @objc func registBtnClick() {
+        self.view.endEditing(true)
         guard self.userNameTF.text != "", self.passWordTF.text != "" ,self.passWordTF.text != "" else {
-            print("账号/密码/验证码不能为空")
+            messageAlert("账号/密码/验证码不能为空")
             return
         }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"mobile":self.userNameTF.text!,"passwd":self.passWordTF.text!,"securityCode":self.codeTF.text!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: userRegister, parameters: parData) { (json) in
-            self.rightBtnClick()
+            if json["code"] == "-1" {
+                messageAlert(json["msg"].stringValue)
+            }else{
+                messageAlert("修改成功")
+            }
         }
     }
     @objc func leftBtnClick(){

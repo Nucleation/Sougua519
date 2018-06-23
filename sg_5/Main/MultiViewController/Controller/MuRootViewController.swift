@@ -116,7 +116,6 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
 //            self.mainTableView?.mj_footer.endRefreshing()
 //        })
         self.mainTableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-            print("上拉加载.")
             self.pageNO += 1
             self.getNewsList(pageNO: self.pageNO)
         })
@@ -191,7 +190,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             let vc = MUMultiWindowController()
             self.navigationController?.pushViewController(vc, animated: true)
         case 3:
-            self.navigationController?.popToRootViewController(animated: false)
+            self.pageNO = 1
+            self.getNewsList(pageNO: self.pageNO)
         case 4:
             let vc = PersonalCenterViewController.loadStoryboard()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -227,11 +227,6 @@ extension MuRootViewController {
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let aNews = newsListArr[indexPath.row]
-//        if aNews.directType == "组图" {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "Image") as! ImageTableViewCell
-//            cell.aNews = aNews
-//            return cell
-//        }
         switch aNews.modelType {
         case "1":
             let cell = tableView.dequeueReusableCell(withIdentifier: "SingleTest") as! SingleTestTableViewCell
@@ -261,21 +256,6 @@ extension MuRootViewController {
         }
         
      }
-//        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//            let aNews = newsListArr[indexPath.row]
-//            switch aNews.modelType {
-//            case "1":
-//                return 95
-//            case "2":
-//                return 120
-//            case "3":
-//                return 320
-//            case "4":
-//                return 120
-//            default:
-//                return 320
-//            }
-//        }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }

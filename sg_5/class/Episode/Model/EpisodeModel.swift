@@ -28,6 +28,6 @@ class EpisodeModel: HandyJSON {
     var del: String = ""//删除标记
     var isShowAll: Bool = false
     var isUp: Bool = false
-    
+    var isDown: Bool = false
     public required init() {}
 }

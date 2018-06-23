@@ -133,7 +133,9 @@ class ReportView: UIView {
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"contentId":self.contentId! ,"contentType":ContentType.Picture.rawValue,"reportReason":reportReason,"userId":KeyChain().getKeyChain()["id"]!,"token":KeyChain().getKeyChain()["token"]!,"mobile":KeyChain().getKeyChain()["mobile"]!]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentReportUrl, parameters: parData ) { (json) in
-                self.removeFromSuperview()
+            self.makeToast("举报成功", point: self.center, title: nil, image: nil, completion: nil)
+
+             self.removeFromSuperview()
             }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -27,12 +27,13 @@ class HomePageWebViewController: UIViewController{
     var popview: UIView?
     
     var webview: WKWebView?
-    var webHeitht: CGFloat?{
-        didSet{
-            
-            self.webview?.frame = CGRect(x: 0, y: 0, width: screenWidth, height: webHeitht ?? 0)
-        }
-    }
+    var webHeitht: CGFloat = 0
+//    var webHeitht: CGFloat?{
+//        didSet{
+//
+//            //self.webview?.frame = CGRect(x: 0, y: 0, width: screenWidth, height: webHeitht ?? 0)
+//        }
+//    }
     
     var contentView:UIView?
     var upBtn: UIButton?
@@ -69,16 +70,29 @@ class HomePageWebViewController: UIViewController{
             
         }
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        player.pause()
+        player.prepareToDealloc()
+    }
     deinit {
         player.prepareToDealloc()
         self.webview?.removeObserver(self, forKeyPath: "estimatedProgress")
+        self.webview?.scrollView.removeObserver(self, forKeyPath: "contentSize")
         self.webview?.uiDelegate = nil
         self.webview?.navigationDelegate = nil
     }
-    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            print("收回键盘")
+            self.popview?.removeFromSuperview()
+            self.textField?.resignFirstResponder()
+        }
+        sender.cancelsTouchesInView = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender: ))))
         let navView = UIView()
         navView.backgroundColor = .white
         self.view.addSubview(navView)
@@ -124,24 +138,24 @@ class HomePageWebViewController: UIViewController{
         let scrollview = UIScrollView()
         scrollview.showsVerticalScrollIndicator = false
         scrollview.showsHorizontalScrollIndicator = false
+        scrollview.delegate = self
         self.view.addSubview(scrollview)
         self.scrollerView = scrollview
         let scrollContent = UIView()
         self.scrollerView?.addSubview(scrollContent)
         self.scrollContent = scrollContent
-        let webview: WKWebView = WKWebView(frame: self.view.frame, configuration: WKWebViewConfiguration())
+        let webview: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
         if model?.directType != "1" {
             if (model?.newsContent) != nil {
                 webview.loadHTMLString((model?.newsContent)!, baseURL: nil)
             }
-        }else{
-            
         }
         webview.navigationDelegate = self
         self.scrollContent?.addSubview(webview)
         self.webview = webview
         self.view.addSubview(progressView)
         self.webview?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        self.webview?.scrollView .addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         let contentView = UIView()
         contentView.backgroundColor = .white
         self.scrollContent?.addSubview(contentView)
@@ -279,8 +293,10 @@ class HomePageWebViewController: UIViewController{
             make.width.height.equalTo(40)
             make.right.equalTo(self.footView!.snp.right).offset(-10)
         })
+         self.layoutView()
         requestComment()
         requestIsCollect()
+       
     }
     func requestIsCollect(){
         guard KeyChain().getKeyChain()["isLogin"] == "1" else {
@@ -315,6 +331,7 @@ class HomePageWebViewController: UIViewController{
                 let parData = dic.toParameterDic()
                 NetworkTool.requestData(.post, URLString: addCollectUrl, parameters: parData ) { (json) in
                     if json.boolValue == true {
+                        self.view.makeToast("收藏成功", point: self.view.center, title: nil, image: nil, completion: nil)
                         self.collectBtn?.setImage(UIImage(named: "shoucang2"), for: .normal)
                         self.isCollect = true
                     }
@@ -326,6 +343,7 @@ class HomePageWebViewController: UIViewController{
                 let parData = dic.toParameterDic()
                 NetworkTool.requestData(.post, URLString: cancleCollectUrl, parameters: parData ) { (json) in
                     if json.boolValue == true {
+                         self.view.makeToast("取消收藏", point: self.view.center, title: nil, image: nil, completion: nil)
                         self.collectBtn?.setImage(UIImage(named: "shoucang"), for: .normal)
                         self.isCollect = false
                     }   
@@ -352,7 +370,7 @@ class HomePageWebViewController: UIViewController{
         })
         if model?.type == "1" {
 
-            self.view?.addSubview(self.player)
+            self.scrollContent?.addSubview(self.player)
             self.view?.bringSubview(toFront: self.backBtn!)
             self.player.delegate = self
             self.player.setVideo(resource: BMPlayerResource(url: URL(string:model?.newsContent ?? "")!))
@@ -361,14 +379,14 @@ class HomePageWebViewController: UIViewController{
                 let _ = self.navigationController?.popViewController(animated: true)
             }
             self.player.snp.makeConstraints { (make) in
-                make.top.equalToSuperview().offset(64)
+                make.top.equalToSuperview().offset(0)
                 make.left.right.equalToSuperview()
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(500)
             }
         }else{
             self.webview?.snp.makeConstraints({ (make) in
                 make.top.left.right.equalToSuperview()
-                make.height.equalTo(self.webHeitht!)
+                make.height.equalTo(self.webHeitht)
             })
         }
         
@@ -414,7 +432,7 @@ class HomePageWebViewController: UIViewController{
         self.tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.contentView!.snp.bottom)
             make.left.right.equalTo(self.contentView!)
-            make.height.equalTo(self.view.frame.height - 114)
+            make.height.equalTo(100)
         })
         
         self.scrollContent?.snp.makeConstraints({ (make) in
@@ -440,20 +458,25 @@ class HomePageWebViewController: UIViewController{
             }
             self.totolComment?.text = "评论\(self.commentListArray.count)"
             self.commentCountLab?.text = "\(self.commentListArray.count)"
+
             self.setTableViewHeight(cellNum: self.commentListArray.count)
             self.tableView?.reloadData()
-            self.view.layoutIfNeeded()
+            //self.layoutView()
         }
     }
     func setTableViewHeight(cellNum: Int){
-        if CGFloat(cellNum) * 124 + 50 > screenHeight - 104 {
-            self.tableView?.snp.updateConstraints({ (make) in
+        if CGFloat(cellNum) * 130 + 50 > screenHeight - 104 {
+            self.tableView?.snp.remakeConstraints({ (make) in
+                make.top.equalTo(self.contentView!.snp.bottom)
+                make.left.right.equalTo(self.contentView!)
                 make.height.equalTo(self.view.frame.height - 114)
             })
            
         }else{
-            self.tableView?.snp.updateConstraints({ (make) in
-                make.height.equalTo(CGFloat(cellNum) * 124 + 50)
+            self.tableView?.snp.remakeConstraints({ (make) in
+                make.top.equalTo(self.contentView!.snp.bottom)
+                make.left.right.equalTo(self.contentView!)
+                make.height.equalTo(CGFloat(cellNum) * 130 + 80)
             })
         }
         self.scrollContent?.snp.remakeConstraints({ (make) in
@@ -463,6 +486,10 @@ class HomePageWebViewController: UIViewController{
         })
     }
     func sendComment(comment: String){
+        guard comment != "" else {
+            self.view.makeToast("评论内容不能为空")
+            return
+        }
         let keyChain = KeyChain()
         guard let mobile = keyChain.getKeyChain()["mobile"],let token = keyChain.getKeyChain()["token"],let id = keyChain.getKeyChain()["id"] else {
             self.view.makeToast("你还没有登录")
@@ -475,7 +502,22 @@ class HomePageWebViewController: UIViewController{
             if json["code"] == "-1"{
                 self.view.makeToast(json["msg"].stringValue)
             }else{
-                 self.requestComment()
+                self.view.makeToast("评论成功")
+                let model = NovelCommentModel()
+                model.fromMobile = keyChain.getKeyChain()["mobile"] ?? ""
+                model.content = self.textField?.text ?? ""
+                model.fromHeadUrl = keyChain.getKeyChain()["headUrl"] ?? ""
+                let now = Date()
+                let timeInterval:TimeInterval = now.timeIntervalSince1970
+                let timeStamp = Int(timeInterval)
+                let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+                let dformatter = DateFormatter()
+                dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                model.createDate = dformatter.string(from: date)
+                self.commentListArray.append(model)
+                self.commentListArray = self.commentListArray.reversed()
+                self.tableView?.reloadData()
+                //self.requestComment()
             }
         }
     }
@@ -484,16 +526,16 @@ class HomePageWebViewController: UIViewController{
         self.navigationController?.popViewController(animated: true)
     }
     @objc func leftBtnClick(){
-        let popview = BottonPopView(frame: CGRect(x: 0, y: screenHeight-75, width: screenWidth, height: 75))
+        let popview = BottonPopView(frame: UIScreen.main.bounds)
         popview.delegate = self
         self.view.addSubview(popview)
         self.popview = popview
     }
-    //MARK:-- 键盘评论pop收回问题
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.popview?.removeFromSuperview()
-        self.view.endEditing(true)
-    }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.popview?.removeFromSuperview()
+//        self.view.endEditing(true)
+//    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -524,7 +566,7 @@ extension HomePageWebViewController: UITableViewDelegate,UITableViewDataSource,E
         print(indexPath.row)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+        self.textField?.resignFirstResponder()
     }
 }
 extension HomePageWebViewController: WKNavigationDelegate {
@@ -541,6 +583,13 @@ extension HomePageWebViewController: WKNavigationDelegate {
                 })
             }
         }
+        if keyPath == "contentSize" {
+            self.webview?.snp.remakeConstraints({ (make) in
+                make.top.left.right.equalToSuperview()
+                make.height.equalTo((self.webview?.scrollView.contentSize.height)!                                                                 )
+            })
+        }
+
     }
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         
@@ -560,9 +609,9 @@ extension HomePageWebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 
         self.webHeitht = webView.scrollView.contentSize.height
-        if self.webHeitht == 0 {
-            self.webHeitht = screenHeight
-        }
+//        if self.webHeitht == 0 {
+//            self.webHeitht = screenHeight
+//        }
         if !webView.isLoading{
  
             if (webView.url?.absoluteString ?? "").contains("toutiao.com/"){
@@ -576,7 +625,6 @@ document.getElementsByClassName("new-style-test-article-author")[0].style.displa
                 webView.evaluateJavaScript(str, completionHandler: nil)
             }
         }
-        self.layoutView()
     }
 }
 extension HomePageWebViewController: UITextFieldDelegate {
@@ -626,7 +674,7 @@ extension HomePageWebViewController: UITextFieldDelegate {
 }
 extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuViewDelegate{
     func reloadBtnClick() {
-        self.makeUI()
+        self.requestComment()
         SVProgressHUD.show()
         SVProgressHUD.dismiss(withDelay: 1)
     }
@@ -646,7 +694,6 @@ extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuView
     }
     
     func shareBtnClick() {
-        print("share")
         self.popview?.removeFromSuperview()
         share()
     }

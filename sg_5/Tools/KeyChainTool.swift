@@ -34,6 +34,7 @@ struct KeyChain {
         
     }
     func getKeyChain() -> Dictionary<String, String>{
+        
         let keyChain = KeychainSwift()
         return ["mobile":"\(keyChain.get("mobile") ?? "")","id":"\(keyChain.get("id") ?? "")","token":"\(keyChain.get("token") ?? "")","isLogin":"\(keyChain.get("isLogin") ?? "0")","headUrl":"\(keyChain.get("headUrl") ?? "")","passwd":"\(keyChain.get("passwd") ?? "")"]
     }

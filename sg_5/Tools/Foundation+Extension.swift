@@ -213,5 +213,15 @@ extension Date
         let date = formatter.string(from: nowDate)
         return date
     }
+    func dateNowAsAllString() -> String {
+        let nowDate = Date()
+        let timeZone = TimeZone.init(identifier: "UTC")
+        let formatter = DateFormatter()
+        formatter.timeZone = timeZone
+        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.dateFormat = "YYYY-MM-dd hh:mm:ss"
+        let date = formatter.string(from: nowDate)
+        return date
+    }
 }
 

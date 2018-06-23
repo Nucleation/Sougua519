@@ -54,6 +54,8 @@ class SearchWebViewController: UIViewController {
         webview.navigationDelegate = self
         self.view?.addSubview(webview)
         self.webview = webview
+        self.view.addSubview(progressView)
+        self.webview?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         self.navView?.snp.makeConstraints({ (make) in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(64)

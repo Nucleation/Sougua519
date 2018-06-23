@@ -362,8 +362,9 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    func reloadComment() {
-        getComment()
+    func reloadComment(model: NovelCommentModel) {
+        self.commentArr.append(model)
+        self.tableView?.reloadData()
     }
     func getComment(){
         self.commentArr = []
@@ -373,34 +374,15 @@ class NovelInfoViewController: UIViewController,CommentViewDelegate{
         let dic: Dictionary<String, String> = ["timestamp":String(timeInterval),"typeId":self.novelInfo?.id ?? "","fromId":fromId]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: commentByType, parameters: parData) { (json) in
-            guard let resJson = json["commentList"].array else{
-                return
+            //self.totolUp?.text = "\(String(json["sumComment"].intValue)) 赞"
+            //self.totolUpNum = json["sumComment"].intValue
+            if let datas = json["commentList"].arrayObject{
+                self.commentArr += datas.compactMap({NovelCommentModel.deserialize(from: $0 as? Dictionary)})
             }
-            for item in resJson {
-                let model = NovelCommentModel()
-                if let fromId = item["fromId"].string{
-                    model.fromId = fromId
-                }
-                if let typeId = item["typeId"].string{
-                    model.typeId = typeId
-                }
-                if let content = item["content"].string{
-                    model.content = content
-                }
-                if let id = item["id"].string{
-                    model.id = id
-                }
-                if let createDate = item["createDate"].string{
-                    model.createDate = createDate
-                }
-                if let type = item["type"].string{
-                    model.type = type
-                }
-                if let upCount = item["upCount"].int{
-                    model.upCount = upCount
-                }
-                self.commentArr += [model]
-            }
+            //self.totolComment?.text = "评论\(self.commentListArray.count)"
+            //self.commentCountLab?.text = "\(self.commentListArray.count)"
+            //self.setTableViewHeight(cellNum: self.commentListArray.count)
+            self.commentArr = self.commentArr.reversed()
             self.tableView?.reloadData()
         }
     }

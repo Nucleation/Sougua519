@@ -14,6 +14,11 @@ protocol EpisodeCommentTableViewCellDelegate {
 class EpisodeCommentTableViewCell: UITableViewCell {
     var model = NovelCommentModel(){
         didSet {
+            if model.isUp {
+                 self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
+            }else{
+               self.upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
+            }
             self.upBtn.isEnabled = true
             userNameLab.text = model.fromMobile
             commentLab.text = model.content
@@ -44,6 +49,7 @@ class EpisodeCommentTableViewCell: UITableViewCell {
     @IBAction func upBtnClick(_ sender: Any) {
         model.upCount += 1
         self.upBtn.isEnabled = false
+        model.isUp = true
         self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
         self.upBtn.setTitle(String(model.upCount), for: .normal)
         //#MARK: -- 交给父视图处理

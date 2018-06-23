@@ -25,7 +25,6 @@ class BookShelfViewController: UIView, UICollectionViewDelegate,UICollectionView
         super.init(frame: frame)
         createUI()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -94,7 +93,8 @@ extension BookShelfViewController {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookcell", for: indexPath) as! BookShelfItem
-        cell.setItemByModel(model: self.bookArray[indexPath.row])
+        cell.model = self.bookArray[indexPath.row]
+        //cell.setItemByModel(model: self.bookArray[indexPath.row])
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -136,7 +136,8 @@ extension BookShelfViewController {
                     let parData = dic.toParameterDic()
                     NetworkTool.requestData(.post, URLString: deleteNovelShelfUrl, parameters: parData) { (json) in
                         if self.delegate != nil{
-                            self.delegate?.reloadData()
+                            self.requestData()
+                            //self.delegate?.reloadData()
                         }
                         
                     }
@@ -153,7 +154,18 @@ extension BookShelfViewController {
 class BookShelfItem: UICollectionViewCell {
     var titleLab: UILabel?
     var imageView: UIImageView?
-    var model: NoveCategoryListModel?
+    //var model: NoveCategoryListModel?
+    var model = NovelShelfBaseModel() {
+        didSet {
+            if model.id != "" {
+                self.imageView?.kf.setImage(with: URL(string: (model.novel?.fictionImg)!))
+                self.titleLab?.text = model.novel?.fictionName
+            }else{
+                self.imageView?.image = UIImage(named: "shujiaAdd")
+                self.titleLab?.text = ""
+            }
+        }
+    }
     var delBtn:UIButton?
     
     override init(frame: CGRect) {
@@ -164,15 +176,15 @@ class BookShelfItem: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setItemByModel(model:NovelShelfBaseModel){
-        if model.id != "" {
-            self.imageView?.kf.setImage(with: URL(string: model.novel?.fictionImg ?? ""))
-            self.titleLab?.text = model.novel?.fictionName
-        }else{
-            self.imageView?.image = UIImage(named: "shujiaAdd")
-        }
-       
-    }
+//    func setItemByModel(model:NovelShelfBaseModel){
+//        if model.id != "" {
+//            self.imageView?.kf.setImage(with: URL(string: model.novel?.fictionImg ?? ""))
+//            self.titleLab?.text = model.novel?.fictionName
+//        }else{
+//            self.imageView?.image = UIImage(named: "shujiaAdd")
+//        }
+//
+//    }
     func setUI(){
         //self.backgroundColor = .white
         let imageView = UIImageView()

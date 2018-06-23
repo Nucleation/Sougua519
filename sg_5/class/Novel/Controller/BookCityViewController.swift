@@ -32,14 +32,6 @@ class BookCityViewController: UIViewController{
         })
         self.view.addSubview(tableView)
         self.tableView = tableView
-//        let view = EmptyPageView.ContentView.standard
-//        // 自定义配置标准样式
-//        view.configImageView(images: [UIImage(named: "333")!])
-//        view.titleLabel.text = "Connection failure"
-//        view.button.setTitle("TRY AGAIN", for: .normal)
-//        // 将标准样式条添加至背景View上(提供了约束设置的功能)
-//        let emptyView: EmptyPageView = .mix(view: view)
-//        tableView.setEmpty(view: emptyView)
         return tableView
     }()
     var tabHeadView: UIView?

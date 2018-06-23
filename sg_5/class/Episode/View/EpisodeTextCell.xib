@@ -126,7 +126,7 @@
                                     <action selector="downBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0RF-Hg-Fly"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1O-Yw-7NT">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1O-Yw-7NT">
                                 <rect key="frame" x="175" y="2" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="T1O-Yw-7NT" secondAttribute="height" multiplier="1:1" id="ppI-Rk-tJa"/>
@@ -204,6 +204,7 @@
                 <outlet property="contentLab" destination="gMi-0N-1k7" id="eS8-AZ-ehi"/>
                 <outlet property="createTimeLab" destination="ec3-kL-jcA" id="ova-Nr-bY6"/>
                 <outlet property="dowmCountLab" destination="KoT-bN-NAu" id="JMe-Zn-bNx"/>
+                <outlet property="downBtn" destination="aZr-i2-cjG" id="GKw-Zz-SyB"/>
                 <outlet property="sourceLab" destination="OTl-R8-xYK" id="aQ3-vd-UR1"/>
                 <outlet property="upBtn" destination="XFd-R2-Xlc" id="rIF-vI-LNG"/>
                 <outlet property="upCountLab" destination="AZp-rj-CdM" id="m6c-b2-6g8"/>

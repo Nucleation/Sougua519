@@ -12,7 +12,12 @@ import SVProgressHUD
 class FindViewController: UIViewController,WKNavigationDelegate {
     var navView: UIView?
     var titleLab:UILabel?
-    var progressView: UIProgressView?
+    lazy private var progressView: UIProgressView = {
+        self.progressView = UIProgressView.init(frame: CGRect(x: CGFloat(0), y: CGFloat(65), width: UIScreen.main.bounds.width, height: 2))
+        self.progressView.tintColor = UIColor.colorAccent      // 进度条颜色
+        self.progressView.trackTintColor = UIColor.white // 进度条背景色
+        return self.progressView
+    }()
     var webview: WKWebView?
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
@@ -59,25 +64,26 @@ class FindViewController: UIViewController,WKNavigationDelegate {
         self.view.addSubview(webview)
         self.view.bringSubview(toFront: navView)
         self.webview = webview
+        self.view.addSubview(progressView)
+        self.webview?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
     }
     @objc func backBtnClick(){
         self.navigationController?.popViewController(animated: true)
     }
-//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        if keyPath == "estimatedProgress" {
-//            self.progressView?.progress = Float((self.webview?.estimatedProgress)!)
-//            if self.progressView?.progress == Float(1) {
-//                unowned let uSelf = self
-//                UIView.animate(withDuration: 0.25, delay: 0.3, options: UIViewAnimationOptions.curveEaseOut, animations: {
-//                    uSelf.progressView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.4)
-//                }) { (finished) in
-//                    uSelf.progressView?.isHidden = true
-//                }
-//            }else{
-//                super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-//            }
-//        }
-//    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == "estimatedProgress"{
+            progressView.alpha = 1.0
+            progressView.setProgress(Float((self.webview?.estimatedProgress)!), animated: true)
+            if Float((self.webview?.estimatedProgress)!) >= 1.0 {
+                UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
+                    self.progressView.alpha = 0
+                }, completion: { (finish) in
+                    self.progressView.setProgress(0.0, animated: false)
+                })
+            }
+        }
+    }
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
 //        self.progressView?.isHidden = false
 //        self.progressView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
@@ -107,9 +113,11 @@ class FindViewController: UIViewController,WKNavigationDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-//    deinit {
-//        self.webview?.removeObserver(self, forKeyPath: "estimatedProgress")
-//    }
+    deinit {
+        self.webview?.removeObserver(self, forKeyPath: "estimatedProgress")
+        self.webview?.uiDelegate = nil
+        self.webview?.navigationDelegate = nil
+    }
     /*
     // MARK: - Navigation
 

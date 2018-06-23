@@ -44,10 +44,13 @@ class EpisodeViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension // 自适应单元格高度
         tableView.estimatedRowHeight = 50
         self.view.addSubview(tableView)
-        self.tableView = tableView
-        self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.requestData()
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.requestData(isHead:true)
         })
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.requestData(isHead:false)
+        })
+        self.tableView = tableView
         self.tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view).offset(64)
             make.left.right.equalTo(self.view)
@@ -61,10 +64,14 @@ class EpisodeViewController: UIViewController {
             uSelf.oprateClick(sender: sender)
         }
         self.view.addSubview(oprateView)
-        requestData()
+        requestData(isHead:true)
         // Do any additional setup after loading the view.
     }
-    func requestData(){
+    func requestData(isHead:Bool){
+        
+        if isHead {
+            self.episodeArray.removeAll()
+        }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval)]
         let parData = dic.toParameterDic()
@@ -73,7 +80,13 @@ class EpisodeViewController: UIViewController {
             if let datas = json.arrayObject{
                 self.episodeArray += datas.compactMap({EpisodeModel.deserialize(from: $0 as? Dictionary)})
             }
-            self.tableView?.mj_header.endRefreshing()
+            if isHead{
+               self.tableView?.mj_header.endRefreshing()
+            }else{
+                self.tableView?.mj_footer.endRefreshing()
+            }
+            
+           
             self.tableView?.reloadData()
         }
     }

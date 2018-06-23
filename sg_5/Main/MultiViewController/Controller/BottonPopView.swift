@@ -14,6 +14,8 @@ protocol BottonPopViewDelegate {
     func shareBtnClick()
 }
 class BottonPopView: UIView {
+    var backView: UIView?
+    
     var reloadBtn: UIButton?
     var copyBtn: UIButton?
     var openWebBtn: UIButton?
@@ -22,7 +24,7 @@ class BottonPopView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
         createUI()
     }
     
@@ -30,6 +32,9 @@ class BottonPopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     func createUI() {
+        let backView = UIView()
+        backView.backgroundColor = .white
+        self.addSubview(backView)
         let reloadBtn = UIButton(type: .custom)
         reloadBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         reloadBtn.titleLabel?.textAlignment = .center
@@ -37,7 +42,7 @@ class BottonPopView: UIView {
         reloadBtn.setTitle("刷新", for: .normal)
         reloadBtn.setTitleColor(UIColor.colorWithHexColorString("666666"), for: .normal)
         reloadBtn.addTarget(self, action: #selector(reloadBtnClick), for: .touchUpInside)
-        self.addSubview(reloadBtn)
+        backView.addSubview(reloadBtn)
         self.reloadBtn = reloadBtn
         let copyBtn = UIButton(type: .custom)
         copyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -46,7 +51,7 @@ class BottonPopView: UIView {
         copyBtn.setTitle("复制链接", for: .normal)
         copyBtn.setTitleColor(UIColor.colorWithHexColorString("666666"), for: .normal)
         copyBtn.addTarget(self, action: #selector(copyBtnClick), for: .touchUpInside)
-        self.addSubview(copyBtn)
+        backView.addSubview(copyBtn)
         self.copyBtn = copyBtn
         let openWebBtn = UIButton(type: .custom)
         openWebBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -55,7 +60,7 @@ class BottonPopView: UIView {
         openWebBtn.setTitle("浏览器打开", for: .normal)
         openWebBtn.setTitleColor(UIColor.colorWithHexColorString("666666"), for: .normal)
         openWebBtn.addTarget(self, action: #selector(openWebBtnClick), for: .touchUpInside)
-        self.addSubview(openWebBtn)
+        backView.addSubview(openWebBtn)
         self.openWebBtn = openWebBtn
         let shareBtn = UIButton(type: .custom)
         shareBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -64,31 +69,35 @@ class BottonPopView: UIView {
         shareBtn.setTitle("分享", for: .normal)
         shareBtn.setTitleColor(UIColor.colorWithHexColorString("666666"), for: .normal)
         shareBtn.addTarget(self, action: #selector(shareBtnClick), for: .touchUpInside)
-        self.addSubview(shareBtn)
+        backView.addSubview(shareBtn)
         self.shareBtn = shareBtn
+        backView.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(self)
+            make.height.equalTo(75)
+        }
         self.reloadBtn?.snp.makeConstraints({ (make) in
-            make.height.equalTo(self)
-            make.centerX.equalTo(self.snp.centerX).offset(-self.width * 3/8)
+            make.height.equalTo(backView)
+            make.centerX.equalTo(backView.snp.centerX).offset(-self.width * 3/8)
             make.width.equalTo(80)
-            make.centerY.equalTo(self).offset(0)
+            make.centerY.equalTo(backView).offset(0)
         })
         self.copyBtn?.snp.makeConstraints({ (make) in
-            make.height.equalTo(self)
-            make.centerX.equalTo(self.snp.centerX).offset(-self.width/8)
+            make.height.equalTo(backView)
+            make.centerX.equalTo(backView.snp.centerX).offset(-self.width/8)
             make.width.equalTo(80)
-            make.centerY.equalTo(self).offset(0)
+            make.centerY.equalTo(backView).offset(0)
         })
         self.openWebBtn?.snp.makeConstraints({ (make) in
-            make.height.equalTo(self)
-            make.centerX.equalTo(self.snp.centerX).offset(self.width/8)
+            make.height.equalTo(backView)
+            make.centerX.equalTo(backView.snp.centerX).offset(self.width/8)
             make.width.equalTo(80)
-            make.centerY.equalTo(self).offset(0)
+            make.centerY.equalTo(backView).offset(0)
         })
         self.shareBtn?.snp.makeConstraints({ (make) in
-            make.height.equalTo(self)
-            make.centerX.equalTo(self.snp.centerX).offset(self.width * 3/8)
+            make.height.equalTo(backView)
+            make.centerX.equalTo(backView.snp.centerX).offset(self.width * 3/8)
             make.width.equalTo(80)
-            make.centerY.equalTo(self).offset(0)
+            make.centerY.equalTo(backView).offset(0)
         })
         self.layoutIfNeeded()
         reloadBtn.titleEdgeInsets = UIEdgeInsets(top: reloadBtn.imageView!.frame.size.height, left: -reloadBtn.imageView!.frame.size.width, bottom: 0, right: 0)
@@ -100,7 +109,9 @@ class BottonPopView: UIView {
         shareBtn.titleEdgeInsets = UIEdgeInsets(top: shareBtn.imageView!.frame.size.height, left: -shareBtn.imageView!.frame.size.width, bottom: 0, right: 0)
         shareBtn.imageEdgeInsets = UIEdgeInsets(top: -shareBtn.titleLabel!.bounds.size.height, left: 0, bottom: 0, right: -shareBtn.titleLabel!.bounds.size.width)
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.removeFromSuperview()
+    }
     @objc func reloadBtnClick(){
         if self.delegate != nil {
             delegate?.reloadBtnClick()

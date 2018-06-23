@@ -24,6 +24,7 @@ class EpisodeImageCell: UITableViewCell {
     @IBOutlet weak var commentCountLab: UILabel!
     @IBOutlet weak var contentImageView: UIImageView!
     
+    @IBOutlet weak var downBtn: UIButton!
     var model = EpisodeModel() {
         didSet {
             if model.isUp {
@@ -31,7 +32,11 @@ class EpisodeImageCell: UITableViewCell {
             }else{
                 self.upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
             }
-            
+            if model.isDown {
+                self.downBtn.setImage(UIImage(named: "dianzan4"), for: .normal)
+            }else{
+                self.downBtn.setImage(UIImage(named: "dianzan1"), for: .normal)
+            }
             sourceLab.text = model.source
             createTimeLab.text = model.createTime.subString(start: 5, length: 5)
             contentLab.text = model.content
@@ -81,6 +86,9 @@ class EpisodeImageCell: UITableViewCell {
             delegate?.imageCelldown(sender: self)
             model.down += 1
             dowmCountLab.text = String(model.down)
+            model.isDown = true
+            self.downBtn.setImage(UIImage(named: "dianzan4"), for: .normal)
+            self.downBtn.isEnabled = false
         }
     }
     @IBAction func shareBtnClick(_ sender: Any) {

@@ -50,6 +50,10 @@ class RemakePwdViewController: UIViewController {
 
     @IBAction func changePwdBtnClick(_ sender: Any) {
         self.view.endEditing(true)
+        guard self.newPwdTF.text != "", self.surePwdTF.text != "" ,self.codeTF.text != "" else {
+            messageAlert("密码/验证码不能为空")
+            return
+        }
         guard self.newPwdTF.text == self.surePwdTF.text else {
             self.view.makeToast("两次输入密码不一致")
             return
@@ -58,13 +62,17 @@ class RemakePwdViewController: UIViewController {
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"mobile":self.userMobileLab.text!,"passwd":self.newPwdTF.text!,"securityCode":self.codeTF.text!,"oldPasswd":KeyChain().getKeyChain()["passwd"] ?? ""]
         let parData = dic.toParameterDic()
         NetworkTool.requestData(.post, URLString: resetPwdUrl, parameters: parData) { (json) in
+            self.newPwdTF.text = ""
+            self.surePwdTF.text = ""
+            self.codeTF.text = ""
             if json["code"] == "1" {
-                self.view.makeToast("修改成功")
-                KeyChain().savekeyChain(dic: ["mobile":json["mobile"].stringValue,"id":json["id"].stringValue,"token":json["token"].stringValue,"headUrl" : json["headUrl"].stringValue,"isLogin" : "1","passwd" : self.newPwdTF.text ?? ""])
+                KeyChain().savekeyChain(dic: ["mobile":KeyChain().getKeyChain()["mobile"] ?? "","id":KeyChain().getKeyChain()["id"] ?? "","token":KeyChain().getKeyChain()["token"] ?? "","headUrl" : KeyChain().getKeyChain()["headUrl"] ?? "","isLogin" : "1","passwd" : self.newPwdTF.text ?? ""])
+                messageAlert("修改成功")
             }
         }
     }
     @IBAction func getCodeClick(_ sender: Any) {
+        
         let urlStr = ucenterGetSecurityCode
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["mobile":self.userMobileLab.text ?? "","timestamp":String(timeInterval)]

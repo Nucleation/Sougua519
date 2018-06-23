@@ -103,12 +103,16 @@ extension NetworkToolProtocol{
         }
     }
     static func requestData(_ type : MethodType, URLString : String, parameters : [String : Any]? = nil, success:  @escaping (JSON) -> ()) {
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.backgroundColor = .clear
         let nva = NVActivityIndicatorView(frame: CGRect(x: screenWidth/2 - 30 , y: screenHeight/2 - 40, width: 60, height: 80), type: .pacman, color: UIColor.colorAccent, padding: 0)
-        UIApplication.shared.keyWindow?.addSubview(nva)
+        view.addSubview(nva)
+        UIApplication.shared.keyWindow?.addSubview(view)
         nva.startAnimating()
         if #available(iOS 10.0, *) {
             Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { (time) in
                nva.stopAnimating()
+               view.removeFromSuperview()
                //UIApplication.shared.keyWindow?.makeToast("请求失败")
             }
         } else {
@@ -124,23 +128,34 @@ extension NetworkToolProtocol{
                     guard jsonDic["code"].intValue == 1 else {
                         success(jsonDic)
                         nva.stopAnimating()
+                        view.removeFromSuperview()
                         return
                     }
-                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl {
+                    if URLString == resetPwdUrl {
+                        success(jsonDic)
+                        nva.stopAnimating()
+                        view.removeFromSuperview()
+                    }
+                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl{
                        success(jsonDic["data"])
                         nva.stopAnimating()
+                        view.removeFromSuperview()
                     }else{
                     let jsonDataStr = jsonDic["data"].rawString()?.aesDecrypt
                     let jsonData = jsonDataStr?.data(using: String.Encoding.utf8, allowLossyConversion: true)
                     success(JSON(data: jsonData!))
                     nva.stopAnimating()
+                        view.removeFromSuperview()
                     }
             }else{
                 nva.stopAnimating()
+                    view.removeFromSuperview()
             }
                 nva.stopAnimating()
+                view.removeFromSuperview()
         }
         nva.stopAnimating()
+        view.removeFromSuperview()
       }
     }
 //    static func getToken() -> String {

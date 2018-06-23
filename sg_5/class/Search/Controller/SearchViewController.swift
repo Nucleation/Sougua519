@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController ,UITextFieldDelegate{
     var navView: UIView?
     var searchTF: UITextField?
     var searchBtn: UIButton?
@@ -21,7 +21,8 @@ class SearchViewController: UIViewController {
     let cellId1 = "cell1"
     var tableView :UITableView?
     var keyWord: String?
-    
+    var dataModel = DataModel()
+    var backBtn: UIButton?
     //操作视图
     var oprateView: MUOprateView!
     override func viewWillAppear(_ animated: Bool) {
@@ -38,13 +39,20 @@ class SearchViewController: UIViewController {
         navView.backgroundColor = .white
         self.view.addSubview(navView)
         self.navView = navView
+        let backBtn = UIButton(type: .custom)
+        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
+        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
+        self.navView?.addSubview(backBtn)
+        self.backBtn = backBtn
         let searchTF = UITextField()
         searchTF.layer.borderWidth = 1
         searchTF.layer.cornerRadius = 3
         searchTF.layer.borderColor = UIColor.colorWithHexColorString("dddddd").cgColor
         searchTF.placeholder = "请输入搜索内容"
         searchTF.font = UIFont.systemFont(ofSize: 15)
+        searchTF.delegate = self
         searchTF.leftViewMode = UITextFieldViewMode.always
+        searchTF.returnKeyType = .search
         self.navView?.addSubview(searchTF)
         let imageView = UIImageView(frame: CGRect(x: 18, y: 0, width: 30, height: 30))
         imageView.image = UIImage(named: "souzuo")
@@ -63,8 +71,13 @@ class SearchViewController: UIViewController {
             make.left.right.top.equalToSuperview()
             make.height.equalTo(64)
         })
+        self.backBtn?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.navView!).offset(0)
+            make.height.width.equalTo(44)
+            make.bottom.equalTo(self.navView!.snp.bottom)
+        })
         self.searchTF?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self.navView!).offset(15)
+            make.left.equalTo(self.backBtn!.snp.right).offset(0)
             make.height.equalTo(38)
             make.bottom.equalTo(self.navView!).offset(-5)
             make.right.equalTo(self.searchBtn!.snp.left).offset(1)
@@ -106,7 +119,14 @@ class SearchViewController: UIViewController {
         self.view.addSubview(oprateView)
         // Do any additional setup after loading the view.
     }
+    
+    @objc func backBtnClick(){
+        self.navigationController?.popViewController(animated: true)
+    }
     @objc func searchClick(){
+        dataModel.loadData()
+        dataModel.historyList.append(Histroy(his: self.searchTF?.text ?? ""))
+        dataModel.saveData()
         self.dataArr = SOsearch().getData(keyWord: self.searchTF?.text ?? "")
         self.dataArr += SougouSearch().getData(keyWord: self.searchTF?.text ?? "")
         self.tableView?.mj_header.endRefreshing()
@@ -136,6 +156,14 @@ class SearchViewController: UIViewController {
             let vc = FindViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard textField.text != "" else {
+            return true
+        }
+        searchClick()
+        self.view.endEditing(true)
+        return true
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
