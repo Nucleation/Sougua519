@@ -31,16 +31,16 @@ class FindViewController: UIViewController,WKNavigationDelegate {
         super.viewDidLoad()
         
         let navView = UIView()
-        navView.backgroundColor = .colorAccent
+        navView.backgroundColor = .white
         self.view.addSubview(navView)
         let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "fanhui1"), for: .normal)
+        backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         navView.addSubview(backBtn)
         let titleLab = UILabel()
         titleLab.font = UIFont.systemFont(ofSize: 16)
         titleLab.textAlignment = .center
-        titleLab.textColor = .white
+        titleLab.textColor = .black
         self.titleLab = titleLab
         navView.addSubview(titleLab)
         

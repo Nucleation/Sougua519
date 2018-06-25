@@ -19,7 +19,6 @@ class EpisodeCommentTableViewCell: UITableViewCell {
             }else{
                self.upBtn.setImage(UIImage(named: "dianzan"), for: .normal)
             }
-            self.upBtn.isEnabled = true
             userNameLab.text = model.fromMobile
             commentLab.text = model.content
             timeLab.text = model.createDate
@@ -47,14 +46,18 @@ class EpisodeCommentTableViewCell: UITableViewCell {
     }
 
     @IBAction func upBtnClick(_ sender: Any) {
-        model.upCount += 1
-        self.upBtn.isEnabled = false
-        model.isUp = true
-        self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
-        self.upBtn.setTitle(String(model.upCount), for: .normal)
-        //#MARK: -- 交给父视图处理
-        addTootleUP()
-        self.upWithIdAndMark(id: model.id)
+        if model.isUp {
+            makeToast("已赞")
+        }else{
+            model.upCount += 1
+            model.isUp = true
+            self.upBtn.setImage(UIImage(named: "dianzan2"), for: .normal)
+            self.upBtn.setTitle(String(model.upCount), for: .normal)
+            //#MARK: -- 交给父视图处理
+            addTootleUP()
+            self.upWithIdAndMark(id: model.id)
+        }
+        
     }
     func upWithIdAndMark(id: String){
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)

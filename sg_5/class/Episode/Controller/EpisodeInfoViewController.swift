@@ -48,16 +48,16 @@ class EpisodeInfoViewController: UIViewController,EpisodeInfoHeadViewDelegate ,U
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
         player.autoPlay()
+        requestIsCollect()
+    }
+    deinit {
+        player.prepareToDealloc()
         if self.textField != nil {
             let center = NotificationCenter.default
             center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
             center.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             
         }
-        requestIsCollect()
-    }
-    deinit {
-        player.prepareToDealloc()
     }
     override func viewDidLoad() {
         super.viewDidLoad()

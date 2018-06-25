@@ -29,6 +29,8 @@ PODS:
   - SwiftyJSON (4.0.0)
   - Toast-Swift (3.0.1)
   - UMCCommon (1.5.1)
+  - UMCPush (3.2.1):
+    - UMCCommon
   - UMCSecurityPlugins (1.0.6)
   - WKWebViewJavascriptBridge (1.1.0)
 
@@ -50,6 +52,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - Toast-Swift (~> 3.0.1)
   - UMCCommon
+  - UMCPush
   - UMCSecurityPlugins
   - WKWebViewJavascriptBridge (~> 1.1.0)
 
@@ -71,9 +74,10 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   UMCCommon: 16b674e9de0616d3a6128c551348a686d869c3c7
+  UMCPush: 6a56ca259e934043a491283a88b1699596ea1a18
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   WKWebViewJavascriptBridge: 8da532409bc489ba2c0a69cf38e5d1cd49e3d5e4
 
-PODFILE CHECKSUM: fc781284c81a3f4ca41534efe41b727d722518d4
+PODFILE CHECKSUM: 6d8b8814d052a60c4344e8d6070a3860607b8657
 
 COCOAPODS: 1.4.0

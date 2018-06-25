@@ -8,7 +8,7 @@
 
 import UIKit
 import EmptyPage
-
+import NVActivityIndicatorView
 class SearchHistoryViewController: UIViewController ,UITextFieldDelegate{
     var navView: UIView?
     var backBtn: UIButton?
@@ -46,6 +46,7 @@ class SearchHistoryViewController: UIViewController ,UITextFieldDelegate{
         searchTF.placeholder = "请输入搜索内容"
         searchTF.font = UIFont.systemFont(ofSize: 15)
         searchTF.returnKeyType = .search
+        searchTF.delegate = self
         searchTF.leftViewMode = UITextFieldViewMode.always
         self.navView?.addSubview(searchTF)
         let imageView = UIImageView(frame: CGRect(x: 18, y: 0, width: 30, height: 30))
@@ -158,7 +159,7 @@ class SearchHistoryViewController: UIViewController ,UITextFieldDelegate{
             dataModel.saveData()
             dataModel.loadData()
             self.historyArr = dataModel.historyList
-            self.tableView?.reloadData()
+            //self.tableView?.reloadData()
             let vc = SearchViewController()
             vc.keyWord = self.searchTF?.text ?? ""
             self.navigationController?.pushViewController(vc, animated: true)

@@ -156,9 +156,6 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
     }
     func getNewsList(pageNO: Int){
         self.mainTableView?.backgroundColor = UIColor.white
-        if pageNO == 1 {
-            self.newsListArr = []
-        }
         let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
         let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval)]
         var parData = dic.toParameterDic()
@@ -166,6 +163,9 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         NetworkTool.requestData(.post, URLString: getNewsUrl, parameters: parData) { (json) in
             if let datas = json["news"].arrayObject{
                 self.hideEmptyView()
+                if pageNO == 1 {
+                    self.newsListArr = []
+                }
                 self.newsListArr += datas.compactMap({HomePageNewsModel.deserialize(from: $0 as? Dictionary)})
             }
             else{
@@ -174,10 +174,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             self.mainTableView?.backgroundColor = UIColor.colorAccent
             self.mainTableView!.mj_footer.endRefreshing()
             self.mainTableView?.reloadData()
-            if pageNO == 1{
-                //self.mainTableView?.scrollsToTop = true
-                self.mainTableView?.contentOffset = CGPoint(x: 0, y: -20)
-            }
+            self.mainTableView?.setContentOffset(CGPoint.zero, animated: false)
+            self.mainTableView?.layoutIfNeeded()            
         }
     }
     //MARK:--操作视图点击回调操作
@@ -185,6 +183,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
         switch sender.tag {
         case 1:
             self.pageNO = 1
+            self.mainTableView?.setContentOffset(CGPoint.zero, animated: false)
+            self.mainTableView?.layoutIfNeeded()
             self.getNewsList(pageNO: self.pageNO)
          case 2:
             let vc = MUMultiWindowController()

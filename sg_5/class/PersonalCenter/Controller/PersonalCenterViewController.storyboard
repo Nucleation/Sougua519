@@ -943,15 +943,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personalcenter智深logo" translatesAutoresizingMaskIntoConstraints="NO" id="P82-Gf-3tA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P82-Gf-3tA">
                                 <rect key="frame" x="132" y="109" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="P82-Gf-3tA" secondAttribute="height" multiplier="1:1" id="s9d-Ls-bwq"/>
                                     <constraint firstAttribute="width" constant="110" id="xUO-7s-R4O"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜瓜 1.1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlA-xp-vNH">
-                                <rect key="frame" x="149" y="269" width="77" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlA-xp-vNH">
+                                <rect key="frame" x="187.5" y="269" width="0.0" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="743-kd-oPx"/>
                                 </constraints>
@@ -959,9 +959,8 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAK-g9-5jH">
-                                <rect key="frame" x="20" y="353" width="338" height="125.5"/>
-                                <string key="text">广州智深数据服务有限责任公司于2015年成立。是一家专业的软件开发和互联网应用平台提供商，专注于互联网应用的后台服务与数据挖掘的企业。公司目前在职人数120人，其中研发工程师团队占60%，在产品研发、系统运维、风控运维、数据建模、运作指导、进场培训、催收协助等方面，具有强大的综合实力和竞争优势。</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAK-g9-5jH">
+                                <rect key="frame" x="20" y="353" width="338" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1028,7 +1027,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="aDZ-cb-XBd"/>
                     <connections>
-                        <outlet property="versionLab" destination="xlA-xp-vNH" id="i9f-vj-6mz"/>
+                        <outlet property="contentLab" destination="JAK-g9-5jH" id="6TL-bJ-NCb"/>
+                        <outlet property="iconImage" destination="P82-Gf-3tA" id="Qfl-IR-xFA"/>
+                        <outlet property="versionLab" destination="xlA-xp-vNH" id="Tft-WM-1Cs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qMc-Fp-BPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1041,7 +1042,6 @@
         <image name="personalcenter书签历史" width="30" height="30"/>
         <image name="personalcenter关于我们" width="30" height="30"/>
         <image name="personalcenter我的收藏" width="30" height="30"/>
-        <image name="personalcenter智深logo" width="110" height="110"/>
         <image name="personalcenter清理缓存" width="30" height="30"/>
         <image name="personalcenter矢量智能对象 拷贝" width="30" height="30"/>
         <image name="personalcenter设置" width="30" height="30"/>

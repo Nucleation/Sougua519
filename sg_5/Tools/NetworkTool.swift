@@ -136,7 +136,7 @@ extension NetworkToolProtocol{
                         nva.stopAnimating()
                         view.removeFromSuperview()
                     }
-                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl{
+                    if URLString == checkNovelShelfUrl || URLString == UpHeadImageUrl || URLString == getIsCollectUrl || URLString == addCollectUrl || URLString == cancleCollectUrl  || URLString == getAboutUSDataUrl{
                        success(jsonDic["data"])
                         nva.stopAnimating()
                         view.removeFromSuperview()

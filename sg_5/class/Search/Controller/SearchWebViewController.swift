@@ -12,6 +12,7 @@ class SearchWebViewController: UIViewController {
     var navView:UIView?
     var leftBtn: UIButton?
     var rightBtn: UIButton?
+    var titleLab:UILabel?
     var lineView:UIView?
     var model: Content?
     var webview: WKWebView?
@@ -36,6 +37,12 @@ class SearchWebViewController: UIViewController {
         navView.backgroundColor = .white
         self.view.addSubview(navView)
         self.navView = navView
+        let titleLab = UILabel()
+        titleLab.font = UIFont.systemFont(ofSize: 16)
+        titleLab.textAlignment = .center
+        titleLab.textColor = .black
+        self.titleLab = titleLab
+        navView.addSubview(titleLab)
         let rightBtn = UIButton(type: .custom)
         rightBtn.setImage(UIImage(named: "gengduo"), for: .normal)
         self.navView?.addSubview(rightBtn)
@@ -60,6 +67,11 @@ class SearchWebViewController: UIViewController {
             make.left.right.top.equalToSuperview()
             make.height.equalTo(64)
         })
+        self.titleLab?.snp.makeConstraints { (make) in
+            make.centerY.height.equalTo(self.leftBtn!)
+            make.width.equalTo(navView).offset(-100)
+            make.centerX.equalTo(navView)
+        }
         self.leftBtn?.snp.makeConstraints({ (make) in
             make.left.bottom.equalToSuperview()
             make.width.height.equalTo(44)
@@ -101,9 +113,9 @@ extension SearchWebViewController: WKNavigationDelegate {
     }
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         print("网页开始接收网页内容")
-//        webView.evaluateJavaScript("document.title") { (a, e) in
-//            self.titleLab?.text = a as? String ?? ""
-//        }
+        webView.evaluateJavaScript("document.title") { (a, e) in
+            self.titleLab?.text = a as? String ?? ""
+        }
     }
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print("网页由于某些原因加载失败\(error)")

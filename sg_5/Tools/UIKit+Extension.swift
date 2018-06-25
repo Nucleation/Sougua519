@@ -72,7 +72,7 @@ extension UIColor {
     class func colorWithHexColorString(_ color: String, alpha: CGFloat) -> UIColor {
         let whitespace = NSCharacterSet.whitespacesAndNewlines
         var cString = color.trimmingCharacters(in: whitespace).uppercased()
-        let len = cString.characters.count
+        let len = cString.count
         if len < 6 {
             return UIColor.clear
         }

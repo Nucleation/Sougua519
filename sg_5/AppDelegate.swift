@@ -92,7 +92,7 @@ class StaticNumerical: NSObject {
 }
 
 class StaticNumerical_guaniu: NSObject {
-    var appname = "天天租"
+    var appname = "搜瓜"
     /*  测试地址 */
     //let AppConfig_BaseUrlValue = apiUrl1 // 正式地址
     let buglyId = "135c25dfc0"

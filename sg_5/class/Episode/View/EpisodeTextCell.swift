@@ -88,13 +88,16 @@ class EpisodeTextCell: UITableViewCell {
         }
     }
     @IBAction func downBtnClick(_ sender: Any) {
-        if self.delegate != nil {
-            delegate?.textCelldown(sender: self)
-            model.down += 1
-            dowmCountLab.text = String(model.down)
-            model.isDown = true
-            self.downBtn.setImage(UIImage(named: "dianzan4"), for: .normal)
-            self.downBtn.isEnabled = false
+        if !model.isDown {
+            if self.delegate != nil{
+                delegate?.textCelldown(sender: self)
+                model.down += 1
+                dowmCountLab.text = String(model.down)
+                model.isDown = true
+                self.downBtn.setImage(UIImage(named: "dianzan4"), for: .normal)
+            }
+        }else{
+            self.makeToast("已经点过了")
         }
     }
     @IBAction func upBtnClick(_ sender: Any) {

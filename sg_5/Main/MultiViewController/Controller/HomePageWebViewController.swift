@@ -99,7 +99,7 @@ class HomePageWebViewController: UIViewController{
         let backBtn = UIButton(type: .custom)
         backBtn.setImage(UIImage(named: "fanhui"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-        navView.addSubview(backBtn)
+        self.view.addSubview(backBtn)
         self.backBtn = backBtn
         let rightBtn = UIButton(type: .custom)
         rightBtn.setImage(UIImage(named: "gengduo"), for: .normal)
@@ -353,25 +353,28 @@ class HomePageWebViewController: UIViewController{
         }
     }
     @objc func upBtnClick() {
-        self.model?.up += 1
-        self.upBtn?.isEnabled = false
-        self.upBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
-        self.upBtn?.setTitle(String(self.model!.up), for: .normal)
-        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
-        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.model?.id ?? ""]
-        let parData = dic.toParameterDic()
-        NetworkTool.requestData(.post, URLString: UpnewLickUrl, parameters: parData ) { (json) in
-            
+        if self.model?.isUP == true {
+            self.view.makeToast("已赞")
+        }else{
+            self.model?.up += 1
+            self.upBtn?.setImage(UIImage(named: "dianzan2"), for: .normal)
+            self.upBtn?.setTitle(String(self.model!.up), for: .normal)
+            let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+            let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"id":self.model?.id ?? ""]
+            let parData = dic.toParameterDic()
+            NetworkTool.requestData(.post, URLString: UpnewLickUrl, parameters: parData ) { (json) in
+                self.model?.isUP = true
+            }
         }
+        
     }    
     func layoutView() {
-        self.scrollerView?.snp.makeConstraints({ (make) in
-            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 40, right: 0))
-        })
         if model?.type == "1" {
-
-            self.scrollContent?.addSubview(self.player)
-            self.view?.bringSubview(toFront: self.backBtn!)
+            self.scrollerView?.snp.makeConstraints({ (make) in
+                make.edges.equalTo(self.view).inset(UIEdgeInsets(top: screenWidth * 9.0 / 16.0 + 64, left: 0, bottom: 40, right: 0))
+            })
+            self.view?.addSubview(self.player)
+            //self.view?.bringSubview(toFront: self.backBtn!)
             self.player.delegate = self
             self.player.setVideo(resource: BMPlayerResource(url: URL(string:model?.newsContent ?? "")!))
             self.player.backBlock = { [unowned self] (isFullScreen) in
@@ -379,20 +382,27 @@ class HomePageWebViewController: UIViewController{
                 let _ = self.navigationController?.popViewController(animated: true)
             }
             self.player.snp.makeConstraints { (make) in
-                make.top.equalToSuperview().offset(0)
+                make.top.equalToSuperview().offset(64)
                 make.left.right.equalToSuperview()
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(500)
             }
-        }else{
             self.webview?.snp.makeConstraints({ (make) in
                 make.top.left.right.equalToSuperview()
-                make.height.equalTo(self.webHeitht)
+                make.height.equalTo(0)
+            })
+        }else{
+            self.scrollerView?.snp.makeConstraints({ (make) in
+                make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 64, left: 0, bottom: 40, right: 0))
+            })
+            self.webview?.snp.makeConstraints({ (make) in
+                make.top.left.right.equalToSuperview()
+                make.height.equalTo(0)
             })
         }
         
         self.contentView?.snp.makeConstraints({ (make) in
             if model?.type == "1"{
-                make.top.equalTo(self.player.snp.bottom)
+                make.top.equalTo(self.webview!.snp.bottom)
             }else{
                 make.top.equalTo(self.webview!.snp.bottom)
             }
@@ -432,7 +442,7 @@ class HomePageWebViewController: UIViewController{
         self.tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.contentView!.snp.bottom)
             make.left.right.equalTo(self.contentView!)
-            make.height.equalTo(100)
+            make.height.equalTo(0)
         })
         
         self.scrollContent?.snp.makeConstraints({ (make) in
@@ -458,9 +468,8 @@ class HomePageWebViewController: UIViewController{
             }
             self.totolComment?.text = "评论\(self.commentListArray.count)"
             self.commentCountLab?.text = "\(self.commentListArray.count)"
-
-            self.setTableViewHeight(cellNum: self.commentListArray.count)
             self.tableView?.reloadData()
+            self.setTableViewHeight(cellNum: self.commentListArray.count)
             //self.layoutView()
         }
     }
@@ -471,19 +480,17 @@ class HomePageWebViewController: UIViewController{
                 make.left.right.equalTo(self.contentView!)
                 make.height.equalTo(self.view.frame.height - 114)
             })
-           
+
         }else{
             self.tableView?.snp.remakeConstraints({ (make) in
                 make.top.equalTo(self.contentView!.snp.bottom)
                 make.left.right.equalTo(self.contentView!)
-                make.height.equalTo(CGFloat(cellNum) * 130 + 80)
+                make.height.equalTo(CGFloat(cellNum) * 130 + 50)
             })
+
         }
-        self.scrollContent?.snp.remakeConstraints({ (make) in
-            make.edges.equalTo(self.scrollerView!).inset(UIEdgeInsets.zero)
-            make.width.equalTo(self.scrollerView!)
-            make.bottom.equalTo(self.tableView!).offset(1)
-        })
+        self.view.layoutIfNeeded()
+        
     }
     func sendComment(comment: String){
         guard comment != "" else {
@@ -517,6 +524,7 @@ class HomePageWebViewController: UIViewController{
                 self.commentListArray.append(model)
                 self.commentListArray = self.commentListArray.reversed()
                 self.tableView?.reloadData()
+                self.setTableViewHeight(cellNum: self.commentListArray.count)
                 //self.requestComment()
             }
         }
@@ -584,10 +592,13 @@ extension HomePageWebViewController: WKNavigationDelegate {
             }
         }
         if keyPath == "contentSize" {
-            self.webview?.snp.remakeConstraints({ (make) in
-                make.top.left.right.equalToSuperview()
-                make.height.equalTo((self.webview?.scrollView.contentSize.height)!                                                                 )
-            })
+            if model?.type != "1"{
+                self.webview?.snp.remakeConstraints({ (make) in
+                    make.top.left.right.equalToSuperview()
+                    make.height.equalTo((self.webview?.scrollView.contentSize.height)!                                                                 )
+                })
+            }
+            
         }
 
     }
@@ -674,21 +685,28 @@ extension HomePageWebViewController: UITextFieldDelegate {
 }
 extension HomePageWebViewController: BottonPopViewDelegate,UMSocialShareMenuViewDelegate{
     func reloadBtnClick() {
+        self.popview?.removeFromSuperview()
         self.requestComment()
-        SVProgressHUD.show()
-        SVProgressHUD.dismiss(withDelay: 1)
     }
     
     func copyBtnClick() {
+        self.popview?.removeFromSuperview()
         UIPasteboard.general.string = self.model?.crawlurl
         self.view.makeToast("复制成功")
     }
     
     func openWebClick() {
+        self.popview?.removeFromSuperview()
 //        NSString *textURL = @"http://www.yoururl.com/";
 //        NSURL *cleanURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", textURL]];
 //        [[UIApplication sharedApplication] openURL:cleanURL];
-        let url = URL(string: self.model?.crawlurl ?? "")
+        var url: URL!
+        //url = URL(string: self.model?.crawlurl ?? "")
+        if self.model?.type == "0"{
+            url = URL(string: self.model?.crawlurl ?? "")
+        }else{
+            url = URL(string: self.model?.newsContent ?? "")
+        }
         UIApplication.shared.openURL(url!)
         
     }
@@ -746,11 +764,13 @@ extension HomePageWebViewController: BMPlayerDelegate {
     func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
         player.snp.remakeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(self.navView!.snp.bottom)
+            
             if isFullscreen {
+                make.top.equalToSuperview()
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(900)
                 //self.leftBtn?.isHidden = true
             } else {
+                make.top.equalTo(self.navView!.snp.bottom)
                 make.height.equalTo(player.snp.width).multipliedBy(9.0/16.0).priority(900)
                 //self.leftBtn?.isHidden = false
             }

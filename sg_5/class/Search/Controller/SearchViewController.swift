@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import NVActivityIndicatorView
 
 class SearchViewController: UIViewController ,UITextFieldDelegate{
     var navView: UIView?
@@ -29,8 +30,10 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
         self.navigationController?.isNavigationBarHidden = true
         //更新按钮状态
         self.oprateView.subViewStatus(viewController: self)
-        self.search(keyWord: self.keyWord ?? "")
-        self.searchTF?.text = self.keyWord ?? ""
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +120,8 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
             uSelf.oprateClick(sender: sender)
         }
         self.view.addSubview(oprateView)
+        self.search(keyWord: self.keyWord ?? "")
+        self.searchTF?.text = self.keyWord ?? ""
         // Do any additional setup after loading the view.
     }
     
@@ -124,6 +129,12 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
         self.navigationController?.popViewController(animated: true)
     }
     @objc func searchClick(){
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.backgroundColor = .clear
+        let nva = NVActivityIndicatorView(frame: CGRect(x: screenWidth/2 - 30 , y: screenHeight/2 - 40, width: 60, height: 80), type: .pacman, color: UIColor.colorAccent, padding: 0)
+        view.addSubview(nva)
+        UIApplication.shared.keyWindow?.addSubview(view)
+        nva.startAnimating()
         dataModel.loadData()
         dataModel.historyList.append(Histroy(his: self.searchTF?.text ?? ""))
         dataModel.saveData()
@@ -131,12 +142,24 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
         self.dataArr += SougouSearch().getData(keyWord: self.searchTF?.text ?? "")
         self.tableView?.mj_header.endRefreshing()
         self.tableView?.reloadData()
+        nva.stopAnimating()
+        view.removeFromSuperview()
     }
     func search(keyWord:String){
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.backgroundColor = .black
+        let nva = NVActivityIndicatorView(frame: CGRect(x: screenWidth/2 - 30 , y: screenHeight/2 - 40, width: 60, height: 80), type: .pacman, color: UIColor.colorAccent, padding: 0)
+        view.addSubview(nva)
+        self.view.addSubview(view)
+        self.view.bringSubview(toFront: view)
+        //UIApplication.shared.keyWindow?.addSubview(view)
+        nva.startAnimating()
         self.view.endEditing(true)
         self.dataArr = SOsearch().getData(keyWord: keyWord)
         self.dataArr += SougouSearch().getData(keyWord:keyWord)
         self.tableView?.reloadData()
+        nva.stopAnimating()
+        view.removeFromSuperview()
     }
     //MARK:--操作视图点击回调操作
     func oprateClick(sender: UIButton) {

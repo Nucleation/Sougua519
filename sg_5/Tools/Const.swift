@@ -16,7 +16,9 @@ enum ContentType: String {
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 //总接口
-let postUrl = "http://47.95.244.69:8086"
+//let postUrl = "http://47.95.244.69:8086"
+let postUrl = "http://api.soogua.cn/"
+
 //let postUrl = "http://192.168.10.123:10001"
 //获取短信验证码
 let ucenterGetSecurityCode = "\(postUrl)/app/ucenter/api/getAppUserSecurityCode"
@@ -79,4 +81,5 @@ let getIsCollectUrl = "\(postUrl)/app/comment/api/getIsCollect"
 let getVideoByIDUrl = "\(postUrl)/app/novel/api/getVideoById"
 let getEpisodeByIDUrl = "\(postUrl)/app/picture/api/getEpisodeById"
 let getNewsByIDUrl = "\(postUrl)/app/novel/api/getNewsById"
+let getAboutUSDataUrl = "\(postUrl)app/content/pc/getAdProdictForPC"
 

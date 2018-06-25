@@ -44,6 +44,6 @@ class HomePageNewsModel: HandyJSON {
     var originalPortrait:String = ""
     var up:Int = 0
     var crawlurl:String = ""
-    
+    var isUP: Bool = false
     public required init() {}
 }

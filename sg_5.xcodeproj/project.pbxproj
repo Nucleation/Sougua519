@@ -144,6 +144,7 @@
 		179234E120CF53ED00893F3F /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D620CF53ED00893F3F /* libSocialQQ.a */; };
 		179234E220CF53ED00893F3F /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179234D820CF53ED00893F3F /* TencentOpenAPI.framework */; };
 		1792354D20CFC15100893F3F /* PCCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1792354C20CFC15100893F3F /* PCCollectionViewController.swift */; };
+		179BDC7E20E0D0B300508E77 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17765E1E20B2D6A0008FDC6E /* UserNotifications.framework */; };
 		17D5603120CE5BFF0074FFEA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603020CE5BFF0074FFEA /* libsqlite3.tbd */; };
 		17D5603320CE5C0E0074FFEA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603220CE5C0E0074FFEA /* CoreGraphics.framework */; };
 		17D5603520CE5C1B0074FFEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D5603420CE5C1A0074FFEA /* SystemConfiguration.framework */; };
@@ -356,6 +357,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179BDC7E20E0D0B300508E77 /* UserNotifications.framework in Frameworks */,
 				17D5603720CE5C260074FFEA /* libc++.tbd in Frameworks */,
 				17D5603520CE5C1B0074FFEA /* SystemConfiguration.framework in Frameworks */,
 				179234E120CF53ED00893F3F /* libSocialQQ.a in Frameworks */,
@@ -1111,7 +1113,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -1545,6 +1547,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = sg_5/sg_5.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SBG27Y7XSW;
@@ -1588,6 +1591,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = sg_5/sg_5.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SBG27Y7XSW;

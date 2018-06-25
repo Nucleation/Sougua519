@@ -9,18 +9,33 @@
 import UIKit
 
 class AboutUSViewController: UIViewController {
-    
+    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var contentLab: UILabel!    
     @IBOutlet weak var versionLab: UILabel!
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
-        self.versionLab.text = "搜瓜\(version ?? "")"
-        // Do any additional setup after loading the view.
+//        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+//        
+        requestData()
     }
-
+    func requestData(){
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, String> = ["timestamp":String(timeInterval)]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: getAboutUSDataUrl, parameters: parData) { (json) in
+            if json["code"] == "-1" {
+                self.view.makeToast(json["msg"].stringValue)
+            }else{
+                self.versionLab.text = json[0]["title"].stringValue
+                self.contentLab.text = json[0]["detail"].stringValue
+                self.iconImage.kf.setImage(with: URL(string: json[0]["icon"].stringValue))
+            }
+            
+        }
+    }
     @IBAction func leftBtnClick(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

@@ -71,7 +71,6 @@ class MetooScrollerFootView: UIView {
         }
         self.reportBtn = reportBtn
     }
-    //MARK: --  未处理
     @objc func likesBtnClick(){
         if self.delegate != nil {
             self.delegate?.likes()
