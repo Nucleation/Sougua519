@@ -20,7 +20,11 @@ class VideoSubTableViewCell: UITableViewCell {
             titleLabel.text = aNews.title
             image1.kf.setImage(with: URL(string: aNews.imageUrl))
             newsFrom.text = aNews.source
-            reviewLab.text = "评论:\(aNews.discussCount)"
+            if aNews.directType == "广告" {
+                reviewLab.isHidden = true
+            }else{
+                reviewLab.text = "评论:\(aNews.discussCount)"
+            }
             if aNews.figureTime == ""{
                 timeLab.isHidden = true
             }else{

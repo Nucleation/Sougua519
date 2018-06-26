@@ -12,6 +12,8 @@ import SVProgressHUD
 class FindViewController: UIViewController,WKNavigationDelegate {
     var navView: UIView?
     var titleLab:UILabel?
+    var url: String?
+    
     lazy private var progressView: UIProgressView = {
         self.progressView = UIProgressView.init(frame: CGRect(x: CGFloat(0), y: CGFloat(65), width: UIScreen.main.bounds.width, height: 2))
         self.progressView.tintColor = UIColor.colorAccent      // 进度条颜色
@@ -59,7 +61,7 @@ class FindViewController: UIViewController,WKNavigationDelegate {
             make.centerX.equalTo(navView)
         }
         let webview: WKWebView = WKWebView(frame: CGRect(x: 0, y: 64, width: screenWidth, height: screenHeight - 64), configuration: WKWebViewConfiguration())
-        webview.load(URLRequest(url: URL(string: "http://daiduoduo.zhishensoft.com/h5/index/index?channel=10001")!))
+        webview.load(URLRequest(url: URL(string: self.url ?? "")!))
         webview.navigationDelegate = self
         self.view.addSubview(webview)
         self.view.bringSubview(toFront: navView)

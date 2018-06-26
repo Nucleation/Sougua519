@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -23,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMConfigure.setLogEnabled(true)
         configUSharePlatforms()
         confitUShareSettings()
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.resignKey()
         window?.isHidden = true
@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firstWindow?.windowLevel = UIWindowLevelNormal
         firstWindow?.rootViewController = MUNaigationViewController(rootViewController: MuRootViewController())
         firstWindow?.makeKeyAndVisible()
+        UMessage_application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
     func configUSharePlatforms() {

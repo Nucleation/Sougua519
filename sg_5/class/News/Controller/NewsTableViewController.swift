@@ -138,6 +138,10 @@ class NewsTableViewController: UITableViewController {
             multiPictureVC.imageURLArr = imageURLs
             self.navigationController?.pushViewController(multiPictureVC, animated: true)
             
+        }else if self.newsListArr[indexPath.row].directType == "广告" {
+            let vc = FindViewController()
+            vc.url = self.newsListArr[indexPath.row].newsContent
+            self.navigationController?.pushViewController(vc, animated: true)
         }else{
             let webVC = HomePageWebViewController()
             webVC.model = newsListArr[indexPath.row]

@@ -24,7 +24,11 @@ class ImageTableViewCell: UITableViewCell {
             image2.kf.setImage(with: URL(string: imageURLs[1]))
             image3.kf.setImage(with: URL(string: imageURLs[2]))
             newsFrom.text = aNews.source
-            reviewLab.text = "评论数：\(aNews.discussCount)"
+            if aNews.directType == "广告" {
+                reviewLab.isHidden = true
+            }else{
+                reviewLab.text = "评论:\(aNews.discussCount)"
+            }
         }
     }
     

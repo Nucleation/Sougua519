@@ -129,6 +129,8 @@
 		1782724320AFCACE00EAFEC0 /* MetooScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */; };
 		1782724520B0138300EAFEC0 /* MetooCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */; };
 		1782724720B0162E00EAFEC0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782724620B0162D00EAFEC0 /* LoginViewController.swift */; };
+		17840CFE20E1E19900EACA38 /* AppDelegate_UMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17840CFD20E1E19900EACA38 /* AppDelegate_UMessage.swift */; };
+		17840D0020E22B4E00EACA38 /* NoticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17840CFF20E22B4E00EACA38 /* NoticeModel.swift */; };
 		1785760720D25953005215DE /* help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1785760620D25952005215DE /* help.swift */; };
 		17857D5C20B53BF2005B028C /* HomePageNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */; };
 		17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17857D5E20B548B6005B028C /* HomePageWebViewController.swift */; };
@@ -313,6 +315,8 @@
 		1782724220AFCACE00EAFEC0 /* MetooScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetooScrollViewController.swift; sourceTree = "<group>"; };
 		1782724420B0138300EAFEC0 /* MetooCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetooCollectionViewController.swift; sourceTree = "<group>"; };
 		1782724620B0162D00EAFEC0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		17840CFD20E1E19900EACA38 /* AppDelegate_UMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate_UMessage.swift; sourceTree = "<group>"; };
+		17840CFF20E22B4E00EACA38 /* NoticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeModel.swift; sourceTree = "<group>"; };
 		1785760620D25952005215DE /* help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = help.swift; sourceTree = "<group>"; };
 		17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageNewsModel.swift; sourceTree = "<group>"; };
 		17857D5E20B548B6005B028C /* HomePageWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageWebViewController.swift; sourceTree = "<group>"; };
@@ -476,6 +480,7 @@
 			children = (
 				17765E1D20B2D4AE008FDC6E /* sg_5.entitlements */,
 				172CF23A20A45563005632F3 /* AppDelegate.swift */,
+				17840CFD20E1E19900EACA38 /* AppDelegate_UMessage.swift */,
 				174F762020A44AB700BB0B46 /* MUConfig.swift */,
 				174F762420A44AB800BB0B46 /* MUltiWindow-Bridging-Header.h */,
 				174F762120A44AB700BB0B46 /* JHFundation-Extension.swift */,
@@ -685,6 +690,7 @@
 			children = (
 				174F768620A44E6700BB0B46 /* CategoryButtonModel.swift */,
 				17857D5B20B53BF2005B028C /* HomePageNewsModel.swift */,
+				17840CFF20E22B4E00EACA38 /* NoticeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1305,6 +1311,7 @@
 				174F765920A44AB900BB0B46 /* MUmultiWindowFlowlayout.swift in Sources */,
 				174F766820A44C4900BB0B46 /* Const.swift in Sources */,
 				177E745920C90D110017F6CB /* markAndCollectionViewController.swift in Sources */,
+				17840CFE20E1E19900EACA38 /* AppDelegate_UMessage.swift in Sources */,
 				177E745B20C913F80017F6CB /* RemakePwdViewController.swift in Sources */,
 				17507CC520C4D15000600BE1 /* EpisodeImageCell.swift in Sources */,
 				174F766520A44C4900BB0B46 /* NetworkTool.swift in Sources */,
@@ -1312,6 +1319,7 @@
 				1762DE9120AD5D8400D179AE /* NoveCollectionViewCell.swift in Sources */,
 				174F765120A44AB900BB0B46 /* MUMultiWindowViewModel.swift in Sources */,
 				17857D5F20B548B6005B028C /* HomePageWebViewController.swift in Sources */,
+				17840D0020E22B4E00EACA38 /* NoticeModel.swift in Sources */,
 				177D2AB620BCE21000B61F1E /* CollectionView.swift in Sources */,
 				17D8CB4020A44F7800914492 /* SOsearch.swift in Sources */,
 				1775678720C7E49E00ACAE52 /* NewsTableViewController.swift in Sources */,

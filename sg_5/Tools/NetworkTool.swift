@@ -123,7 +123,7 @@ extension NetworkToolProtocol{
         Alamofire.request(URLString, method: method, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess {
                 if let jsons = response.result.value{
-                    print("返回的json---\(JSON(jsons))")
+                    //print("返回的json---\(JSON(jsons))")
                     let jsonDic = JSON(jsons)
                     guard jsonDic["code"].intValue == 1 else {
                         success(jsonDic)

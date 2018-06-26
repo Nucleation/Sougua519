@@ -97,6 +97,7 @@ class MetooViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             let vc = FindViewController()
+            vc.url = "http://daiduoduo.zhishensoft.com/h5/index/index?channel=10001"
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -12,5 +12,5 @@
 #import <UMShare/UMShare.h>
 #import <UShareUI/UShareUI.h>
 #import <UMCommon/UMCommon.h>
-
-
+#import <UMPush/UMessage.h>
+#import <UserNotifications/UserNotifications.h>

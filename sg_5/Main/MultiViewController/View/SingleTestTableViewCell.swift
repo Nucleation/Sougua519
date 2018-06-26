@@ -16,7 +16,12 @@ class SingleTestTableViewCell: UITableViewCell {
         didSet {
             titleLabel.text = aNews.title
             newsFrom.text = aNews.source
-            reviewLab.text = "评论:\(aNews.discussCount)"
+            if aNews.directType == "广告" {
+                reviewLab.isHidden = true
+            }else{
+               reviewLab.text = "评论:\(aNews.discussCount)"
+            }
+            
         }
     }
     

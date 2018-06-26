@@ -128,6 +128,61 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             uSelf.oprateClick(sender: sender)
         }
         self.view.addSubview(oprateView)
+       
+    }
+    /// 获取后台通知
+    func getNotice() {
+        let timeInterval: Int = Int(Date().timeIntervalSince1970 * 1000)
+        let dic: Dictionary<String, Any> = ["timestamp":String(timeInterval),"userId":KeyChain().getKeyChain()["id"] ?? ""]
+        let parData = dic.toParameterDic()
+        NetworkTool.requestData(.post, URLString: getNoticeUrl, parameters: parData ) { (json) in
+            let model = NoticeModel.deserialize(from: json.dictionary)
+            self.makeAlertWithModel(model: model ?? NoticeModel())
+        }
+    }
+    func makeAlertWithModel(model: NoticeModel) {
+        //model.type = 3
+        switch model.type {
+        case 0:
+            return
+        case 1:
+            let customView = UIView(frame: UIScreen.main.bounds)
+            customView.backgroundColor = .clear
+            let contentLab = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+            contentLab.backgroundColor = .white
+            contentLab.textAlignment = .center
+            contentLab.text = model.content
+            contentLab.center = customView.center
+            contentLab.layer.cornerRadius = 10
+            customView.addSubview(contentLab)
+            self.view.addSubview(customView)
+        case 2:
+            let alertController = UIAlertController(title: "系统提示",
+                                                    message: model.title, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: model.cancelButton, style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: model.okButton, style: .default, handler: {
+                action in
+                
+            })
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        case 3:
+            let alertController = UIAlertController(title: "系统提示",
+                                                    message: model.title, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: model.cancelButton, style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: model.okButton, style: .default, handler: {
+                action in
+                let vc = FindViewController()
+                vc.url = model.url
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+             self.present(alertController, animated: true, completion: nil)
+        default:
+            return
+        }
     }
     override func viewWillDisappear(_ animated:Bool) {
         super.viewWillDisappear(animated)
@@ -175,7 +230,8 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             self.mainTableView!.mj_footer.endRefreshing()
             self.mainTableView?.reloadData()
             self.mainTableView?.setContentOffset(CGPoint.zero, animated: false)
-            self.mainTableView?.layoutIfNeeded()            
+            self.mainTableView?.layoutIfNeeded()
+            self.getNotice()
         }
     }
     //MARK:--操作视图点击回调操作
@@ -197,6 +253,7 @@ class MuRootViewController: UIViewController,UIScrollViewDelegate ,UITableViewDe
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             let vc = FindViewController()
+            vc.url = "http://daiduoduo.zhishensoft.com/h5/index/index?channel=10001"
             self.navigationController?.pushViewController(vc, animated: true)   
         }
     }
@@ -267,6 +324,10 @@ extension MuRootViewController {
             multiPictureVC.imageURLArr = imageURLs
             self.navigationController?.pushViewController(multiPictureVC, animated: true)
             
+        }else if self.newsListArr[indexPath.row].directType == "广告" {
+            let vc = FindViewController()
+            vc.url = self.newsListArr[indexPath.row].newsContent
+            self.navigationController?.pushViewController(vc, animated: true)
         }else{
             let webVC = HomePageWebViewController()
             webVC.model = newsListArr[indexPath.row]
@@ -307,6 +368,7 @@ extension MuRootViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             let vc = FindViewController()
+            vc.url = "http://daiduoduo.zhishensoft.com/h5/index/index?channel=10001"
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
